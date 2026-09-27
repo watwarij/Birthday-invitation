@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>You're Invited — 21st Birthday</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #0c0c0c;
+      --card: #141414;
+      --gold: #d6b36a;
+      --gold-light: #f1d99b;
+      --white: #f7f4ed;
+      --muted: #aaa59b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 20%, #292319 0%, transparent 35%),
+        var(--bg);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---------------- PASSWORD SCREEN ---------------- */
+
+    #password-screen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      position: relative;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #password-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    .password-card {
+      width: 100%;
+      max-width: 430px;
+      padding: 55px 35px;
+      text-align: center;
+      border: 1px solid rgba(214, 179, 106, 0.3);
+      background: rgba(20, 20, 20, 0.8);
+      backdrop-filter: blur(15px);
+      border-radius: 4px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+    }
+
+    .small-title {
+      color: var(--gold);
+      letter-spacing: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 130px;
+      line-height: .8;
+      color: var(--gold-light);
+      font-weight: 400;
+    }
+
+    .birthday {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      letter-spacing: 5px;
+      margin-top: 25px;
+    }
+
+    .password-description {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin: 30px auto;
+      max-width: 280px;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 15px;
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+      text-align: center;
+      letter-spacing: 5px;
+      outline: none;
+      transition: .3s;
+    }
+
+    .password-input:focus {
+      border-color: var(--gold);
+    }
+
+    .unlock-button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #111;
+      font-weight: 600;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .unlock-button:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .error {
+      color: #d77c7c;
+      font-size: 11px;
+      margin-top: 15px;
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .error.show {
+      opacity: 1;
+    }
+
+    /* ---------------- INVITATION ---------------- */
+
+    #invitation {
+      display: none;
+      opacity: 0;
+      animation: invitationIn 1.5s forwards;
+    }
+
+    @keyframes invitationIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-subtitle {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 7px;
+      margin-bottom: 30px;
+    }
+
+    .hero-21 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(160px, 35vw, 310px);
+      line-height: .65;
+      font-weight: 400;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold);
+      text-shadow: 0 0 50px rgba(214,179,106,.1);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 8vw, 75px);
+      font-weight: 500;
+      margin-top: 50px;
+      letter-spacing: 4px;
+    }
+
+    .hero-date {
+      margin-top: 25px;
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--muted);
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--muted);
+    }
+
+    /* ---------------- CONTENT ---------------- */
+
+    .section {
+      max-width: 850px;
+      margin: auto;
+      padding: 100px 25px;
+      text-align: center;
+    }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 5px;
+      margin-bottom: 25px;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 45px;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .section p {
+      max-width: 600px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .details {
+      margin-top: 55px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #333;
+      border: 1px solid #333;
+    }
+
+    .detail {
+      background: var(--card);
+      padding: 35px 20px;
+    }
+
+    .detail-icon {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .detail-title {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+
+    .detail-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    /* ---------------- RSVP ---------------- */
+
+    .rsvp {
+      border-top: 1px solid #292929;
+      border-bottom: 1px solid #292929;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 16px 45px;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      text-decoration: none;
+      letter-spacing: 3px;
+      font-size: 11px;
+      transition: .3s;
+    }
+
+    .rsvp-button:hover {
+      background: var(--gold);
+      color: #111;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #666;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    /* ---------------- PARTICLES ---------------- */
+
+    .particle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: .3;
+      pointer-events: none;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      20% {
+        opacity: .4;
+      }
+      80% {
+        opacity: .2;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 650px) {
+
+      .password-card {
+        padding: 45px 25px;
+      }
+
+      .number {
+        font-size: 105px;
+      }
+
+      .birthday {
+        font-size: 24px;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .detail {
+        padding: 30px;
+      }
+
+      .hero-title {
+        margin-top: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PASSWORD SCREEN -->
+  <section id="password-screen">
+
+    <div class="password-card">
+
+      <div class="small-title">
+        PRIVATE INVITATION
+      </div>
+
+      <div class="number">
+        21
+      </div>
+
+      <div class="birthday">
+        BIRTHDAY
+      </div>
+
+      <p class="password-description">
+        This invitation is private.<br>
+        Enter your password to continue.
+      </p>
+
+      <input
+        type="password"
+        id="password"
+        class="password-input"
+        placeholder="PASSWORD"
+        autocomplete="off"
+      >
+
+      <button
+        class="unlock-button"
+        onclick="unlockInvitation()"
+      >
+        UNLOCK
+      </button>
+
+      <div id="error" class="error">
+        Incorrect password. Please try again.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- INVITATION -->
+  <main id="invitation">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="hero-subtitle">
+          YOU'RE INVITED
+        </div>
+
+        <div class="hero-21">
+          21
+        </div>
+
+        <h1 class="hero-title">
+          [YOUR NAME]'S<br>
+          BIRTHDAY
+        </h1>
+
+        <div class="hero-date">
+          14 OCTOBER 2026
+        </div>
+
+      </div>
+
+      <div class="scroll">
+        SCROLL TO DISCOVER
+      </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+    <section class="section">
+
+      <div class="section-label">
+        LET'S CELEBRATE
+      </div>
+
+      <h2>
+        Twenty-one looks good.
+      </h2>
+
+      <p>
+        It's time to celebrate another trip around the sun.
+        Join me for an unforgettable evening filled with
+        good music, great people, food, drinks and memories
+        that we'll be talking about for years.
+      </p>
+
+    </section>
+
+
+    <!-- DETAILS -->
+    <section class="section">
+
+      <div class="section-label">
+        THE DETAILS
+      </div>
+
+      <h2>
+        Save the date.
+      </h2>
+
+      <div class="details">
+
+        <div class="detail">
+
+          <div class="detail-icon">
+            ◇
+          </div>
+
+          <div class="detail-title">
+            DATE
+          </div>
+
+          <div class="detail-text">
+            14 October<br>
+            2026
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-icon">
+            ◷
+          </div>
+
+          <div class="detail-title">
+            TIME
+          </div>
+
+          <div class="detail-text">
+            19:00<br>
+            Till late
+          </div>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-icon">
+            ♢
+          </div>
+
+          <div class="detail-title">
+            LOCATION
+          </div>
+
+          <div class="detail-text">
+            Venue Name<br>
+            City
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DRESS CODE -->
+    <section class="section">
+
+      <div class="section-label">
+        DRESS CODE
+      </div>
+
+      <h2>
+        Come dressed to celebrate.
+      </h2>
+
+      <p>
+        [Add your dress code here — for example:
+        Black & Gold / Cocktail / All White.]
+      </p>
+
+    </section>
+
+
+    <!-- RSVP -->
+    <section class="section rsvp">
+
+      <div class="section-label">
+        ONE LAST THING
+      </div>
+
+      <h2>
+        Will you be there?
+      </h2>
+
+      <p>
+        Please let me know if you're coming so we can
+        save your spot.
+      </p>
+
+      <!-- Replace this with your WhatsApp number,
+           Google Form, RSVP website, etc. -->
+
+      <a
+        class="rsvp-button"
+        href="https://wa.me/264XXXXXXXXX?text=Hi!%20I'll%20be%20there%20for%20your%2021st!"
+        target="_blank"
+      >
+        RSVP
+      </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+      MADE WITH ♡ FOR A SPECIAL 21ST
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    /*
+      ============================
+      PASSWORD
+      ============================
+
+      This is the password for the invitation.
+    */
+
+    const correctPassword = "14102005";
+
+
+    function unlockInvitation() {
+
+      const enteredPassword =
+        document.getElementById("password").value;
+
+      const passwordScreen =
+        document.getElementById("password-screen");
+
+      const invitation =
+        document.getElementById("invitation");
+
+      const error =
+        document.getElementById("error");
+
+
+      if (enteredPassword === correctPassword) {
+
+        error.classList.remove("show");
+
+        passwordScreen.classList.add("hidden");
+
+        setTimeout(() => {
+
+          invitation.style.display = "block";
+
+          window.scrollTo({
+            top: 0,
+            behavior: "instant"
+          });
+
+        }, 700);
+
+        createParticles();
+
+      } else {
+
+        error.classList.add("show");
+
+      }
+
+    }
+
+
+    /*
+      Allow ENTER to unlock.
+    */
+
+    document
+      .getElementById("password")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+          unlockInvitation();
+        }
+
+      });
+
+
+    /*
+      Floating gold particles.
+    */
+
+    function createParticles() {
+
+      for (let i = 0; i < 25; i++) {
+
+        const particle =
+          document.createElement("div");
+
+        particle.classList.add("particle");
+
+        particle.style.left =
+          Math.random() * 100 + "vw";
+
+        particle.style.animationDelay =
+          Math.random() * 8 + "s";
+
+        particle.style.animationDuration =
+          (5 + Math.random() * 7) + "s";
+
+        document.body.appendChild(particle);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
