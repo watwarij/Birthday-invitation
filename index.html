@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,10 +12,11 @@
 
   <meta
     name="theme-color"
-    content="#b77b82"
+    content="#c98f98"
   >
 
   <title>You're Invited — 21st Birthday</title>
+
 
   <style>
 
@@ -21,11 +24,13 @@
        GOOGLE FONTS
        ========================================================= */
 
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+    @import url(
+      'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap'
+    );
 
 
     /* =========================================================
-       VARIABLES — PINK & KHAKI
+       VARIABLES
        ========================================================= */
 
     :root {
@@ -52,8 +57,6 @@
 
       --danger: #d98686;
 
-      --success: #a9c5a0;
-
     }
 
 
@@ -78,16 +81,19 @@
       min-height: 100vh;
 
       background:
+
         radial-gradient(
           circle at 50% 10%,
           rgba(201, 143, 152, 0.16),
           transparent 35%
         ),
+
         radial-gradient(
           circle at 15% 70%,
           rgba(183, 166, 138, 0.08),
           transparent 30%
         ),
+
         var(--bg);
 
       color: var(--white);
@@ -122,6 +128,7 @@
       display: flex;
 
       justify-content: center;
+
       align-items: center;
 
       padding: 25px;
@@ -133,15 +140,19 @@
       z-index: 10000;
 
       background:
+
         radial-gradient(
           circle at center,
           rgba(201, 143, 152, 0.12),
           transparent 45%
         ),
+
         var(--bg);
 
       transition:
+
         opacity 0.8s ease,
+
         visibility 0.8s ease;
     }
 
@@ -167,21 +178,25 @@
       text-align: center;
 
       border:
+
         1px solid
         rgba(201, 143, 152, 0.4);
 
       background:
-        rgba(41, 35, 31, 0.9);
+
+        rgba(41, 35, 31, 0.92);
 
       backdrop-filter: blur(18px);
 
       border-radius: 6px;
 
       box-shadow:
+
         0 30px 90px
         rgba(0, 0, 0, 0.55);
 
       animation:
+
         passwordCardIn
         1s
         ease
@@ -196,6 +211,7 @@
         opacity: 0;
 
         transform:
+
           translateY(30px)
           scale(0.97);
       }
@@ -205,6 +221,7 @@
         opacity: 1;
 
         transform:
+
           translateY(0)
           scale(1);
       }
@@ -241,6 +258,7 @@
       font-weight: 400;
 
       text-shadow:
+
         0 0 45px
         rgba(201, 143, 152, 0.15);
     }
@@ -297,11 +315,13 @@
       padding: 15px;
 
       background:
-        rgba(255,255,255,0.02);
+
+        rgba(255, 255, 255, 0.02);
 
       border:
+
         1px solid
-        rgba(183,166,138,0.35);
+        rgba(183, 166, 138, 0.35);
 
       color: var(--white);
 
@@ -328,6 +348,7 @@
         var(--pink);
 
       box-shadow:
+
         0 0 25px
         rgba(201, 143, 152, 0.1);
     }
@@ -342,6 +363,7 @@
       padding: 15px;
 
       border:
+
         1px solid
         var(--pink);
 
@@ -374,6 +396,7 @@
         translateY(-2px);
 
       box-shadow:
+
         0 10px 30px
         rgba(201, 143, 152, 0.15);
     }
@@ -403,8 +426,7 @@
 
     .error {
 
-      color:
-        var(--danger);
+      color: var(--danger);
 
       font-size: 11px;
 
@@ -442,6 +464,7 @@
       align-items: center;
 
       background:
+
         radial-gradient(
           circle at center,
           #493337 0%,
@@ -456,7 +479,9 @@
       pointer-events: none;
 
       transition:
+
         opacity 0.7s ease,
+
         visibility 0.7s ease;
     }
 
@@ -480,7 +505,9 @@
       pointer-events: none;
 
       transition:
+
         opacity 1s ease,
+
         visibility 1s ease;
     }
 
@@ -510,6 +537,7 @@
       perspective: 1000px;
 
       filter:
+
         drop-shadow(
           0 30px 50px
           rgba(0, 0, 0, 0.65)
@@ -524,6 +552,7 @@
       inset: 0;
 
       background:
+
         linear-gradient(
           135deg,
           #776a57,
@@ -531,6 +560,7 @@
         );
 
       border:
+
         1px solid
         rgba(229, 181, 187, 0.5);
 
@@ -552,25 +582,24 @@
 
       height: 175px;
 
-      background:
-        #f8eee9;
+      background: #f8eee9;
 
-      color:
-        #332725;
+      color: #332725;
 
       z-index: 2;
 
-      transform:
-        translateY(0);
+      transform: translateY(0);
 
       transition:
+
         transform
         1.1s
-        cubic-bezier(.22,1,.36,1);
+        cubic-bezier(.22, 1, .36, 1);
 
       box-shadow:
+
         0 10px 30px
-        rgba(0,0,0,0.3);
+        rgba(0, 0, 0, 0.3);
     }
 
 
@@ -604,8 +633,7 @@
 
       letter-spacing: 4px;
 
-      color:
-        var(--pink-dark);
+      color: var(--pink-dark);
     }
 
 
@@ -617,8 +645,7 @@
 
       font-weight: 400;
 
-      color:
-        #9d6e75;
+      color: #9d6e75;
     }
 
 
@@ -631,6 +658,7 @@
       z-index: 4;
 
       background:
+
         linear-gradient(
           145deg,
           transparent 49.5%,
@@ -638,6 +666,7 @@
         );
 
       clip-path:
+
         polygon(
           0 0,
           50% 58%,
@@ -647,8 +676,9 @@
         );
 
       border-bottom:
+
         1px solid
-        rgba(229,181,187,0.35);
+        rgba(229, 181, 187, 0.35);
     }
 
 
@@ -667,6 +697,7 @@
       z-index: 5;
 
       background:
+
         linear-gradient(
           135deg,
           #95866d,
@@ -674,23 +705,25 @@
         );
 
       clip-path:
+
         polygon(
           0 0,
           100% 0,
           50% 100%
         );
 
-      transform-origin:
-        top center;
+      transform-origin: top center;
 
       border-top:
+
         1px solid
-        rgba(229,181,187,0.55);
+        rgba(229, 181, 187, 0.55);
 
       transition:
+
         transform
         1s
-        cubic-bezier(.22,1,.36,1);
+        cubic-bezier(.22, 1, .36, 1);
     }
 
 
@@ -729,13 +762,13 @@
       opacity: 0;
 
       animation:
+
         openingTextIn
         1s
         ease
         forwards;
 
-      animation-delay:
-        0.5s;
+      animation-delay: 0.5s;
     }
 
 
@@ -769,6 +802,7 @@
       opacity: 0;
 
       animation:
+
         invitationIn
         1.5s
         ease
@@ -834,9 +868,10 @@
       border-radius: 50%;
 
       background:
+
         radial-gradient(
           circle,
-          rgba(201,143,152,0.14),
+          rgba(201, 143, 152, 0.14),
           transparent 65%
         );
 
@@ -854,8 +889,7 @@
 
     .hero-subtitle {
 
-      color:
-        var(--pink);
+      color: var(--pink);
 
       font-size: 11px;
 
@@ -872,6 +906,7 @@
         serif;
 
       font-size:
+
         clamp(
           160px,
           35vw,
@@ -885,12 +920,13 @@
       color: transparent;
 
       -webkit-text-stroke:
-        1px
-        var(--pink);
+
+        1px var(--pink);
 
       text-shadow:
+
         0 0 50px
-        rgba(201,143,152,0.12);
+        rgba(201, 143, 152, 0.12);
     }
 
 
@@ -901,6 +937,7 @@
         serif;
 
       font-size:
+
         clamp(
           40px,
           8vw,
@@ -943,8 +980,7 @@
 
       letter-spacing: 4px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       white-space: nowrap;
     }
@@ -968,8 +1004,7 @@
 
     .section-label {
 
-      color:
-        var(--pink);
+      color: var(--pink);
 
       font-size: 10px;
 
@@ -999,8 +1034,7 @@
 
       margin: auto;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       line-height: 2;
 
@@ -1024,11 +1058,12 @@
       gap: 1px;
 
       background:
-        rgba(183,166,138,0.25);
+        rgba(183, 166, 138, 0.25);
 
       border:
+
         1px solid
-        rgba(183,166,138,0.25);
+        rgba(183, 166, 138, 0.25);
     }
 
 
@@ -1040,15 +1075,16 @@
       padding: 40px 20px;
 
       transition:
+
         background 0.3s,
+
         transform 0.3s;
     }
 
 
     .detail:hover {
 
-      background:
-        #302925;
+      background: #302925;
 
       transform:
         translateY(-3px);
@@ -1061,8 +1097,7 @@
 
       margin-bottom: 15px;
 
-      color:
-        var(--pink);
+      color: var(--pink);
     }
 
 
@@ -1087,15 +1122,13 @@
 
       font-size: 22px;
 
-      color:
-        var(--white);
+      color: var(--white);
     }
 
 
     .detail-small {
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font-size: 11px;
 
@@ -1127,11 +1160,13 @@
       padding: 25px 10px;
 
       background:
-        rgba(201,143,152,0.06);
+
+        rgba(201, 143, 152, 0.06);
 
       border:
+
         1px solid
-        rgba(201,143,152,0.18);
+        rgba(201, 143, 152, 0.18);
     }
 
 
@@ -1156,8 +1191,7 @@
 
       letter-spacing: 2px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
 
@@ -1168,12 +1202,14 @@
     .rsvp {
 
       border-top:
+
         1px solid
-        rgba(183,166,138,0.2);
+        rgba(183, 166, 138, 0.2);
 
       border-bottom:
+
         1px solid
-        rgba(183,166,138,0.2);
+        rgba(183, 166, 138, 0.2);
     }
 
 
@@ -1186,6 +1222,7 @@
       padding: 16px 45px;
 
       border:
+
         1px solid
         var(--pink);
 
@@ -1200,9 +1237,7 @@
 
       transition: 0.3s;
 
-      margin-right: 8px;
-
-      margin-left: 8px;
+      cursor: pointer;
     }
 
 
@@ -1211,28 +1246,7 @@
       background:
         var(--pink);
 
-      color:
-        #21191a;
-    }
-
-
-    .rsvp-button.secondary {
-
-      border-color:
-        var(--khaki);
-
-      color:
-        var(--khaki-light);
-    }
-
-
-    .rsvp-button.secondary:hover {
-
-      background:
-        var(--khaki);
-
-      color:
-        #211e19;
+      color: #21191a;
     }
 
 
@@ -1246,8 +1260,7 @@
 
       padding: 60px 20px;
 
-      color:
-        #706963;
+      color: #706963;
 
       font-size: 10px;
 
@@ -1256,9 +1269,7 @@
 
 
     footer span {
-
-      color:
-        var(--pink);
+      color: var(--pink);
     }
 
 
@@ -1284,6 +1295,7 @@
       pointer-events: none;
 
       animation:
+
         float 8s
         linear
         infinite;
@@ -1420,7 +1432,7 @@
         display: block;
 
         margin:
-          15px auto;
+          20px auto 0;
 
         max-width: 280px;
       }
@@ -1469,26 +1481,32 @@
 
     <div class="password-card">
 
+
       <div class="small-title">
         PRIVATE INVITATION
       </div>
+
 
       <div class="number">
         21
       </div>
 
+
       <div class="birthday">
         BIRTHDAY
       </div>
+
 
       <p class="password-description">
         This invitation is private.
         Enter the password to reveal your invitation.
       </p>
 
+
       <div class="hint">
         HINT: MY BIRTHDAY
       </div>
+
 
       <input
         type="password"
@@ -1499,6 +1517,7 @@
         spellcheck="false"
       >
 
+
       <button
         id="unlock-button"
         class="unlock-button"
@@ -1506,6 +1525,7 @@
       >
         UNLOCK INVITATION
       </button>
+
 
       <div
         id="error"
@@ -1515,12 +1535,14 @@
         Incorrect password. Please try again.
       </div>
 
+
       <div
         id="attempts"
         class="attempts"
       >
         3 attempts remaining
       </div>
+
 
     </div>
 
@@ -1530,6 +1552,8 @@
 
   <!-- =======================================================
        ENVELOPE TRANSITION
+
+       The invitation is NOT visible while this is happening.
        ======================================================= -->
 
   <div
@@ -1539,9 +1563,12 @@
 
     <div class="envelope-scene">
 
+
       <div class="envelope">
 
+
         <div class="envelope-back"></div>
+
 
         <div class="envelope-letter">
 
@@ -1559,15 +1586,20 @@
 
         </div>
 
+
         <div class="envelope-front"></div>
+
 
         <div class="envelope-flap"></div>
 
+
       </div>
+
 
       <div class="opening-text">
         OPENING YOUR INVITATION
       </div>
+
 
     </div>
 
@@ -1578,13 +1610,14 @@
   <!-- =======================================================
        INVITATION TEMPLATE
 
-       IMPORTANT:
-       Nothing inside this template is shown until the
-       password is correct AND the envelope animation has
-       started.
+       This is deliberately kept inside <template>.
+
+       Therefore none of this content is rendered until
+       JavaScript inserts it after the envelope animation.
        ======================================================= -->
 
   <template id="invitation-template">
+
 
     <main id="invitation">
 
@@ -1595,34 +1628,45 @@
 
       <section class="hero">
 
+
         <div class="hero-content">
+
 
           <div class="hero-subtitle">
             YOU'RE INVITED
           </div>
 
+
           <div class="hero-21">
             21
           </div>
 
-          <!-- CHANGE NAME HERE -->
+
+          <!-- CHANGE YOUR NAME HERE -->
 
           <h1 class="hero-title">
+
             [YOUR NAME]'S<br>
+
             BIRTHDAY
+
           </h1>
 
-          <!-- CHANGE DATE HERE -->
+
+          <!-- CHANGE YOUR DATE HERE -->
 
           <div class="hero-date">
             14 OCTOBER 2026
           </div>
 
+
         </div>
+
 
         <div class="scroll">
           SCROLL TO DISCOVER
         </div>
+
 
       </section>
 
@@ -1634,21 +1678,29 @@
 
       <section class="section">
 
+
         <div class="section-label">
           LET'S CELEBRATE
         </div>
+
 
         <h2>
           Twenty-one looks good.
         </h2>
 
+
         <p>
+
           It's time to celebrate another trip around
-          the sun. Join me for an unforgettable evening
-          filled with good music, great people, delicious
-          food, drinks and memories we'll be talking about
+          the sun.
+
+          Join me for an unforgettable evening filled
+          with good music, great people, delicious food,
+          drinks and memories we'll be talking about
           for years.
+
         </p>
+
 
       </section>
 
@@ -1660,13 +1712,16 @@
 
       <section class="section">
 
+
         <div class="section-label">
           THE DETAILS
         </div>
 
+
         <h2>
           Save the date.
         </h2>
+
 
         <div class="details">
 
@@ -1675,71 +1730,94 @@
 
           <div class="detail">
 
+
             <div class="detail-icon">
               ♡
             </div>
+
 
             <div class="detail-title">
               DATE
             </div>
 
+
             <div class="detail-text">
               14 October 2026
             </div>
+
 
             <div class="detail-small">
               Wednesday
             </div>
 
+
           </div>
+
 
 
           <!-- TIME -->
 
           <div class="detail">
 
+
             <div class="detail-icon">
               ◷
             </div>
+
 
             <div class="detail-title">
               TIME
             </div>
 
+
             <div class="detail-text">
               18:00
             </div>
+
 
             <div class="detail-small">
               Please arrive from 17:30
             </div>
 
+
           </div>
+
 
 
           <!-- LOCATION -->
 
           <div class="detail">
 
+
             <div class="detail-icon">
               ◇
             </div>
+
 
             <div class="detail-title">
               LOCATION
             </div>
 
+
+            <!-- CHANGE VENUE -->
+
             <div class="detail-text">
               [VENUE NAME]
             </div>
+
+
+            <!-- CHANGE ADDRESS -->
 
             <div class="detail-small">
               [CITY / ADDRESS]
             </div>
 
+
           </div>
 
+
         </div>
+
 
       </section>
 
@@ -1751,13 +1829,16 @@
 
       <section class="section">
 
+
         <div class="section-label">
           COUNTING DOWN
         </div>
 
+
         <h2>
           Until the celebration.
         </h2>
+
 
         <div class="countdown">
 
@@ -1825,7 +1906,9 @@
 
           </div>
 
+
         </div>
+
 
       </section>
 
@@ -1837,53 +1920,43 @@
 
       <section class="section rsvp">
 
+
         <div class="section-label">
           RSVP
         </div>
+
 
         <h2>
           Will you join me?
         </h2>
 
+
         <p>
+
           Please let me know if you can make it.
+
           I can't wait to celebrate this special
           milestone with you.
+
         </p>
 
 
         <!--
-          CHANGE THE NUMBER BELOW TO YOUR
-          WHATSAPP NUMBER.
-
-          Include country code.
-          Example:
-          264811234567
+          You can replace the # below with:
+          - An RSVP form
+          - Google Form
+          - Email link
+          - Your own RSVP page
         -->
 
         <a
           class="rsvp-button"
-          href="https://wa.me/264811234567?text=Hi!%20I'd%20love%20to%20RSVP%20for%20your%2021st%20birthday!"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
+          onclick="return false;"
         >
-          RSVP VIA WHATSAPP
+          RSVP
         </a>
 
-
-        <!--
-          CHANGE THIS GOOGLE MAPS LINK
-          TO YOUR VENUE LOCATION.
-        -->
-
-        <a
-          class="rsvp-button secondary"
-          href="https://www.google.com/maps"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          VIEW LOCATION
-        </a>
 
       </section>
 
@@ -1896,7 +1969,11 @@
       <footer>
 
         MADE WITH
-        <span>♥</span>
+
+        <span>
+          ♥
+        </span>
+
         FOR A SPECIAL 21ST
 
       </footer>
@@ -1916,41 +1993,28 @@
 
 
     /* =======================================================
-       SETTINGS
+       PASSWORD SETTINGS
+       ======================================================= */
+
+    const CORRECT_PASSWORD =
+      "14102005";
+
+
+    const MAX_ATTEMPTS =
+      3;
+
+
+    /* =======================================================
+       EVENT SETTINGS
        ======================================================= */
 
     /*
-      CHANGE YOUR PASSWORD HERE.
+      Countdown target:
 
-      Example:
-      "14october"
+      14 October 2026
+      18:00
 
-      IMPORTANT:
-      This is client-side protection only.
-      Anyone who can inspect the HTML can technically
-      discover the password.
-    */
-
-    const CORRECT_PASSWORD = "14october";
-
-
-    /*
-      Maximum incorrect attempts.
-    */
-
-    const MAX_ATTEMPTS = 3;
-
-
-    /*
-      Countdown date.
-
-      CHANGE THIS IF NEEDED.
-
-      Format:
-      YYYY-MM-DDTHH:MM:SS
-
-      This example is:
-      14 October 2026 at 18:00
+      Change the time below if necessary.
     */
 
     const EVENT_DATE =
@@ -1958,7 +2022,7 @@
 
 
     /* =======================================================
-       ELEMENTS
+       GET ELEMENTS
        ======================================================= */
 
     const passwordScreen =
@@ -2017,16 +2081,20 @@
       const remaining =
         MAX_ATTEMPTS - attempts;
 
+
       if (remaining > 0) {
 
         attemptsDisplay.textContent =
+
           `${remaining} ${
             remaining === 1
               ? "attempt"
               : "attempts"
           } remaining`;
 
-      } else {
+      }
+
+      else {
 
         attemptsDisplay.textContent =
           "Too many attempts.";
@@ -2045,28 +2113,28 @@
       error.textContent =
         message;
 
-      error.classList.add("show");
+      error.classList.add(
+        "show"
+      );
 
     }
 
 
     function hideError() {
 
-      error.classList.remove("show");
+      error.classList.remove(
+        "show"
+      );
 
     }
 
 
     /* =======================================================
-       UNLOCK FUNCTION
+       UNLOCK INVITATION
        ======================================================= */
 
     function unlockInvitation() {
 
-
-      /*
-        Prevent interaction during lockout.
-      */
 
       if (lockedOut) {
         return;
@@ -2077,20 +2145,25 @@
         passwordInput.value.trim();
 
 
-      /*
-        INCORRECT PASSWORD
-      */
+      /* -------------------------------------------------------
+         INCORRECT PASSWORD
+         ------------------------------------------------------- */
 
       if (
         enteredPassword !==
         CORRECT_PASSWORD
       ) {
 
+
         attempts++;
+
 
         updateAttempts();
 
-        passwordInput.value = "";
+
+        passwordInput.value =
+          "";
+
 
         passwordInput.focus();
 
@@ -2100,13 +2173,17 @@
           MAX_ATTEMPTS
         ) {
 
+
           lockedOut = true;
+
 
           unlockButton.disabled =
             true;
 
+
           passwordInput.disabled =
             true;
+
 
           showError(
             "Too many incorrect attempts. Please wait 15 seconds."
@@ -2114,34 +2191,46 @@
 
 
           /*
-            15-second temporary lockout.
+            Temporary 15-second lockout.
           */
 
           setTimeout(() => {
 
+
             attempts = 0;
 
+
             lockedOut = false;
+
 
             unlockButton.disabled =
               false;
 
+
             passwordInput.disabled =
               false;
+
 
             passwordInput.value =
               "";
 
+
             hideError();
+
 
             updateAttempts();
 
+
             passwordInput.focus();
+
 
           }, 15000);
 
 
-        } else {
+        }
+
+        else {
+
 
           showError(
             "Incorrect password. Please try again."
@@ -2149,28 +2238,32 @@
 
         }
 
+
         return;
+
       }
 
 
-      /*
-        ======================================================
-        CORRECT PASSWORD
-        ======================================================
-      */
+      /* -------------------------------------------------------
+         CORRECT PASSWORD
+         ------------------------------------------------------- */
+
 
       unlockButton.disabled =
         true;
 
+
       passwordInput.disabled =
         true;
+
 
       hideError();
 
 
       /*
         STEP 1
-        Fade away the password screen.
+
+        Hide password screen.
       */
 
       passwordScreen.classList.add(
@@ -2180,11 +2273,11 @@
 
       /*
         STEP 2
-        Show the envelope.
 
-        IMPORTANT:
-        The invitation is STILL NOT inserted
-        into the page at this point.
+        Show envelope.
+
+        The invitation is STILL inside the
+        <template> and therefore is NOT visible.
       */
 
       envelopeTransition.classList.add(
@@ -2194,27 +2287,33 @@
 
       /*
         STEP 3
-        Allow the envelope to appear
-        before opening it.
+
+        Wait for the envelope to appear,
+        then open it.
       */
 
       setTimeout(() => {
 
+
         envelopeTransition.classList.add(
           "open"
         );
+
 
       }, 700);
 
 
       /*
         STEP 4
+
         Wait until the envelope has opened.
 
-        Only NOW do we insert the invitation.
+        ONLY NOW is the invitation inserted
+        into the page.
       */
 
       setTimeout(() => {
+
 
         const invitation =
           invitationTemplate.content.cloneNode(
@@ -2233,8 +2332,7 @@
 
 
         /*
-          Start countdown after invitation
-          has been inserted.
+          Start countdown.
         */
 
         startCountdown();
@@ -2242,15 +2340,18 @@
 
         /*
           STEP 5
-          Let the invitation begin appearing,
-          then fade the envelope away.
+
+          Allow the invitation to begin appearing,
+          then fade out the envelope.
         */
 
         setTimeout(() => {
 
+
           envelopeTransition.classList.add(
             "fade-out"
           );
+
 
         }, 400);
 
@@ -2261,7 +2362,7 @@
 
 
     /* =======================================================
-       BUTTON
+       UNLOCK BUTTON
        ======================================================= */
 
     unlockButton.addEventListener(
@@ -2277,6 +2378,7 @@
     passwordInput.addEventListener(
       "keydown",
       function(event) {
+
 
         if (
           event.key ===
@@ -2297,11 +2399,15 @@
 
     function startCountdown() {
 
+
       const targetDate =
-        new Date(EVENT_DATE).getTime();
+        new Date(
+          EVENT_DATE
+        ).getTime();
 
 
       function updateCountdown() {
+
 
         const now =
           new Date().getTime();
@@ -2347,19 +2453,26 @@
         }
 
 
-        if (difference <= 0) {
+        if (
+          difference <= 0
+        ) {
+
 
           days.textContent =
             "00";
 
+
           hours.textContent =
             "00";
+
 
           minutes.textContent =
             "00";
 
+
           seconds.textContent =
             "00";
+
 
           return;
 
@@ -2404,28 +2517,36 @@
 
 
         days.textContent =
-          String(daysValue).padStart(
+          String(
+            daysValue
+          ).padStart(
             2,
             "0"
           );
 
 
         hours.textContent =
-          String(hoursValue).padStart(
+          String(
+            hoursValue
+          ).padStart(
             2,
             "0"
           );
 
 
         minutes.textContent =
-          String(minutesValue).padStart(
+          String(
+            minutesValue
+          ).padStart(
             2,
             "0"
           );
 
 
         seconds.textContent =
-          String(secondsValue).padStart(
+          String(
+            secondsValue
+          ).padStart(
             2,
             "0"
           );
@@ -2450,7 +2571,9 @@
 
     function createParticles() {
 
-      const particleCount = 20;
+
+      const particleCount =
+        20;
 
 
       for (
@@ -2458,6 +2581,7 @@
         i < particleCount;
         i++
       ) {
+
 
         const particle =
           document.createElement(
@@ -2470,7 +2594,7 @@
 
 
         /*
-          Every second particle is khaki.
+          Alternate pink and khaki particles.
         */
 
         if (
@@ -2485,22 +2609,28 @@
 
 
         particle.style.left =
-          Math.random() * 100 + "%";
+          Math.random() *
+          100 +
+          "%";
 
 
         particle.style.animationDelay =
-          Math.random() * 8 + "s";
+          Math.random() *
+          8 +
+          "s";
 
 
         particle.style.animationDuration =
           6 +
-          Math.random() * 7 +
+          Math.random() *
+          7 +
           "s";
 
 
         particle.style.width =
           2 +
-          Math.random() * 3 +
+          Math.random() *
+          3 +
           "px";
 
 
@@ -2537,4 +2667,5 @@
   </script>
 
 </body>
+
 </html>
