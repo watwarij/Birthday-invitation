@@ -41,17 +41,13 @@ input{
   font:inherit;
 }
 
-button{
-  cursor:pointer;
-}
-
 .hidden{
   display:none!important;
 }
 
 
 /* =========================================================
-   PASSWORD SCREEN
+   PASSWORD
 ========================================================= */
 
 #gate{
@@ -78,8 +74,8 @@ button{
     var(--pink5);
 
   transition:
-    opacity .6s ease,
-    visibility .6s ease;
+    opacity .6s,
+    visibility .6s;
 }
 
 #gate.hide{
@@ -91,7 +87,10 @@ button{
 .gate-card{
   width:min(410px,100%);
 
-  padding:42px 28px 34px;
+  padding:
+    42px
+    28px
+    34px;
 
   text-align:center;
 
@@ -110,6 +109,7 @@ button{
   margin:0 auto 20px;
 
   border:1px solid var(--pink3);
+
   border-radius:50%;
 
   display:grid;
@@ -127,16 +127,23 @@ button{
 }
 
 .gate-card h1{
-  margin:14px 0 8px;
+  margin:
+    14px
+    0
+    8px;
 
   font-size:42px;
+
   font-weight:400;
 
   color:var(--khaki4);
 }
 
 .gate-card p{
-  margin:0 0 24px;
+  margin:
+    0
+    0
+    24px;
 
   line-height:1.7;
 
@@ -193,7 +200,7 @@ button{
 
 
 /* =========================================================
-   VIDEO-STYLE ENVELOPE REVEAL
+   ENVELOPE REVEAL
 ========================================================= */
 
 #reveal{
@@ -202,7 +209,8 @@ button{
 
   z-index:9000;
 
-  display:grid;
+  display:none;
+
   place-items:center;
 
   overflow:hidden;
@@ -210,8 +218,12 @@ button{
   background:var(--pink5);
 
   transition:
-    opacity .8s ease,
-    visibility .8s ease;
+    opacity .8s,
+    visibility .8s;
+}
+
+#reveal.show{
+  display:grid;
 }
 
 #reveal.done{
@@ -238,7 +250,8 @@ button{
   top:25px;
   left:50%;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
   font-size:10px;
 
@@ -255,6 +268,7 @@ button{
   position:relative;
 
   width:min(390px,86vw);
+
   height:min(700px,84vh);
 
   perspective:1600px;
@@ -262,7 +276,7 @@ button{
 
 
 /* =========================================================
-   FLORAL INVITATION BEHIND ENVELOPE
+   INVITATION BEHIND ENVELOPE
 ========================================================= */
 
 .card{
@@ -288,20 +302,39 @@ button{
   opacity:0;
 
   transform:
-    translateY(70px)
-    scale(.88);
+    translateY(95px)
+    scale(.82);
 
-  transition:
-    opacity .9s ease 5.35s,
-    transform 1.25s cubic-bezier(.18,.8,.18,1) 5.2s;
+  animation:
+    cardReveal
+    2s
+    cubic-bezier(.18,.8,.18,1)
+    4.95s
+    forwards;
 }
 
-.play .card{
-  opacity:1;
+@keyframes cardReveal{
 
-  transform:
-    translateY(0)
-    scale(1);
+  0%{
+    opacity:0;
+
+    transform:
+      translateY(95px)
+      scale(.82);
+  }
+
+  25%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
 }
 
 .card-inner{
@@ -312,6 +345,7 @@ button{
   position:relative;
 
   display:grid;
+
   place-items:center;
 
   overflow:hidden;
@@ -324,8 +358,6 @@ button{
   inset:0;
 
   color:var(--pink3);
-
-  opacity:.9;
 }
 
 .floral svg{
@@ -344,22 +376,36 @@ button{
 
   padding:25px;
 
-  background:rgba(245,217,223,.88);
+  background:rgba(
+    245,
+    217,
+    223,
+    .88
+  );
 
   border:1px solid var(--khaki2);
 
   opacity:0;
 
-  transform:translateY(18px);
+  transform:
+    translateY(18px);
 
-  transition:
-    opacity .8s ease 7.5s,
-    transform .8s ease 7.5s;
+  animation:
+    copyReveal
+    .9s
+    ease
+    7.15s
+    forwards;
 }
 
-.play .card-copy{
-  opacity:1;
-  transform:none;
+@keyframes copyReveal{
+
+  to{
+    opacity:1;
+
+    transform:none;
+  }
+
 }
 
 .card-copy small{
@@ -375,7 +421,10 @@ button{
 }
 
 .card-copy h2{
-  margin:14px 0 7px;
+  margin:
+    14px
+    0
+    7px;
 
   font-size:48px;
 
@@ -399,7 +448,10 @@ button{
 }
 
 .card-copy p{
-  margin:16px 0 0;
+  margin:
+    16px
+    0
+    0;
 
   font-size:10px;
 
@@ -418,9 +470,23 @@ button{
 
   z-index:5;
 
-  inset:5% 0;
+  inset:
+    5%
+    0;
 
   transform-style:preserve-3d;
+
+  animation:
+    envelope-settle
+    .9s
+    3.45s
+    both,
+
+    envelopeFade
+    .9s
+    ease
+    6.65s
+    forwards;
 }
 
 .env-back{
@@ -479,9 +545,14 @@ button{
 
   backface-visibility:hidden;
 
-  transition:
-    transform 1.65s cubic-bezier(.7,.02,.18,1) 4.85s,
-    box-shadow 1.65s ease 4.85s;
+  animation-duration:1.55s;
+
+  animation-timing-function:
+    cubic-bezier(.7,.02,.18,1);
+
+  animation-delay:4.25s;
+
+  animation-fill-mode:forwards;
 }
 
 .door.left{
@@ -489,7 +560,10 @@ button{
 
   transform-origin:left center;
 
-  border-right:1px solid var(--khaki2);
+  border-right:
+    1px solid var(--khaki2);
+
+  animation-name:leftDoorOpen;
 }
 
 .door.right{
@@ -497,7 +571,10 @@ button{
 
   transform-origin:right center;
 
-  border-left:1px solid var(--khaki2);
+  border-left:
+    1px solid var(--khaki2);
+
+  animation-name:rightDoorOpen;
 }
 
 .door.left:after{
@@ -507,11 +584,12 @@ button{
 
   inset:0;
 
-  clip-path:polygon(
-    0 0,
-    100% 50%,
-    0 100%
-  );
+  clip-path:
+    polygon(
+      0 0,
+      100% 50%,
+      0 100%
+    );
 
   background:var(--khaki);
 }
@@ -523,35 +601,43 @@ button{
 
   inset:0;
 
-  clip-path:polygon(
-    100% 0,
-    0 50%,
-    100% 100%
-  );
+  clip-path:
+    polygon(
+      100% 0,
+      0 50%,
+      100% 100%
+    );
 
   background:var(--khaki);
 }
 
+@keyframes leftDoorOpen{
 
-/* Actual opening */
+  to{
+    transform:
+      rotateY(-108deg);
 
-.play .door.left{
-  transform:rotateY(-108deg);
+    box-shadow:
+      -25px 0 45px var(--shadow);
+  }
 
-  box-shadow:
-    -25px 0 45px var(--shadow);
 }
 
-.play .door.right{
-  transform:rotateY(108deg);
+@keyframes rightDoorOpen{
 
-  box-shadow:
-    25px 0 45px var(--shadow);
+  to{
+    transform:
+      rotateY(108deg);
+
+    box-shadow:
+      25px 0 45px var(--shadow);
+  }
+
 }
 
 
 /* =========================================================
-   TOP AND BOTTOM ENVELOPE FOLDS
+   TOP / BOTTOM ENVELOPE FOLDS
 ========================================================= */
 
 .fold-top,
@@ -573,19 +659,22 @@ button{
 
   height:43%;
 
-  clip-path:polygon(
-    0 0,
-    100% 0,
-    50% 76%
-  );
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 76%
+    );
 
-  border-bottom:1px solid var(--khaki2);
+  border-bottom:
+    1px solid var(--khaki2);
 
-  opacity:1;
-
-  transition:
-    transform 1.15s cubic-bezier(.65,.03,.2,1) 4.65s,
-    opacity .5s ease 5.5s;
+  animation:
+    topOpen
+    1.25s
+    cubic-bezier(.65,.03,.2,1)
+    4.05s
+    forwards;
 }
 
 .fold-bottom{
@@ -593,29 +682,44 @@ button{
 
   height:28%;
 
-  clip-path:polygon(
-    0 100%,
-    100% 100%,
-    50% 17%
-  );
+  clip-path:
+    polygon(
+      0 100%,
+      100% 100%,
+      50% 17%
+    );
 
-  border-top:1px solid var(--khaki2);
+  border-top:
+    1px solid var(--khaki2);
 
-  opacity:1;
-
-  transition:
-    transform 1.15s cubic-bezier(.65,.03,.2,1) 5.25s,
-    opacity .5s ease 6s;
+  animation:
+    bottomOpen
+    1.2s
+    cubic-bezier(.65,.03,.2,1)
+    4.65s
+    forwards;
 }
 
-.play .fold-top{
-  transform:translateY(-105%);
-  opacity:.15;
+@keyframes topOpen{
+
+  to{
+    transform:
+      translateY(-115%);
+
+    opacity:.15;
+  }
+
 }
 
-.play .fold-bottom{
-  transform:translateY(115%);
-  opacity:.12;
+@keyframes bottomOpen{
+
+  to{
+    transform:
+      translateY(120%);
+
+    opacity:.12;
+  }
+
 }
 
 
@@ -629,18 +733,23 @@ button{
   z-index:20;
 
   left:50%;
+
   top:0;
   bottom:0;
 
   width:12px;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
   background:var(--pink3);
 
-  transition:
-    transform 1.15s cubic-bezier(.55,.02,.18,1) 2.35s,
-    opacity .3s ease 3.45s;
+  animation:
+    ribbonDrop
+    1.15s
+    cubic-bezier(.55,.02,.18,1)
+    2.15s
+    forwards;
 }
 
 .ribbon-h{
@@ -655,26 +764,40 @@ button{
 
   height:14px;
 
-  transform:translateY(-50%);
+  transform:
+    translateY(-50%);
 
   background:var(--pink3);
 
-  transition:
-    transform 1s cubic-bezier(.55,.02,.18,1) 2.35s,
-    opacity .3s ease 3.45s;
+  animation:
+    ribbonDropH
+    1s
+    cubic-bezier(.55,.02,.18,1)
+    2.15s
+    forwards;
 }
 
-.play .ribbon-v{
-  transform:translate(-50%,118%);
-  opacity:0;
+@keyframes ribbonDrop{
+
+  to{
+    transform:
+      translate(-50%,118%);
+
+    opacity:0;
+  }
+
 }
 
-.play .ribbon-h{
-  transform:
-    translateY(105px)
-    rotate(-7deg);
+@keyframes ribbonDropH{
 
-  opacity:0;
+  to{
+    transform:
+      translateY(105px)
+      rotate(-7deg);
+
+    opacity:0;
+  }
+
 }
 
 
@@ -696,9 +819,12 @@ button{
   transform:
     translate(-50%,-50%);
 
-  transition:
-    transform 1.2s cubic-bezier(.55,.02,.18,1) 2.2s,
-    opacity .35s ease 3.4s;
+  animation:
+    bowDrop
+    1.2s
+    cubic-bezier(.55,.02,.18,1)
+    2s
+    forwards;
 }
 
 .bow:before,
@@ -714,30 +840,43 @@ button{
 
   background:var(--pink);
 
-  border:8px solid var(--pink2);
+  border:
+    8px solid
+    var(--pink2);
 
   box-shadow:
-    inset 0 0 0 2px var(--pink3);
+    inset
+    0
+    0
+    0
+    2px
+    var(--pink3);
 }
 
 .bow:before{
   left:0;
 
   border-radius:
-    65% 18%
-    65% 18%;
+    65%
+    18%
+    65%
+    18%;
 
-  transform:rotate(16deg);
+  transform:
+    rotate(16deg);
 }
 
 .bow:after{
   right:0;
 
   border-radius:
-    18% 65%
-    18% 65%;
+    18%
+    65%
+    18%
+    65%;
 
-  transform:rotate(-16deg);
+  transform:
+    rotate(-16deg);
 }
 
 .knot{
@@ -756,28 +895,44 @@ button{
 
   background:var(--pink4);
 
-  border:3px solid var(--pink5);
+  border:
+    3px solid
+    var(--pink5);
+}
+
+@keyframes bowDrop{
+
+  0%{
+    transform:
+      translate(-50%,-50%)
+      rotate(0)
+      scale(1);
+
+    opacity:1;
+  }
+
+  45%{
+    transform:
+      translate(-50%,55px)
+      rotate(4deg)
+      scale(.92);
+
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translate(-50%,190px)
+      rotate(10deg)
+      scale(.5);
+
+    opacity:0;
+  }
+
 }
 
 
-/* Bow drops away */
-
-.play .bow{
-  transform:
-    translate(-50%,155px)
-    rotate(9deg)
-    scale(.55);
-
-  opacity:0;
-}
-
-
-/* Small envelope settling movement */
-
-.play .envelope{
-  animation:
-    envelope-settle .9s 3.5s both;
-}
+/* envelope settling */
 
 @keyframes envelope-settle{
 
@@ -791,6 +946,15 @@ button{
 
   100%{
     transform:scale(1);
+  }
+
+}
+
+@keyframes envelopeFade{
+
+  to{
+    opacity:0;
+    visibility:hidden;
   }
 
 }
@@ -811,7 +975,7 @@ button{
 }
 
 
-/* NAV */
+/* NAVIGATION */
 
 .topbar{
   position:fixed;
@@ -830,11 +994,21 @@ button{
 
   justify-content:space-between;
 
-  padding:0 22px;
+  padding:
+    0
+    22px;
 
-  background:rgba(255,244,246,.93);
+  background:
+    rgba(
+      255,
+      244,
+      246,
+      .93
+    );
 
-  border-bottom:1px solid var(--pink);
+  border-bottom:
+    1px solid
+    var(--pink);
 
   backdrop-filter:blur(12px);
 }
@@ -851,7 +1025,9 @@ button{
   width:40px;
   height:40px;
 
-  border:1px solid var(--khaki3);
+  border:
+    1px solid
+    var(--khaki3);
 
   background:var(--khaki);
 
@@ -874,14 +1050,18 @@ button{
 
   background:var(--khaki);
 
-  border:1px solid var(--khaki2);
+  border:
+    1px solid
+    var(--khaki2);
 
   box-shadow:
-    0 20px 50px var(--shadow);
+    0 20px 50px
+    var(--shadow);
 
   opacity:0;
 
-  transform:translateY(-8px);
+  transform:
+    translateY(-8px);
 
   pointer-events:none;
 
@@ -899,7 +1079,9 @@ button{
 .menu a{
   display:block;
 
-  padding:13px 10px;
+  padding:
+    13px
+    10px;
 
   color:var(--khaki4);
 
@@ -972,7 +1154,9 @@ section{
 
   text-align:center;
 
-  border:1px solid var(--pink3);
+  border:
+    1px solid
+    var(--pink3);
 
   background:var(--pink5);
 }
@@ -984,7 +1168,9 @@ section{
 
   inset:14px;
 
-  border:1px solid var(--khaki3);
+  border:
+    1px solid
+    var(--khaki3);
 }
 
 .hero-content{
@@ -1062,7 +1248,8 @@ section{
 
   left:50%;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
   font-size:9px;
 
@@ -1097,7 +1284,9 @@ section{
 
   background:var(--pink5);
 
-  border:1px solid var(--pink3);
+  border:
+    1px solid
+    var(--pink3);
 
   position:relative;
 }
@@ -1109,7 +1298,9 @@ section{
 
   inset:12px;
 
-  border:1px solid var(--khaki3);
+  border:
+    1px solid
+    var(--khaki3);
 }
 
 .inner{
@@ -1134,11 +1325,7 @@ section{
   overflow:hidden;
 }
 
-.inner .frame{
-  position:absolute;
-}
-
-.inner>*:not(.frame){
+.inner>*{
   position:relative;
 
   z-index:2;
@@ -1193,7 +1380,9 @@ section{
 
   background:var(--pink5);
 
-  border:1px solid var(--pink3);
+  border:
+    1px solid
+    var(--pink3);
 
   text-align:center;
 }
@@ -1244,7 +1433,9 @@ section{
 
   background:var(--pink5);
 
-  border:1px solid var(--pink3);
+  border:
+    1px solid
+    var(--pink3);
 
   text-align:center;
 }
@@ -1283,7 +1474,9 @@ section{
 
   background:var(--pink5);
 
-  border:1px solid var(--pink3);
+  border:
+    1px solid
+    var(--pink3);
 }
 
 .map-box h2{
@@ -1313,7 +1506,9 @@ section{
     14px
     22px;
 
-  border:1px solid var(--pink4);
+  border:
+    1px solid
+    var(--pink4);
 
   background:var(--pink3);
 
@@ -1353,7 +1548,9 @@ section{
 /* FOOTER */
 
 footer{
-  padding:35px 20px;
+  padding:
+    35px
+    20px;
 
   text-align:center;
 
@@ -1403,7 +1600,6 @@ footer{
 }
 </style>
 </head>
-
 
 <body>
 
@@ -1455,7 +1651,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      ENVELOPE REVEAL
 ========================================================= -->
@@ -1476,7 +1671,7 @@ footer{
   <div class="stage">
 
 
-    <!-- FLORAL INVITATION BEHIND ENVELOPE -->
+    <!-- INVITATION BEHIND ENVELOPE -->
 
     <div class="card">
 
@@ -1620,7 +1815,6 @@ footer{
     </div>
 
 
-
     <!-- ENVELOPE -->
 
     <div class="envelope">
@@ -1640,7 +1834,9 @@ footer{
       <div class="ribbon-h"></div>
 
       <div class="bow">
+
         <div class="knot"></div>
+
       </div>
 
     </div>
@@ -1650,7 +1846,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      MAIN WEBSITE
 ========================================================= -->
@@ -1658,590 +1853,579 @@ footer{
 <main id="site">
 
 
-  <!-- NAVIGATION -->
+<header class="topbar">
 
-  <header class="topbar">
+  <div class="brand">
+    21ST BIRTHDAY
+  </div>
 
-    <div class="brand">
-      21ST BIRTHDAY
-    </div>
+  <button
+    class="menu-btn"
+    id="menuBtn"
+    aria-label="Open menu"
+  >
+    ☰
+  </button>
 
-    <button
-      class="menu-btn"
-      id="menuBtn"
-      aria-label="Open menu"
+</header>
+
+
+<nav
+  class="menu"
+  id="menu"
+>
+
+  <a href="#invitation">
+    Invitation
+  </a>
+
+  <a href="#details">
+    Details
+  </a>
+
+  <a href="#countdown">
+    Countdown
+  </a>
+
+  <a href="#location">
+    Location
+  </a>
+
+  <a href="#rsvp">
+    RSVP
+  </a>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+  class="hero"
+  id="invitation"
+>
+
+  <div class="frame">
+
+    <svg
+      viewBox="0 0 500 900"
+      preserveAspectRatio="none"
     >
-      ☰
-    </button>
 
-  </header>
-
-
-  <nav
-    class="menu"
-    id="menu"
-  >
-
-    <a href="#invitation">
-      Invitation
-    </a>
-
-    <a href="#details">
-      Details
-    </a>
-
-    <a href="#countdown">
-      Countdown
-    </a>
-
-    <a href="#location">
-      Location
-    </a>
-
-    <a href="#rsvp">
-      RSVP
-    </a>
-
-  </nav>
-
-
-
-  <!-- =======================================================
-       HERO
-  ======================================================== -->
-
-  <section
-    class="hero"
-    id="invitation"
-  >
-
-    <div class="frame">
-
-      <svg
-        viewBox="0 0 500 900"
-        preserveAspectRatio="none"
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
       >
 
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-        >
+        <path d="
+          M0 160
+          C80 120 90 50 35 0
 
-          <path d="
-            M0 160
-            C80 120 90 50 35 0
+          M500 160
+          C420 120 410 50 465 0
 
-            M500 160
-            C420 120 410 50 465 0
+          M0 740
+          C80 780 90 850 35 900
 
-            M0 740
-            C80 780 90 850 35 900
+          M500 740
+          C420 780 410 850 465 900
+        "/>
 
-            M500 740
-            C420 780 410 850 465 900
-          "/>
+        <ellipse
+          cx="55"
+          cy="95"
+          rx="28"
+          ry="10"
+          transform="rotate(-30 55 95)"
+        />
 
-          <ellipse
-            cx="55"
-            cy="95"
-            rx="28"
-            ry="10"
-            transform="rotate(-30 55 95)"
-          />
+        <ellipse
+          cx="445"
+          cy="95"
+          rx="28"
+          ry="10"
+          transform="rotate(30 445 95)"
+        />
 
-          <ellipse
-            cx="445"
-            cy="95"
-            rx="28"
-            ry="10"
-            transform="rotate(30 445 95)"
-          />
+        <ellipse
+          cx="55"
+          cy="805"
+          rx="28"
+          ry="10"
+          transform="rotate(30 55 805)"
+        />
 
-          <ellipse
-            cx="55"
-            cy="805"
-            rx="28"
-            ry="10"
-            transform="rotate(30 55 805)"
-          />
+        <ellipse
+          cx="445"
+          cy="805"
+          rx="28"
+          ry="10"
+          transform="rotate(-30 445 805)"
+        />
 
-          <ellipse
-            cx="445"
-            cy="805"
-            rx="28"
-            ry="10"
-            transform="rotate(-30 445 805)"
-          />
+      </g>
 
-        </g>
+    </svg>
 
-      </svg>
-
-    </div>
+  </div>
 
 
-    <div class="hero-card">
+  <div class="hero-card">
 
-      <div class="hero-content">
+    <div class="hero-content">
 
-        <div class="eyebrow">
-          Come celebrate with me
-        </div>
-
-        <h1>
-          21
-        </h1>
-
-        <h2>
-          MY BIRTHDAY
-        </h2>
-
-        <div class="hero-date">
-          14 OCTOBER 2026
-        </div>
-
-        <div
-          class="hero-name"
-          id="heroName"
-        >
-          Your Name
-        </div>
-
+      <div class="eyebrow">
+        Come celebrate with me
       </div>
 
-    </div>
-
-
-    <div class="scroll">
-      Scroll to explore
-    </div>
-
-  </section>
-
-
-
-  <!-- =======================================================
-       DETAILS
-  ======================================================== -->
-
-  <section
-    class="section alt"
-    id="details"
-  >
-
-    <div class="shell">
-
-      <div class="inner">
-
-        <small>
-          Save the date
-        </small>
-
-        <h2>
-          Let's celebrate
-        </h2>
-
-        <p>
-          Join me as I celebrate turning 21.
-          I would love to have you there for an
-          evening of good memories, good company
-          and a little celebration.
-        </p>
-
-
-        <div class="details-grid">
-
-          <div class="detail">
-
-            <b>
-              Date
-            </b>
-
-            <span>
-              14 October 2026
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>
-              Time
-            </b>
-
-            <span>
-              18:00
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>
-              Venue
-            </b>
-
-            <span id="venueText">
-              Your Venue
-            </span>
-
-          </div>
-
-
-          <div class="detail">
-
-            <b>
-              City
-            </b>
-
-            <span id="cityText">
-              Your City
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =======================================================
-       COUNTDOWN
-  ======================================================== -->
-
-  <section
-    class="section"
-    id="countdown"
-  >
-
-    <div class="shell">
-
-      <div class="inner">
-
-        <small>
-          The countdown is on
-        </small>
-
-        <h2>
-          Until 21
-        </h2>
-
-
-        <div class="countdown">
-
-          <div class="time">
-
-            <strong id="days">
-              00
-            </strong>
-
-            <small>
-              Days
-            </small>
-
-          </div>
-
-
-          <div class="time">
-
-            <strong id="hours">
-              00
-            </strong>
-
-            <small>
-              Hours
-            </small>
-
-          </div>
-
-
-          <div class="time">
-
-            <strong id="minutes">
-              00
-            </strong>
-
-            <small>
-              Minutes
-            </small>
-
-          </div>
-
-
-          <div class="time">
-
-            <strong id="seconds">
-              00
-            </strong>
-
-            <small>
-              Seconds
-            </small>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =======================================================
-       LOCATION
-  ======================================================== -->
-
-  <section
-    class="section alt"
-    id="location"
-  >
-
-    <div class="map-box">
-
-      <small>
-        Where to find us
-      </small>
-
-      <h2 id="locationVenue">
-        Your Venue
+      <h1>
+        21
+      </h1>
+
+      <h2>
+        MY BIRTHDAY
       </h2>
 
-      <p>
+      <div class="hero-date">
+        14 OCTOBER 2026
+      </div>
 
-        <span id="locationCity">
-          Your City
-        </span>
-
-        <br>
-
-        14 October 2026 · 18:00
-
-      </p>
-
-      <a
-        class="map-btn"
-        href="https://www.google.com/maps"
-        target="_blank"
-        rel="noopener"
+      <div
+        class="hero-name"
+        id="heroName"
       >
-        Open in Maps
-      </a>
+        Your Name
+      </div>
 
     </div>
 
-  </section>
+  </div>
 
 
+  <div class="scroll">
+    Scroll to explore
+  </div>
 
-  <!-- =======================================================
-       RSVP
-  ======================================================== -->
+</section>
 
-  <section
-    class="section"
-    id="rsvp"
-  >
 
-    <div class="rsvp">
+<!-- =========================================================
+     DETAILS
+========================================================= -->
+
+<section
+  class="section alt"
+  id="details"
+>
+
+  <div class="shell">
+
+    <div class="inner">
 
       <small>
-        Let me know
+        Save the date
       </small>
 
       <h2>
-        RSVP
+        Let's celebrate
       </h2>
 
       <p>
-        Please confirm your attendance so I can
-        save your place.
+        Join me as I celebrate turning 21.
+        I would love to have you there for an
+        evening of good memories, good company
+        and a little celebration.
       </p>
 
-      <a
-        class="rsvp-btn"
-        id="rsvpBtn"
-        href="#"
-        target="_blank"
-        rel="noopener"
-      >
-        RSVP on WhatsApp
-      </a>
+
+      <div class="details-grid">
+
+        <div class="detail">
+
+          <b>
+            Date
+          </b>
+
+          <span>
+            14 October 2026
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Time
+          </b>
+
+          <span>
+            18:00
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Venue
+          </b>
+
+          <span id="venueText">
+            Your Venue
+          </span>
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            City
+          </b>
+
+          <span id="cityText">
+            Your City
+          </span>
+
+        </div>
+
+      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
+<!-- =========================================================
+     COUNTDOWN
+========================================================= -->
 
-  <!-- FOOTER -->
+<section
+  class="section"
+  id="countdown"
+>
 
-  <footer>
-    Made for a very special 21st birthday ·
-    14 October 2026
-  </footer>
+  <div class="shell">
+
+    <div class="inner">
+
+      <small>
+        The countdown is on
+      </small>
+
+      <h2>
+        Until 21
+      </h2>
+
+
+      <div class="countdown">
+
+        <div class="time">
+
+          <strong id="days">
+            00
+          </strong>
+
+          <small>
+            Days
+          </small>
+
+        </div>
+
+
+        <div class="time">
+
+          <strong id="hours">
+            00
+          </strong>
+
+          <small>
+            Hours
+          </small>
+
+        </div>
+
+
+        <div class="time">
+
+          <strong id="minutes">
+            00
+          </strong>
+
+          <small>
+            Minutes
+          </small>
+
+        </div>
+
+
+        <div class="time">
+
+          <strong id="seconds">
+            00
+          </strong>
+
+          <small>
+            Seconds
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section
+  class="section alt"
+  id="location"
+>
+
+  <div class="map-box">
+
+    <small>
+      Where to find us
+    </small>
+
+    <h2 id="locationVenue">
+      Your Venue
+    </h2>
+
+    <p>
+
+      <span id="locationCity">
+        Your City
+      </span>
+
+      <br>
+
+      14 October 2026 · 18:00
+
+    </p>
+
+    <a
+      class="map-btn"
+      href="https://www.google.com/maps"
+      target="_blank"
+      rel="noopener"
+    >
+      Open in Maps
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RSVP
+========================================================= -->
+
+<section
+  class="section"
+  id="rsvp"
+>
+
+  <div class="rsvp">
+
+    <small>
+      Let me know
+    </small>
+
+    <h2>
+      RSVP
+    </h2>
+
+    <p>
+      Please confirm your attendance so I can
+      save your place.
+    </p>
+
+    <a
+      class="rsvp-btn"
+      id="rsvpBtn"
+      href="#"
+      target="_blank"
+      rel="noopener"
+    >
+      RSVP on WhatsApp
+    </a>
+
+  </div>
+
+</section>
+
+
+<footer>
+  Made for a very special 21st birthday ·
+  14 October 2026
+</footer>
 
 </main>
-
 
 
 <script>
 
 /* =========================================================
-   EDIT THESE DETAILS
+   YOUR DETAILS
 ========================================================= */
 
-const CONFIG = {
+const CONFIG={
 
-  /* Password is exactly this */
   password:"14102005",
 
-  /* Change these */
   name:"Your Name",
+
   venue:"Your Venue",
+
   city:"Your City",
 
-  /*
-    Put your WhatsApp number here.
-
-    Example:
-    264812345678
-
-    Do NOT include + or spaces.
-  */
   whatsapp:"0000000000",
 
-  /* Put your actual Google Maps link here */
   mapUrl:"https://www.google.com/maps",
 
-  /*
-    Event date:
-    14 October 2026 at 18:00
-    Namibia/South Africa time (+02:00)
-  */
   eventDate:"2026-10-14T18:00:00+02:00"
 
 };
 
 
+const gate=
+  document.getElementById(
+    "gate"
+  );
+
+const password=
+  document.getElementById(
+    "password"
+  );
+
+const error=
+  document.getElementById(
+    "error"
+  );
+
+const enterBtn=
+  document.getElementById(
+    "enterBtn"
+  );
+
+const reveal=
+  document.getElementById(
+    "reveal"
+  );
+
+const site=
+  document.getElementById(
+    "site"
+  );
+
 
 /* =========================================================
-   PASSWORD + AUTO ENVELOPE
+   START INVITATION
 ========================================================= */
-
-const gate =
-  document.getElementById("gate");
-
-const password =
-  document.getElementById("password");
-
-const error =
-  document.getElementById("error");
-
-const enterBtn =
-  document.getElementById("enterBtn");
-
-const reveal =
-  document.getElementById("reveal");
-
-const stage =
-  document.querySelector(".stage");
-
-const site =
-  document.getElementById("site");
-
-
 
 function startInvitation(){
 
-  /*
-    Hide password screen.
-  */
+  gate.classList.add(
+    "hide"
+  );
 
-  gate.classList.add("hide");
-
-
-  /*
-    Show envelope.
-  */
-
-  reveal.classList.remove("hidden");
+  reveal.classList.remove(
+    "hidden"
+  );
 
   reveal.setAttribute(
     "aria-hidden",
     "false"
   );
 
-
-  /*
-    Prevent scrolling during animation.
-  */
-
-  document.body.style.overflow="hidden";
+  document.body.style.overflow=
+    "hidden";
 
 
   /*
     IMPORTANT:
 
-    There is NO envelope button.
+    There is NO envelope click
+    and NO envelope button.
 
-    The animation starts automatically.
+    Adding .show causes every
+    envelope animation to start
+    automatically through CSS.
   */
 
-  setTimeout(
-    ()=>{
-      stage.classList.add("play");
-    },
-    120
+  reveal.classList.add(
+    "show"
   );
 
 
   /*
-    Animation timing follows the reference:
+    Animation timeline:
 
     0.0s
-      Bow and ribbon visible.
+      Envelope + bow visible.
 
-    2.2s
-      Bow begins dropping.
+    2.0s
+      Bow begins falling.
+
+    2.15s
+      Ribbon begins releasing.
 
     3.4s
-      Bow/ribbon disappear.
+      Bow/ribbon are gone.
 
-    3.5s
-      Closed envelope pause.
+    4.05s
+      Top flap begins opening.
 
-    4.85s
-      Left and right envelope panels open.
+    4.25s
+      Left/right envelope doors open.
 
-    5.2s
-      Floral invitation starts appearing.
+    4.65s
+      Bottom fold opens.
 
-    7.5s
-      Invitation wording fades in.
+    4.95s
+      Invitation begins rising.
+
+    7.15s
+      Invitation wording appears.
 
     9.0s
-      Website is revealed.
+      Main website appears.
   */
 
   setTimeout(
     ()=>{
 
-      reveal.classList.add("done");
+      reveal.classList.add(
+        "done"
+      );
 
-      site.classList.add("visible");
+      site.classList.add(
+        "visible"
+      );
 
-      document.body.style.overflow="auto";
+      document.body.style.overflow=
+        "auto";
+
+      window.scrollTo(
+        0,
+        0
+      );
 
     },
     9000
@@ -2250,29 +2434,35 @@ function startInvitation(){
 }
 
 
+/* =========================================================
+   PASSWORD
+========================================================= */
 
 function checkPassword(){
 
   if(
-    password.value ===
+    password.value===
     CONFIG.password
   ){
 
     error.textContent="";
 
-    enterBtn.disabled=true;
+    enterBtn.disabled=
+      true;
 
-    password.disabled=true;
+    password.disabled=
+      true;
 
     /*
-      AUTO PLAY STARTS HERE.
+      THIS STARTS THE ENVELOPE.
+      NO CLICK ON THE ENVELOPE.
     */
 
     startInvitation();
 
   }else{
 
-    error.textContent =
+    error.textContent=
       "Incorrect password. Please try again.";
 
     password.select();
@@ -2280,7 +2470,6 @@ function checkPassword(){
   }
 
 }
-
 
 
 enterBtn.addEventListener(
@@ -2293,96 +2482,64 @@ password.addEventListener(
   "keydown",
   event=>{
 
-    if(event.key==="Enter"){
+    if(
+      event.key===
+      "Enter"
+    ){
+
       checkPassword();
+
     }
 
   }
 );
 
 
-
 /* =========================================================
-   MENU
-========================================================= */
-
-const menuBtn =
-  document.getElementById("menuBtn");
-
-const menu =
-  document.getElementById("menu");
-
-
-menuBtn.addEventListener(
-  "click",
-  ()=>{
-    menu.classList.toggle("show");
-  }
-);
-
-
-menu.querySelectorAll("a")
-  .forEach(
-    link=>{
-
-      link.addEventListener(
-        "click",
-        ()=>{
-          menu.classList.remove("show");
-        }
-      );
-
-    }
-  );
-
-
-
-/* =========================================================
-   INSERT CONFIG DETAILS
+   INSERT YOUR DETAILS
 ========================================================= */
 
 document.getElementById(
   "heroName"
-).textContent =
+).textContent=
   CONFIG.name;
 
 
 document.getElementById(
   "venueText"
-).textContent =
+).textContent=
   CONFIG.venue;
 
 
 document.getElementById(
   "cityText"
-).textContent =
+).textContent=
   CONFIG.city;
 
 
 document.getElementById(
   "locationVenue"
-).textContent =
+).textContent=
   CONFIG.venue;
 
 
 document.getElementById(
   "locationCity"
-).textContent =
+).textContent=
   CONFIG.city;
 
 
 document.querySelector(
   ".map-btn"
-).href =
+).href=
   CONFIG.mapUrl;
-
 
 
 /* =========================================================
    COUNTDOWN
 ========================================================= */
 
-const target =
+const target=
   new Date(
     CONFIG.eventDate
   ).getTime();
@@ -2390,65 +2547,77 @@ const target =
 
 function countdown(){
 
-  let diff =
+  let diff=
     Math.max(
       0,
-      target - Date.now()
+      target-
+      Date.now()
     );
 
 
-  const days =
+  const d=
     Math.floor(
-      diff / 86400000
+      diff/
+      86400000
     );
 
-  diff %= 86400000;
+  diff%=
+    86400000;
 
 
-  const hours =
+  const h=
     Math.floor(
-      diff / 3600000
+      diff/
+      3600000
     );
 
-  diff %= 3600000;
+  diff%=
+    3600000;
 
 
-  const minutes =
+  const m=
     Math.floor(
-      diff / 60000
+      diff/
+      60000
     );
 
-  diff %= 60000;
+  diff%=
+    60000;
 
 
-  const seconds =
+  const s=
     Math.floor(
-      diff / 1000
+      diff/
+      1000
     );
 
 
   document.getElementById(
     "days"
-  ).textContent =
-    String(days).padStart(2,"0");
+  ).textContent=
+    String(d)
+      .padStart(2,"0");
 
 
   document.getElementById(
     "hours"
-  ).textContent =
-    String(hours).padStart(2,"0");
+  ).textContent=
+    String(h)
+      .padStart(2,"0");
 
 
   document.getElementById(
     "minutes"
-  ).textContent =
-    String(minutes).padStart(2,"0");
+  ).textContent=
+    String(m)
+      .padStart(2,"0");
 
 
   document.getElementById(
     "seconds"
-  ).textContent =
-    String(seconds).padStart(2,"0");
+  ).textContent=
+    String(s)
+      .padStart(2,"0");
 
 }
 
@@ -2461,19 +2630,61 @@ setInterval(
 );
 
 
-
 /* =========================================================
-   WHATSAPP RSVP
+   RSVP
 ========================================================= */
 
-const message =
+const msg=
   `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday celebration on 14 October 2026.`;
 
 
 document.getElementById(
   "rsvpBtn"
-).href =
-  `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
+).href=
+  `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+const menuBtn=
+  document.getElementById(
+    "menuBtn"
+  );
+
+const menu=
+  document.getElementById(
+    "menu"
+  );
+
+
+menuBtn.addEventListener(
+  "click",
+  ()=>{
+    menu.classList.toggle(
+      "show"
+    );
+  }
+);
+
+
+menu.querySelectorAll(
+  "a"
+).forEach(
+  a=>{
+
+    a.addEventListener(
+      "click",
+      ()=>{
+        menu.classList.remove(
+          "show"
+        );
+      }
+    );
+
+  }
+);
 
 </script>
 
