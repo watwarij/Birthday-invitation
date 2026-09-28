@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>You're Invited — 21st Birthday</title>
 
+
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+
+    /* =========================================================
+       VARIABLES
+       ========================================================= */
 
     :root {
       --bg: #0c0c0c;
       --card: #141414;
+
       --gold: #d6b36a;
       --gold-light: #f1d99b;
+
       --white: #f7f4ed;
       --muted: #aaa59b;
     }
+
+
+    /* =========================================================
+       RESET
+       ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -24,401 +44,1165 @@
       padding: 0;
     }
 
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
     body {
       min-height: 100vh;
+
       background:
-        radial-gradient(circle at 50% 20%, #292319 0%, transparent 35%),
+        radial-gradient(
+          circle at 50% 20%,
+          #292319 0%,
+          transparent 35%
+        ),
         var(--bg);
+
       color: var(--white);
+
       font-family: 'Montserrat', sans-serif;
+
       overflow-x: hidden;
     }
 
-    /* ---------------- PASSWORD SCREEN ---------------- */
+
+    body.locked {
+      overflow: hidden;
+    }
+
+
+    /* =========================================================
+       PASSWORD SCREEN
+       ========================================================= */
 
     #password-screen {
       min-height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 25px;
+
       position: relative;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+
+      z-index: 10;
+
+      transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
     }
+
 
     #password-screen.hidden {
       opacity: 0;
       visibility: hidden;
+
       pointer-events: none;
+
       position: absolute;
+
       inset: 0;
     }
+
 
     .password-card {
       width: 100%;
       max-width: 430px;
+
       padding: 55px 35px;
+
       text-align: center;
-      border: 1px solid rgba(214, 179, 106, 0.3);
-      background: rgba(20, 20, 20, 0.8);
+
+      border:
+        1px solid
+        rgba(214, 179, 106, 0.3);
+
+      background:
+        rgba(20, 20, 20, 0.82);
+
       backdrop-filter: blur(15px);
+
       border-radius: 4px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+
+      box-shadow:
+        0 25px 80px
+        rgba(0, 0, 0, 0.5);
+
+      animation:
+        passwordCardIn 1s ease forwards;
     }
+
+
+    @keyframes passwordCardIn {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(25px)
+          scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+      }
+
+    }
+
 
     .small-title {
       color: var(--gold);
+
       letter-spacing: 5px;
+
       font-size: 11px;
+
       font-weight: 500;
+
       margin-bottom: 25px;
     }
 
+
     .number {
-      font-family: 'Cormorant Garamond', serif;
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
       font-size: 130px;
-      line-height: .8;
+
+      line-height: 0.8;
+
       color: var(--gold-light);
+
       font-weight: 400;
     }
 
+
     .birthday {
-      font-family: 'Cormorant Garamond', serif;
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
       font-size: 30px;
+
       letter-spacing: 5px;
+
       margin-top: 25px;
     }
 
+
     .password-description {
       color: var(--muted);
+
       font-size: 12px;
+
       line-height: 1.7;
+
       margin: 30px auto;
+
       max-width: 280px;
     }
 
+
+    /* PASSWORD HINT */
+
     .hint {
       color: var(--gold);
+
       font-size: 11px;
+
       letter-spacing: 2px;
+
       margin-top: 20px;
+
+      margin-bottom: 15px;
     }
+
 
     .password-input {
       width: 100%;
+
       padding: 15px;
+
       background: transparent;
-      border: 1px solid #444;
+
+      border:
+        1px solid #444;
+
       color: white;
+
       text-align: center;
+
       letter-spacing: 5px;
+
       outline: none;
-      transition: .3s;
+
+      transition: 0.3s;
+
+      border-radius: 0;
     }
+
+
+    .password-input::placeholder {
+      color: #666;
+    }
+
 
     .password-input:focus {
       border-color: var(--gold);
+
+      box-shadow:
+        0 0 20px
+        rgba(214, 179, 106, 0.08);
     }
+
 
     .unlock-button {
       width: 100%;
+
       margin-top: 12px;
+
       padding: 15px;
-      border: 1px solid var(--gold);
-      background: var(--gold);
+
+      border:
+        1px solid
+        var(--gold);
+
+      background:
+        var(--gold);
+
       color: #111;
+
       font-weight: 600;
+
       letter-spacing: 2px;
+
       cursor: pointer;
-      transition: .3s;
+
+      transition: 0.3s;
     }
 
+
     .unlock-button:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
+      background:
+        var(--gold-light);
+
+      transform:
+        translateY(-2px);
     }
+
+
+    .unlock-button:disabled {
+      opacity: 0.6;
+
+      cursor: wait;
+
+      transform: none;
+    }
+
 
     .error {
       color: #d77c7c;
+
       font-size: 11px;
+
       margin-top: 15px;
+
+      min-height: 14px;
+
       opacity: 0;
-      transition: .3s;
+
+      transition: 0.3s;
     }
+
 
     .error.show {
       opacity: 1;
     }
 
-    /* ---------------- INVITATION ---------------- */
 
-    /*
-      Completely hidden before the password is entered.
-    */
+    /* =========================================================
+       ENVELOPE TRANSITION
+       ========================================================= */
 
-    #invitation {
-      display: none;
-      opacity: 0;
-    }
+    #envelope-transition {
+      position: fixed;
 
-    #invitation.visible {
-      display: block;
-      animation: invitationIn 1.5s forwards;
-    }
+      inset: 0;
 
-    @keyframes invitationIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+      z-index: 99999;
 
-    .hero {
-      min-height: 100vh;
       display: flex;
+
       justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 60px 20px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #292319 0%,
+          #0c0c0c 65%
+        );
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+    }
+
+
+    #envelope-transition.active {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: all;
+    }
+
+
+    .envelope-scene {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+
+    /* ENVELOPE */
+
+    .envelope {
       position: relative;
+
+      width: 320px;
+      height: 210px;
+
+      perspective: 1000px;
+
+      filter:
+        drop-shadow(
+          0 30px 50px
+          rgba(0, 0, 0, 0.65)
+        );
+    }
+
+
+    /* Envelope back */
+
+    .envelope-back {
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #191612,
+          #272116
+        );
+
+      border:
+        1px solid
+        rgba(214, 179, 106, 0.5);
+
+      border-radius: 3px;
+
+      z-index: 1;
+    }
+
+
+    /* Letter */
+
+    .envelope-letter {
+      position: absolute;
+
+      left: 20px;
+      right: 20px;
+
+      bottom: 15px;
+
+      height: 175px;
+
+      background:
+        #f7f4ed;
+
+      color: #16130e;
+
+      z-index: 2;
+
+      transform:
+        translateY(0);
+
+      transition:
+        transform
+        1.1s
+        cubic-bezier(.22, 1, .36, 1);
+
+      box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.25);
+    }
+
+
+    .letter-content {
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 8px;
+
+      font-family:
+        'Cormorant Garamond',
+        serif;
+    }
+
+
+    .letter-content span {
+      font-family:
+        'Montserrat',
+        sans-serif;
+
+      font-size: 9px;
+
+      letter-spacing: 4px;
+
+      color: #a78340;
+    }
+
+
+    .letter-content strong {
+      font-size: 85px;
+
+      line-height: 0.8;
+
+      font-weight: 400;
+    }
+
+
+    /* Envelope front */
+
+    .envelope-front {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 4;
+
+      background:
+        linear-gradient(
+          145deg,
+          transparent 49.5%,
+          #211c15 50%
+        );
+
+      clip-path:
+        polygon(
+          0 0,
+          50% 58%,
+          100% 0,
+          100% 100%,
+          0 100%
+        );
+
+      border-bottom:
+        1px solid
+        rgba(214, 179, 106, 0.35);
+    }
+
+
+    /* Envelope flap */
+
+    .envelope-flap {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 115px;
+
+      z-index: 5;
+
+      background:
+        linear-gradient(
+          135deg,
+          #30281b,
+          #1c1812
+        );
+
+      clip-path:
+        polygon(
+          0 0,
+          100% 0,
+          50% 100%
+        );
+
+      transform-origin:
+        top center;
+
+      border-top:
+        1px solid
+        rgba(214, 179, 106, 0.55);
+
+      transition:
+        transform
+        1s
+        cubic-bezier(.22, 1, .36, 1);
+    }
+
+
+    /* Open envelope */
+
+    #envelope-transition.open
+    .envelope-flap {
+
+      transform:
+        rotateX(180deg);
+
+      z-index: 1;
+    }
+
+
+    #envelope-transition.open
+    .envelope-letter {
+
+      transform:
+        translateY(-115px);
+
+      transition-delay: 0.35s;
+    }
+
+
+    /* Opening text */
+
+    .opening-text {
+      margin-top: 60px;
+
+      color: var(--gold);
+
+      font-size: 9px;
+
+      letter-spacing: 5px;
+
+      opacity: 0;
+
+      animation:
+        openingTextIn
+        1s
+        ease
+        forwards;
+
+      animation-delay: 0.5s;
+    }
+
+
+    @keyframes openingTextIn {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(10px);
+      }
+
+      to {
+        opacity: 0.8;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    /* Envelope disappears */
+
+    #envelope-transition.fade-out {
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transition:
+        opacity 1s ease,
+        visibility 1s ease;
+    }
+
+
+    /* =========================================================
+       INVITATION
+       ========================================================= */
+
+    #invitation {
+
+      opacity: 0;
+
+      animation:
+        invitationIn
+        1.5s
+        ease
+        forwards;
+    }
+
+
+    @keyframes invitationIn {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(20px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      padding: 60px 20px;
+
+      position: relative;
+
       overflow: hidden;
     }
 
+
     .hero-content {
+
       position: relative;
+
       z-index: 2;
     }
 
+
     .hero-subtitle {
+
       color: var(--gold);
+
       font-size: 11px;
+
       letter-spacing: 7px;
+
       margin-bottom: 30px;
     }
 
+
     .hero-21 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(160px, 35vw, 310px);
-      line-height: .65;
+
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
+      font-size:
+        clamp(
+          160px,
+          35vw,
+          310px
+        );
+
+      line-height: 0.65;
+
       font-weight: 400;
+
       color: transparent;
-      -webkit-text-stroke: 1px var(--gold);
-      text-shadow: 0 0 50px rgba(214,179,106,.1);
+
+      -webkit-text-stroke:
+        1px var(--gold);
+
+      text-shadow:
+        0 0 50px
+        rgba(214, 179, 106, 0.1);
     }
+
 
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 8vw, 75px);
+
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
+      font-size:
+        clamp(
+          40px,
+          8vw,
+          75px
+        );
+
       font-weight: 500;
+
       margin-top: 50px;
+
       letter-spacing: 4px;
     }
+
 
     .hero-date {
+
       margin-top: 25px;
+
       font-size: 13px;
+
       letter-spacing: 4px;
+
       color: var(--muted);
     }
+
 
     .scroll {
+
       position: absolute;
+
       bottom: 30px;
+
       left: 50%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       font-size: 9px;
+
       letter-spacing: 4px;
+
       color: var(--muted);
     }
 
-    /* ---------------- CONTENT ---------------- */
+
+    /* =========================================================
+       CONTENT SECTIONS
+       ========================================================= */
 
     .section {
+
       max-width: 850px;
+
       margin: auto;
+
       padding: 100px 25px;
+
       text-align: center;
     }
 
+
     .section-label {
+
       color: var(--gold);
+
       font-size: 10px;
+
       letter-spacing: 5px;
+
       margin-bottom: 25px;
     }
+
 
     .section h2 {
-      font-family: 'Cormorant Garamond', serif;
+
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
       font-size: 45px;
+
       font-weight: 500;
+
       margin-bottom: 25px;
     }
 
+
     .section p {
+
       max-width: 600px;
+
       margin: auto;
+
       color: var(--muted);
+
       line-height: 2;
+
       font-size: 14px;
     }
 
+
+    /* =========================================================
+       DETAILS
+       ========================================================= */
+
     .details {
+
       margin-top: 55px;
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 1px;
+
       background: #333;
-      border: 1px solid #333;
+
+      border:
+        1px solid #333;
     }
 
+
     .detail {
-      background: var(--card);
+
+      background:
+        var(--card);
+
       padding: 35px 20px;
     }
 
+
     .detail-icon {
+
       font-size: 22px;
+
       margin-bottom: 15px;
+
+      color: var(--gold);
     }
 
+
     .detail-title {
+
       color: var(--gold);
+
       font-size: 10px;
+
       letter-spacing: 3px;
+
       margin-bottom: 10px;
     }
 
+
     .detail-text {
-      font-family: 'Cormorant Garamond', serif;
+
+      font-family:
+        'Cormorant Garamond',
+        serif;
+
       font-size: 22px;
+
       color: var(--white);
     }
 
-    /* ---------------- RSVP ---------------- */
+
+    /* =========================================================
+       RSVP
+       ========================================================= */
 
     .rsvp {
-      border-top: 1px solid #292929;
-      border-bottom: 1px solid #292929;
+
+      border-top:
+        1px solid #292929;
+
+      border-bottom:
+        1px solid #292929;
     }
+
 
     .rsvp-button {
+
       display: inline-block;
+
       margin-top: 35px;
+
       padding: 16px 45px;
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
+
+      border:
+        1px solid
+        var(--gold);
+
+      color:
+        var(--gold-light);
+
       text-decoration: none;
+
       letter-spacing: 3px;
+
       font-size: 11px;
-      transition: .3s;
+
+      transition: 0.3s;
     }
 
+
     .rsvp-button:hover {
-      background: var(--gold);
+
+      background:
+        var(--gold);
+
       color: #111;
     }
 
-    /* ---------------- FOOTER ---------------- */
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
 
     footer {
+
       text-align: center;
+
       padding: 50px 20px;
+
       color: #666;
+
       font-size: 10px;
+
       letter-spacing: 3px;
     }
 
-    /* ---------------- PARTICLES ---------------- */
+
+    /* =========================================================
+       FLOATING GOLD PARTICLES
+       ========================================================= */
 
     .particle {
+
       position: fixed;
+
       width: 3px;
       height: 3px;
-      background: var(--gold);
+
+      background:
+        var(--gold);
+
       border-radius: 50%;
-      opacity: .3;
+
+      opacity: 0.3;
+
       pointer-events: none;
-      animation: float 8s linear infinite;
+
+      animation:
+        float 8s
+        linear
+        infinite;
+
+      z-index: 999;
     }
+
 
     @keyframes float {
+
       from {
-        transform: translateY(100vh);
+
+        transform:
+          translateY(100vh);
+
         opacity: 0;
       }
+
       20% {
-        opacity: .4;
+
+        opacity: 0.4;
       }
+
       80% {
-        opacity: .2;
+
+        opacity: 0.2;
       }
+
       to {
-        transform: translateY(-10vh);
+
+        transform:
+          translateY(-10vh);
+
         opacity: 0;
       }
+
     }
 
-    /* ---------------- MOBILE ---------------- */
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
 
     @media (max-width: 650px) {
 
       .password-card {
-        padding: 45px 25px;
+
+        padding:
+          45px 25px;
       }
 
+
       .number {
+
         font-size: 105px;
       }
 
+
       .birthday {
+
         font-size: 24px;
       }
 
+
       .details {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
+
       .detail {
+
         padding: 30px;
       }
 
+
       .hero-title {
+
         margin-top: 40px;
       }
+
+
+      .envelope {
+
+        width: 280px;
+
+        height: 185px;
+      }
+
+
+      .envelope-flap {
+
+        height: 100px;
+      }
+
+
+      .envelope-letter {
+
+        height: 155px;
+      }
+
+
+      .letter-content strong {
+
+        font-size: 70px;
+      }
+
+
+      .opening-text {
+
+        font-size: 8px;
+
+        letter-spacing: 4px;
+      }
+
     }
+
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          0.01ms !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+
+    }
+
   </style>
+
 </head>
 
-<body>
 
-  <!-- PASSWORD SCREEN -->
+<body class="locked">
+
+
+  <!-- =======================================================
+       PASSWORD SCREEN
+       ======================================================= -->
+
   <section id="password-screen">
 
     <div class="password-card">
+
 
       <div class="small-title">
         PRIVATE INVITATION
       </div>
 
+
       <div class="number">
         21
       </div>
+
 
       <div class="birthday">
         BIRTHDAY
       </div>
 
+
       <p class="password-description">
         Enter the password to unlock your invitation.
       </p>
 
+
+      <!-- PASSWORD HINT -->
+
       <div class="hint">
         HINT: MY BIRTHDAY
       </div>
+
 
       <input
         type="password"
@@ -426,294 +1210,748 @@
         class="password-input"
         placeholder="PASSWORD"
         autocomplete="off"
+        spellcheck="false"
       >
 
+
       <button
+        id="unlock-button"
         class="unlock-button"
-        onclick="unlockInvitation()"
+        type="button"
       >
         UNLOCK
       </button>
 
-      <div id="error" class="error">
+
+      <div
+        id="error"
+        class="error"
+        aria-live="polite"
+      >
         Incorrect password. Please try again.
       </div>
+
 
     </div>
 
   </section>
 
 
-  <!-- INVITATION -->
-  <main id="invitation">
 
-    <section class="hero">
+  <!-- =======================================================
+       ENVELOPE OPENING TRANSITION
+       ======================================================= -->
 
-      <div class="hero-content">
+  <div
+    id="envelope-transition"
+    aria-hidden="true"
+  >
 
-        <div class="hero-subtitle">
-          YOU'RE INVITED
-        </div>
-
-        <div class="hero-21">
-          21
-        </div>
-
-        <h1 class="hero-title">
-          [YOUR NAME]'S<br>
-          BIRTHDAY
-        </h1>
-
-        <div class="hero-date">
-          14 OCTOBER 2026
-        </div>
-
-      </div>
-
-      <div class="scroll">
-        SCROLL TO DISCOVER
-      </div>
-
-    </section>
+    <div class="envelope-scene">
 
 
-    <section class="section">
-
-      <div class="section-label">
-        LET'S CELEBRATE
-      </div>
-
-      <h2>
-        Twenty-one looks good.
-      </h2>
-
-      <p>
-        It's time to celebrate another trip around the sun.
-        Join me for an unforgettable evening filled with
-        good music, great people, food, drinks and memories
-        that we'll be talking about for years.
-      </p>
-
-    </section>
+      <div class="envelope">
 
 
-    <section class="section">
+        <!-- Envelope back -->
 
-      <div class="section-label">
-        THE DETAILS
-      </div>
+        <div class="envelope-back"></div>
 
-      <h2>
-        Save the date.
-      </h2>
 
-      <div class="details">
+        <!-- Letter -->
 
-        <div class="detail">
+        <div class="envelope-letter">
 
-          <div class="detail-icon">
-            ◇
-          </div>
+          <div class="letter-content">
 
-          <div class="detail-title">
-            DATE
-          </div>
+            <span>
+              YOU'RE INVITED
+            </span>
 
-          <div class="detail-text">
-            14 October<br>
-            2026
+            <strong>
+              21
+            </strong>
+
           </div>
 
         </div>
 
 
-        <div class="detail">
+        <!-- Envelope front -->
 
-          <div class="detail-icon">
-            ◷
+        <div class="envelope-front"></div>
+
+
+        <!-- Envelope flap -->
+
+        <div class="envelope-flap"></div>
+
+
+      </div>
+
+
+      <div class="opening-text">
+        OPENING YOUR INVITATION
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       INVITATION TEMPLATE
+
+       The invitation is NOT inserted into the document
+       until the correct password is entered.
+       ======================================================= -->
+
+  <template id="invitation-template">
+
+
+    <main id="invitation">
+
+
+      <!-- ===================================================
+           HERO
+           =================================================== -->
+
+      <section class="hero">
+
+
+        <div class="hero-content">
+
+
+          <div class="hero-subtitle">
+            YOU'RE INVITED
           </div>
 
-          <div class="detail-title">
-            TIME
+
+          <div class="hero-21">
+            21
           </div>
 
-          <div class="detail-text">
-            19:00<br>
-            Till late
+
+          <h1 class="hero-title">
+
+            [YOUR NAME]'S<br>
+
+            BIRTHDAY
+
+          </h1>
+
+
+          <div class="hero-date">
+            14 OCTOBER 2026
           </div>
+
 
         </div>
 
 
-        <div class="detail">
+        <div class="scroll">
+          SCROLL TO DISCOVER
+        </div>
 
-          <div class="detail-icon">
-            ♢
+
+      </section>
+
+
+
+      <!-- ===================================================
+           INTRODUCTION
+           =================================================== -->
+
+      <section class="section">
+
+
+        <div class="section-label">
+          LET'S CELEBRATE
+        </div>
+
+
+        <h2>
+          Twenty-one looks good.
+        </h2>
+
+
+        <p>
+
+          It's time to celebrate another
+          trip around the sun.
+
+          Join me for an unforgettable
+          evening filled with good music,
+          great people, food, drinks and
+          memories that we'll be talking
+          about for years.
+
+        </p>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           DETAILS
+           =================================================== -->
+
+      <section class="section">
+
+
+        <div class="section-label">
+          THE DETAILS
+        </div>
+
+
+        <h2>
+          Save the date.
+        </h2>
+
+
+        <div class="details">
+
+
+          <!-- DATE -->
+
+          <div class="detail">
+
+
+            <div class="detail-icon">
+              ◇
+            </div>
+
+
+            <div class="detail-title">
+              DATE
+            </div>
+
+
+            <div class="detail-text">
+
+              14 October<br>
+
+              2026
+
+            </div>
+
+
           </div>
 
-          <div class="detail-title">
-            LOCATION
+
+
+          <!-- TIME -->
+
+          <div class="detail">
+
+
+            <div class="detail-icon">
+              ◷
+            </div>
+
+
+            <div class="detail-title">
+              TIME
+            </div>
+
+
+            <div class="detail-text">
+
+              19:00<br>
+
+              Till late
+
+            </div>
+
+
           </div>
 
-          <div class="detail-text">
-            Venue Name<br>
-            City
+
+
+          <!-- LOCATION -->
+
+          <div class="detail">
+
+
+            <div class="detail-icon">
+              ♢
+            </div>
+
+
+            <div class="detail-title">
+              LOCATION
+            </div>
+
+
+            <div class="detail-text">
+
+              Venue Name<br>
+
+              City
+
+            </div>
+
+
           </div>
+
 
         </div>
 
-      </div>
 
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-label">
-        DRESS CODE
-      </div>
-
-      <h2>
-        Come dressed to celebrate.
-      </h2>
-
-      <p>
-        [Add your dress code here — for example:
-        Black & Gold / Cocktail / All White.]
-      </p>
-
-    </section>
+      </section>
 
 
-    <section class="section rsvp">
 
-      <div class="section-label">
-        ONE LAST THING
-      </div>
+      <!-- ===================================================
+           DRESS CODE
+           =================================================== -->
 
-      <h2>
-        Will you be there?
-      </h2>
-
-      <p>
-        Please let me know if you're coming so we can
-        save your spot.
-      </p>
-
-      <a
-        class="rsvp-button"
-        href="https://wa.me/264XXXXXXXXX?text=Hi!%20I'll%20be%20there%20for%20your%2021st!"
-        target="_blank"
-      >
-        RSVP
-      </a>
-
-    </section>
+      <section class="section">
 
 
-    <footer>
-      MADE WITH ♡ FOR A SPECIAL 21ST
-    </footer>
+        <div class="section-label">
+          DRESS CODE
+        </div>
 
-  </main>
 
+        <h2>
+          Come dressed to celebrate.
+        </h2>
+
+
+        <p>
+
+          [Add your dress code here —
+          for example:
+          Black & Gold / Cocktail /
+          All White.]
+
+        </p>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           RSVP
+           =================================================== -->
+
+      <section class="section rsvp">
+
+
+        <div class="section-label">
+          ONE LAST THING
+        </div>
+
+
+        <h2>
+          Will you be there?
+        </h2>
+
+
+        <p>
+
+          Please let me know if you're
+          coming so we can save your spot.
+
+        </p>
+
+
+        <a
+          class="rsvp-button"
+          href="https://wa.me/264XXXXXXXXX?text=Hi!%20I'll%20be%20there%20for%20your%2021st!"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          RSVP
+
+        </a>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           FOOTER
+           =================================================== -->
+
+      <footer>
+
+        MADE WITH ♡
+        FOR A SPECIAL 21ST
+
+      </footer>
+
+
+    </main>
+
+  </template>
+
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
 
   <script>
 
-    /*
-      PASSWORD
-    */
 
-    const correctPassword = "14102005";
+    /* =======================================================
+       PASSWORD
+       ======================================================= */
 
+    const correctPassword =
+      "14102005";
+
+
+    /* =======================================================
+       GET ELEMENTS
+       ======================================================= */
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+
+    const unlockButton =
+      document.getElementById(
+        "unlock-button"
+      );
+
+
+    const passwordScreen =
+      document.getElementById(
+        "password-screen"
+      );
+
+
+    const error =
+      document.getElementById(
+        "error"
+      );
+
+
+    const envelopeTransition =
+      document.getElementById(
+        "envelope-transition"
+      );
+
+
+    const invitationTemplate =
+      document.getElementById(
+        "invitation-template"
+      );
+
+
+
+    /* =======================================================
+       UNLOCK INVITATION
+       ======================================================= */
 
     function unlockInvitation() {
 
+
       const enteredPassword =
-        document.getElementById("password").value;
-
-      const passwordScreen =
-        document.getElementById("password-screen");
-
-      const invitation =
-        document.getElementById("invitation");
-
-      const error =
-        document.getElementById("error");
+        passwordInput.value.trim();
 
 
-      if (enteredPassword === correctPassword) {
+      /* Empty password */
 
-        error.classList.remove("show");
+      if (!enteredPassword) {
 
-        passwordScreen.classList.add("hidden");
+        error.textContent =
+          "Please enter the password.";
+
+        error.classList.add(
+          "show"
+        );
+
+        passwordInput.focus();
+
+        return;
+
+      }
+
+
+      /* Disable button */
+
+      unlockButton.disabled =
+        true;
+
+      unlockButton.textContent =
+        "OPENING...";
+
+
+      /* =====================================================
+         CORRECT PASSWORD
+         ===================================================== */
+
+      if (
+        enteredPassword ===
+        correctPassword
+      ) {
+
+
+        error.classList.remove(
+          "show"
+        );
+
+
+        passwordInput.blur();
+
+
+        /*
+          Keep page locked during
+          the envelope animation.
+        */
+
+        document.body.classList.add(
+          "locked"
+        );
+
+
+        /*
+          Hide password screen.
+        */
+
+        passwordScreen.classList.add(
+          "hidden"
+        );
+
+
+        /*
+          Show envelope.
+        */
 
         setTimeout(() => {
 
-          invitation.classList.add("visible");
+          envelopeTransition.classList.add(
+            "active"
+          );
+
+        }, 500);
+
+
+        /*
+          Open envelope flap.
+        */
+
+        setTimeout(() => {
+
+          envelopeTransition.classList.add(
+            "open"
+          );
+
+        }, 900);
+
+
+        /*
+          Insert invitation.
+
+          The invitation does not exist
+          in the live DOM before this.
+        */
+
+        setTimeout(() => {
+
+
+          const invitation =
+            invitationTemplate
+              .content
+              .cloneNode(true);
+
+
+          document.body.appendChild(
+            invitation
+          );
+
+
+          /*
+            Start particles.
+          */
+
+          createParticles();
+
+
+          /*
+            Start at top.
+          */
 
           window.scrollTo({
             top: 0,
             behavior: "instant"
           });
 
-        }, 700);
 
-        createParticles();
+        }, 1900);
 
-      } else {
 
-        error.classList.add("show");
+        /*
+          Fade envelope away.
+        */
+
+        setTimeout(() => {
+
+          envelopeTransition.classList.add(
+            "fade-out"
+          );
+
+
+          document.body.classList.remove(
+            "locked"
+          );
+
+
+        }, 2700);
+
+
+        /*
+          Remove envelope.
+        */
+
+        setTimeout(() => {
+
+          envelopeTransition.remove();
+
+        }, 3800);
+
+
+      }
+
+
+      /* =====================================================
+         INCORRECT PASSWORD
+         ===================================================== */
+
+      else {
+
+
+        error.textContent =
+          "Incorrect password. Please try again.";
+
+
+        error.classList.add(
+          "show"
+        );
+
+
+        passwordInput.value =
+          "";
+
+
+        passwordInput.focus();
+
+
+        unlockButton.disabled =
+          false;
+
+
+        unlockButton.textContent =
+          "UNLOCK";
 
       }
 
     }
 
 
-    /*
-      Allow ENTER to unlock.
-    */
 
-    document
-      .getElementById("password")
-      .addEventListener("keydown", function(event) {
+    /* =======================================================
+       BUTTON
+       ======================================================= */
 
-        if (event.key === "Enter") {
+    unlockButton.addEventListener(
+      "click",
+      unlockInvitation
+    );
+
+
+
+    /* =======================================================
+       ENTER KEY
+       ======================================================= */
+
+    passwordInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          event.preventDefault();
+
           unlockInvitation();
+
         }
 
-      });
+      }
+    );
 
 
-    /*
-      Floating gold particles.
-    */
+
+    /* =======================================================
+       GOLD PARTICLES
+       ======================================================= */
 
     function createParticles() {
 
-      for (let i = 0; i < 25; i++) {
+
+      for (
+        let i = 0;
+        i < 25;
+        i++
+      ) {
+
 
         const particle =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
-        particle.classList.add("particle");
+
+        particle.classList.add(
+          "particle"
+        );
+
 
         particle.style.left =
-          Math.random() * 100 + "vw";
+          Math.random() * 100 +
+          "vw";
+
 
         particle.style.animationDelay =
-          Math.random() * 8 + "s";
+          Math.random() * 8 +
+          "s";
+
 
         particle.style.animationDuration =
-          (5 + Math.random() * 7) + "s";
+          (
+            5 +
+            Math.random() * 7
+          ) +
+          "s";
 
-        document.body.appendChild(particle);
+
+        document.body.appendChild(
+          particle
+        );
+
 
       }
 
     }
 
+
   </script>
 
+
 </body>
+
 </html>
