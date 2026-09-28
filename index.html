@@ -1,1575 +1,1569 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
+<meta name="theme-color" content="#5a3f3f">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<title>You're Invited — 21st Birthday</title>
 
-  <meta
-    name="theme-color"
-    content="#c98f98"
-  >
+<style>
 
-  <title>You're Invited — 21st Birthday</title>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 
-  <style>
+:root{
 
-    /* =========================================================
-       FONTS
-       ========================================================= */
+  --cream:#f7eee9;
+  --paper:#fffaf7;
 
-    @import url(
-      'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap'
+  --brown:#4a3433;
+  --brown-dark:#634545;
+
+  --pink:#c98f98;
+  --pink-light:#e5b5bb;
+  --pink-dark:#9e6972;
+
+  --khaki:#b7a68a;
+  --khaki-light:#d8cbb2;
+
+  --ink:#4a3835;
+  --muted:#8f817b;
+
+  --line:#ded0c2;
+
+  --shadow:
+    0 20px 60px rgba(75,52,47,.14);
+
+}
+
+
+/* ================================
+   GENERAL
+================================ */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  min-height:100vh;
+
+  background:var(--cream);
+
+  color:var(--ink);
+
+  font-family:'DM Sans',sans-serif;
+
+  overflow-x:hidden;
+
+}
+
+body.locked{
+  overflow:hidden;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+
+/* ================================
+   PASSWORD SCREEN
+================================ */
+
+#password-screen{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  display:grid;
+
+  place-items:center;
+
+  padding:24px;
+
+  background:
+
+    radial-gradient(
+      circle at 12% 15%,
+      rgba(201,143,152,.16),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 88% 85%,
+      rgba(201,143,152,.12),
+      transparent 28%
+    ),
+
+    var(--cream);
+
+  transition:
+    opacity .8s ease,
+    visibility .8s ease;
+
+}
+
+
+#password-screen.hidden{
+
+  opacity:0;
+
+  visibility:hidden;
+
+  pointer-events:none;
+
+}
+
+
+.cover-card{
+
+  position:relative;
+
+  width:min(430px,100%);
+
+  min-height:650px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  padding:60px 34px;
+
+  background:var(--paper);
+
+  border:1px solid #e6e0d3;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+
+}
+
+
+.cover-card:before,
+.cover-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:190px;
+  height:190px;
+
+  border:1px solid rgba(201,143,152,.28);
+
+  border-radius:50%;
+
+}
+
+
+.cover-card:before{
+
+  top:-90px;
+  left:-90px;
+
+}
+
+
+.cover-card:after{
+
+  bottom:-90px;
+  right:-90px;
+
+}
+
+
+/* Decorative flowers */
+
+.flower-cluster{
+
+  position:absolute;
+
+  color:var(--pink);
+
+  opacity:.38;
+
+  pointer-events:none;
+
+  font-size:58px;
+
+  line-height:.8;
+
+}
+
+
+.flower-cluster.tl{
+
+  top:18px;
+  left:18px;
+
+  transform:rotate(-18deg);
+
+}
+
+
+.flower-cluster.br{
+
+  bottom:20px;
+  right:18px;
+
+  transform:rotate(165deg);
+
+}
+
+
+.flower-cluster span{
+  display:block;
+}
+
+
+/* Cover typography */
+
+.mini-label{
+
+  color:var(--brown);
+
+  letter-spacing:5px;
+
+  font-size:9px;
+
+  font-weight:600;
+
+  margin-bottom:22px;
+
+}
+
+
+.cover-21{
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:150px;
+
+  line-height:.65;
+
+  color:var(--brown);
+
+  font-weight:400;
+
+}
+
+
+.cover-title{
+
+  margin-top:28px;
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:32px;
+
+  letter-spacing:5px;
+
+  color:var(--brown);
+
+}
+
+
+.cover-line{
+
+  width:55px;
+
+  height:1px;
+
+  background:var(--khaki);
+
+  margin:25px auto;
+
+}
+
+
+.cover-copy{
+
+  max-width:280px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.9;
+
+}
+
+
+.hint{
+
+  margin-top:30px;
+
+  color:var(--brown);
+
+  font-size:9px;
+
+  letter-spacing:3px;
+
+}
+
+
+.password-input{
+
+  width:100%;
+
+  max-width:280px;
+
+  margin-top:13px;
+
+  padding:14px 16px;
+
+  border:1px solid #cfd5df;
+
+  background:#fff;
+
+  color:var(--ink);
+
+  text-align:center;
+
+  letter-spacing:5px;
+
+  outline:none;
+
+}
+
+
+.password-input:focus{
+
+  border-color:var(--brown);
+
+  box-shadow:
+    0 0 0 3px rgba(74,52,51,.07);
+
+}
+
+
+.unlock-button{
+
+  width:100%;
+
+  max-width:280px;
+
+  margin-top:10px;
+
+  padding:14px;
+
+  border:1px solid var(--brown);
+
+  background:var(--brown);
+
+  color:white;
+
+  letter-spacing:3px;
+
+  font-size:10px;
+
+  transition:.25s;
+
+}
+
+
+.unlock-button:hover{
+
+  background:var(--brown-dark);
+
+  transform:translateY(-1px);
+
+}
+
+
+.error{
+
+  height:16px;
+
+  margin-top:12px;
+
+  color:#a85858;
+
+  font-size:10px;
+
+  opacity:0;
+
+}
+
+
+.error.show{
+  opacity:1;
+}
+
+
+/* ================================
+   ENVELOPE
+================================ */
+
+#envelope-transition{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  display:grid;
+
+  place-items:center;
+
+  background:#5a3f3f;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  pointer-events:none;
+
+  transition:
+    opacity .6s ease,
+    visibility .6s ease;
+
+}
+
+
+#envelope-transition.active{
+
+  opacity:1;
+
+  visibility:visible;
+
+  pointer-events:auto;
+
+}
+
+
+#envelope-transition.fade-out{
+
+  opacity:0;
+
+  visibility:hidden;
+
+}
+
+
+.envelope-scene{
+  text-align:center;
+}
+
+
+.envelope{
+
+  position:relative;
+
+  width:310px;
+
+  height:205px;
+
+  filter:
+    drop-shadow(
+      0 25px 35px rgba(0,0,0,.25)
     );
 
+}
 
-    /* =========================================================
-       COLOURS
-       ========================================================= */
 
-    :root {
+.envelope-back{
 
-      --bg: #191614;
+  position:absolute;
 
-      --bg-soft: #211d1a;
+  inset:0;
 
-      --card: #29231f;
+  background:#f5eee3;
 
-      --khaki: #b7a68a;
+  border:1px solid #e5dccd;
 
-      --khaki-light: #d8cbb2;
+  z-index:1;
 
-      --pink: #c98f98;
+}
 
-      --pink-light: #e5b5bb;
 
-      --pink-dark: #9e6972;
+.envelope-letter{
 
-      --white: #faf5f1;
+  position:absolute;
 
-      --muted: #b8ada5;
+  left:20px;
+  right:20px;
 
-      --danger: #d98686;
+  bottom:12px;
 
-    }
+  height:175px;
 
+  background:#fffdf8;
 
-    /* =========================================================
-       RESET
-       ========================================================= */
+  z-index:2;
 
-    * {
+  display:grid;
 
-      box-sizing: border-box;
+  place-items:center;
 
-      margin: 0;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.14);
 
-      padding: 0;
+  transition:
+    transform 1s
+    cubic-bezier(.22,1,.36,1);
 
-    }
+}
 
 
-    html {
+.letter-content{
 
-      scroll-behavior: smooth;
+  font-family:'Cormorant Garamond',serif;
 
-    }
+  text-align:center;
 
+}
 
-    body {
 
-      min-height: 100vh;
+.letter-content small{
 
-      background:
+  display:block;
 
-        radial-gradient(
-          circle at 50% 10%,
-          rgba(201, 143, 152, 0.16),
-          transparent 35%
-        ),
+  font-family:'DM Sans',sans-serif;
 
-        radial-gradient(
-          circle at 15% 70%,
-          rgba(183, 166, 138, 0.08),
-          transparent 30%
-        ),
+  color:var(--brown);
 
-        var(--bg);
+  font-size:8px;
 
-      color: var(--white);
+  letter-spacing:4px;
 
-      font-family:
-        'Montserrat',
-        sans-serif;
+  margin-bottom:8px;
 
-      overflow-x: hidden;
+}
 
-    }
 
+.letter-content strong{
 
-    body.locked {
+  font-size:72px;
 
-      overflow: hidden;
+  color:var(--brown);
 
-    }
+  font-weight:400;
 
+}
 
-    button,
-    input {
 
-      font-family: inherit;
+.envelope-front{
 
-    }
+  position:absolute;
 
+  inset:0;
 
-    /* =========================================================
-       PASSWORD SCREEN
-       ========================================================= */
+  z-index:4;
 
-    #password-screen {
+  background:#eee5d6;
 
-      min-height: 100vh;
+  clip-path:
+    polygon(
+      0 0,
+      50% 58%,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
 
-      display: flex;
+}
 
-      justify-content: center;
 
-      align-items: center;
+.envelope-flap{
 
-      padding: 25px;
+  position:absolute;
 
-      position: fixed;
+  top:0;
 
-      inset: 0;
+  left:0;
 
-      z-index: 10000;
+  width:100%;
 
-      background:
+  height:112px;
 
-        radial-gradient(
-          circle at center,
-          rgba(201, 143, 152, 0.12),
-          transparent 45%
-        ),
+  z-index:5;
 
-        var(--bg);
+  background:#f7f0e5;
 
-      transition:
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
 
-        opacity 0.8s ease,
+  transform-origin:top center;
 
-        visibility 0.8s ease;
+  transition:
+    transform 1s
+    cubic-bezier(.22,1,.36,1);
 
-    }
+}
 
 
-    #password-screen.hidden {
+#envelope-transition.open
+.envelope-flap{
 
-      opacity: 0;
+  transform:rotateX(180deg);
 
-      visibility: hidden;
+  z-index:1;
 
-      pointer-events: none;
+}
 
-    }
 
+#envelope-transition.open
+.envelope-letter{
 
-    .password-card {
+  transform:translateY(-112px);
 
-      width: 100%;
+  transition-delay:.3s;
 
-      max-width: 430px;
+}
 
-      padding: 55px 35px;
 
-      text-align: center;
+.opening-text{
 
-      border:
+  margin-top:50px;
 
-        1px solid
-        rgba(201, 143, 152, 0.4);
+  color:#fff;
 
-      background:
+  font-size:9px;
 
-        rgba(41, 35, 31, 0.92);
+  letter-spacing:5px;
 
-      backdrop-filter: blur(18px);
+  opacity:.8;
 
-      border-radius: 6px;
+}
 
-      box-shadow:
 
-        0 30px 90px
-        rgba(0, 0, 0, 0.55);
+/* ================================
+   MAIN SITE
+================================ */
 
-      animation:
+#invitation{
 
-        passwordCardIn
-        1s
-        ease
-        forwards;
+  opacity:0;
 
-    }
+  animation:
+    siteIn 1.2s ease forwards;
 
+}
 
-    @keyframes passwordCardIn {
 
-      from {
+@keyframes siteIn{
 
-        opacity: 0;
+  from{
 
-        transform:
+    opacity:0;
 
-          translateY(30px)
-          scale(0.97);
+    transform:translateY(15px);
 
-      }
+  }
 
-      to {
+  to{
 
-        opacity: 1;
+    opacity:1;
 
-        transform:
+    transform:none;
 
-          translateY(0)
-          scale(1);
+  }
 
-      }
+}
 
-    }
 
+/* ================================
+   NAVIGATION
+================================ */
 
-    .small-title {
+.topbar{
 
-      color: var(--pink);
+  position:sticky;
 
-      letter-spacing: 5px;
+  top:0;
 
-      font-size: 10px;
+  z-index:1000;
 
-      font-weight: 500;
+  height:62px;
 
-      margin-bottom: 25px;
+  display:flex;
 
-    }
+  align-items:center;
 
+  justify-content:space-between;
 
-    .number {
+  padding:0 22px;
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+  background:
+    rgba(90,63,63,.97);
 
-      font-size: 135px;
+  color:white;
 
-      line-height: 0.75;
+}
 
-      color: var(--pink-light);
 
-      font-weight: 400;
+.brand{
 
-      text-shadow:
+  width:30px;
 
-        0 0 45px
-        rgba(201, 143, 152, 0.15);
+  height:30px;
 
-    }
+  border:
+    1px solid rgba(255,255,255,.55);
 
+  border-radius:50%;
 
-    .birthday {
+  display:grid;
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+  place-items:center;
 
-      font-size: 30px;
+  font-family:'Cormorant Garamond',serif;
 
-      letter-spacing: 5px;
+  font-size:14px;
 
-      margin-top: 25px;
+}
 
-      color: var(--white);
 
-    }
+.menu{
 
+  display:flex;
 
-    .password-description {
+  gap:22px;
 
-      color: var(--muted);
+  align-items:center;
 
-      font-size: 12px;
+  font-size:9px;
 
-      line-height: 1.8;
+  letter-spacing:2px;
 
-      margin: 30px auto;
+}
 
-      max-width: 280px;
 
-    }
+.menu a{
 
+  color:white;
 
-    .hint {
+  text-decoration:none;
 
-      color: var(--khaki-light);
+  opacity:.85;
 
-      font-size: 10px;
+}
 
-      letter-spacing: 2px;
 
-      margin-top: 20px;
+.menu a:hover{
+  opacity:1;
+}
 
-      margin-bottom: 15px;
 
-    }
+.menu-button{
 
+  display:none;
 
-    .password-input {
+  background:none;
 
-      width: 100%;
+  border:0;
 
-      padding: 15px;
+  color:white;
 
-      background:
+  font-size:20px;
 
-        rgba(255, 255, 255, 0.02);
+}
 
-      border:
 
-        1px solid
-        rgba(183, 166, 138, 0.35);
+/* ================================
+   HERO
+================================ */
 
-      color: var(--white);
+.hero{
 
-      text-align: center;
+  min-height:
+    calc(100vh - 62px);
 
-      letter-spacing: 5px;
+  display:flex;
 
-      outline: none;
+  align-items:center;
 
-      transition: 0.3s;
+  justify-content:center;
 
-      border-radius: 2px;
+  text-align:center;
 
-      font-size: 16px;
+  position:relative;
 
-    }
+  overflow:hidden;
 
+  padding:90px 25px;
 
-    .password-input::placeholder {
+  background:var(--paper);
 
-      color: #77706b;
+  border-bottom:
+    1px solid
+    rgba(183,166,138,.28);
 
-    }
+}
 
 
-    .password-input:focus {
+.hero-flower{
 
-      border-color:
-        var(--pink);
+  position:absolute;
 
-      box-shadow:
+  color:#d09aa2;
 
-        0 0 25px
-        rgba(201, 143, 152, 0.1);
+  opacity:.28;
 
-    }
+  font-size:105px;
 
+  line-height:.7;
 
-    .unlock-button {
+}
 
-      width: 100%;
 
-      margin-top: 12px;
+.hero-flower.a{
 
-      padding: 15px;
+  left:-22px;
 
-      border:
+  top:65px;
 
-        1px solid
-        var(--pink);
+  transform:rotate(-25deg);
 
-      background:
-        var(--pink);
+}
 
-      color: #241b1b;
 
-      font-weight: 600;
+.hero-flower.b{
 
-      letter-spacing: 2px;
+  right:-28px;
 
-      cursor: pointer;
+  top:145px;
 
-      transition: 0.3s;
+  transform:rotate(155deg);
 
-      border-radius: 2px;
+}
 
-    }
 
+.hero-flower.c{
 
-    .unlock-button:hover {
+  left:18px;
 
-      background:
-        var(--pink-light);
+  bottom:45px;
 
-      border-color:
-        var(--pink-light);
+  transform:rotate(20deg);
 
-      transform:
-        translateY(-2px);
+  opacity:.18;
 
-      box-shadow:
+}
 
-        0 10px 30px
-        rgba(201, 143, 152, 0.15);
 
-    }
+.hero-flower.d{
 
+  right:5px;
 
-    .unlock-button:disabled {
+  bottom:20px;
 
-      opacity: 0.55;
+  transform:rotate(195deg);
 
-      cursor: wait;
+  opacity:.18;
 
-      transform: none;
+}
 
-    }
 
+.hero-content{
 
-    .attempts {
+  position:relative;
 
-      color: #77706b;
+  z-index:2;
 
-      font-size: 9px;
+  max-width:700px;
 
-      letter-spacing: 1px;
+}
 
-      margin-top: 14px;
 
-    }
+.hero-kicker{
 
+  color:var(--pink);
 
-    .error {
+  font-size:9px;
 
-      color: var(--danger);
+  letter-spacing:5px;
 
-      font-size: 11px;
+  margin-bottom:20px;
 
-      margin-top: 15px;
+}
 
-      min-height: 14px;
 
-      opacity: 0;
+.hero-21{
 
-      transition: 0.3s;
+  font-family:'Cormorant Garamond',serif;
 
-    }
+  color:var(--brown);
 
+  font-size:
+    clamp(
+      160px,
+      42vw,
+      300px
+    );
 
-    .error.show {
+  line-height:.6;
 
-      opacity: 1;
+  font-weight:400;
 
-    }
+}
 
 
-    /* =========================================================
-       ENVELOPE TRANSITION
-       ========================================================= */
+.hero-title{
 
-    #envelope-transition {
+  margin-top:55px;
 
-      position: fixed;
+  font-family:'Cormorant Garamond',serif;
 
-      inset: 0;
+  font-size:
+    clamp(
+      35px,
+      8vw,
+      65px
+    );
 
-      z-index: 99999;
+  font-weight:500;
 
-      display: flex;
+  letter-spacing:3px;
 
-      justify-content: center;
+  color:var(--brown);
 
-      align-items: center;
+}
 
-      background:
 
-        radial-gradient(
-          circle at center,
-          #493337 0%,
-          #241d1b 38%,
-          #151311 75%
-        );
+.hero-date{
 
-      opacity: 0;
+  margin-top:20px;
 
-      visibility: hidden;
+  color:var(--pink);
 
-      pointer-events: none;
+  font-size:11px;
 
-      transition:
+  letter-spacing:4px;
 
-        opacity 0.7s ease,
+}
 
-        visibility 0.7s ease;
 
-    }
+.birthday-badge{
 
+  display:inline-block;
 
-    #envelope-transition.active {
+  margin-top:18px;
 
-      opacity: 1;
+  padding:8px 15px;
 
-      visibility: visible;
+  border:
+    1px solid
+    rgba(183,166,138,.55);
 
-      pointer-events: all;
+  color:#9b8468;
 
-    }
+  font-size:8px;
 
+  letter-spacing:3px;
 
-    #envelope-transition.fade-out {
+  background:
+    rgba(216,203,178,.16);
 
-      opacity: 0;
+}
 
-      visibility: hidden;
 
-      pointer-events: none;
+.scroll{
 
-      transition:
+  position:absolute;
 
-        opacity 1s ease,
+  bottom:22px;
 
-        visibility 1s ease;
+  left:50%;
 
-    }
+  transform:
+    translateX(-50%);
 
+  color:#a39891;
 
-    .envelope-scene {
+  font-size:8px;
 
-      display: flex;
+  letter-spacing:4px;
 
-      flex-direction: column;
+}
 
-      align-items: center;
 
-    }
+/* ================================
+   SECTIONS
+================================ */
 
+.section{
 
-    /* =========================================================
-       ENVELOPE
-       ========================================================= */
+  position:relative;
 
-    .envelope {
+  max-width:760px;
 
-      position: relative;
+  margin:auto;
 
-      width: 320px;
+  padding:105px 25px;
 
-      height: 210px;
+  text-align:center;
 
-      perspective: 1000px;
+}
 
-      filter:
 
-        drop-shadow(
-          0 30px 50px
-          rgba(0, 0, 0, 0.65)
-        );
+.section:nth-of-type(even){
 
-    }
+  background:#f4f6f9;
 
+}
 
-    .envelope-back {
 
-      position: absolute;
+.section-label{
 
-      inset: 0;
+  color:var(--pink);
 
-      background:
+  font-size:9px;
 
-        linear-gradient(
-          135deg,
-          #776a57,
-          #514837
-        );
+  letter-spacing:5px;
 
-      border:
+  margin-bottom:20px;
 
-        1px solid
-        rgba(229, 181, 187, 0.5);
+}
 
-      border-radius: 4px;
 
-      z-index: 1;
+.section h2{
 
-    }
+  font-family:'Cormorant Garamond',serif;
 
+  font-size:50px;
 
-    .envelope-letter {
+  font-weight:500;
 
-      position: absolute;
+  color:var(--brown);
 
-      left: 20px;
+  margin-bottom:20px;
 
-      right: 20px;
+}
 
-      bottom: 15px;
 
-      height: 175px;
+.section p{
 
-      background: #f8eee9;
+  max-width:570px;
 
-      color: #332725;
+  margin:auto;
 
-      z-index: 2;
+  color:var(--muted);
 
-      transform: translateY(0);
+  line-height:1.9;
 
-      transition:
+  font-size:13px;
 
-        transform
-        1.1s
-        cubic-bezier(.22, 1, .36, 1);
+}
 
-      box-shadow:
 
-        0 10px 30px
-        rgba(0, 0, 0, 0.3);
+.botanical-divider{
 
-    }
+  width:110px;
 
+  height:1px;
 
-    .letter-content {
+  background:var(--khaki);
 
-      height: 100%;
+  margin:30px auto;
 
-      display: flex;
+}
 
-      flex-direction: column;
 
-      justify-content: center;
+/* ================================
+   DETAILS
+================================ */
 
-      align-items: center;
+.details{
 
-      gap: 8px;
+  margin-top:45px;
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+  display:grid;
 
-    }
+  grid-template-columns:
+    repeat(3,1fr);
 
+  border:1px solid var(--line);
 
-    .letter-content span {
+  background:var(--line);
 
-      font-family:
-        'Montserrat',
-        sans-serif;
+  gap:1px;
 
-      font-size: 9px;
+}
 
-      letter-spacing: 4px;
 
-      color: var(--pink-dark);
+.detail{
 
-    }
+  background:var(--paper);
 
+  padding:36px 16px;
 
-    .letter-content strong {
+}
 
-      font-size: 85px;
 
-      line-height: 0.8;
+.detail-icon{
 
-      font-weight: 400;
+  font-size:20px;
 
-      color: #9d6e75;
+  color:var(--pink);
 
-    }
+  margin-bottom:13px;
 
+}
 
-    .envelope-front {
 
-      position: absolute;
+.detail-title{
 
-      inset: 0;
+  font-size:8px;
 
-      z-index: 4;
+  letter-spacing:3px;
 
-      background:
+  color:var(--brown);
 
-        linear-gradient(
-          145deg,
-          transparent 49.5%,
-          #665a49 50%
-        );
+  margin-bottom:9px;
 
-      clip-path:
+}
 
-        polygon(
-          0 0,
-          50% 58%,
-          100% 0,
-          100% 100%,
-          0 100%
-        );
 
-      border-bottom:
+.detail-text{
 
-        1px solid
-        rgba(229, 181, 187, 0.35);
+  font-family:'Cormorant Garamond',serif;
 
-    }
+  font-size:22px;
 
+  color:var(--ink);
 
-    .envelope-flap {
+}
 
-      position: absolute;
 
-      top: 0;
+.detail-small{
 
-      left: 0;
+  font-size:10px;
 
-      width: 100%;
+  color:var(--muted);
 
-      height: 115px;
+  margin-top:7px;
 
-      z-index: 5;
+  line-height:1.5;
 
-      background:
+}
 
-        linear-gradient(
-          135deg,
-          #95866d,
-          #665a48
-        );
 
-      clip-path:
+/* ================================
+   COUNTDOWN
+================================ */
 
-        polygon(
-          0 0,
-          100% 0,
-          50% 100%
-        );
+.countdown{
 
-      transform-origin:
-        top center;
+  margin-top:45px;
 
-      border-top:
+  display:grid;
 
-        1px solid
-        rgba(229, 181, 187, 0.55);
+  grid-template-columns:
+    repeat(4,1fr);
 
-      transition:
+  gap:8px;
 
-        transform
-        1s
-        cubic-bezier(.22, 1, .36, 1);
+}
 
-    }
 
+.countdown-box{
 
-    #envelope-transition.open
-    .envelope-flap {
+  padding:23px 8px;
 
-      transform:
-        rotateX(180deg);
+  background:white;
 
-      z-index: 1;
+  border:1px solid var(--line);
 
-    }
+}
 
 
-    #envelope-transition.open
-    .envelope-letter {
+.countdown-number{
 
-      transform:
-        translateY(-115px);
+  display:block;
 
-      transition-delay:
-        0.35s;
+  font-family:'Cormorant Garamond',serif;
 
-    }
+  font-size:38px;
 
+  color:var(--brown);
 
-    .opening-text {
+}
 
-      margin-top: 60px;
 
-      color:
-        var(--pink-light);
+.countdown-label{
 
-      font-size: 9px;
+  font-size:7px;
 
-      letter-spacing: 5px;
+  letter-spacing:2px;
 
-      opacity: 0;
+  color:#8a90a0;
 
-      animation:
+}
 
-        openingTextIn
-        1s
-        ease
-        forwards;
 
-      animation-delay: 0.5s;
+/* ================================
+   GIFT / RSVP / MAP
+================================ */
 
-    }
+.card{
 
+  margin-top:40px;
 
-    @keyframes openingTextIn {
+  padding:35px 25px;
 
-      from {
+  background:white;
 
-        opacity: 0;
+  border:1px solid var(--line);
 
-        transform:
-          translateY(10px);
+  box-shadow:
+    0 12px 35px
+    rgba(75,52,47,.06);
 
-      }
+}
 
-      to {
 
-        opacity: 0.8;
+.copy-box{
 
-        transform:
-          translateY(0);
+  margin:20px auto 0;
 
-      }
+  max-width:480px;
 
-    }
+  padding:17px;
 
+  border:1px dashed #bdc5d3;
 
-    /* =========================================================
-       INVITATION
-       ========================================================= */
+  font-family:monospace;
 
-    #invitation {
+  font-size:10px;
 
-      opacity: 0;
+  color:var(--brown);
 
-      animation:
+  background:#fafbfc;
 
-        invitationIn
-        1.5s
-        ease
-        forwards;
+}
 
-    }
 
+.rsvp{
 
-    @keyframes invitationIn {
+  background:var(--brown);
 
-      from {
+  color:white;
 
-        opacity: 0;
+  max-width:none;
 
-        transform:
-          translateY(20px);
+  padding-left:25px;
 
-      }
+  padding-right:25px;
 
-      to {
+}
 
-        opacity: 1;
 
-        transform:
-          translateY(0);
+.rsvp h2,
+.rsvp .section-label{
 
-      }
+  color:white;
 
-    }
+}
 
 
-    /* =========================================================
-       HERO
-       ========================================================= */
+.rsvp p{
 
-    .hero {
+  color:
+    rgba(255,255,255,.72);
 
-      min-height: 100vh;
+}
 
-      display: flex;
 
-      justify-content: center;
+.rsvp-button{
 
-      align-items: center;
+  display:inline-block;
 
-      text-align: center;
+  margin-top:28px;
 
-      padding: 60px 20px;
+  padding:15px 42px;
 
-      position: relative;
+  color:var(--brown);
 
-      overflow: hidden;
+  background:white;
 
-    }
+  border:1px solid white;
 
+  text-decoration:none;
 
-    .hero::before {
+  letter-spacing:3px;
 
-      content: "";
+  font-size:9px;
 
-      position: absolute;
+  transition:.25s;
 
-      width: 600px;
+}
 
-      height: 600px;
 
-      border-radius: 50%;
+.rsvp-button:hover{
 
-      background:
+  background:var(--pink-light);
 
-        radial-gradient(
-          circle,
-          rgba(201, 143, 152, 0.14),
-          transparent 65%
-        );
+}
 
-      pointer-events: none;
 
-    }
+/* ================================
+   MAP
+================================ */
 
+.map{
 
-    .hero-content {
+  height:220px;
 
-      position: relative;
+  margin-top:35px;
 
-      z-index: 2;
+  display:grid;
 
-    }
+  place-items:center;
 
+  background:
 
-    .hero-subtitle {
+    linear-gradient(
+      rgba(201,143,152,.08) 1px,
+      transparent 1px
+    ),
 
-      color: var(--pink);
+    linear-gradient(
+      90deg,
+      rgba(201,143,152,.08) 1px,
+      transparent 1px
+    ),
 
-      font-size: 11px;
+    #f8f9fb;
 
-      letter-spacing: 7px;
+  background-size:32px 32px;
 
-      margin-bottom: 30px;
+  border:1px solid var(--line);
 
-    }
+  color:var(--brown);
 
+}
 
-    .hero-21 {
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+.pin{
+  font-size:38px;
+}
 
-      font-size:
 
-        clamp(
-          160px,
-          35vw,
-          310px
-        );
+.map span{
 
-      line-height: 0.65;
+  display:block;
 
-      font-weight: 400;
+  font-size:9px;
 
-      color: transparent;
+  letter-spacing:2px;
 
-      -webkit-text-stroke:
+  margin-top:8px;
 
-        1px var(--pink);
+}
 
-      text-shadow:
 
-        0 0 50px
-        rgba(201, 143, 152, 0.12);
+/* ================================
+   FOOTER
+================================ */
 
-    }
+footer{
 
+  padding:55px 20px;
 
-    .hero-title {
+  text-align:center;
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+  color:#9a8e86;
 
-      font-size:
+  font-size:8px;
 
-        clamp(
-          40px,
-          8vw,
-          75px
-        );
+  letter-spacing:3px;
 
-      font-weight: 500;
+}
 
-      margin-top: 50px;
 
-      letter-spacing: 4px;
+footer span{
+  color:var(--pink);
+}
 
-    }
 
+/* ================================
+   FLOATING PARTICLES
+================================ */
 
-    .hero-date {
+.particle{
 
-      margin-top: 25px;
+  position:fixed;
 
-      font-size: 13px;
+  width:3px;
 
-      letter-spacing: 4px;
+  height:3px;
 
-      color:
-        var(--khaki-light);
+  border-radius:50%;
 
-    }
+  background:#d09aa2;
 
+  opacity:.2;
 
-    .scroll {
+  pointer-events:none;
 
-      position: absolute;
+  z-index:20;
 
-      bottom: 30px;
+  animation:
+    float 9s linear infinite;
 
-      left: 50%;
+}
 
-      transform:
-        translateX(-50%);
 
-      font-size: 9px;
+@keyframes float{
 
-      letter-spacing: 4px;
+  from{
 
-      color: var(--muted);
+    transform:
+      translateY(105vh);
 
-      white-space: nowrap;
+    opacity:0;
 
-    }
+  }
 
+  20%{
+    opacity:.25;
+  }
 
-    /* =========================================================
-       SECTIONS
-       ========================================================= */
+  80%{
+    opacity:.12;
+  }
 
-    .section {
+  to{
 
-      max-width: 850px;
+    transform:
+      translateY(-10vh);
 
-      margin: auto;
+    opacity:0;
 
-      padding: 110px 25px;
+  }
 
-      text-align: center;
+}
 
-    }
 
+/* ================================
+   MOBILE
+================================ */
 
-    .section-label {
+@media(max-width:650px){
 
-      color: var(--pink);
+  .cover-card{
 
-      font-size: 10px;
+    min-height:620px;
 
-      letter-spacing: 5px;
+    padding:50px 25px;
 
-      margin-bottom: 25px;
+  }
 
-    }
 
+  .cover-21{
+    font-size:125px;
+  }
 
-    .section h2 {
 
-      font-family:
-        'Cormorant Garamond',
-        serif;
+  .cover-title{
+    font-size:27px;
+  }
 
-      font-size: 48px;
 
-      font-weight: 500;
+  .menu{
+    display:none;
+  }
 
-      margin-bottom: 25px;
 
-    }
+  .menu-button{
+    display:block;
+  }
 
 
-    .section p {
+  .details{
 
-      max-width: 600px;
+    grid-template-columns:1fr;
 
-      margin: auto;
+  }
 
-      color: var(--muted);
 
-      line-height: 2;
+  .detail{
+    padding:28px;
+  }
 
-      font-size: 14px;
 
-    }
+  .countdown{
 
+    grid-template-columns:
+      repeat(2,1fr);
 
-    /* =========================================================
-       DETAILS
-       ========================================================= */
+  }
 
-    .details {
 
-      margin-top: 55px;
+  .section{
 
-      display: grid;
+    padding:80px 20px;
 
-      grid-template-columns:
-        repeat(3, 1fr);
+  }
 
-      gap: 1px;
 
-      background:
-        rgba(183, 166, 138, 0.25);
+  .hero-title{
+    margin-top:42px;
+  }
 
-      border:
 
-        1px solid
-        rgba(183, 166, 138, 0.25);
+  .hero-flower{
+    font-size:75px;
+  }
 
-    }
+}
 
 
-    .detail {
+/* ================================
+   REDUCED MOTION
+================================ */
 
-      background:
-        var(--card);
+@media(prefers-reduced-motion:reduce){
 
-      padding: 40px 20px;
+  *,
+  *::before,
+  *::after{
 
-      transition:
+    animation-duration:.01ms!important;
 
-        background 0.3s,
+    animation-iteration-count:1!important;
 
-        transform 0.3s;
+    transition-duration:.01ms!important;
 
-    }
+    scroll-behavior:auto!important;
 
+  }
 
-    .detail:hover {
+}
 
-      background: #302925;
-
-      transform:
-        translateY(-3px);
-
-    }
-
-
-    .detail-icon {
-
-      font-size: 22px;
-
-      margin-bottom: 15px;
-
-      color: var(--pink);
-
-    }
-
-
-    .detail-title {
-
-      color:
-        var(--khaki-light);
-
-      font-size: 10px;
-
-      letter-spacing: 3px;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .detail-text {
-
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 22px;
-
-      color: var(--white);
-
-    }
-
-
-    .detail-small {
-
-      color: var(--muted);
-
-      font-size: 11px;
-
-      margin-top: 7px;
-
-      line-height: 1.5;
-
-    }
-
-
-    /* =========================================================
-       COUNTDOWN
-       ========================================================= */
-
-    .countdown {
-
-      margin-top: 50px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 10px;
-
-    }
-
-
-    .countdown-box {
-
-      padding: 25px 10px;
-
-      background:
-
-        rgba(201, 143, 152, 0.06);
-
-      border:
-
-        1px solid
-        rgba(201, 143, 152, 0.18);
-
-    }
-
-
-    .countdown-number {
-
-      display: block;
-
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 40px;
-
-      color:
-        var(--pink-light);
-
-    }
-
-
-    .countdown-label {
-
-      font-size: 8px;
-
-      letter-spacing: 2px;
-
-      color: var(--muted);
-
-    }
-
-
-    /* =========================================================
-       RSVP
-       ========================================================= */
-
-    .rsvp {
-
-      border-top:
-
-        1px solid
-        rgba(183, 166, 138, 0.2);
-
-      border-bottom:
-
-        1px solid
-        rgba(183, 166, 138, 0.2);
-
-    }
-
-
-    .rsvp-button {
-
-      display: inline-block;
-
-      margin-top: 35px;
-
-      padding: 16px 45px;
-
-      border:
-
-        1px solid
-        var(--pink);
-
-      color:
-        var(--pink-light);
-
-      text-decoration: none;
-
-      letter-spacing: 3px;
-
-      font-size: 11px;
-
-      transition: 0.3s;
-
-      cursor: pointer;
-
-    }
-
-
-    .rsvp-button:hover {
-
-      background:
-        var(--pink);
-
-      color: #21191a;
-
-    }
-
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    footer {
-
-      text-align: center;
-
-      padding: 60px 20px;
-
-      color: #706963;
-
-      font-size: 10px;
-
-      letter-spacing: 3px;
-
-    }
-
-
-    footer span {
-
-      color: var(--pink);
-
-    }
-
-
-    /* =========================================================
-       PARTICLES
-       ========================================================= */
-
-    .particle {
-
-      position: fixed;
-
-      width: 3px;
-
-      height: 3px;
-
-      background:
-        var(--pink);
-
-      border-radius: 50%;
-
-      opacity: 0.3;
-
-      pointer-events: none;
-
-      animation:
-
-        float 8s
-        linear
-        infinite;
-
-      z-index: 999;
-
-    }
-
-
-    .particle.khaki {
-
-      background:
-        var(--khaki-light);
-
-    }
-
-
-    @keyframes float {
-
-      from {
-
-        transform:
-          translateY(100vh);
-
-        opacity: 0;
-
-      }
-
-      20% {
-
-        opacity: 0.4;
-
-      }
-
-      80% {
-
-        opacity: 0.2;
-
-      }
-
-      to {
-
-        transform:
-          translateY(-10vh);
-
-        opacity: 0;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 650px) {
-
-      .password-card {
-
-        padding:
-          45px 25px;
-
-      }
-
-
-      .number {
-
-        font-size: 105px;
-
-      }
-
-
-      .birthday {
-
-        font-size: 24px;
-
-      }
-
-
-      .details {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-
-      .detail {
-
-        padding: 30px;
-
-      }
-
-
-      .hero-title {
-
-        margin-top: 40px;
-
-      }
-
-
-      .envelope {
-
-        width: 280px;
-
-        height: 185px;
-
-      }
-
-
-      .envelope-flap {
-
-        height: 100px;
-
-      }
-
-
-      .envelope-letter {
-
-        height: 155px;
-
-      }
-
-
-      .letter-content strong {
-
-        font-size: 70px;
-
-      }
-
-
-      .opening-text {
-
-        font-size: 8px;
-
-        letter-spacing: 4px;
-
-      }
-
-
-      .countdown {
-
-        grid-template-columns:
-          repeat(2, 1fr);
-
-      }
-
-
-      .rsvp-button {
-
-        display: block;
-
-        margin:
-          20px auto 0;
-
-        max-width: 280px;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       REDUCED MOTION
-       ========================================================= */
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-
-        animation-duration:
-          0.01ms !important;
-
-        animation-iteration-count:
-          1 !important;
-
-        transition-duration:
-          0.01ms !important;
-
-        scroll-behavior:
-          auto !important;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -1577,1239 +1571,1201 @@
 <body class="locked">
 
 
-  <!-- =======================================================
-       PASSWORD SCREEN
-       ======================================================= -->
+<!-- =========================================
+     PASSWORD SCREEN
+========================================= -->
 
-  <section id="password-screen">
+<section id="password-screen">
 
-    <div class="password-card">
+  <div class="cover-card">
 
 
-      <div class="small-title">
-        PRIVATE INVITATION
+    <div class="flower-cluster tl">
+      ❀
+      <span>✿</span>
+    </div>
+
+
+    <div class="flower-cluster br">
+      ❀
+      <span>✿</span>
+    </div>
+
+
+    <div class="mini-label">
+      PRIVATE INVITATION
+    </div>
+
+
+    <div class="cover-21">
+      21
+    </div>
+
+
+    <div class="cover-title">
+      BIRTHDAY
+    </div>
+
+
+    <div class="cover-line"></div>
+
+
+    <p class="cover-copy">
+
+      An elegant little birthday invitation
+      is waiting for you.
+
+      Enter the password to open it.
+
+    </p>
+
+
+    <div class="hint">
+      HINT: MY BIRTHDAY
+    </div>
+
+
+    <input
+
+      id="password"
+
+      class="password-input"
+
+      type="password"
+
+      inputmode="numeric"
+
+      autocomplete="off"
+
+      placeholder="PASSWORD"
+
+      aria-label="Invitation password"
+
+    >
+
+
+    <button
+      id="unlock"
+      class="unlock-button"
+    >
+
+      OPEN INVITATION
+
+    </button>
+
+
+    <div
+      id="error"
+      class="error"
+    >
+
+      That password isn't correct.
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+     ENVELOPE TRANSITION
+========================================= -->
+
+<section
+  id="envelope-transition"
+  aria-hidden="true"
+>
+
+  <div class="envelope-scene">
+
+
+    <div class="envelope">
+
+
+      <div class="envelope-back"></div>
+
+
+      <div class="envelope-letter">
+
+        <div class="letter-content">
+
+          <small>
+            YOU'RE INVITED
+          </small>
+
+          <strong>
+            21
+          </strong>
+
+        </div>
+
       </div>
 
 
-      <div class="number">
+      <div class="envelope-front"></div>
+
+
+      <div class="envelope-flap"></div>
+
+
+    </div>
+
+
+    <div class="opening-text">
+
+      OPENING YOUR INVITATION
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+     MAIN INVITATION
+========================================= -->
+
+<main id="invitation">
+
+
+  <!-- NAVIGATION -->
+
+  <header class="topbar">
+
+
+    <div class="brand">
+      21
+    </div>
+
+
+    <nav class="menu">
+
+      <a href="#details">
+        DETAILS
+      </a>
+
+      <a href="#story">
+        ABOUT
+      </a>
+
+      <a href="#location">
+        LOCATION
+      </a>
+
+      <a href="#rsvp">
+        RSVP
+      </a>
+
+    </nav>
+
+
+    <button
+      class="menu-button"
+      onclick="
+        document
+        .querySelector('.menu')
+        .classList
+        .toggle('show')
+      "
+    >
+
+      ☰
+
+    </button>
+
+
+  </header>
+
+
+
+  <!-- =========================================
+       HERO
+  ========================================= -->
+
+  <section class="hero">
+
+
+    <div class="hero-flower a">
+      ❀✿
+    </div>
+
+
+    <div class="hero-flower b">
+      ❀✿
+    </div>
+
+
+    <div class="hero-flower c">
+      ❀
+    </div>
+
+
+    <div class="hero-flower d">
+      ✿
+    </div>
+
+
+    <div class="hero-content">
+
+
+      <div class="hero-kicker">
+
+        COME CELEBRATE MY 21ST
+
+      </div>
+
+
+      <div class="hero-21">
+
         21
+
       </div>
 
 
-      <div class="birthday">
-        BIRTHDAY
+      <h1 class="hero-title">
+
+        BIRTHDAY CELEBRATION
+
+      </h1>
+
+
+      <div class="hero-date">
+
+        14 OCTOBER 2026
+
       </div>
 
 
-      <p class="password-description">
-        This invitation is private.
-        Enter the password to reveal your invitation.
-      </p>
+      <div class="birthday-badge">
 
+        TWENTY-ONE · A NIGHT TO REMEMBER
 
-      <div class="hint">
-        HINT: MY BIRTHDAY
-      </div>
-
-
-      <input
-        type="password"
-        id="password"
-        class="password-input"
-        placeholder="PASSWORD"
-        autocomplete="off"
-        spellcheck="false"
-        inputmode="numeric"
-      >
-
-
-      <button
-        id="unlock-button"
-        class="unlock-button"
-        type="button"
-      >
-        UNLOCK INVITATION
-      </button>
-
-
-      <div
-        id="error"
-        class="error"
-        aria-live="polite"
-      ></div>
-
-
-      <div
-        id="attempts"
-        class="attempts"
-      >
-        3 attempts remaining
       </div>
 
 
     </div>
+
+
+    <div class="scroll">
+
+      SCROLL TO EXPLORE
+
+    </div>
+
 
   </section>
 
 
 
-  <!-- =======================================================
-       ENVELOPE TRANSITION
+  <!-- =========================================
+       ABOUT
+  ========================================= -->
 
-       This is the ONLY thing shown after the password
-       is accepted, until the envelope has opened.
-       ======================================================= -->
-
-  <div
-    id="envelope-transition"
-    aria-hidden="true"
+  <section
+    class="section"
+    id="story"
   >
 
-    <div class="envelope-scene">
+
+    <div class="section-label">
+
+      A LITTLE NOTE
+
+    </div>
 
 
-      <div class="envelope">
+    <h2>
+
+      Come celebrate with me
+
+    </h2>
 
 
-        <div class="envelope-back"></div>
+    <div class="botanical-divider"></div>
 
 
-        <div class="envelope-letter">
+    <p>
 
-          <div class="letter-content">
+      Twenty-one feels like the beginning
+      of something beautiful.
 
-            <span>
-              YOU'RE INVITED
-            </span>
+      I would love to spend this special day
+      surrounded by the people who make life
+      brighter, happier and more memorable.
 
-            <strong>
-              21
-            </strong>
+    </p>
 
-          </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       DETAILS
+  ========================================= -->
+
+  <section
+    class="section"
+    id="details"
+  >
+
+
+    <div class="section-label">
+
+      THE DETAILS
+
+    </div>
+
+
+    <h2>
+
+      Save the date
+
+    </h2>
+
+
+    <div class="details">
+
+
+      <div class="detail">
+
+
+        <div class="detail-icon">
+          ♡
+        </div>
+
+
+        <div class="detail-title">
+          DATE
+        </div>
+
+
+        <div class="detail-text">
+
+          14 October
 
         </div>
 
 
-        <div class="envelope-front"></div>
+        <div class="detail-small">
 
+          2026
 
-        <div class="envelope-flap"></div>
+        </div>
 
 
       </div>
 
 
-      <div class="opening-text">
-        OPENING YOUR INVITATION
+
+      <div class="detail">
+
+
+        <div class="detail-icon">
+          ⌖
+        </div>
+
+
+        <div class="detail-title">
+          VENUE
+        </div>
+
+
+        <div class="detail-text">
+
+          Your Venue
+
+        </div>
+
+
+        <div class="detail-small">
+
+          Your City
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="detail">
+
+
+        <div class="detail-icon">
+          ◷
+        </div>
+
+
+        <div class="detail-title">
+          TIME
+        </div>
+
+
+        <div class="detail-text">
+
+          18:00
+
+        </div>
+
+
+        <div class="detail-small">
+
+          Please arrive from 17:30
+
+        </div>
+
+
       </div>
 
 
     </div>
 
-  </div>
 
+  </section>
 
 
-  <!-- =======================================================
-       INVITATION TEMPLATE
 
-       IMPORTANT:
-       Everything below is inside <template>, meaning it
-       does NOT appear on the page until JavaScript
-       deliberately inserts it after the envelope animation.
-       ======================================================= -->
+  <!-- =========================================
+       COUNTDOWN
+  ========================================= -->
 
-  <template id="invitation-template">
+  <section class="section">
 
 
-    <main id="invitation">
+    <div class="section-label">
 
+      COUNTING DOWN
 
-      <!-- ===================================================
-           HERO
-           =================================================== -->
+    </div>
 
-      <section class="hero">
 
+    <h2>
 
-        <div class="hero-content">
+      Until we celebrate
 
+    </h2>
 
-          <div class="hero-subtitle">
-            YOU'RE INVITED
-          </div>
 
+    <div class="countdown">
 
-          <div class="hero-21">
-            21
-          </div>
 
+      <div class="countdown-box">
 
-          <!-- CHANGE NAME -->
-
-          <h1 class="hero-title">
-
-            [YOUR NAME]'S<br>
-
-            BIRTHDAY
-
-          </h1>
-
-
-          <div class="hero-date">
-            14 OCTOBER 2026
-          </div>
-
-
-        </div>
-
-
-        <div class="scroll">
-          SCROLL TO DISCOVER
-        </div>
-
-
-      </section>
-
-
-
-      <!-- ===================================================
-           INTRO
-           =================================================== -->
-
-      <section class="section">
-
-
-        <div class="section-label">
-          LET'S CELEBRATE
-        </div>
-
-
-        <h2>
-          Twenty-one looks good.
-        </h2>
-
-
-        <p>
-
-          It's time to celebrate another trip around
-          the sun.
-
-          Join me for an unforgettable evening filled
-          with good music, great people, delicious food,
-          drinks and memories we'll be talking about
-          for years.
-
-        </p>
-
-
-      </section>
-
-
-
-      <!-- ===================================================
-           DETAILS
-           =================================================== -->
-
-      <section class="section">
-
-
-        <div class="section-label">
-          THE DETAILS
-        </div>
-
-
-        <h2>
-          Save the date.
-        </h2>
-
-
-        <div class="details">
-
-
-          <div class="detail">
-
-            <div class="detail-icon">
-              ♡
-            </div>
-
-            <div class="detail-title">
-              DATE
-            </div>
-
-            <div class="detail-text">
-              14 October 2026
-            </div>
-
-            <div class="detail-small">
-              Wednesday
-            </div>
-
-          </div>
-
-
-          <div class="detail">
-
-            <div class="detail-icon">
-              ◷
-            </div>
-
-            <div class="detail-title">
-              TIME
-            </div>
-
-            <div class="detail-text">
-              18:00
-            </div>
-
-            <div class="detail-small">
-              Please arrive from 17:30
-            </div>
-
-          </div>
-
-
-          <div class="detail">
-
-            <div class="detail-icon">
-              ◇
-            </div>
-
-            <div class="detail-title">
-              LOCATION
-            </div>
-
-            <div class="detail-text">
-              [VENUE NAME]
-            </div>
-
-            <div class="detail-small">
-              [CITY / ADDRESS]
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-      </section>
-
-
-
-      <!-- ===================================================
-           COUNTDOWN
-           =================================================== -->
-
-      <section class="section">
-
-
-        <div class="section-label">
-          COUNTING DOWN
-        </div>
-
-
-        <h2>
-          Until the celebration.
-        </h2>
-
-
-        <div class="countdown">
-
-
-          <div class="countdown-box">
-
-            <span
-              id="days"
-              class="countdown-number"
-            >
-              00
-            </span>
-
-            <span class="countdown-label">
-              DAYS
-            </span>
-
-          </div>
-
-
-          <div class="countdown-box">
-
-            <span
-              id="hours"
-              class="countdown-number"
-            >
-              00
-            </span>
-
-            <span class="countdown-label">
-              HOURS
-            </span>
-
-          </div>
-
-
-          <div class="countdown-box">
-
-            <span
-              id="minutes"
-              class="countdown-number"
-            >
-              00
-            </span>
-
-            <span class="countdown-label">
-              MINUTES
-            </span>
-
-          </div>
-
-
-          <div class="countdown-box">
-
-            <span
-              id="seconds"
-              class="countdown-number"
-            >
-              00
-            </span>
-
-            <span class="countdown-label">
-              SECONDS
-            </span>
-
-          </div>
-
-
-        </div>
-
-
-      </section>
-
-
-
-      <!-- ===================================================
-           RSVP
-
-           NO WHATSAPP SECTION
-           =================================================== -->
-
-      <section class="section rsvp">
-
-
-        <div class="section-label">
-          RSVP
-        </div>
-
-
-        <h2>
-          Will you join me?
-        </h2>
-
-
-        <p>
-
-          Please let me know if you can make it.
-
-          I can't wait to celebrate this special
-          milestone with you.
-
-        </p>
-
-
-        <a
-          class="rsvp-button"
-          href="#"
-          onclick="return false;"
+        <span
+          id="days"
+          class="countdown-number"
         >
-          RSVP
-        </a>
-
-
-      </section>
-
-
-
-      <!-- ===================================================
-           FOOTER
-           =================================================== -->
-
-      <footer>
-
-        MADE WITH
-
-        <span>
-          ♥
+          00
         </span>
 
-        FOR A SPECIAL 21ST
+        <span class="countdown-label">
+          DAYS
+        </span>
 
-      </footer>
-
-
-    </main>
-
-  </template>
+      </div>
 
 
 
-  <!-- =======================================================
-       JAVASCRIPT
-       ======================================================= -->
+      <div class="countdown-box">
 
-  <script>
+        <span
+          id="hours"
+          class="countdown-number"
+        >
+          00
+        </span>
+
+        <span class="countdown-label">
+          HOURS
+        </span>
+
+      </div>
+
+
+
+      <div class="countdown-box">
+
+        <span
+          id="minutes"
+          class="countdown-number"
+        >
+          00
+        </span>
+
+        <span class="countdown-label">
+          MINUTES
+        </span>
+
+      </div>
+
+
+
+      <div class="countdown-box">
+
+        <span
+          id="seconds"
+          class="countdown-number"
+        >
+          00
+        </span>
+
+        <span class="countdown-label">
+          SECONDS
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =========================================
+       GIFT
+  ========================================= -->
+
+  <section class="section">
+
+
+    <div class="section-label">
+
+      GIFT GUIDE
+
+    </div>
+
+
+    <h2>
+
+      Your presence is enough
+
+    </h2>
+
+
+    <p>
+
+      If you would like to bring something,
+      a contribution toward my next adventure
+      would be deeply appreciated.
+
+    </p>
+
+
+    <div class="card">
+
+
+      <div class="detail-title">
+
+        ACCOUNT / GIFT DETAILS
+
+      </div>
+
+
+      <div class="copy-box">
+
+        YOUR GIFT / PAYMENT INFORMATION HERE
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =========================================
+       LOCATION
+  ========================================= -->
+
+  <section
+    class="section"
+    id="location"
+  >
+
+
+    <div class="section-label">
+
+      FIND US
+
+    </div>
+
+
+    <h2>
+
+      The celebration
+
+    </h2>
+
+
+    <p>
+
+      Replace the details below with
+      your exact venue and directions.
+
+    </p>
+
+
+    <div class="map">
+
+
+      <div>
+
+
+        <div class="pin">
+
+          ⌖
+
+        </div>
+
+
+        <span>
+
+          YOUR VENUE · YOUR CITY
+
+        </span>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =========================================
+       RSVP
+  ========================================= -->
+
+  <section
+    class="section rsvp"
+    id="rsvp"
+  >
+
+
+    <div class="section-label">
+
+      KINDLY RESPOND
+
+    </div>
+
+
+    <h2>
+
+      Let's celebrate together
+
+    </h2>
+
+
+    <p>
+
+      Please RSVP before the date shown
+      on your invitation.
+
+      I can't wait to celebrate my 21st
+      with you.
+
+    </p>
+
+
+    <!--
+      CHANGE THE NUMBER BELOW.
+
+      Example:
+      https://wa.me/264811234567
+
+      Replace 264811234567 with
+      your WhatsApp number.
+    -->
+
+
+    <a
+
+      class="rsvp-button"
+
+      href="https://wa.me/0000000000?text=Hi!%20I'd%20love%20to%20RSVP%20for%20your%2021st%20birthday."
+
+      target="_blank"
+
+      rel="noopener"
+
+    >
+
+      RSVP NOW
+
+    </a>
+
+
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    MADE WITH LOVE ·
+
+    <span>
+      21
+    </span>
+
+    · SEE YOU THERE
+
+  </footer>
+
+
+</main>
+
+
+
+<script>
+
+
+/* ============================================================
+   INVITATION SETTINGS
+============================================================ */
+
+
+/*
+   PASSWORD
+
+   The password is:
+
+   14102005
+
+*/
+
+const CORRECT_PASSWORD = "14102005";
+
+
+/*
+   EVENT DATE
+
+   Birthday:
+
+   14 October 2026
+
+   Time:
+
+   18:00
+
+   +02:00 is the timezone used for
+   the countdown.
+*/
+
+const EVENT_DATE =
+  new Date(
+    "2026-10-14T18:00:00+02:00"
+  );
+
+
+
+/* ============================================================
+   PASSWORD / OPENING
+============================================================ */
+
+
+const passwordScreen =
+  document.getElementById(
+    "password-screen"
+  );
+
+
+const password =
+  document.getElementById(
+    "password"
+  );
+
+
+const unlock =
+  document.getElementById(
+    "unlock"
+  );
+
+
+const error =
+  document.getElementById(
+    "error"
+  );
+
+
+const envelope =
+  document.getElementById(
+    "envelope-transition"
+  );
+
+
+
+function openInvitation(){
+
+
+  /*
+     Check password
+  */
+
+  if(
+    password.value.trim()
+    !==
+    CORRECT_PASSWORD
+  ){
+
+    error.classList.add("show");
+
 
     /*
-     * ========================================================
-     * IMPORTANT PASSWORD
-     * ========================================================
-     *
-     * The password is EXACTLY:
-     *
-     * 14102005
-     *
-     */
+       Shake password box
+    */
 
-    const CORRECT_PASSWORD = "14102005";
+    password.animate(
 
-    const MAX_ATTEMPTS = 3;
+      [
 
+        {
+          transform:
+            "translateX(-6px)"
+        },
 
-    /*
-     * ========================================================
-     * EVENT DATE
-     * ========================================================
-     */
+        {
+          transform:
+            "translateX(6px)"
+        },
 
-    const EVENT_DATE =
-      "2026-10-14T18:00:00";
-
-
-    /*
-     * ========================================================
-     * ELEMENTS
-     * ========================================================
-     */
-
-    const passwordScreen =
-      document.getElementById(
-        "password-screen"
-      );
-
-
-    const passwordInput =
-      document.getElementById(
-        "password"
-      );
-
-
-    const unlockButton =
-      document.getElementById(
-        "unlock-button"
-      );
-
-
-    const error =
-      document.getElementById(
-        "error"
-      );
-
-
-    const attemptsDisplay =
-      document.getElementById(
-        "attempts"
-      );
-
-
-    const envelopeTransition =
-      document.getElementById(
-        "envelope-transition"
-      );
-
-
-    const invitationTemplate =
-      document.getElementById(
-        "invitation-template"
-      );
-
-
-    /*
-     * ========================================================
-     * STATE
-     * ========================================================
-     */
-
-    let attempts = 0;
-
-    let lockedOut = false;
-
-    let invitationOpened = false;
-
-
-    /*
-     * ========================================================
-     * ATTEMPT DISPLAY
-     * ========================================================
-     */
-
-    function updateAttempts() {
-
-      const remaining =
-        MAX_ATTEMPTS - attempts;
-
-
-      if (remaining <= 0) {
-
-        attemptsDisplay.textContent =
-          "Too many attempts.";
-
-        return;
-
-      }
-
-
-      attemptsDisplay.textContent =
-
-        remaining +
-        (
-          remaining === 1
-            ? " attempt remaining"
-            : " attempts remaining"
-        );
-
-    }
-
-
-    /*
-     * ========================================================
-     * ERROR
-     * ========================================================
-     */
-
-    function showError(message) {
-
-      error.textContent =
-        message;
-
-      error.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function hideError() {
-
-      error.textContent =
-        "";
-
-      error.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    /*
-     * ========================================================
-     * PASSWORD CHECK
-     * ========================================================
-     */
-
-    function unlockInvitation() {
-
-
-      /*
-       * Do nothing if currently locked.
-       */
-
-      if (lockedOut) {
-
-        return;
-
-      }
-
-
-      /*
-       * Read the password.
-
-       * String() makes sure we are comparing
-       * text with text.
-
-       * trim() removes accidental spaces.
-       */
-
-      const enteredPassword =
-        String(
-          passwordInput.value
-        ).trim();
-
-
-      /*
-       * ======================================================
-       * CORRECT PASSWORD
-       * ======================================================
-       */
-
-      if (
-        enteredPassword ===
-        CORRECT_PASSWORD
-      ) {
-
-
-        /*
-         * Prevent the function from being
-         * triggered twice.
-         */
-
-        if (invitationOpened) {
-
-          return;
-
+        {
+          transform:
+            "translateX(0)"
         }
 
+      ],
 
-        invitationOpened = true;
-
-
-        /*
-         * Disable controls.
-         */
-
-        unlockButton.disabled =
-          true;
-
-        passwordInput.disabled =
-          true;
-
-
-        hideError();
-
-
-        /*
-         * ----------------------------------------------------
-         * STEP 1
-         * Hide password screen.
-         * ----------------------------------------------------
-         */
-
-        passwordScreen.classList.add(
-          "hidden"
-        );
-
-
-        /*
-         * ----------------------------------------------------
-         * STEP 2
-         * Show envelope.
-         * ----------------------------------------------------
-         */
-
-        envelopeTransition.classList.add(
-          "active"
-        );
-
-
-        /*
-         * ----------------------------------------------------
-         * STEP 3
-         * Open envelope.
-         * ----------------------------------------------------
-         */
-
-        setTimeout(
-          function() {
-
-            envelopeTransition.classList.add(
-              "open"
-            );
-
-          },
-          700
-        );
-
-
-        /*
-         * ----------------------------------------------------
-         * STEP 4
-         *
-         * WAIT until the envelope has opened.
-         *
-         * Only after this point is the invitation
-         * inserted into the actual document.
-         * ----------------------------------------------------
-         */
-
-        setTimeout(
-          function() {
-
-
-            const invitation =
-              invitationTemplate
-                .content
-                .cloneNode(true);
-
-
-            document.body.appendChild(
-              invitation
-            );
-
-
-            document.body.classList.remove(
-              "locked"
-            );
-
-
-            /*
-             * Start countdown after invitation
-             * has been inserted.
-             */
-
-            startCountdown();
-
-
-            /*
-             * ------------------------------------------------
-             * STEP 5
-             * Fade the envelope away.
-             * ------------------------------------------------
-             */
-
-            setTimeout(
-              function() {
-
-                envelopeTransition.classList.add(
-                  "fade-out"
-                );
-
-              },
-              400
-            );
-
-
-          },
-          2700
-        );
-
-
-        return;
-
+      {
+        duration:240
       }
 
-
-      /*
-       * ======================================================
-       * INCORRECT PASSWORD
-       * ======================================================
-       */
-
-      attempts++;
-
-
-      passwordInput.value =
-        "";
-
-
-      updateAttempts();
-
-
-      /*
-       * Lock after three incorrect attempts.
-       */
-
-      if (
-        attempts >=
-        MAX_ATTEMPTS
-      ) {
-
-
-        lockedOut = true;
-
-
-        unlockButton.disabled =
-          true;
-
-
-        passwordInput.disabled =
-          true;
-
-
-        showError(
-          "Too many incorrect attempts. Please wait 15 seconds."
-        );
-
-
-        /*
-         * Unlock again after 15 seconds.
-         */
-
-        setTimeout(
-          function() {
-
-
-            attempts = 0;
-
-            lockedOut = false;
-
-
-            unlockButton.disabled =
-              false;
-
-
-            passwordInput.disabled =
-              false;
-
-
-            passwordInput.value =
-              "";
-
-
-            hideError();
-
-
-            updateAttempts();
-
-
-            passwordInput.focus();
-
-
-          },
-          15000
-        );
-
-
-      }
-
-      else {
-
-
-        showError(
-          "Incorrect password. Please try again."
-        );
-
-
-        passwordInput.focus();
-
-      }
-
-    }
-
-
-    /*
-     * ========================================================
-     * BUTTON
-     * ========================================================
-     */
-
-    unlockButton.addEventListener(
-      "click",
-      unlockInvitation
     );
 
 
-    /*
-     * ========================================================
-     * ENTER KEY
-     * ========================================================
-     */
+    return;
 
-    passwordInput.addEventListener(
-      "keydown",
-      function(event) {
+  }
 
 
-        if (
-          event.key ===
-          "Enter"
-        ) {
 
+  /*
+     Correct password
+  */
 
-          event.preventDefault();
+  error.classList.remove(
+    "show"
+  );
 
 
-          unlockInvitation();
+  unlock.disabled = true;
 
-        }
 
-      }
-    );
+  /*
+     Show envelope
+  */
 
+  envelope.classList.add(
+    "active"
+  );
 
-    /*
-     * ========================================================
-     * COUNTDOWN
-     * ========================================================
-     */
 
-    function startCountdown() {
+  /*
+     Open envelope
+  */
 
+  setTimeout(
 
-      const targetDate =
-        new Date(
-          EVENT_DATE
-        ).getTime();
+    () => {
 
-
-      function updateCountdown() {
-
-
-        const now =
-          new Date().getTime();
-
-
-        const difference =
-          targetDate - now;
-
-
-        const days =
-          document.getElementById(
-            "days"
-          );
-
-
-        const hours =
-          document.getElementById(
-            "hours"
-          );
-
-
-        const minutes =
-          document.getElementById(
-            "minutes"
-          );
-
-
-        const seconds =
-          document.getElementById(
-            "seconds"
-          );
-
-
-        if (
-          !days ||
-          !hours ||
-          !minutes ||
-          !seconds
-        ) {
-
-          return;
-
-        }
-
-
-        if (
-          difference <= 0
-        ) {
-
-
-          days.textContent =
-            "00";
-
-
-          hours.textContent =
-            "00";
-
-
-          minutes.textContent =
-            "00";
-
-
-          seconds.textContent =
-            "00";
-
-
-          return;
-
-        }
-
-
-        const daysValue =
-          Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-          );
-
-
-        const hoursValue =
-          Math.floor(
-            (
-              difference %
-              (1000 * 60 * 60 * 24)
-            ) /
-            (1000 * 60 * 60)
-          );
-
-
-        const minutesValue =
-          Math.floor(
-            (
-              difference %
-              (1000 * 60 * 60)
-            ) /
-            (1000 * 60)
-          );
-
-
-        const secondsValue =
-          Math.floor(
-            (
-              difference %
-              (1000 * 60)
-            ) /
-            1000
-          );
-
-
-        days.textContent =
-          String(
-            daysValue
-          ).padStart(
-            2,
-            "0"
-          );
-
-
-        hours.textContent =
-          String(
-            hoursValue
-          ).padStart(
-            2,
-            "0"
-          );
-
-
-        minutes.textContent =
-          String(
-            minutesValue
-          ).padStart(
-            2,
-            "0"
-          );
-
-
-        seconds.textContent =
-          String(
-            secondsValue
-          ).padStart(
-            2,
-            "0"
-          );
-
-      }
-
-
-      updateCountdown();
-
-
-      setInterval(
-        updateCountdown,
-        1000
+      envelope.classList.add(
+        "open"
       );
 
+    },
+
+    350
+
+  );
+
+
+  /*
+     Hide password screen
+  */
+
+  setTimeout(
+
+    () => {
+
+      passwordScreen.classList.add(
+        "hidden"
+      );
+
+    },
+
+    900
+
+  );
+
+
+  /*
+     Reveal website
+  */
+
+  setTimeout(
+
+    () => {
+
+      envelope.classList.add(
+        "fade-out"
+      );
+
+
+      document.body.classList.remove(
+        "locked"
+      );
+
+    },
+
+    2200
+
+  );
+
+}
+
+
+
+/*
+   Click button
+*/
+
+unlock.addEventListener(
+  "click",
+  openInvitation
+);
+
+
+
+/*
+   Press ENTER
+*/
+
+password.addEventListener(
+
+  "keydown",
+
+  e => {
+
+    if(
+      e.key === "Enter"
+    ){
+
+      openInvitation();
+
     }
 
+  }
 
-    /*
-     * ========================================================
-     * FLOATING PARTICLES
-     * ========================================================
-     */
-
-    function createParticles() {
+);
 
 
-      const particleCount =
-        20;
+
+/* ============================================================
+   COUNTDOWN
+============================================================ */
 
 
-      for (
-        let i = 0;
-        i < particleCount;
-        i++
-      ) {
+function updateCountdown(){
 
 
-        const particle =
-          document.createElement(
-            "div"
-          );
+  const now =
+    new Date();
 
 
-        particle.className =
-          "particle";
+  let diff =
+    EVENT_DATE - now;
 
 
-        if (
-          i % 2 === 0
-        ) {
+  /*
+     Prevent negative countdown
+  */
 
-          particle.classList.add(
-            "khaki"
-          );
+  if(diff < 0){
 
-        }
+    diff = 0;
 
-
-        particle.style.left =
-          Math.random() *
-          100 +
-          "%";
+  }
 
 
-        particle.style.animationDelay =
-          Math.random() *
-          8 +
-          "s";
 
-
-        particle.style.animationDuration =
-          6 +
-          Math.random() *
-          7 +
-          "s";
-
-
-        particle.style.width =
-          2 +
-          Math.random() *
-          3 +
-          "px";
-
-
-        particle.style.height =
-          particle.style.width;
-
-
-        document.body.appendChild(
-          particle
-        );
-
-      }
-
-    }
-
-
-    createParticles();
-
-
-    /*
-     * ========================================================
-     * INITIAL FOCUS
-     * ========================================================
-     */
-
-    window.addEventListener(
-      "load",
-      function() {
-
-        passwordInput.focus();
-
-      }
+  const days =
+    Math.floor(
+      diff / 86400000
     );
 
-  </script>
+
+  const hours =
+    Math.floor(
+      diff / 3600000
+    ) % 24;
+
+
+  const minutes =
+    Math.floor(
+      diff / 60000
+    ) % 60;
+
+
+  const seconds =
+    Math.floor(
+      diff / 1000
+    ) % 60;
+
+
+
+  /*
+     Update days
+  */
+
+  document
+    .getElementById("days")
+    .textContent =
+      String(days)
+      .padStart(2,"0");
+
+
+
+  /*
+     Update hours
+  */
+
+  document
+    .getElementById("hours")
+    .textContent =
+      String(hours)
+      .padStart(2,"0");
+
+
+
+  /*
+     Update minutes
+  */
+
+  document
+    .getElementById("minutes")
+    .textContent =
+      String(minutes)
+      .padStart(2,"0");
+
+
+
+  /*
+     Update seconds
+  */
+
+  document
+    .getElementById("seconds")
+    .textContent =
+      String(seconds)
+      .padStart(2,"0");
+
+}
+
+
+
+/*
+   Start countdown immediately
+*/
+
+updateCountdown();
+
+
+
+/*
+   Update every second
+*/
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+
+/* ============================================================
+   FLOATING PARTICLES
+============================================================ */
+
+
+for(
+  let i = 0;
+  i < 12;
+  i++
+){
+
+
+  const p =
+    document.createElement(
+      "div"
+    );
+
+
+  p.className =
+    "particle";
+
+
+  /*
+     Random horizontal position
+  */
+
+  p.style.left =
+    (Math.random() * 100)
+    + "vw";
+
+
+  /*
+     Random animation delay
+  */
+
+  p.style.animationDelay =
+    (Math.random() * 8)
+    + "s";
+
+
+  /*
+     Random animation duration
+  */
+
+  p.style.animationDuration =
+    (7 + Math.random() * 6)
+    + "s";
+
+
+  document.body.appendChild(
+    p
+  );
+
+}
+
+
+
+</script>
+
 
 </body>
-
 </html>
