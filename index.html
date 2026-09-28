@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#f5d9df">
 <title>21st Birthday Invitation</title>
 
 <style>
@@ -18,7 +19,8 @@
   --khaki3:#a99a78;
   --khaki4:#74664d;
 
-  --shadow:rgba(116,102,77,.18);
+  --shadow:rgba(116,102,77,.22);
+  --deep-shadow:rgba(116,102,77,.34);
 }
 
 *{
@@ -31,8 +33,8 @@ html{
 
 body{
   margin:0;
-  background:var(--pink5);
   color:var(--khaki4);
+  background:var(--pink5);
   font-family:Georgia,"Times New Roman",serif;
 }
 
@@ -41,41 +43,36 @@ input{
   font:inherit;
 }
 
-.hidden{
-  display:none!important;
+a{
+  color:inherit;
 }
 
 
 /* =========================================================
-   PASSWORD
+   PASSWORD SCREEN
 ========================================================= */
 
 #gate{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:10000;
 
   display:grid;
   place-items:center;
 
-  padding:22px;
+  padding:24px;
 
   background:
     radial-gradient(
-      circle at 15% 15%,
-      var(--pink),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 85% 85%,
-      var(--khaki),
-      transparent 34%
+      circle at 50% 25%,
+      rgba(237,185,197,.72),
+      transparent 42%
     ),
     var(--pink5);
 
   transition:
-    opacity .6s,
-    visibility .6s;
+    opacity .8s,
+    visibility .8s;
 }
 
 #gate.hide{
@@ -85,74 +82,49 @@ input{
 }
 
 .gate-card{
-  width:min(410px,100%);
+  width:min(440px,100%);
 
-  padding:
-    42px
-    28px
-    34px;
+  padding:42px 30px;
 
   text-align:center;
 
-  background:var(--khaki);
+  background:rgba(232,225,207,.93);
 
   border:1px solid var(--khaki2);
 
   box-shadow:
-    0 28px 80px var(--shadow);
-}
-
-.monogram{
-  width:72px;
-  height:72px;
-
-  margin:0 auto 20px;
-
-  border:1px solid var(--pink3);
-
-  border-radius:50%;
-
-  display:grid;
-  place-items:center;
-
-  color:var(--pink4);
-
-  font-size:26px;
+    0 30px 80px var(--shadow);
 }
 
 .gate-card small{
-  letter-spacing:.28em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  color:var(--pink4);
 }
 
 .gate-card h1{
-  margin:
-    14px
-    0
-    8px;
+  margin:14px 0 8px;
 
-  font-size:42px;
+  font-size:clamp(42px,12vw,70px);
+
+  color:var(--pink4);
 
   font-weight:400;
-
-  color:var(--khaki4);
 }
 
 .gate-card p{
-  margin:
-    0
-    0
-    24px;
-
-  line-height:1.7;
-
-  color:var(--khaki4);
+  margin:0 0 24px;
 }
 
-#password{
-  width:100%;
-  height:52px;
+.password-row{
+  display:flex;
+  gap:8px;
+}
+
+.password-row input{
+  min-width:0;
+  flex:1;
+
+  padding:14px;
 
   border:1px solid var(--khaki3);
 
@@ -162,40 +134,29 @@ input{
 
   text-align:center;
 
-  letter-spacing:.3em;
+  letter-spacing:.16em;
 
-  outline:0;
+  outline:none;
 }
 
-#password:focus{
-  border-color:var(--pink3);
-}
-
-.gate-btn{
-  width:100%;
-  height:52px;
-
-  margin-top:12px;
+.password-row button{
+  padding:14px 20px;
 
   border:1px solid var(--pink4);
 
-  background:var(--pink3);
+  background:var(--pink4);
 
   color:var(--pink5);
 
-  letter-spacing:.2em;
-
-  text-transform:uppercase;
+  cursor:pointer;
 }
 
-#error{
-  height:20px;
+.error{
+  min-height:22px;
 
-  margin-top:11px;
+  margin-top:12px;
 
   color:var(--pink4);
-
-  font-size:13px;
 }
 
 
@@ -215,11 +176,15 @@ input{
 
   overflow:hidden;
 
-  background:var(--pink5);
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(245,217,223,.96),
+      rgba(255,244,246,1) 62%
+    ),
+    var(--pink5);
 
-  transition:
-    opacity .8s,
-    visibility .8s;
+  perspective:1400px;
 }
 
 #reveal.show{
@@ -230,87 +195,158 @@ input{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
+
+  transition:
+    opacity .9s;
 }
+
+
+/* Background decorative texture */
 
 .reveal-bg{
   position:absolute;
-  inset:0;
+
+  inset:-15%;
+
+  opacity:.42;
 
   background:
     radial-gradient(
-      circle at 50% 45%,
-      var(--khaki) 0 24%,
-      transparent 58%
+      circle at 15% 20%,
+      var(--khaki2) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 82% 70%,
+      var(--pink3) 0 1px,
+      transparent 2px
     );
+
+  background-size:
+    34px 34px,
+    48px 48px;
+
+  animation:bgDrift 10s linear infinite;
 }
+
+@keyframes bgDrift{
+  to{
+    transform:
+      translate3d(20px,-18px,0)
+      rotate(.5deg);
+  }
+}
+
+
+/* Small heading */
 
 .reveal-note{
   position:absolute;
 
-  top:25px;
+  top:8%;
   left:50%;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
-  font-size:10px;
+  z-index:30;
+
+  color:var(--khaki3);
+
+  font-size:12px;
 
   letter-spacing:.28em;
 
   text-transform:uppercase;
 
-  color:var(--khaki3);
+  opacity:0;
 
-  white-space:nowrap;
+  animation:
+    noteIn .8s ease 1s forwards,
+    noteOut .7s ease 3.1s forwards;
 }
+
+@keyframes noteIn{
+  to{
+    opacity:.9;
+  }
+}
+
+@keyframes noteOut{
+  to{
+    opacity:0;
+    transform:
+      translate(-50%,-12px);
+  }
+}
+
+
+/* Main animation stage */
 
 .stage{
   position:relative;
 
-  width:min(390px,86vw);
+  width:min(430px,84vw);
+  height:min(700px,76vh);
 
-  height:min(700px,84vh);
-
-  perspective:1600px;
+  transform-style:preserve-3d;
 }
 
 
 /* =========================================================
-   INVITATION BEHIND ENVELOPE
+   INVITATION CARD BEHIND ENVELOPE
 ========================================================= */
 
 .card{
   position:absolute;
 
-  z-index:1;
+  z-index:2;
 
-  left:7%;
-  right:7%;
+  left:5%;
+  right:5%;
 
-  top:5%;
-  bottom:5%;
+  top:4%;
+  bottom:3%;
 
-  padding:9px;
+  padding:10px;
 
-  background:var(--pink);
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink2),
+      var(--pink)
+    );
 
   border:1px solid var(--pink3);
 
   box-shadow:
-    0 25px 60px var(--shadow);
+    0 35px 90px rgba(116,102,77,.24),
+    inset 0 0 0 5px rgba(255,244,246,.55);
 
   opacity:0;
 
   transform:
-    translateY(95px)
-    scale(.82);
+    translateY(110px)
+    scale(.78)
+    rotateX(8deg);
 
   animation:
     cardReveal
-    2s
-    cubic-bezier(.18,.8,.18,1)
-    4.95s
+    2.25s
+    cubic-bezier(.15,.82,.15,1)
+    4.85s
     forwards;
+}
+
+.card:before{
+  content:"";
+
+  position:absolute;
+
+  inset:8px;
+
+  border:1px solid var(--khaki2);
+
+  pointer-events:none;
 }
 
 @keyframes cardReveal{
@@ -319,12 +355,20 @@ input{
     opacity:0;
 
     transform:
-      translateY(95px)
-      scale(.82);
+      translateY(110px)
+      scale(.78)
+      rotateX(8deg);
   }
 
-  25%{
+  18%{
     opacity:1;
+  }
+
+  65%{
+    transform:
+      translateY(-10px)
+      scale(1.015)
+      rotateX(0);
   }
 
   100%{
@@ -332,32 +376,22 @@ input{
 
     transform:
       translateY(0)
-      scale(1);
+      scale(1)
+      rotateX(0);
   }
-
 }
 
-.card-inner{
-  height:100%;
 
-  border:1px solid var(--pink3);
-
-  position:relative;
-
-  display:grid;
-
-  place-items:center;
-
-  overflow:hidden;
-
-  background:var(--pink5);
-}
+/* Floral border */
 
 .floral{
   position:absolute;
+
   inset:0;
 
-  color:var(--pink3);
+  color:var(--pink4);
+
+  opacity:.78;
 }
 
 .floral svg{
@@ -365,36 +399,41 @@ input{
   height:100%;
 }
 
+
+/* Invitation text */
+
 .card-copy{
-  position:relative;
+  position:absolute;
 
-  z-index:2;
+  left:50%;
+  top:50%;
 
-  width:72%;
+  z-index:4;
+
+  width:70%;
+
+  transform:
+    translate(-50%,-45%)
+    translateY(22px);
+
+  padding:28px 16px;
 
   text-align:center;
 
-  padding:25px;
-
-  background:rgba(
-    245,
-    217,
-    223,
-    .88
-  );
+  background:rgba(245,217,223,.9);
 
   border:1px solid var(--khaki2);
 
-  opacity:0;
+  box-shadow:
+    0 16px 35px rgba(116,102,77,.14);
 
-  transform:
-    translateY(18px);
+  opacity:0;
 
   animation:
     copyReveal
-    .9s
+    1s
     ease
-    7.15s
+    7.05s
     forwards;
 }
 
@@ -403,132 +442,158 @@ input{
   to{
     opacity:1;
 
-    transform:none;
+    transform:
+      translate(-50%,-45%)
+      translateY(0);
   }
-
 }
 
 .card-copy small{
-  display:block;
-
-  font-size:9px;
-
-  letter-spacing:.3em;
+  letter-spacing:.18em;
 
   text-transform:uppercase;
 
-  color:var(--khaki4);
+  font-size:9px;
 }
 
 .card-copy h2{
-  margin:
-    14px
-    0
-    7px;
+  margin:6px 0 0;
 
-  font-size:48px;
+  font-size:clamp(82px,20vw,118px);
 
-  line-height:.9;
-
-  font-weight:400;
+  line-height:.82;
 
   color:var(--pink4);
+
+  font-weight:400;
 }
 
 .card-copy h3{
-  margin:0;
+  margin:10px 0;
 
-  font-size:13px;
+  font-size:14px;
 
-  letter-spacing:.22em;
+  letter-spacing:.3em;
 
   font-weight:400;
-
-  color:var(--khaki4);
 }
 
 .card-copy p{
-  margin:
-    16px
-    0
-    0;
+  margin:0;
 
-  font-size:10px;
+  font-size:12px;
 
-  letter-spacing:.14em;
-
-  color:var(--khaki3);
+  letter-spacing:.18em;
 }
 
 
 /* =========================================================
-   ENVELOPE
+   GRAPHICAL ENVELOPE
 ========================================================= */
 
 .envelope{
   position:absolute;
 
-  z-index:5;
+  left:0;
+  right:0;
 
-  inset:
-    5%
-    0;
+  bottom:5%;
+
+  height:61%;
+
+  z-index:10;
 
   transform-style:preserve-3d;
 
+  filter:
+    drop-shadow(
+      0 32px 35px
+      var(--shadow)
+    );
+
   animation:
-    envelope-settle
+    envelopeSettle
     .9s
-    3.45s
+    3.4s
     both,
 
     envelopeFade
     .9s
     ease
-    6.65s
+    6.8s
     forwards;
 }
+
+@keyframes envelopeSettle{
+
+  0%{
+    transform:
+      translateY(0)
+      rotateZ(0);
+  }
+
+  40%{
+    transform:
+      translateY(4px)
+      rotateZ(-.5deg);
+  }
+
+  70%{
+    transform:
+      translateY(-3px)
+      rotateZ(.35deg);
+  }
+
+  100%{
+    transform:
+      translateY(0)
+      rotateZ(0);
+  }
+}
+
+@keyframes envelopeFade{
+
+  to{
+    opacity:0;
+    visibility:hidden;
+
+    transform:
+      translateY(12px)
+      scale(.985);
+  }
+}
+
+
+/* Envelope rear */
 
 .env-back{
   position:absolute;
 
   inset:0;
 
-  background:var(--khaki);
-
-  border:1px solid var(--khaki2);
-
-  box-shadow:
-    0 30px 65px var(--shadow);
-}
-
-.env-back:before{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
   background:
     linear-gradient(
-      145deg,
-      transparent 49.7%,
-      var(--khaki3) 49.9%,
-      transparent 50.2%
+      135deg,
+      rgba(255,255,255,.25),
+      transparent 38%
     ),
     linear-gradient(
-      215deg,
-      transparent 49.7%,
-      var(--khaki3) 49.9%,
-      transparent 50.2%
-    );
+      315deg,
+      rgba(116,102,77,.08),
+      transparent 45%
+    ),
+    var(--khaki);
 
-  opacity:.55;
+  border:1px solid var(--khaki3);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,244,246,.55);
 }
 
 
 /* =========================================================
-   LEFT / RIGHT ENVELOPE DOORS
+   SIDE ENVELOPE DOORS
 ========================================================= */
 
 .door{
@@ -539,20 +604,40 @@ input{
 
   width:50%;
 
-  background:var(--khaki);
-
   z-index:12;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.18),
+      transparent 50%
+    ),
+    var(--khaki);
 
   backface-visibility:hidden;
 
-  animation-duration:1.55s;
+  animation-duration:1.65s;
 
   animation-timing-function:
-    cubic-bezier(.7,.02,.18,1);
+    cubic-bezier(.68,.02,.16,1);
 
-  animation-delay:4.25s;
+  animation-delay:4.05s;
 
   animation-fill-mode:forwards;
+}
+
+.door:after{
+  content:"";
+
+  position:absolute;
+
+  inset:9px;
+
+  border:
+    1px solid
+    rgba(169,154,120,.55);
 }
 
 .door.left{
@@ -561,7 +646,15 @@ input{
   transform-origin:left center;
 
   border-right:
-    1px solid var(--khaki2);
+    1px solid
+    var(--khaki2);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 50%,
+      0 100%
+    );
 
   animation-name:leftDoorOpen;
 }
@@ -572,34 +665,8 @@ input{
   transform-origin:right center;
 
   border-left:
-    1px solid var(--khaki2);
-
-  animation-name:rightDoorOpen;
-}
-
-.door.left:after{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 50%,
-      0 100%
-    );
-
-  background:var(--khaki);
-}
-
-.door.right:after{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
+    1px solid
+    var(--khaki2);
 
   clip-path:
     polygon(
@@ -608,36 +675,58 @@ input{
       100% 100%
     );
 
-  background:var(--khaki);
+  animation-name:rightDoorOpen;
 }
 
 @keyframes leftDoorOpen{
 
-  to{
+  0%{
     transform:
-      rotateY(-108deg);
-
-    box-shadow:
-      -25px 0 45px var(--shadow);
+      rotateY(0)
+      translateZ(0);
   }
 
+  45%{
+    transform:
+      rotateY(-58deg)
+      translateZ(18px);
+  }
+
+  100%{
+    transform:
+      rotateY(-118deg)
+      translateZ(24px);
+
+    opacity:.15;
+  }
 }
 
 @keyframes rightDoorOpen{
 
-  to{
+  0%{
     transform:
-      rotateY(108deg);
-
-    box-shadow:
-      25px 0 45px var(--shadow);
+      rotateY(0)
+      translateZ(0);
   }
 
+  45%{
+    transform:
+      rotateY(58deg)
+      translateZ(18px);
+  }
+
+  100%{
+    transform:
+      rotateY(118deg)
+      translateZ(24px);
+
+    opacity:.15;
+  }
 }
 
 
 /* =========================================================
-   TOP / BOTTOM ENVELOPE FOLDS
+   TOP AND BOTTOM ENVELOPE FOLDS
 ========================================================= */
 
 .fold-top,
@@ -647,79 +736,103 @@ input{
   left:0;
   right:0;
 
-  background:var(--khaki);
+  z-index:15;
 
-  z-index:14;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.24),
+      transparent 55%
+    ),
+    var(--khaki);
 
-  pointer-events:none;
+  transform-origin:center top;
 }
 
 .fold-top{
   top:0;
 
-  height:43%;
+  height:46%;
 
   clip-path:
     polygon(
       0 0,
       100% 0,
-      50% 76%
+      50% 78%
     );
 
   border-bottom:
-    1px solid var(--khaki2);
+    1px solid
+    var(--khaki2);
 
   animation:
     topOpen
-    1.25s
-    cubic-bezier(.65,.03,.2,1)
-    4.05s
+    1.35s
+    cubic-bezier(.66,.02,.18,1)
+    3.85s
     forwards;
 }
 
 .fold-bottom{
   bottom:0;
 
-  height:28%;
+  height:30%;
 
   clip-path:
     polygon(
       0 100%,
       100% 100%,
-      50% 17%
+      50% 12%
     );
 
   border-top:
-    1px solid var(--khaki2);
+    1px solid
+    var(--khaki2);
 
   animation:
     bottomOpen
-    1.2s
-    cubic-bezier(.65,.03,.2,1)
-    4.65s
+    1.3s
+    cubic-bezier(.66,.02,.18,1)
+    4.35s
     forwards;
 }
 
 @keyframes topOpen{
 
-  to{
+  0%{
     transform:
-      translateY(-115%);
+      rotateX(0)
+      translateY(0);
 
-    opacity:.15;
+    opacity:1;
   }
 
+  100%{
+    transform:
+      rotateX(-72deg)
+      translateY(-55px);
+
+    opacity:.08;
+  }
 }
 
 @keyframes bottomOpen{
 
-  to{
+  0%{
     transform:
-      translateY(120%);
+      rotateX(0)
+      translateY(0);
 
-    opacity:.12;
+    opacity:1;
   }
 
+  100%{
+    transform:
+      rotateX(62deg)
+      translateY(95px);
+
+    opacity:.08;
+  }
 }
 
 
@@ -727,180 +840,264 @@ input{
    RIBBON
 ========================================================= */
 
-.ribbon-v{
+.ribbon-v,
+.ribbon-h{
   position:absolute;
 
-  z-index:20;
+  z-index:22;
 
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.18),
+      transparent 28%,
+      rgba(116,102,77,.12) 75%,
+      transparent
+    ),
+    var(--pink3);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(182,94,115,.22);
+}
+
+.ribbon-v{
   left:50%;
 
   top:0;
   bottom:0;
 
-  width:12px;
+  width:15px;
 
   transform:
     translateX(-50%);
 
-  background:var(--pink3);
-
   animation:
     ribbonDrop
-    1.15s
+    1.2s
     cubic-bezier(.55,.02,.18,1)
-    2.15s
+    2.05s
     forwards;
 }
 
 .ribbon-h{
-  position:absolute;
-
-  z-index:20;
-
   left:0;
   right:0;
 
-  top:51%;
+  top:50%;
 
-  height:14px;
+  height:16px;
 
   transform:
     translateY(-50%);
 
-  background:var(--pink3);
-
   animation:
     ribbonDropH
-    1s
+    1.05s
     cubic-bezier(.55,.02,.18,1)
-    2.15s
+    2.05s
     forwards;
 }
 
 @keyframes ribbonDrop{
 
-  to{
+  0%{
     transform:
-      translate(-50%,118%);
+      translateX(-50%);
+  }
+
+  30%{
+    transform:
+      translate(-50%,20px)
+      rotate(-1deg);
+  }
+
+  100%{
+    transform:
+      translate(-50%,125%)
+      rotate(3deg);
 
     opacity:0;
   }
-
 }
 
 @keyframes ribbonDropH{
 
-  to{
+  0%{
+    transform:
+      translateY(-50%);
+  }
+
+  35%{
+    transform:
+      translateY(5px)
+      rotate(2deg);
+  }
+
+  100%{
     transform:
       translateY(105px)
-      rotate(-7deg);
+      rotate(-8deg);
 
     opacity:0;
   }
-
 }
 
 
 /* =========================================================
-   BOW
+   GRAPHICAL BOW
 ========================================================= */
 
 .bow{
   position:absolute;
 
-  z-index:25;
+  z-index:30;
 
   left:50%;
-  top:51%;
+  top:50%;
 
-  width:116px;
-  height:74px;
+  width:170px;
+  height:108px;
 
   transform:
     translate(-50%,-50%);
 
   animation:
-    bowDrop
-    1.2s
+    bowRelease
+    1.35s
     cubic-bezier(.55,.02,.18,1)
-    2s
+    1.95s
     forwards;
 }
 
-.bow:before,
-.bow:after{
-  content:"";
-
+.bow .loop{
   position:absolute;
 
-  top:10px;
+  top:8px;
 
-  width:54px;
-  height:48px;
+  width:78px;
+  height:72px;
 
-  background:var(--pink);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.28),
+      transparent 45%
+    ),
+    var(--pink3);
 
   border:
-    8px solid
-    var(--pink2);
+    1px solid
+    var(--pink4);
 
   box-shadow:
-    inset
-    0
-    0
-    0
-    2px
-    var(--pink3);
+    0 10px 18px
+    rgba(116,102,77,.18);
 }
 
-.bow:before{
-  left:0;
+.bow .loop.left{
+  left:4px;
 
   border-radius:
-    65%
-    18%
-    65%
-    18%;
+    75% 25% 70% 30%;
 
   transform:
-    rotate(16deg);
+    rotate(20deg);
 }
 
-.bow:after{
-  right:0;
+.bow .loop.right{
+  right:4px;
 
   border-radius:
-    18%
-    65%
-    18%
-    65%;
+    25% 75% 30% 70%;
 
   transform:
-    rotate(-16deg);
+    rotate(-20deg);
 }
 
-.knot{
+.bow .tail{
   position:absolute;
 
-  left:50%;
-  top:50%;
+  top:58px;
 
-  width:29px;
-  height:29px;
+  width:45px;
+  height:68px;
+
+  background:var(--pink3);
+
+  border:
+    1px solid
+    var(--pink4);
+
+  box-shadow:
+    0 8px 16px
+    rgba(116,102,77,.14);
+}
+
+.bow .tail.left{
+  left:39px;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 8%,
+      72% 100%,
+      38% 78%
+    );
 
   transform:
-    translate(-50%,-50%);
+    rotate(12deg);
+}
+
+.bow .tail.right{
+  right:39px;
+
+  clip-path:
+    polygon(
+      0 8%,
+      100% 0,
+      62% 78%,
+      28% 100%
+    );
+
+  transform:
+    rotate(-12deg);
+}
+
+.bow .knot{
+  position:absolute;
+
+  z-index:3;
+
+  left:50%;
+  top:31px;
+
+  width:35px;
+  height:35px;
+
+  transform:
+    translateX(-50%);
 
   border-radius:50%;
 
-  background:var(--pink4);
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255,255,255,.35),
+      transparent 25%
+    ),
+    var(--pink4);
 
   border:
-    3px solid
-    var(--pink5);
+    1px solid
+    var(--pink4);
+
+  box-shadow:
+    0 7px 15px
+    rgba(116,102,77,.25);
 }
 
-@keyframes bowDrop{
+@keyframes bowRelease{
 
   0%{
     transform:
@@ -911,52 +1108,99 @@ input{
     opacity:1;
   }
 
-  45%{
+  32%{
     transform:
-      translate(-50%,55px)
-      rotate(4deg)
-      scale(.92);
+      translate(-50%,25px)
+      rotate(5deg)
+      scale(1.02);
 
     opacity:1;
   }
 
   100%{
     transform:
-      translate(-50%,190px)
-      rotate(10deg)
-      scale(.5);
+      translate(-50%,210px)
+      rotate(14deg)
+      scale(.42);
 
     opacity:0;
   }
-
 }
 
 
-/* envelope settling */
+/* =========================================================
+   DECORATIVE SPARKS
+========================================================= */
 
-@keyframes envelope-settle{
+.spark{
+  position:absolute;
+
+  z-index:31;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:var(--pink3);
+
+  opacity:0;
+
+  animation:
+    spark
+    1.5s
+    ease
+    3.35s
+    forwards;
+}
+
+.spark:nth-child(1){
+  left:25%;
+  top:45%;
+}
+
+.spark:nth-child(2){
+  left:70%;
+  top:40%;
+
+  animation-delay:3.5s;
+}
+
+.spark:nth-child(3){
+  left:34%;
+  top:67%;
+
+  animation-delay:3.65s;
+}
+
+.spark:nth-child(4){
+  left:63%;
+  top:64%;
+
+  animation-delay:3.8s;
+}
+
+@keyframes spark{
 
   0%{
-    transform:scale(1);
+    opacity:0;
+
+    transform:
+      scale(.3)
+      translateY(10px);
   }
 
-  50%{
-    transform:scale(.985);
+  30%{
+    opacity:1;
   }
 
   100%{
-    transform:scale(1);
-  }
-
-}
-
-@keyframes envelopeFade{
-
-  to{
     opacity:0;
-    visibility:hidden;
-  }
 
+    transform:
+      scale(1.5)
+      translateY(-45px);
+  }
 }
 
 
@@ -965,88 +1209,78 @@ input{
 ========================================================= */
 
 #site{
-  display:none;
+  opacity:0;
+  visibility:hidden;
 
-  background:var(--pink5);
+  transition:
+    opacity 1s;
 }
 
 #site.visible{
-  display:block;
+  opacity:1;
+  visibility:visible;
 }
 
 
 /* NAVIGATION */
 
-.topbar{
+nav{
   position:fixed;
-
-  z-index:100;
 
   top:0;
   left:0;
   right:0;
 
-  height:64px;
+  z-index:100;
 
   display:flex;
 
   align-items:center;
-
   justify-content:space-between;
 
-  padding:
-    0
-    22px;
+  padding:16px 22px;
 
   background:
-    rgba(
-      255,
-      244,
-      246,
-      .93
-    );
+    rgba(255,244,246,.88);
+
+  backdrop-filter:blur(12px);
 
   border-bottom:
     1px solid
-    var(--pink);
-
-  backdrop-filter:blur(12px);
+    rgba(169,154,120,.35);
 }
 
-.brand{
-  font-size:15px;
+.logo{
+  color:var(--pink4);
 
-  letter-spacing:.16em;
+  font-size:19px;
 
-  color:var(--khaki4);
+  letter-spacing:.08em;
 }
 
 .menu-btn{
-  width:40px;
-  height:40px;
+  border:0;
 
-  border:
-    1px solid
-    var(--khaki3);
-
-  background:var(--khaki);
+  background:none;
 
   color:var(--khaki4);
 
-  font-size:18px;
+  font-size:22px;
+
+  cursor:pointer;
 }
 
 .menu{
-  position:fixed;
+  display:none;
 
-  top:64px;
-  right:14px;
+  position:absolute;
 
-  z-index:99;
+  right:18px;
+  top:62px;
 
-  width:220px;
+  width:190px;
 
-  padding:10px;
+  padding:12px;
 
   background:var(--khaki);
 
@@ -1055,98 +1289,42 @@ input{
     var(--khaki2);
 
   box-shadow:
-    0 20px 50px
+    0 18px 40px
     var(--shadow);
-
-  opacity:0;
-
-  transform:
-    translateY(-8px);
-
-  pointer-events:none;
-
-  transition:.25s;
 }
 
 .menu.show{
-  opacity:1;
-
-  transform:none;
-
-  pointer-events:auto;
+  display:block;
 }
 
 .menu a{
   display:block;
 
-  padding:
-    13px
-    10px;
-
-  color:var(--khaki4);
+  padding:11px;
 
   text-decoration:none;
 
-  font-size:11px;
-
-  letter-spacing:.12em;
-
-  text-transform:uppercase;
+  border-bottom:
+    1px solid
+    rgba(169,154,120,.3);
 }
 
-.menu a:hover{
-  background:var(--pink);
+.menu a:last-child{
+  border-bottom:0;
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
+/* GENERAL SECTIONS */
 
 section{
-  position:relative;
+  padding:100px 22px;
 }
+
+
+/* HERO */
 
 .hero{
-  min-height:100svh;
-
-  display:grid;
-
-  place-items:center;
-
-  padding:
-    100px
-    22px
-    50px;
-
-  background:var(--pink5);
-}
-
-.frame{
-  position:absolute;
-
-  inset:0;
-
-  color:var(--pink3);
-
-  opacity:.8;
-
-  pointer-events:none;
-}
-
-.frame svg{
-  width:100%;
-  height:100%;
-}
-
-.hero-card{
-  position:relative;
-
-  width:min(430px,100%);
-
-  min-height:620px;
-
-  padding:26px;
+  min-height:100vh;
 
   display:grid;
 
@@ -1154,52 +1332,39 @@ section{
 
   text-align:center;
 
-  border:
-    1px solid
-    var(--pink3);
+  padding-top:120px;
 
-  background:var(--pink5);
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(237,185,197,.65),
+      transparent 35%
+    ),
+    var(--pink5);
 }
 
-.hero-card:before{
-  content:"";
-
-  position:absolute;
-
-  inset:14px;
-
-  border:
-    1px solid
-    var(--khaki3);
-}
-
-.hero-content{
-  position:relative;
-
-  z-index:2;
+.hero-inner{
+  max-width:720px;
 }
 
 .eyebrow{
-  font-size:10px;
+  color:var(--pink4);
 
-  letter-spacing:.32em;
+  letter-spacing:.3em;
 
   text-transform:uppercase;
 
-  color:var(--khaki3);
+  font-size:11px;
 }
 
 .hero h1{
-  margin:
-    20px
-    0
-    5px;
+  margin:16px 0;
 
   font-size:
     clamp(
       62px,
-      18vw,
-      100px
+      17vw,
+      150px
     );
 
   line-height:.82;
@@ -1212,335 +1377,260 @@ section{
 .hero h2{
   margin:0;
 
-  font-size:20px;
+  font-size:
+    clamp(
+      18px,
+      4vw,
+      30px
+    );
 
-  letter-spacing:.22em;
+  letter-spacing:.25em;
 
   font-weight:400;
-
-  color:var(--khaki4);
 }
 
-.hero-date{
-  margin-top:27px;
+.hero p{
+  max-width:540px;
 
-  font-size:12px;
+  margin:24px auto;
 
-  letter-spacing:.25em;
-
-  color:var(--khaki3);
+  line-height:1.8;
 }
 
-.hero-name{
-  margin-top:34px;
 
-  font-size:27px;
+/* ORNAMENT */
 
-  font-style:italic;
+.ornament{
+  margin:28px auto;
 
-  color:var(--pink4);
+  width:120px;
+  height:1px;
+
+  background:var(--khaki3);
+
+  position:relative;
 }
 
-.scroll{
+.ornament:before,
+.ornament:after{
+  content:"";
+
   position:absolute;
 
-  bottom:24px;
+  top:50%;
 
-  left:50%;
-
-  transform:
-    translateX(-50%);
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  text-transform:uppercase;
-
-  color:var(--khaki3);
-}
-
-
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
-
-.section{
-  padding:
-    105px
-    22px;
-}
-
-.section.alt{
-  background:var(--khaki);
-}
-
-.shell{
-  width:min(450px,100%);
-
-  margin:auto;
-
-  padding:20px;
-
-  background:var(--pink5);
+  width:8px;
+  height:8px;
 
   border:
     1px solid
     var(--pink3);
 
-  position:relative;
+  transform:
+    translateY(-50%)
+    rotate(45deg);
+
+  background:var(--pink5);
 }
 
-.shell:before{
-  content:"";
-
-  position:absolute;
-
-  inset:12px;
-
-  border:
-    1px solid
-    var(--khaki3);
+.ornament:before{
+  left:0;
 }
 
-.inner{
-  position:relative;
+.ornament:after{
+  right:0;
+}
 
-  min-height:570px;
 
-  padding:
-    80px
-    32px;
+/* TITLES */
 
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
-
+.title{
   text-align:center;
 
-  overflow:hidden;
-}
+  color:var(--pink4);
 
-.inner>*{
-  position:relative;
-
-  z-index:2;
-}
-
-.inner small{
-  font-size:10px;
-
-  letter-spacing:.3em;
-
-  color:var(--khaki3);
-}
-
-.inner h2{
-  margin:
-    18px
-    0
-    8px;
-
-  font-size:50px;
-
-  line-height:.95;
+  font-size:
+    clamp(
+      34px,
+      8vw,
+      58px
+    );
 
   font-weight:400;
-
-  color:var(--pink4);
 }
 
-.inner p{
-  line-height:1.8;
+.center{
+  max-width:850px;
 
-  color:var(--khaki4);
+  margin:auto;
+
+  text-align:center;
 }
 
 
 /* DETAILS */
 
-.details-grid{
+.details{
+  background:var(--khaki);
+}
+
+.detail-grid{
   display:grid;
 
-  gap:14px;
+  grid-template-columns:
+    repeat(3,1fr);
 
-  width:min(600px,100%);
+  gap:18px;
 
-  margin:auto;
+  max-width:900px;
+
+  margin:45px auto 0;
 }
 
 .detail{
-  padding:
-    28px
-    22px;
+  padding:30px 18px;
 
-  background:var(--pink5);
+  text-align:center;
 
   border:
     1px solid
-    var(--pink3);
+    var(--khaki2);
 
-  text-align:center;
+  background:
+    rgba(255,244,246,.52);
 }
 
-.detail b{
+.detail small{
   display:block;
 
-  margin-bottom:7px;
-
-  font-size:11px;
-
-  letter-spacing:.2em;
+  color:var(--pink4);
 
   text-transform:uppercase;
 
-  color:var(--pink4);
-}
+  letter-spacing:.16em;
 
-.detail span{
-  font-size:18px;
-
-  color:var(--khaki4);
+  margin-bottom:10px;
 }
 
 
 /* COUNTDOWN */
 
 .countdown{
+  background:var(--pink);
+
+  text-align:center;
+}
+
+.timer{
   display:grid;
 
   grid-template-columns:
     repeat(4,1fr);
 
-  gap:8px;
+  gap:12px;
 
-  width:min(600px,100%);
+  max-width:800px;
 
-  margin:
-    30px
-    auto
-    0;
+  margin:45px auto 0;
 }
 
 .time{
-  padding:
-    20px
-    5px;
+  padding:24px 10px;
 
-  background:var(--pink5);
+  background:
+    rgba(255,244,246,.6);
 
   border:
     1px solid
     var(--pink3);
-
-  text-align:center;
 }
 
 .time strong{
   display:block;
 
-  font-size:30px;
+  font-size:
+    clamp(
+      32px,
+      8vw,
+      60px
+    );
 
   font-weight:400;
 
   color:var(--pink4);
 }
 
-.time small{
-  font-size:8px;
+.time span{
+  font-size:10px;
 
-  letter-spacing:.14em;
+  letter-spacing:.16em;
 
   text-transform:uppercase;
-
-  color:var(--khaki3);
 }
 
 
 /* LOCATION */
 
-.map-box{
-  width:min(650px,100%);
-
-  margin:auto;
-
-  padding:30px;
-
+.location{
   text-align:center;
 
   background:var(--pink5);
+}
+
+.map-box{
+  max-width:800px;
+
+  margin:40px auto 0;
+
+  padding:45px 25px;
+
+  background:var(--khaki);
 
   border:
     1px solid
-    var(--pink3);
+    var(--khaki2);
 }
 
-.map-box h2{
-  margin:
-    0
-    0
-    12px;
+.map-box h3{
+  color:var(--pink4);
 
-  font-size:38px;
+  font-size:30px;
 
   font-weight:400;
-
-  color:var(--pink4);
 }
 
-.map-box p{
-  line-height:1.7;
-}
-
-.map-btn,
-.rsvp-btn{
+.btn{
   display:inline-block;
 
-  margin-top:18px;
+  margin-top:15px;
 
-  padding:
-    14px
-    22px;
+  padding:13px 22px;
+
+  text-decoration:none;
+
+  background:var(--pink4);
+
+  color:var(--pink5);
 
   border:
     1px solid
     var(--pink4);
-
-  background:var(--pink3);
-
-  color:var(--pink5);
-
-  text-decoration:none;
-
-  font-size:10px;
-
-  letter-spacing:.2em;
-
-  text-transform:uppercase;
 }
 
 
 /* RSVP */
 
 .rsvp{
+  background:var(--khaki);
+
   text-align:center;
 }
 
-.rsvp h2{
-  margin:0;
-
-  font-size:44px;
-
-  font-weight:400;
-
-  color:var(--pink4);
-}
-
 .rsvp p{
+  max-width:550px;
+
+  margin:20px auto;
+
   line-height:1.8;
 }
 
@@ -1548,116 +1638,119 @@ section{
 /* FOOTER */
 
 footer{
-  padding:
-    35px
-    20px;
+  padding:35px 20px;
 
   text-align:center;
 
-  background:var(--khaki);
+  background:var(--pink4);
 
-  font-size:10px;
+  color:var(--pink5);
 
-  letter-spacing:.18em;
+  font-size:12px;
 
-  text-transform:uppercase;
-
-  color:var(--khaki3);
+  letter-spacing:.08em;
 }
 
 
 /* MOBILE */
 
-@media(max-width:480px){
+@media(max-width:700px){
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .timer{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
 
   .stage{
-    height:min(650px,82vh);
+    height:min(660px,74vh);
+
+    width:min(410px,90vw);
   }
 
   .card-copy{
-    width:75%;
-    padding:20px;
+    width:74%;
   }
+}
 
-  .card-copy h2{
-    font-size:40px;
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation-duration:.01ms!important;
+
+    animation-iteration-count:1!important;
+
+    scroll-behavior:auto!important;
   }
-
-  .countdown{
-    gap:5px;
-  }
-
-  .time strong{
-    font-size:25px;
-  }
-
-  .section{
-    padding:
-      90px
-      18px;
-  }
-
 }
 </style>
 </head>
 
+
 <body>
 
 
-<!-- =========================================================
+<!-- =======================================================
      PASSWORD
-========================================================= -->
+======================================================= -->
 
 <div id="gate">
 
   <div class="gate-card">
 
-    <div class="monogram">
-      21
-    </div>
-
     <small>
-      Private Invitation
+      Private invitation
     </small>
 
     <h1>
-      You're Invited
+      21
     </h1>
 
     <p>
       Enter the password to open your invitation.
     </p>
 
-    <input
-      id="password"
-      type="password"
-      inputmode="numeric"
-      maxlength="8"
-      placeholder="PASSWORD"
-      autocomplete="off"
-    >
+    <div class="password-row">
 
-    <button
-      class="gate-btn"
-      id="enterBtn"
-    >
-      Enter Invitation
-    </button>
+      <input
+        id="password"
+        type="password"
+        inputmode="numeric"
+        autocomplete="off"
+        maxlength="8"
+        placeholder="Password"
+      >
 
-    <div id="error"></div>
+      <button id="enterBtn">
+        Open
+      </button>
+
+    </div>
+
+    <div
+      class="error"
+      id="error"
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- =========================================================
-     ENVELOPE REVEAL
-========================================================= -->
+<!-- =======================================================
+     ENVELOPE ANIMATION
+======================================================= -->
 
 <div
   id="reveal"
-  class="hidden"
   aria-hidden="true"
 >
 
@@ -1675,140 +1768,136 @@ footer{
 
     <div class="card">
 
-      <div class="card-inner">
+      <div class="floral">
 
-        <div class="floral">
+        <svg
+          viewBox="0 0 390 700"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
 
-          <svg
-            viewBox="0 0 390 700"
-            preserveAspectRatio="none"
-            aria-hidden="true"
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.35"
           >
 
-            <g
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.4"
-            >
+            <path d="
+              M10 115
+              C65 80 70 25 30 8
 
-              <path d="
-                M10 115
-                C65 80 70 25 30 8
+              M380 115
+              C325 80 320 25 360 8
 
-                M380 115
-                C325 80 320 25 360 8
+              M10 585
+              C65 620 70 675 30 692
 
-                M10 585
-                C65 620 70 675 30 692
+              M380 585
+              C325 620 320 675 360 692
+            "/>
 
-                M380 585
-                C325 620 320 675 360 692
-              "/>
+            <path d="
+              M18 105
+              c35-12 48-43 33-71
 
-              <path d="
-                M18 105
-                c35-12 48-43 33-71
+              M372 105
+              c-35-12-48-43-33-71
 
-                M372 105
-                c-35-12-48-43-33-71
+              M18 595
+              c35 12 48 43 33 71
 
-                M18 595
-                c35 12 48 43 33 71
+              M372 595
+              c-35 12-48 43-33 71
+            "/>
 
-                M372 595
-                c-35 12-48 43-33 71
-              "/>
+            <ellipse
+              cx="48"
+              cy="70"
+              rx="16"
+              ry="7"
+              transform="rotate(-32 48 70)"
+            />
 
-              <ellipse
-                cx="48"
-                cy="70"
-                rx="16"
-                ry="7"
-                transform="rotate(-32 48 70)"
-              />
+            <ellipse
+              cx="70"
+              cy="50"
+              rx="16"
+              ry="7"
+              transform="rotate(26 70 50)"
+            />
 
-              <ellipse
-                cx="70"
-                cy="50"
-                rx="16"
-                ry="7"
-                transform="rotate(26 70 50)"
-              />
+            <ellipse
+              cx="342"
+              cy="70"
+              rx="16"
+              ry="7"
+              transform="rotate(32 342 70)"
+            />
 
-              <ellipse
-                cx="342"
-                cy="70"
-                rx="16"
-                ry="7"
-                transform="rotate(32 342 70)"
-              />
+            <ellipse
+              cx="320"
+              cy="50"
+              rx="16"
+              ry="7"
+              transform="rotate(-26 320 50)"
+            />
 
-              <ellipse
-                cx="320"
-                cy="50"
-                rx="16"
-                ry="7"
-                transform="rotate(-26 320 50)"
-              />
+            <ellipse
+              cx="48"
+              cy="630"
+              rx="16"
+              ry="7"
+              transform="rotate(32 48 630)"
+            />
 
-              <ellipse
-                cx="48"
-                cy="630"
-                rx="16"
-                ry="7"
-                transform="rotate(32 48 630)"
-              />
+            <ellipse
+              cx="70"
+              cy="650"
+              rx="16"
+              ry="7"
+              transform="rotate(-26 70 650)"
+            />
 
-              <ellipse
-                cx="70"
-                cy="650"
-                rx="16"
-                ry="7"
-                transform="rotate(-26 70 650)"
-              />
+            <ellipse
+              cx="342"
+              cy="630"
+              rx="16"
+              ry="7"
+              transform="rotate(-32 342 630)"
+            />
 
-              <ellipse
-                cx="342"
-                cy="630"
-                rx="16"
-                ry="7"
-                transform="rotate(-32 342 630)"
-              />
+            <ellipse
+              cx="320"
+              cy="650"
+              rx="16"
+              ry="7"
+              transform="rotate(26 320 650)"
+            />
 
-              <ellipse
-                cx="320"
-                cy="650"
-                rx="16"
-                ry="7"
-                transform="rotate(26 320 650)"
-              />
+          </g>
 
-            </g>
+        </svg>
 
-          </svg>
-
-        </div>
+      </div>
 
 
-        <div class="card-copy">
+      <div class="card-copy">
 
-          <small>
-            You're invited to
-          </small>
+        <small>
+          You're invited to
+        </small>
 
-          <h2>
-            21
-          </h2>
+        <h2>
+          21
+        </h2>
 
-          <h3>
-            MY BIRTHDAY
-          </h3>
+        <h3>
+          MY BIRTHDAY
+        </h3>
 
-          <p>
-            14 OCTOBER 2026
-          </p>
-
-        </div>
+        <p>
+          14 OCTOBER 2026
+        </p>
 
       </div>
 
@@ -1821,23 +1910,54 @@ footer{
 
       <div class="env-back"></div>
 
+
+      <!-- SIDE DOORS -->
+
       <div class="door left"></div>
 
       <div class="door right"></div>
+
+
+      <!-- FOLDS -->
 
       <div class="fold-top"></div>
 
       <div class="fold-bottom"></div>
 
+
+      <!-- RIBBON -->
+
       <div class="ribbon-v"></div>
 
       <div class="ribbon-h"></div>
 
+
+      <!-- BOW -->
+
       <div class="bow">
+
+        <div class="loop left"></div>
+
+        <div class="loop right"></div>
+
+        <div class="tail left"></div>
+
+        <div class="tail right"></div>
 
         <div class="knot"></div>
 
       </div>
+
+
+      <!-- DECORATIVE SPARKS -->
+
+      <i class="spark"></i>
+
+      <i class="spark"></i>
+
+      <i class="spark"></i>
+
+      <i class="spark"></i>
 
     </div>
 
@@ -1846,17 +1966,20 @@ footer{
 </div>
 
 
-<!-- =========================================================
+
+<!-- =======================================================
      MAIN WEBSITE
-========================================================= -->
+======================================================= -->
 
 <main id="site">
 
 
-<header class="topbar">
+<!-- NAV -->
 
-  <div class="brand">
-    21ST BIRTHDAY
+<nav>
+
+  <div class="logo">
+    21 • 2026
   </div>
 
   <button
@@ -1867,234 +1990,137 @@ footer{
     ☰
   </button>
 
-</header>
+  <div
+    class="menu"
+    id="menu"
+  >
 
+    <a href="#invitation">
+      Invitation
+    </a>
 
-<nav
-  class="menu"
-  id="menu"
->
+    <a href="#details">
+      Details
+    </a>
 
-  <a href="#invitation">
-    Invitation
-  </a>
+    <a href="#countdown">
+      Countdown
+    </a>
 
-  <a href="#details">
-    Details
-  </a>
+    <a href="#location">
+      Location
+    </a>
 
-  <a href="#countdown">
-    Countdown
-  </a>
+    <a href="#rsvp">
+      RSVP
+    </a>
 
-  <a href="#location">
-    Location
-  </a>
-
-  <a href="#rsvp">
-    RSVP
-  </a>
+  </div>
 
 </nav>
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+
+<!-- HERO -->
 
 <section
   class="hero"
   id="invitation"
 >
 
-  <div class="frame">
+  <div class="hero-inner">
 
-    <svg
-      viewBox="0 0 500 900"
-      preserveAspectRatio="none"
-    >
-
-      <g
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-      >
-
-        <path d="
-          M0 160
-          C80 120 90 50 35 0
-
-          M500 160
-          C420 120 410 50 465 0
-
-          M0 740
-          C80 780 90 850 35 900
-
-          M500 740
-          C420 780 410 850 465 900
-        "/>
-
-        <ellipse
-          cx="55"
-          cy="95"
-          rx="28"
-          ry="10"
-          transform="rotate(-30 55 95)"
-        />
-
-        <ellipse
-          cx="445"
-          cy="95"
-          rx="28"
-          ry="10"
-          transform="rotate(30 445 95)"
-        />
-
-        <ellipse
-          cx="55"
-          cy="805"
-          rx="28"
-          ry="10"
-          transform="rotate(30 55 805)"
-        />
-
-        <ellipse
-          cx="445"
-          cy="805"
-          rx="28"
-          ry="10"
-          transform="rotate(-30 445 805)"
-        />
-
-      </g>
-
-    </svg>
-
-  </div>
-
-
-  <div class="hero-card">
-
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        Come celebrate with me
-      </div>
-
-      <h1>
-        21
-      </h1>
-
-      <h2>
-        MY BIRTHDAY
-      </h2>
-
-      <div class="hero-date">
-        14 OCTOBER 2026
-      </div>
-
-      <div
-        class="hero-name"
-        id="heroName"
-      >
-        Your Name
-      </div>
-
+    <div class="eyebrow">
+      You're invited
     </div>
 
-  </div>
+    <h1>
+      21
+    </h1>
 
+    <h2>
+      MY BIRTHDAY
+    </h2>
 
-  <div class="scroll">
-    Scroll to explore
+    <div class="ornament"></div>
+
+    <p>
+      Come celebrate a special milestone,
+      good memories, great people and the
+      beginning of another chapter.
+    </p>
+
+    <p>
+      <strong>
+        14 OCTOBER 2026
+      </strong>
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- =========================================================
-     DETAILS
-========================================================= -->
+
+<!-- DETAILS -->
 
 <section
-  class="section alt"
+  class="details"
   id="details"
 >
 
-  <div class="shell">
+  <div class="center">
 
-    <div class="inner">
+    <div class="eyebrow">
+      The celebration
+    </div>
 
-      <small>
-        Save the date
-      </small>
-
-      <h2>
-        Let's celebrate
-      </h2>
-
-      <p>
-        Join me as I celebrate turning 21.
-        I would love to have you there for an
-        evening of good memories, good company
-        and a little celebration.
-      </p>
+    <h2 class="title">
+      Details
+    </h2>
 
 
-      <div class="details-grid">
-
-        <div class="detail">
-
-          <b>
-            Date
-          </b>
-
-          <span>
-            14 October 2026
-          </span>
-
-        </div>
+    <div class="detail-grid">
 
 
-        <div class="detail">
+      <div class="detail">
 
-          <b>
-            Time
-          </b>
+        <small>
+          Date
+        </small>
 
-          <span>
-            18:00
-          </span>
-
-        </div>
-
-
-        <div class="detail">
-
-          <b>
-            Venue
-          </b>
-
-          <span id="venueText">
-            Your Venue
-          </span>
-
-        </div>
-
-
-        <div class="detail">
-
-          <b>
-            City
-          </b>
-
-          <span id="cityText">
-            Your City
-          </span>
-
-        </div>
+        <strong>
+          14 October 2026
+        </strong>
 
       </div>
+
+
+      <div class="detail">
+
+        <small>
+          Time
+        </small>
+
+        <strong>
+          18:00
+        </strong>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          Venue
+        </small>
+
+        <strong>
+          Your Venue
+        </strong>
+
+      </div>
+
 
     </div>
 
@@ -2103,80 +2129,75 @@ footer{
 </section>
 
 
-<!-- =========================================================
-     COUNTDOWN
-========================================================= -->
+
+<!-- COUNTDOWN -->
 
 <section
-  class="section"
+  class="countdown"
   id="countdown"
 >
 
-  <div class="shell">
+  <div class="center">
 
-    <div class="inner">
+    <div class="eyebrow">
+      Counting down
+    </div>
 
-      <small>
-        The countdown is on
-      </small>
-
-      <h2>
-        Until 21
-      </h2>
+    <h2 class="title">
+      Until the celebration
+    </h2>
 
 
-      <div class="countdown">
+    <div class="timer">
 
-        <div class="time">
+      <div class="time">
 
-          <strong id="days">
-            00
-          </strong>
+        <strong id="days">
+          00
+        </strong>
 
-          <small>
-            Days
-          </small>
+        <span>
+          Days
+        </span>
 
-        </div>
-
-
-        <div class="time">
-
-          <strong id="hours">
-            00
-          </strong>
-
-          <small>
-            Hours
-          </small>
-
-        </div>
+      </div>
 
 
-        <div class="time">
+      <div class="time">
 
-          <strong id="minutes">
-            00
-          </strong>
+        <strong id="hours">
+          00
+        </strong>
 
-          <small>
-            Minutes
-          </small>
+        <span>
+          Hours
+        </span>
 
-        </div>
+      </div>
 
 
-        <div class="time">
+      <div class="time">
 
-          <strong id="seconds">
-            00
-          </strong>
+        <strong id="minutes">
+          00
+        </strong>
 
-          <small>
-            Seconds
-          </small>
+        <span>
+          Minutes
+        </span>
 
-        </div>
+      </div>
+
+
+      <div class="time">
+
+        <strong id="seconds">
+          00
+        </strong>
+
+        <span>
+          Seconds
+        </span>
 
       </div>
 
@@ -2187,83 +2208,83 @@ footer{
 </section>
 
 
-<!-- =========================================================
-     LOCATION
-========================================================= -->
+
+<!-- LOCATION -->
 
 <section
-  class="section alt"
+  class="location"
   id="location"
 >
 
-  <div class="map-box">
+  <div class="center">
 
-    <small>
-      Where to find us
-    </small>
+    <div class="eyebrow">
+      Find us
+    </div>
 
-    <h2 id="locationVenue">
-      Your Venue
+    <h2 class="title">
+      Location
     </h2>
 
-    <p>
 
-      <span id="locationCity">
+    <div class="map-box">
+
+      <h3>
+        Your Venue
+      </h3>
+
+      <p>
         Your City
-      </span>
+      </p>
 
-      <br>
+      <a
+        class="btn"
+        id="mapBtn"
+        href="#"
+        target="_blank"
+        rel="noopener"
+      >
+        OPEN IN MAPS
+      </a>
 
-      14 October 2026 · 18:00
-
-    </p>
-
-    <a
-      class="map-btn"
-      href="https://www.google.com/maps"
-      target="_blank"
-      rel="noopener"
-    >
-      Open in Maps
-    </a>
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- =========================================================
-     RSVP
-========================================================= -->
+
+<!-- RSVP -->
 
 <section
-  class="section"
+  class="rsvp"
   id="rsvp"
 >
 
-  <div class="rsvp">
+  <div class="center">
 
-    <small>
+    <div class="eyebrow">
       Let me know
-    </small>
+    </div>
 
-    <h2>
+    <h2 class="title">
       RSVP
     </h2>
 
     <p>
-      Please confirm your attendance so I can
-      save your place.
+      Please confirm your attendance so everything
+      can be prepared for the celebration.
     </p>
 
     <a
-      class="rsvp-btn"
+      class="btn"
       id="rsvpBtn"
       href="#"
       target="_blank"
       rel="noopener"
     >
-      RSVP on WhatsApp
+      RSVP ON WHATSAPP
     </a>
 
   </div>
@@ -2271,23 +2292,34 @@ footer{
 </section>
 
 
+
+<!-- FOOTER -->
+
 <footer>
-  Made for a very special 21st birthday ·
-  14 October 2026
+
+  21 • 14 OCTOBER 2026 • SEE YOU THERE
+
 </footer>
+
 
 </main>
 
 
+
 <script>
 
-/* =========================================================
+/* =======================================================
    YOUR DETAILS
-========================================================= */
+======================================================= */
 
 const CONFIG={
 
+  /* PASSWORD */
+
   password:"14102005",
+
+
+  /* CHANGE THESE */
 
   name:"Your Name",
 
@@ -2299,55 +2331,47 @@ const CONFIG={
 
   mapUrl:"https://www.google.com/maps",
 
-  eventDate:"2026-10-14T18:00:00+02:00"
+
+  /* EVENT DATE */
+
+  eventDate:
+    "2026-10-14T18:00:00+02:00"
 
 };
 
 
+
+/* =======================================================
+   ELEMENTS
+======================================================= */
+
 const gate=
-  document.getElementById(
-    "gate"
-  );
+  document.getElementById("gate");
 
 const password=
-  document.getElementById(
-    "password"
-  );
-
-const error=
-  document.getElementById(
-    "error"
-  );
+  document.getElementById("password");
 
 const enterBtn=
-  document.getElementById(
-    "enterBtn"
-  );
+  document.getElementById("enterBtn");
+
+const error=
+  document.getElementById("error");
 
 const reveal=
-  document.getElementById(
-    "reveal"
-  );
+  document.getElementById("reveal");
 
 const site=
-  document.getElementById(
-    "site"
-  );
+  document.getElementById("site");
 
 
-/* =========================================================
+
+/* =======================================================
    START INVITATION
-========================================================= */
+======================================================= */
 
 function startInvitation(){
 
-  gate.classList.add(
-    "hide"
-  );
-
-  reveal.classList.remove(
-    "hidden"
-  );
+  gate.classList.add("hide");
 
   reveal.setAttribute(
     "aria-hidden",
@@ -2359,84 +2383,41 @@ function startInvitation(){
 
 
   /*
-    IMPORTANT:
-
-    There is NO envelope click
-    and NO envelope button.
-
-    Adding .show causes every
-    envelope animation to start
-    automatically through CSS.
+    The animation starts automatically.
+    There is NO envelope click required.
   */
 
-  reveal.classList.add(
-    "show"
-  );
+  reveal.classList.add("show");
 
 
   /*
-    Animation timeline:
-
-    0.0s
-      Envelope + bow visible.
-
-    2.0s
-      Bow begins falling.
-
-    2.15s
-      Ribbon begins releasing.
-
-    3.4s
-      Bow/ribbon are gone.
-
-    4.05s
-      Top flap begins opening.
-
-    4.25s
-      Left/right envelope doors open.
-
-    4.65s
-      Bottom fold opens.
-
-    4.95s
-      Invitation begins rising.
-
-    7.15s
-      Invitation wording appears.
-
-    9.0s
-      Main website appears.
+    After the full envelope sequence,
+    reveal the main website.
   */
 
-  setTimeout(
-    ()=>{
+  setTimeout(()=>{
 
-      reveal.classList.add(
-        "done"
-      );
+    reveal.classList.add("done");
 
-      site.classList.add(
-        "visible"
-      );
+    site.classList.add("visible");
 
-      document.body.style.overflow=
-        "auto";
+    document.body.style.overflow=
+      "auto";
 
-      window.scrollTo(
-        0,
-        0
-      );
+    window.scrollTo(
+      0,
+      0
+    );
 
-    },
-    9000
-  );
+  },9000);
 
 }
 
 
-/* =========================================================
-   PASSWORD
-========================================================= */
+
+/* =======================================================
+   PASSWORD CHECK
+======================================================= */
 
 function checkPassword(){
 
@@ -2447,16 +2428,9 @@ function checkPassword(){
 
     error.textContent="";
 
-    enterBtn.disabled=
-      true;
+    enterBtn.disabled=true;
 
-    password.disabled=
-      true;
-
-    /*
-      THIS STARTS THE ENVELOPE.
-      NO CLICK ON THE ENVELOPE.
-    */
+    password.disabled=true;
 
     startInvitation();
 
@@ -2495,158 +2469,10 @@ password.addEventListener(
 );
 
 
-/* =========================================================
-   INSERT YOUR DETAILS
-========================================================= */
 
-document.getElementById(
-  "heroName"
-).textContent=
-  CONFIG.name;
-
-
-document.getElementById(
-  "venueText"
-).textContent=
-  CONFIG.venue;
-
-
-document.getElementById(
-  "cityText"
-).textContent=
-  CONFIG.city;
-
-
-document.getElementById(
-  "locationVenue"
-).textContent=
-  CONFIG.venue;
-
-
-document.getElementById(
-  "locationCity"
-).textContent=
-  CONFIG.city;
-
-
-document.querySelector(
-  ".map-btn"
-).href=
-  CONFIG.mapUrl;
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-const target=
-  new Date(
-    CONFIG.eventDate
-  ).getTime();
-
-
-function countdown(){
-
-  let diff=
-    Math.max(
-      0,
-      target-
-      Date.now()
-    );
-
-
-  const d=
-    Math.floor(
-      diff/
-      86400000
-    );
-
-  diff%=
-    86400000;
-
-
-  const h=
-    Math.floor(
-      diff/
-      3600000
-    );
-
-  diff%=
-    3600000;
-
-
-  const m=
-    Math.floor(
-      diff/
-      60000
-    );
-
-  diff%=
-    60000;
-
-
-  const s=
-    Math.floor(
-      diff/
-      1000
-    );
-
-
-  document.getElementById(
-    "days"
-  ).textContent=
-    String(d)
-      .padStart(2,"0");
-
-
-  document.getElementById(
-    "hours"
-  ).textContent=
-    String(h)
-      .padStart(2,"0");
-
-
-  document.getElementById(
-    "minutes"
-  ).textContent=
-    String(m)
-      .padStart(2,"0");
-
-
-  document.getElementById(
-    "seconds"
-  ).textContent=
-    String(s)
-      .padStart(2,"0");
-
-}
-
-
-countdown();
-
-setInterval(
-  countdown,
-  1000
-);
-
-
-/* =========================================================
-   RSVP
-========================================================= */
-
-const msg=
-  `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday celebration on 14 October 2026.`;
-
-
-document.getElementById(
-  "rsvpBtn"
-).href=
-  `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-
-
-/* =========================================================
+/* =======================================================
    MENU
-========================================================= */
+======================================================= */
 
 const menuBtn=
   document.getElementById(
@@ -2662,29 +2488,156 @@ const menu=
 menuBtn.addEventListener(
   "click",
   ()=>{
+
     menu.classList.toggle(
       "show"
     );
+
   }
 );
 
 
-menu.querySelectorAll(
-  "a"
-).forEach(
-  a=>{
+menu
+  .querySelectorAll("a")
+  .forEach(a=>{
 
     a.addEventListener(
       "click",
       ()=>{
+
         menu.classList.remove(
           "show"
         );
+
       }
     );
 
-  }
+  });
+
+
+
+/* =======================================================
+   COUNTDOWN
+======================================================= */
+
+const target=
+  new Date(
+    CONFIG.eventDate
+  ).getTime();
+
+
+function countdown(){
+
+  let diff=
+    Math.max(
+      0,
+      target-Date.now()
+    );
+
+
+  const d=
+    Math.floor(
+      diff/86400000
+    );
+
+  diff%=
+    86400000;
+
+
+  const h=
+    Math.floor(
+      diff/3600000
+    );
+
+  diff%=
+    3600000;
+
+
+  const m=
+    Math.floor(
+      diff/60000
+    );
+
+  diff%=
+    60000;
+
+
+  const s=
+    Math.floor(
+      diff/1000
+    );
+
+
+  document.getElementById(
+    "days"
+  ).textContent=
+    String(d).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "hours"
+  ).textContent=
+    String(h).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "minutes"
+  ).textContent=
+    String(m).padStart(
+      2,
+      "0"
+    );
+
+
+  document.getElementById(
+    "seconds"
+  ).textContent=
+    String(s).padStart(
+      2,
+      "0"
+    );
+
+}
+
+
+countdown();
+
+setInterval(
+  countdown,
+  1000
 );
+
+
+
+/* =======================================================
+   GOOGLE MAPS
+======================================================= */
+
+document.getElementById(
+  "mapBtn"
+).href=
+  CONFIG.mapUrl;
+
+
+
+/* =======================================================
+   WHATSAPP RSVP
+======================================================= */
+
+const msg=
+  `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday celebration on 14 October 2026.`;
+
+
+document.getElementById(
+  "rsvpBtn"
+).href=
+  `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
 
 </script>
 
