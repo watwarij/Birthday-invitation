@@ -195,7 +195,7 @@ body{
 .browser-time{
   height:20px;
   display:flex;
-  justify-space-between;
+  justify-content:space-between;
   align-items:center;
   color:var(--khaki-dark);
   font-family:Arial, sans-serif;
@@ -233,7 +233,6 @@ body{
   perspective:1400px;
 }
 
-/* Base Envelope Container */
 .envelope{
   position:relative;
   width:320px;
@@ -245,7 +244,6 @@ body{
   transition:transform 1.2s cubic-bezier(.25,1,.5,1), opacity .8s ease;
 }
 
-/* Realistic Inner Pocket Back */
 .envelope-back{
   position:absolute;
   inset:0;
@@ -253,7 +251,6 @@ body{
   border-radius:4px;
 }
 
-/* Real Flap Layers & Paper Lighting */
 .flap-top{
   position:absolute;
   left:0;
@@ -907,10 +904,10 @@ footer p{
     <input
       id="password"
       type="password"
-      placeholder="PASSWORD"
+      placeholder="ENTER PASSWORD"
       autocomplete="off"
     >
-    <button class="open-button" id="openButton">OPEN INVITATION</button>
+    <button class="open-button" id="openButton" onclick="handleUnlock()">OPEN INVITATION</button>
     <div class="password-error" id="passwordError">Incorrect password. Please try again.</div>
   </div>
 </div>
@@ -1098,109 +1095,112 @@ footer p{
 ========================================================= -->
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+// OPTIONAL: Set a password here (e.g. const REQUIRED_PASSWORD = "21";)
+// Leave as empty string "" so ANY password (or clicking Open without typing) works immediately!
+const REQUIRED_PASSWORD = "";
 
-  const gate = document.getElementById('gate');
+function handleUnlock() {
   const passwordInput = document.getElementById('password');
   const openButton = document.getElementById('openButton');
   const passwordError = document.getElementById('passwordError');
+  const gate = document.getElementById('gate');
   const intro = document.getElementById('intro');
   const envelopeStage = document.getElementById('envelopeStage');
   const website = document.getElementById('website');
   const bgMusic = document.getElementById('bgMusic');
 
-  // SET YOUR REQUIRED PASSWORD HERE (or leave as null/empty string to accept any entry)
-  const REQUIRED_PASSWORD = ""; 
+  const entered = passwordInput ? passwordInput.value.trim() : "";
 
-  function handleUnlock() {
-    const entered = passwordInput.value.trim();
-
-    // Password validation check (if REQUIRED_PASSWORD is set)
-    if (REQUIRED_PASSWORD !== "" && entered !== REQUIRED_PASSWORD) {
-      passwordError.style.display = 'block';
-      return;
-    }
-
-    passwordError.style.display = 'none';
-    openButton.innerText = "OPENING...";
-    openButton.disabled = true;
-
-    // Safely attempt audio playback without blocking animation if audio file is missing
-    if (bgMusic) {
-      try {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(err => {
-            console.warn("Audio playback was deferred or song.mp3 is missing:", err);
-          });
-        }
-      } catch (err) {
-        console.warn("Audio error caught safely:", err);
-      }
-    }
-
-    // Hide gate & activate intro
-    gate.style.pointerEvents = 'none';
-    gate.style.opacity = '0';
-
-    setTimeout(() => {
-      gate.style.display = 'none';
-      intro.classList.add('active');
-
-      // Precise Frame-by-Frame Envelope Opening Sequence
-      setTimeout(() => envelopeStage.classList.add('ribbon-loose'), 300);
-      setTimeout(() => envelopeStage.classList.add('ribbon-open'), 800);
-      setTimeout(() => envelopeStage.classList.add('flap-open'), 1600);
-      setTimeout(() => envelopeStage.classList.add('card-rise'), 2600);
-      setTimeout(() => envelopeStage.classList.add('card-settle'), 3700);
-
-      // Reveal Full Website
-      setTimeout(() => {
-        intro.style.transition = 'opacity .8s ease';
-        intro.style.opacity = '0';
-        setTimeout(() => {
-          intro.classList.remove('active');
-          website.classList.add('visible');
-          window.scrollTo(0, 0);
-        }, 800);
-      }, 5200);
-
-    }, 600);
+  // Password validation check
+  if (REQUIRED_PASSWORD !== "" && entered !== REQUIRED_PASSWORD) {
+    if (passwordError) passwordError.style.display = 'block';
+    return;
   }
 
-  // Click & Enter key event bindings
-  openButton.addEventListener('click', handleUnlock);
-  passwordInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleUnlock();
-  });
+  if (passwordError) passwordError.style.display = 'none';
+  if (openButton) {
+    openButton.innerText = "OPENING...";
+    openButton.disabled = true;
+  }
 
-  // Mobile navigation menu toggle
-  const menuButton = document.getElementById('menuButton');
-  const navLinks = document.getElementById('navLinks');
-  if (menuButton && navLinks) {
-    menuButton.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+  // Audio Playback with safe error catch
+  if (bgMusic) {
+    bgMusic.play().catch(function(err) {
+      console.log("Audio skipped or song file not found.");
     });
   }
 
-  // Countdown Logic
-  const targetDate = new Date("October 14, 2026 18:00:00").getTime();
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance < 0) return;
-
-    document.getElementById("days").textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
-    document.getElementById("hours").textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-    document.getElementById("minutes").textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-    document.getElementById("seconds").textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+  // Hide gate & activate intro transition
+  if (gate) {
+    gate.style.pointerEvents = 'none';
+    gate.style.opacity = '0';
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
 
-});
+  setTimeout(() => {
+    if (gate) gate.style.display = 'none';
+    if (intro) intro.classList.add('active');
+
+    // Envelope Opening Animation Sequence
+    setTimeout(() => envelopeStage && envelopeStage.classList.add('ribbon-loose'), 300);
+    setTimeout(() => envelopeStage && envelopeStage.classList.add('ribbon-open'), 800);
+    setTimeout(() => envelopeStage && envelopeStage.classList.add('flap-open'), 1600);
+    setTimeout(() => envelopeStage && envelopeStage.classList.add('card-rise'), 2600);
+    setTimeout(() => envelopeStage && envelopeStage.classList.add('card-settle'), 3700);
+
+    // Reveal Full Website
+    setTimeout(() => {
+      if (intro) {
+        intro.style.transition = 'opacity .8s ease';
+        intro.style.opacity = '0';
+      }
+      setTimeout(() => {
+        if (intro) intro.classList.remove('active');
+        if (website) website.classList.add('visible');
+        window.scrollTo(0, 0);
+      }, 800);
+    }, 5200);
+
+  }, 600);
+}
+
+// Attach listeners directly
+const passInput = document.getElementById('password');
+if (passInput) {
+  passInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') handleUnlock();
+  });
+}
+
+// Mobile Menu Toggle
+const menuButton = document.getElementById('menuButton');
+const navLinks = document.getElementById('navLinks');
+if (menuButton && navLinks) {
+  menuButton.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+}
+
+// Countdown Logic
+const targetDate = new Date("October 14, 2026 18:00:00").getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) return;
+
+  const d = document.getElementById("days");
+  const h = document.getElementById("hours");
+  const m = document.getElementById("minutes");
+  const s = document.getElementById("seconds");
+
+  if (d) d.textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+  if (h) h.textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+  if (m) m.textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+  if (s) s.textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
