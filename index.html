@@ -3,25 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5d9df">
 <title>Lëhanie's 21st Birthday</title>
 
 <style>
 :root{
-  --pink:#f5d9df;
-  --pink2:#edb9c5;
-  --pink3:#d98699;
-  --pink4:#b65e73;
-  --pink5:#fff4f6;
+  /* ONLY PINK + KHAKI */
+  --pink-1:#fff0f3;
+  --pink-2:#f8dce2;
+  --pink-3:#efbdc9;
+  --pink-4:#df94a5;
+  --pink-5:#c96f84;
+  --pink-6:#a94f67;
 
-  --khaki:#e8e1cf;
-  --khaki2:#d3c8ad;
-  --khaki3:#a99a78;
-  --khaki4:#74664d;
+  --khaki-1:#f1ecdf;
+  --khaki-2:#e4dcc8;
+  --khaki-3:#cfc3a6;
+  --khaki-4:#ad9f7e;
+  --khaki-5:#887957;
+  --khaki-6:#665a42;
 
-  --shadow:rgba(116,102,77,.22);
-  --deep-shadow:rgba(116,102,77,.34);
+  --pink-shadow:rgba(169,79,103,.22);
+  --khaki-shadow:rgba(102,90,66,.25);
 }
+
+/* =========================
+   RESET
+========================= */
 
 *{
   box-sizing:border-box;
@@ -35,8 +42,8 @@ html{
 
 body{
   font-family:Georgia,"Times New Roman",serif;
-  background:var(--pink5);
-  color:var(--khaki4);
+  background:var(--khaki-1);
+  color:var(--khaki-6);
   overflow-x:hidden;
 }
 
@@ -45,681 +52,94 @@ input{
   font:inherit;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
 /* =========================
-   PASSWORD GATE
+   PASSWORD SCREEN
 ========================= */
 
 #gate{
   position:fixed;
   inset:0;
-  z-index:1000;
+  z-index:9999;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:25px;
-
   background:
-    radial-gradient(circle at 20% 20%,var(--pink2),transparent 30%),
-    radial-gradient(circle at 80% 80%,var(--khaki2),transparent 32%),
-    var(--pink5);
-
-  transition:opacity .8s ease,visibility .8s ease;
-}
-
-#gate.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+    radial-gradient(circle at 20% 20%,var(--pink-2),transparent 30%),
+    radial-gradient(circle at 80% 80%,var(--khaki-2),transparent 35%),
+    var(--pink-1);
 }
 
 .gate-box{
-  width:min(440px,100%);
+  width:min(430px,100%);
   padding:45px 30px;
   text-align:center;
-
-  background:rgba(255,244,246,.94);
-  border:1px solid var(--pink2);
+  border:2px solid var(--pink-4);
   border-radius:28px;
-  box-shadow:0 25px 70px var(--shadow);
+  background:rgba(241,236,223,.94);
+  box-shadow:0 25px 70px var(--khaki-shadow);
 }
 
-.gate-small{
-  font-size:13px;
+.gate-box .small{
+  color:var(--pink-6);
   letter-spacing:4px;
+  font-size:.72rem;
   text-transform:uppercase;
-  color:var(--pink4);
-  margin-bottom:16px;
+  margin-bottom:15px;
 }
 
-.gate-title{
-  font-size:clamp(38px,8vw,68px);
-  font-weight:normal;
-  color:var(--khaki4);
-  margin-bottom:12px;
+.gate-box h1{
+  color:var(--khaki-6);
+  font-size:clamp(2.3rem,8vw,4rem);
+  margin-bottom:10px;
 }
 
-.gate-subtitle{
-  font-size:16px;
+.gate-box p{
+  color:var(--khaki-5);
   line-height:1.7;
-  margin-bottom:28px;
+  margin-bottom:25px;
 }
 
 #passwordInput{
   width:100%;
   padding:15px 18px;
-
-  border:1px solid var(--khaki2);
+  border:2px solid var(--khaki-3);
   border-radius:14px;
   outline:none;
-
-  background:var(--pink5);
-  color:var(--khaki4);
-
+  background:var(--pink-1);
+  color:var(--khaki-6);
   text-align:center;
-  letter-spacing:4px;
-  font-size:18px;
+  letter-spacing:5px;
 }
 
 #passwordInput:focus{
-  border-color:var(--pink3);
-  box-shadow:0 0 0 4px rgba(217,134,153,.12);
+  border-color:var(--pink-5);
 }
 
 .enter-btn{
   width:100%;
-  margin-top:14px;
-  padding:15px 20px;
-
-  border:0;
+  margin-top:15px;
+  padding:15px;
+  border:2px solid var(--pink-6);
   border-radius:14px;
-
-  background:var(--pink4);
-  color:var(--pink5);
-
+  background:var(--pink-5);
+  color:var(--pink-1);
   cursor:pointer;
   letter-spacing:2px;
-  transition:.25s ease;
+  transition:.3s ease;
 }
 
 .enter-btn:hover{
+  background:var(--pink-6);
   transform:translateY(-2px);
-  box-shadow:0 10px 25px var(--shadow);
 }
 
-.password-error{
-  min-height:22px;
-  margin-top:12px;
-  font-size:13px;
-  color:var(--pink4);
-}
-
-/* =========================
-   ENVELOPE REVEAL
-========================= */
-
-#reveal{
-  position:fixed;
-  inset:0;
-  z-index:900;
-
+#error{
   display:none;
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  background:
-    radial-gradient(circle at 50% 45%,var(--pink5),var(--pink));
+  margin-top:14px;
+  color:var(--pink-6);
+  font-size:.9rem;
 }
-
-#reveal.show{
-  display:flex;
-}
-
-.reveal-stage{
-  position:relative;
-  width:min(700px,94vw);
-  height:min(650px,88vh);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* INVITATION CARD */
-
-.card{
-  position:absolute;
-  left:50%;
-  top:50%;
-
-  width:min(360px,72vw);
-  height:min(500px,70vh);
-
-  transform:translate(-50%,15%);
-
-  opacity:0;
-  z-index:2;
-
-  background:var(--pink5);
-  border:2px solid var(--khaki2);
-
-  box-shadow:0 25px 55px var(--deep-shadow);
-
-  overflow:hidden;
-
-  animation:
-    cardRise 2s cubic-bezier(.2,.8,.2,1) 4.65s forwards;
-}
-
-.card.final{
-  z-index:20;
-}
-
-@keyframes cardRise{
-  0%{
-    opacity:0;
-    transform:translate(-50%,18%);
-  }
-
-  100%{
-    opacity:1;
-    transform:translate(-50%,-50%);
-  }
-}
-
-.floral{
-  position:absolute;
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  pointer-events:none;
-}
-
-.card-copy{
-  position:absolute;
-  inset:0;
-  z-index:3;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-  padding:35px;
-
-  opacity:0;
-  transform:translateY(15px);
-
-  animation:
-    cardWords 1.2s ease 6.35s forwards;
-}
-
-@keyframes cardWords{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.card-small{
-  font-size:11px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:var(--pink4);
-  margin-bottom:18px;
-}
-
-.card-name{
-  font-size:clamp(35px,8vw,56px);
-  font-weight:normal;
-  color:var(--khaki4);
-  line-height:.95;
-}
-
-.card-age{
-  margin-top:15px;
-  font-size:25px;
-  color:var(--pink4);
-}
-
-.card-date{
-  margin-top:22px;
-  font-size:13px;
-  letter-spacing:2px;
-  color:var(--khaki3);
-}
-
-/* ENVELOPE */
-
-.envelope{
-  position:absolute;
-  left:50%;
-  top:50%;
-
-  width:min(410px,78vw);
-  height:min(270px,52vw);
-
-  transform:translate(-50%,-30%);
-
-  z-index:10;
-
-  transition:
-    opacity .35s ease,
-    visibility .35s ease;
-
-  filter:drop-shadow(0 22px 25px var(--shadow));
-}
-
-.envelope.envelope-gone{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.env-back{
-  position:absolute;
-  inset:0;
-
-  background:var(--khaki);
-  border:2px solid var(--khaki3);
-
-  overflow:hidden;
-}
-
-.env-back:after{
-  content:"";
-
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-
-  height:50%;
-
-  background:var(--khaki2);
-
-  clip-path:polygon(
-    0 0,
-    50% 100%,
-    100% 0
-  );
-}
-
-.door{
-  position:absolute;
-  top:0;
-  bottom:0;
-
-  width:52%;
-
-  z-index:4;
-
-  background:var(--pink2);
-  border:2px solid var(--pink3);
-}
-
-.door.left{
-  left:0;
-
-  clip-path:polygon(
-    0 0,
-    100% 50%,
-    0 100%
-  );
-
-  transform-origin:left center;
-
-  animation:
-    doorLeft 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
-}
-
-.door.right{
-  right:0;
-
-  clip-path:polygon(
-    100% 0,
-    0 50%,
-    100% 100%
-  );
-
-  transform-origin:right center;
-
-  animation:
-    doorRight 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
-}
-
-@keyframes doorLeft{
-  to{
-    transform:translateX(-105%) rotateY(70deg);
-    opacity:0;
-  }
-}
-
-@keyframes doorRight{
-  to{
-    transform:translateX(105%) rotateY(-70deg);
-    opacity:0;
-  }
-}
-
-.fold-top{
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-
-  height:62%;
-
-  z-index:7;
-
-  background:var(--pink);
-  border:2px solid var(--pink3);
-
-  clip-path:polygon(
-    0 0,
-    100% 0,
-    50% 100%
-  );
-
-  transform-origin:top center;
-
-  animation:
-    topOpen 1.35s cubic-bezier(.7,0,.2,1) 3.15s forwards;
-}
-
-@keyframes topOpen{
-  to{
-    transform:rotateX(170deg);
-    opacity:0;
-  }
-}
-
-.fold-bottom{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-
-  height:62%;
-
-  z-index:6;
-
-  background:var(--khaki2);
-  border:2px solid var(--khaki3);
-
-  clip-path:polygon(
-    0 100%,
-    100% 100%,
-    50% 0
-  );
-
-  transform-origin:bottom center;
-
-  animation:
-    bottomOpen 1.1s cubic-bezier(.7,0,.2,1) 4.1s forwards;
-}
-
-@keyframes bottomOpen{
-  to{
-    transform:rotateX(-100deg);
-    opacity:0;
-  }
-}
-
-.ribbon-v,
-.ribbon-h{
-  position:absolute;
-  z-index:15;
-
-  background:var(--pink4);
-
-  box-shadow:0 4px 8px var(--shadow);
-}
-
-.ribbon-v{
-  width:22px;
-  top:0;
-  bottom:0;
-  left:50%;
-
-  transform:translateX(-50%);
-
-  animation:
-    ribbonVertical 1s ease 2s forwards;
-}
-
-.ribbon-h{
-  height:22px;
-  left:0;
-  right:0;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  animation:
-    ribbonHorizontal 1s ease 2s forwards;
-}
-
-@keyframes ribbonVertical{
-  to{
-    transform:
-      translate(-50%,100px)
-      rotate(5deg);
-
-    opacity:0;
-  }
-}
-
-@keyframes ribbonHorizontal{
-  to{
-    transform:
-      translate(90px,-50%)
-      rotate(5deg);
-
-    opacity:0;
-  }
-}
-
-.bow{
-  position:absolute;
-  left:50%;
-  top:50%;
-
-  z-index:20;
-
-  width:105px;
-  height:65px;
-
-  transform:translate(-50%,-50%);
-
-  animation:
-    bowDrop 1.15s cubic-bezier(.6,-.2,.2,1) 1.8s forwards;
-}
-
-.bow-loop{
-  position:absolute;
-  top:5px;
-
-  width:54px;
-  height:42px;
-
-  background:var(--pink4);
-  border:2px solid var(--pink5);
-
-  border-radius:70% 35% 70% 35%;
-}
-
-.bow-loop.left{
-  left:0;
-  transform:rotate(18deg);
-}
-
-.bow-loop.right{
-  right:0;
-  transform:scaleX(-1) rotate(18deg);
-}
-
-.bow-knot{
-  position:absolute;
-
-  width:24px;
-  height:24px;
-
-  left:50%;
-  top:20px;
-
-  transform:translateX(-50%);
-
-  border-radius:50%;
-
-  background:var(--pink3);
-  border:2px solid var(--pink5);
-}
-
-.bow-tail{
-  position:absolute;
-
-  top:38px;
-
-  width:37px;
-  height:55px;
-
-  background:var(--pink4);
-
-  clip-path:polygon(
-    0 0,
-    100% 15%,
-    75% 100%,
-    50% 78%,
-    20% 100%
-  );
-}
-
-.bow-tail.left{
-  left:17px;
-  transform:rotate(10deg);
-}
-
-.bow-tail.right{
-  right:17px;
-  transform:scaleX(-1) rotate(10deg);
-}
-
-@keyframes bowDrop{
-  0%{
-    transform:translate(-50%,-50%) scale(1);
-    opacity:1;
-  }
-
-  45%{
-    transform:
-      translate(-50%,45%)
-      rotate(7deg)
-      scale(.9);
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translate(-50%,160%)
-      rotate(18deg)
-      scale(.65);
-    opacity:0;
-  }
-}
-
-.spark{
-  position:absolute;
-
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:var(--pink3);
-
-  opacity:0;
-
-  animation:
-    spark .8s ease 5.5s forwards;
-}
-
-.spark.s1{
-  left:12%;
-  top:25%;
-}
-
-.spark.s2{
-  right:15%;
-  top:35%;
-  animation-delay:5.8s;
-}
-
-.spark.s3{
-  left:22%;
-  bottom:20%;
-  animation-delay:6s;
-}
-
-.spark.s4{
-  right:20%;
-  bottom:25%;
-  animation-delay:6.2s;
-}
-
-@keyframes spark{
-  0%{
-    opacity:0;
-    transform:scale(.4);
-  }
-
-  50%{
-    opacity:1;
-    transform:scale(1.4);
-  }
-
-  100%{
-    opacity:0;
-    transform:scale(.6);
-  }
-}
-
-
-/* =========================
-   MAIN SITE
-========================= */
-
-#site{
-  display:none;
-  min-height:100vh;
-  position:relative;
-  z-index:1;
-}
-
-#site.visible{
-  display:block;
-  animation:siteIn 1s ease forwards;
-}
-
-@keyframes siteIn{
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-}
-
 
 /* =========================
    BALLOONS
@@ -728,9 +148,7 @@ a{
 #balloon-field{
   position:fixed;
   inset:0;
-
   z-index:2;
-
   overflow:hidden;
   pointer-events:none;
 }
@@ -738,119 +156,81 @@ a{
 .balloon{
   position:absolute;
   bottom:-180px;
-
   width:54px;
   height:68px;
-
-  border-radius:
-    52% 48% 48% 52% /
-    58% 58% 42% 42%;
-
-  opacity:.72;
-
-  filter:
-    drop-shadow(
-      0 10px 10px
-      rgba(116,102,77,.12)
-    );
-
+  border-radius:52% 48% 48% 52% / 58% 58% 42% 42%;
+  opacity:.66;
+  filter:drop-shadow(0 10px 10px var(--khaki-shadow));
   animation:
     balloonRise var(--rise) linear infinite,
     balloonSway var(--sway) ease-in-out infinite alternate;
-
-  animation-delay:
-    var(--delay),
-    var(--sway-delay);
+  animation-delay:var(--delay),var(--sway-delay);
 }
 
 .balloon:before{
   content:"";
-
   position:absolute;
-
   left:50%;
   top:9px;
-
   width:16px;
   height:23px;
-
   border-radius:50%;
-
   transform:translateX(-50%);
-
-  background:rgba(255,255,255,.22);
+  background:rgba(255,240,243,.28);
 }
 
 .balloon:after{
   content:"";
-
   position:absolute;
-
   left:50%;
   bottom:-8px;
-
   width:11px;
   height:11px;
-
-  transform:
-    translateX(-50%)
-    rotate(45deg);
-
+  transform:translateX(-50%) rotate(45deg);
   background:inherit;
 }
 
 .balloon .string{
   position:absolute;
-
   left:50%;
   top:100%;
-
   width:1px;
   height:150px;
-
   transform-origin:top;
-
-  background:var(--khaki3);
-
+  background:var(--khaki-4);
   opacity:.58;
 }
 
 .balloon .string:after{
   content:"";
-
   position:absolute;
-
   top:65px;
   left:-3px;
-
   width:7px;
   height:24px;
-
-  border-left:1px solid var(--khaki3);
-
+  border-left:1px solid var(--khaki-4);
   border-radius:50%;
-
   transform:rotate(18deg);
 }
 
 .balloon.pink{
-  background:var(--pink3);
+  background:var(--pink-4);
 }
 
 .balloon.light{
-  background:var(--pink2);
+  background:var(--pink-3);
 }
 
 .balloon.deep{
-  background:var(--pink4);
+  background:var(--pink-5);
 }
 
 .balloon.khaki{
-  background:var(--khaki3);
+  background:var(--khaki-4);
 }
 
 .balloon.soft{
-  background:var(--khaki2);
+  background:var(--khaki-3);
 }
 
 .balloon.b1{
@@ -945,33 +325,23 @@ a{
 
 @keyframes balloonRise{
   0%{
-    transform:
-      translate3d(0,0,0)
-      rotate(-4deg);
+    transform:translate3d(0,0,0) rotate(-4deg);
   }
 
   25%{
-    transform:
-      translate3d(12px,-25vh,0)
-      rotate(4deg);
+    transform:translate3d(12px,-25vh,0) rotate(4deg);
   }
 
   50%{
-    transform:
-      translate3d(-15px,-52vh,0)
-      rotate(-3deg);
+    transform:translate3d(-15px,-52vh,0) rotate(-3deg);
   }
 
   75%{
-    transform:
-      translate3d(10px,-77vh,0)
-      rotate(5deg);
+    transform:translate3d(10px,-77vh,0) rotate(5deg);
   }
 
   100%{
-    transform:
-      translate3d(-8px,-120vh,0)
-      rotate(-4deg);
+    transform:translate3d(-8px,-120vh,0) rotate(-4deg);
   }
 }
 
@@ -985,6 +355,321 @@ a{
   }
 }
 
+/* =========================
+   ENVELOPE REVEAL
+========================= */
+
+#reveal{
+  position:fixed;
+  inset:0;
+  z-index:9000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 30%,var(--pink-2),transparent 38%),
+    var(--khaki-1);
+}
+
+#reveal.show{
+  display:flex;
+}
+
+.envelope-scene{
+  position:relative;
+  width:min(470px,88vw);
+  height:400px;
+}
+
+.envelope{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(390px,82vw);
+  height:250px;
+  transform:translate(-50%,-50%);
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+  z-index:10;
+}
+
+.envelope.envelope-gone{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.envelope-back{
+  position:absolute;
+  inset:0;
+  border:2px solid var(--pink-5);
+  border-radius:8px;
+  background:var(--pink-3);
+  box-shadow:0 25px 55px var(--khaki-shadow);
+}
+
+.envelope-left{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:52%;
+  height:100%;
+  clip-path:polygon(0 0,100% 50%,0 100%);
+  background:var(--pink-4);
+  transform-origin:left center;
+  transition:1s ease;
+  z-index:4;
+}
+
+.envelope-right{
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:52%;
+  height:100%;
+  clip-path:polygon(100% 0,0 50%,100% 100%);
+  background:var(--pink-5);
+  transform-origin:right center;
+  transition:1s ease;
+  z-index:4;
+}
+
+.envelope-bottom{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:65%;
+  clip-path:polygon(0 100%,50% 18%,100% 100%);
+  background:var(--pink-3);
+  transform-origin:bottom center;
+  transition:1s ease;
+  z-index:5;
+}
+
+.envelope-flap{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:65%;
+  clip-path:polygon(0 0,50% 78%,100% 0);
+  background:var(--pink-2);
+  border-top:2px solid var(--pink-5);
+  transform-origin:top center;
+  transition:1.1s ease;
+  z-index:7;
+}
+
+.envelope-scene.open .envelope-flap{
+  transform:rotateX(180deg);
+  z-index:2;
+}
+
+.envelope-scene.open .envelope-left{
+  transform:translateX(-125%) rotate(-4deg);
+}
+
+.envelope-scene.open .envelope-right{
+  transform:translateX(125%) rotate(4deg);
+}
+
+.envelope-scene.open .envelope-bottom{
+  transform:translateY(115%);
+}
+
+/* =========================
+   BOW
+========================= */
+
+.bow{
+  position:absolute;
+  left:50%;
+  top:45%;
+  width:110px;
+  height:75px;
+  transform:translate(-50%,-50%);
+  z-index:12;
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+}
+
+.envelope-scene.open .bow{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.65);
+}
+
+.bow-left,
+.bow-right{
+  position:absolute;
+  top:5px;
+  width:58px;
+  height:58px;
+  background:var(--pink-6);
+  border:3px solid var(--pink-5);
+}
+
+.bow-left{
+  left:0;
+  border-radius:70% 25% 70% 30%;
+  transform:rotate(-28deg);
+}
+
+.bow-right{
+  right:0;
+  border-radius:25% 70% 30% 70%;
+  transform:rotate(28deg);
+}
+
+.bow-center{
+  position:absolute;
+  left:50%;
+  top:26px;
+  width:30px;
+  height:30px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:var(--khaki-4);
+  border:3px solid var(--khaki-5);
+  z-index:2;
+}
+
+/* =========================
+   INVITATION CARD
+========================= */
+
+.invite-card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(340px,73vw);
+  min-height:430px;
+  transform:translate(-50%,-28%) scale(.65);
+  opacity:0;
+  z-index:3;
+  padding:35px 25px;
+  text-align:center;
+  border:3px solid var(--pink-5);
+  background:var(--pink-1);
+  box-shadow:0 20px 60px var(--khaki-shadow);
+  transition:
+    transform 1.2s cubic-bezier(.2,.8,.2,1),
+    opacity .8s ease;
+}
+
+.invite-card.final{
+  z-index:20;
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;
+}
+
+.card-border{
+  position:absolute;
+  inset:12px;
+  border:1px solid var(--khaki-4);
+  pointer-events:none;
+}
+
+.flower{
+  position:absolute;
+  width:50px;
+  height:50px;
+  color:var(--pink-5);
+}
+
+.flower:before,
+.flower:after{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:2px solid var(--pink-4);
+  border-radius:50%;
+}
+
+.flower:before{
+  transform:rotate(45deg);
+}
+
+.flower:after{
+  transform:rotate(-45deg);
+}
+
+.flower.tl{
+  top:22px;
+  left:22px;
+}
+
+.flower.tr{
+  top:22px;
+  right:22px;
+}
+
+.flower.bl{
+  bottom:22px;
+  left:22px;
+}
+
+.flower.br{
+  bottom:22px;
+  right:22px;
+}
+
+.card-small{
+  margin-top:35px;
+  color:var(--khaki-5);
+  font-size:.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+
+.invite-card h2{
+  margin:25px 0 12px;
+  color:var(--pink-6);
+  font-size:clamp(2.2rem,8vw,3.6rem);
+  font-weight:400;
+}
+
+.invite-card .turning{
+  color:var(--khaki-6);
+  font-size:1rem;
+  letter-spacing:2px;
+}
+
+.invite-card .age{
+  margin:12px 0;
+  color:var(--pink-5);
+  font-size:4rem;
+  font-weight:bold;
+}
+
+.invite-card .date{
+  color:var(--khaki-5);
+  line-height:1.8;
+  font-size:.95rem;
+}
+
+/* =========================
+   MAIN SITE
+========================= */
+
+#site{
+  position:relative;
+  z-index:1;
+  display:none;
+  min-height:100vh;
+}
+
+#site.visible{
+  display:block;
+}
+
+.site-content{
+  position:relative;
+  z-index:5;
+}
 
 /* =========================
    NAVIGATION
@@ -993,539 +678,382 @@ a{
 nav{
   position:sticky;
   top:0;
-
-  z-index:20;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding:17px 5%;
-
-  background:rgba(255,244,246,.88);
-
+  z-index:100;
+  padding:15px 20px;
+  border-bottom:1px solid var(--pink-4);
+  background:rgba(241,236,223,.9);
   backdrop-filter:blur(12px);
+}
 
-  border-bottom:1px solid var(--pink2);
+.nav-inner{
+  width:min(1100px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
 }
 
 .logo{
-  font-size:22px;
-  color:var(--pink4);
+  color:var(--pink-6);
+  font-size:1.3rem;
+  letter-spacing:2px;
 }
 
 .nav-links{
   display:flex;
-  align-items:center;
-
-  gap:25px;
-
+  gap:20px;
   list-style:none;
-
-  font-size:13px;
-  letter-spacing:1px;
 }
 
 .nav-links a{
-  transition:.2s ease;
+  color:var(--khaki-6);
+  text-decoration:none;
+  font-size:.82rem;
+  transition:.3s ease;
 }
 
 .nav-links a:hover{
-  color:var(--pink4);
+  color:var(--pink-6);
 }
 
 .menu-btn{
   display:none;
-
-  border:1px solid var(--khaki2);
-
-  background:var(--pink5);
-  color:var(--khaki4);
-
-  padding:9px 12px;
-
+  border:1px solid var(--pink-5);
+  background:var(--pink-2);
+  color:var(--khaki-6);
+  padding:8px 12px;
   border-radius:10px;
-
-  cursor:pointer;
 }
 
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+section{
+  position:relative;
+  width:min(1100px,92%);
+  margin:auto;
+  padding:90px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title span{
+  display:block;
+  color:var(--pink-5);
+  font-size:.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.section-title h2{
+  color:var(--khaki-6);
+  font-size:clamp(2rem,5vw,3.3rem);
+  font-weight:400;
+}
 
 /* =========================
    HERO
 ========================= */
 
 .hero{
-  position:relative;
-  z-index:3;
-
-  min-height:calc(100vh - 65px);
-
+  min-height:calc(100vh - 70px);
   display:grid;
-
-  grid-template-columns:1.05fr .95fr;
-
+  grid-template-columns:1fr 1fr;
   align-items:center;
-
-  gap:50px;
-
-  padding:70px 8%;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,244,246,.92),
-      rgba(245,217,223,.78),
-      rgba(232,225,207,.84)
-    );
+  gap:55px;
 }
 
-.hero-content{
-  position:relative;
-  z-index:4;
-}
-
-.eyebrow{
-  font-size:13px;
-
+.hero-copy .eyebrow{
+  color:var(--pink-5);
   letter-spacing:5px;
-
+  font-size:.75rem;
   text-transform:uppercase;
-
-  color:var(--pink4);
-
-  margin-bottom:20px;
 }
 
-.hero h1{
-  font-size:clamp(65px,10vw,130px);
-
-  line-height:.8;
-
-  font-weight:normal;
-
-  color:var(--khaki4);
+.hero-copy h1{
+  margin:15px 0;
+  color:var(--khaki-6);
+  font-size:clamp(4rem,10vw,8rem);
+  line-height:.9;
+  font-weight:400;
 }
 
-.hero h1 span{
-  display:block;
-
-  color:var(--pink4);
-
-  font-style:italic;
+.hero-copy h1 span{
+  color:var(--pink-5);
 }
 
-.hero-text{
-  max-width:520px;
-
-  margin-top:28px;
-
-  font-size:18px;
-
-  line-height:1.8;
+.hero-copy p{
+  max-width:540px;
+  color:var(--khaki-5);
+  font-size:1.05rem;
+  line-height:1.9;
 }
 
-.date-pill{
+.hero-date{
+  margin-top:25px;
   display:inline-block;
-
-  margin-top:28px;
-
-  padding:13px 20px;
-
-  border:1px solid var(--pink3);
-
-  border-radius:50px;
-
-  background:rgba(255,244,246,.8);
-
+  padding:12px 18px;
+  border:1px solid var(--pink-4);
+  background:var(--pink-2);
+  color:var(--khaki-6);
   letter-spacing:2px;
-
-  font-size:13px;
 }
 
 .hero-photo{
   position:relative;
-
-  z-index:4;
-
-  display:flex;
-
-  justify-content:center;
 }
 
 .photo-frame{
-  width:min(430px,90%);
-
-  aspect-ratio:4/5;
-
-  padding:12px;
-
-  background:var(--pink5);
-
-  border:1px solid var(--khaki2);
-
-  box-shadow:0 25px 60px var(--deep-shadow);
-
+  position:relative;
+  width:min(420px,100%);
+  margin:auto;
+  padding:15px;
+  border:2px solid var(--pink-4);
+  background:var(--khaki-2);
   transform:rotate(2deg);
+  box-shadow:0 25px 60px var(--khaki-shadow);
 }
 
 .photo-frame img{
   width:100%;
-  height:100%;
-
-  object-fit:cover;
-
   display:block;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  border:8px solid var(--pink-1);
 }
 
+.photo-caption{
+  padding:14px 0 3px;
+  text-align:center;
+  color:var(--pink-6);
+  font-size:1.1rem;
+}
 
 /* =========================
-   GENERAL SECTIONS
-========================= */
-
-.section{
-  position:relative;
-
-  z-index:3;
-
-  padding:100px 8%;
-}
-
-.section-inner{
-  max-width:1100px;
-  margin:auto;
-}
-
-.section-label{
-  font-size:12px;
-
-  text-transform:uppercase;
-
-  letter-spacing:4px;
-
-  color:var(--pink4);
-
-  margin-bottom:14px;
-}
-
-.section-title{
-  font-size:clamp(40px,6vw,75px);
-
-  font-weight:normal;
-
-  line-height:.95;
-
-  color:var(--khaki4);
-
-  margin-bottom:45px;
-}
-
-
-/* =========================
-   PSALM 46:5
+   VERSE
 ========================= */
 
 .verse-section{
-  background:rgba(255,244,246,.92);
-  text-align:center;
-  padding-top:85px;
-  padding-bottom:85px;
+  padding-top:40px;
 }
 
-.verse-section .section-inner{
+.verse-card{
   max-width:800px;
+  margin:auto;
+  padding:55px 35px;
+  text-align:center;
+  border:1px solid var(--pink-4);
+  background:rgba(248,220,226,.78);
+  box-shadow:0 20px 55px var(--pink-shadow);
 }
 
-.verse-mark{
-  font-size:38px;
-  color:var(--pink3);
-  margin-bottom:18px;
+.verse-card .cross{
+  color:var(--pink-5);
+  font-size:2rem;
+  margin-bottom:20px;
 }
 
-.verse-text{
-  font-size:clamp(22px,4vw,34px);
-  line-height:1.65;
-  color:var(--khaki4);
+.verse-card blockquote{
+  color:var(--khaki-6);
+  font-size:clamp(1.3rem,3vw,2rem);
+  line-height:1.7;
   font-style:italic;
 }
 
-.verse-reference{
+.verse-card cite{
+  display:block;
   margin-top:22px;
-  font-size:13px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:var(--pink4);
+  color:var(--pink-6);
+  letter-spacing:3px;
+  font-style:normal;
 }
-
 
 /* =========================
    DETAILS
 ========================= */
 
-.details{
-  background:rgba(232,225,207,.88);
-}
-
 .details-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
 .detail-card{
-  padding:32px 25px;
-
-  min-height:190px;
-
-  background:rgba(255,244,246,.84);
-
-  border:1px solid var(--pink2);
-
-  box-shadow:0 12px 30px var(--shadow);
-
-  transition:.25s ease;
+  padding:35px 25px;
+  text-align:center;
+  border:1px solid var(--pink-4);
+  background:rgba(241,236,223,.82);
+  transition:.3s ease;
 }
 
 .detail-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-7px);
+  box-shadow:0 20px 45px var(--khaki-shadow);
 }
 
 .detail-icon{
-  font-size:30px;
-
-  color:var(--pink4);
-
-  margin-bottom:20px;
+  width:60px;
+  height:60px;
+  margin:0 auto 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:2px solid var(--pink-4);
+  background:var(--pink-2);
+  color:var(--pink-6);
+  font-size:1.4rem;
 }
 
 .detail-card h3{
-  font-size:22px;
-
-  font-weight:normal;
-
+  color:var(--khaki-6);
   margin-bottom:10px;
 }
 
 .detail-card p{
+  color:var(--khaki-5);
   line-height:1.7;
-
-  font-size:15px;
 }
-
 
 /* =========================
    COUNTDOWN
 ========================= */
 
-.countdown{
-  background:rgba(255,244,246,.88);
-
+.countdown-section{
   text-align:center;
 }
 
-.countdown .section-title{
-  margin-bottom:15px;
-}
-
-.countdown-sub{
-  margin-bottom:40px;
-
-  line-height:1.7;
-}
-
-.timer{
+.countdown{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  max-width:850px;
-
-  margin:auto;
-
+  grid-template-columns:repeat(4,1fr);
   gap:15px;
+  max-width:800px;
+  margin:auto;
 }
 
-.time-box{
-  padding:28px 15px;
-
-  background:rgba(232,225,207,.78);
-
-  border:1px solid var(--khaki2);
+.count-box{
+  padding:25px 15px;
+  border:1px solid var(--pink-4);
+  background:rgba(248,220,226,.8);
 }
 
-.time-number{
+.count-box strong{
   display:block;
-
-  font-size:clamp(38px,6vw,65px);
-
-  color:var(--pink4);
-
-  line-height:1;
+  color:var(--pink-6);
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:400;
 }
 
-.time-label{
-  display:block;
-
-  margin-top:10px;
-
-  font-size:11px;
-
+.count-box span{
+  color:var(--khaki-5);
+  font-size:.72rem;
+  letter-spacing:3px;
   text-transform:uppercase;
-
-  letter-spacing:2px;
 }
-
 
 /* =========================
    LOCATION
 ========================= */
 
-.location{
-  background:rgba(255,244,246,.88);
-}
-
-.location-grid{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:30px;
-
-  align-items:stretch;
-}
-
 .location-card{
-  padding:40px;
-
-  background:rgba(232,225,207,.84);
-
-  border:1px solid var(--khaki2);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--pink-4);
+  background:rgba(241,236,223,.84);
+  overflow:hidden;
 }
 
-.location-card h3{
-  font-size:30px;
-
-  font-weight:normal;
-
-  margin-bottom:20px;
+.location-info{
+  padding:45px;
 }
 
-.location-card p{
+.location-info h3{
+  color:var(--pink-6);
+  font-size:2rem;
+  font-weight:400;
+  margin-bottom:15px;
+}
+
+.location-info p{
+  color:var(--khaki-5);
   line-height:1.8;
-
-  margin-bottom:8px;
 }
 
-.map-btn{
+.map-button{
   display:inline-block;
-
   margin-top:25px;
-
-  padding:14px 22px;
-
-  border-radius:30px;
-
-  background:var(--pink4);
-
-  color:var(--pink5);
-
-  letter-spacing:1px;
-
-  transition:.2s ease;
+  padding:13px 20px;
+  border:1px solid var(--pink-6);
+  background:var(--pink-5);
+  color:var(--pink-1);
+  text-decoration:none;
+  transition:.3s ease;
 }
 
-.map-btn:hover{
-  transform:translateY(-2px);
-
-  box-shadow:0 10px 25px var(--shadow);
+.map-button:hover{
+  background:var(--pink-6);
 }
 
 .map-placeholder{
-  min-height:320px;
-
+  min-height:300px;
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   text-align:center;
-
   padding:30px;
-
   background:
-    radial-gradient(
-      circle at center,
-      var(--pink2),
-      transparent 50%
-    ),
-    var(--khaki2);
-
-  border:1px solid var(--khaki3);
+    linear-gradient(135deg,
+      var(--khaki-2),
+      var(--pink-2));
+  color:var(--khaki-6);
 }
-
-.map-placeholder span{
-  font-size:18px;
-}
-
 
 /* =========================
    RSVP
 ========================= */
 
-.rsvp{
-  background:rgba(232,225,207,.88);
-
-  text-align:center;
-}
-
 .rsvp-box{
   max-width:700px;
-
   margin:auto;
+  padding:55px 35px;
+  text-align:center;
+  border:2px solid var(--pink-4);
+  background:rgba(248,220,226,.82);
+}
 
-  padding:55px 30px;
-
-  background:rgba(255,244,246,.9);
-
-  border:1px solid var(--pink2);
-
-  box-shadow:0 15px 40px var(--shadow);
+.rsvp-box h2{
+  color:var(--pink-6);
+  font-size:2.5rem;
+  font-weight:400;
+  margin-bottom:15px;
 }
 
 .rsvp-box p{
+  color:var(--khaki-5);
   line-height:1.8;
-
-  margin-bottom:28px;
 }
 
-.whatsapp-btn{
+.rsvp-button{
   display:inline-block;
-
-  padding:16px 30px;
-
-  background:var(--pink4);
-
-  color:var(--pink5);
-
-  border-radius:40px;
-
+  margin-top:25px;
+  padding:15px 30px;
+  border:1px solid var(--pink-6);
+  background:var(--pink-5);
+  color:var(--pink-1);
+  text-decoration:none;
   letter-spacing:1px;
-
-  transition:.2s ease;
+  transition:.3s ease;
 }
 
-.whatsapp-btn:hover{
-  transform:translateY(-3px);
-
-  box-shadow:0 12px 30px var(--shadow);
+.rsvp-button:hover{
+  background:var(--pink-6);
 }
-
 
 /* =========================
    FOOTER
@@ -1533,114 +1061,99 @@ nav{
 
 footer{
   position:relative;
-
-  z-index:3;
-
-  padding:45px 20px;
-
+  z-index:5;
+  padding:55px 20px;
   text-align:center;
+  border-top:1px solid var(--pink-4);
+  background:rgba(228,220,200,.88);
+}
 
-  background:var(--pink4);
-
-  color:var(--pink5);
+footer h3{
+  color:var(--pink-6);
+  font-size:2rem;
+  font-weight:400;
 }
 
 footer p{
-  line-height:1.7;
+  margin-top:10px;
+  color:var(--khaki-5);
 }
-
-.footer-small{
-  margin-top:8px;
-
-  font-size:12px;
-
-  opacity:.8;
-}
-
 
 /* =========================
-   MOBILE
+   RESPONSIVE
 ========================= */
 
-@media(max-width:850px){
-
-  nav{
-    padding:14px 5%;
-  }
-
-  .menu-btn{
-    display:block;
-  }
+@media(max-width:800px){
 
   .nav-links{
-    position:absolute;
-
-    left:0;
-    right:0;
-
-    top:100%;
-
     display:none;
-
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
     flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:0;
-
-    background:rgba(255,244,246,.97);
-
-    border-bottom:1px solid var(--pink2);
+    padding:20px;
+    border-bottom:1px solid var(--pink-4);
+    background:var(--khaki-1);
   }
 
   .nav-links.open{
     display:flex;
   }
 
-  .nav-links li{
-    width:100%;
-  }
-
-  .nav-links a{
+  .menu-btn{
     display:block;
-
-    width:100%;
-
-    padding:15px 5%;
   }
 
   .hero{
     grid-template-columns:1fr;
-
-    min-height:auto;
-
-    padding-top:75px;
-    padding-bottom:75px;
+    padding-top:65px;
   }
 
-  .hero h1{
-    font-size:clamp(65px,18vw,110px);
+  .hero-copy{
+    text-align:center;
   }
 
-  .hero-photo{
-    margin-top:20px;
+  .hero-copy p{
+    margin:auto;
   }
 
   .details-grid{
     grid-template-columns:1fr;
   }
 
-  .timer{
-    grid-template-columns:
-      repeat(2,1fr);
+  .location-card{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  section{
+    padding:70px 0;
   }
 
-  .location-grid{
-    grid-template-columns:1fr;
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .invite-card{
+    min-height:390px;
+  }
+
+  .envelope{
+    width:80vw;
+    height:210px;
+  }
+
+  .rsvp-box,
+  .location-info,
+  .verse-card{
+    padding:35px 22px;
   }
 
   .balloon{
-    opacity:.55;
+    opacity:.48;
   }
 
   .balloon.b2,
@@ -1651,68 +1164,6 @@ footer p{
   }
 }
 
-@media(max-width:500px){
-
-  .gate-box{
-    padding:35px 22px;
-  }
-
-  .reveal-stage{
-    width:100vw;
-    height:80vh;
-  }
-
-  .card{
-    width:70vw;
-
-    height:105vw;
-
-    max-height:500px;
-  }
-
-  .envelope{
-    width:80vw;
-
-    height:52vw;
-  }
-
-  .bow{
-    transform:
-      translate(-50%,-50%)
-      scale(.82);
-  }
-
-  .hero{
-    padding-left:6%;
-    padding-right:6%;
-  }
-
-  .section{
-    padding:75px 6%;
-  }
-
-  .section-title{
-    margin-bottom:32px;
-  }
-
-  .photo-frame{
-    width:92%;
-  }
-
-  .location-card{
-    padding:30px 25px;
-  }
-
-  .verse-text{
-    font-size:22px;
-  }
-}
-
-
-/* =========================
-   REDUCED MOTION
-========================= */
-
 @media(prefers-reduced-motion:reduce){
 
   *,
@@ -1721,250 +1172,136 @@ footer p{
     animation-duration:.01ms !important;
     animation-iteration-count:1 !important;
     scroll-behavior:auto !important;
-    transition-duration:.01ms !important;
   }
 
   .balloon{
     animation:none;
     bottom:8%;
-    opacity:.25;
+    opacity:.22;
   }
 }
-
 </style>
 </head>
 
 <body>
 
-
 <!-- =========================
      PASSWORD
 ========================= -->
 
-<section id="gate">
+<div id="gate">
 
   <div class="gate-box">
 
-    <div class="gate-small">
-      You're Invited
-    </div>
+    <div class="small">A Private Invitation</div>
 
-    <h1 class="gate-title">
-      21
-    </h1>
+    <h1>Lëhanie's 21st</h1>
 
-    <p class="gate-subtitle">
-      Enter the password to open Lëhanie's invitation.
+    <p>
+      Enter the password to open your invitation.
     </p>
 
     <input
       id="passwordInput"
       type="password"
       inputmode="numeric"
-      maxlength="20"
-      placeholder="Password"
+      maxlength="8"
+      placeholder="PASSWORD"
       autocomplete="off"
     >
 
-    <button
-      class="enter-btn"
-      id="enterBtn"
-      type="button"
-    >
+    <button class="enter-btn" id="enterBtn">
       OPEN INVITATION
     </button>
 
-    <div
-      class="password-error"
-      id="passwordError"
-      aria-live="polite"
-    ></div>
+    <div id="error">
+      Incorrect password. Please try again.
+    </div>
 
   </div>
 
-</section>
+</div>
 
 
 <!-- =========================
      ENVELOPE REVEAL
 ========================= -->
 
-<section
-  id="reveal"
-  aria-hidden="true"
->
+<div id="reveal" aria-hidden="true">
 
-  <div class="reveal-stage">
+  <div class="envelope-scene" id="envelopeScene">
 
-    <div
-      class="card"
-      id="inviteCard"
-    >
+    <div class="envelope" id="envelope">
 
-      <svg
-        class="floral"
-        viewBox="0 0 360 500"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
+      <div class="envelope-back"></div>
 
-        <path
-          d="M12 100
-             C25 60 50 35 82 25
-             C55 55 42 85 48 115
-             C52 145 30 155 12 135"
-          fill="none"
-          stroke="#d98699"
-          stroke-width="2"
-        />
+      <div class="envelope-left"></div>
 
-        <path
-          d="M348 100
-             C335 60 310 35 278 25
-             C305 55 318 85 312 115
-             C308 145 330 155 348 135"
-          fill="none"
-          stroke="#d98699"
-          stroke-width="2"
-        />
+      <div class="envelope-right"></div>
 
-        <path
-          d="M12 400
-             C35 435 55 460 90 475
-             C58 450 45 420 50 390
-             C45 365 28 370 12 385"
-          fill="none"
-          stroke="#d98699"
-          stroke-width="2"
-        />
+      <div class="envelope-bottom"></div>
 
-        <path
-          d="M348 400
-             C325 435 305 460 270 475
-             C302 450 315 420 310 390
-             C315 365 332 370 348 385"
-          fill="none"
-          stroke="#d98699"
-          stroke-width="2"
-        />
-
-        <circle
-          cx="55"
-          cy="65"
-          r="7"
-          fill="#edb9c5"
-        />
-
-        <circle
-          cx="305"
-          cy="65"
-          r="7"
-          fill="#edb9c5"
-        />
-
-        <circle
-          cx="55"
-          cy="435"
-          r="7"
-          fill="#d3c8ad"
-        />
-
-        <circle
-          cx="305"
-          cy="435"
-          r="7"
-          fill="#d3c8ad"
-        />
-
-      </svg>
-
-
-      <div class="card-copy">
-
-        <div class="card-small">
-          Please Join Me For
-        </div>
-
-        <div
-          class="card-name"
-          id="cardName"
-        >
-          Lëhanie
-        </div>
-
-        <div class="card-age">
-          21st Birthday
-        </div>
-
-        <div class="card-date">
-          14 OCTOBER 2026
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="envelope"
-      id="envelope"
-    >
-
-      <div class="env-back"></div>
-
-      <div class="fold-top"></div>
-
-      <div class="fold-bottom"></div>
-
-      <div class="door left"></div>
-
-      <div class="door right"></div>
-
-      <div class="ribbon-v"></div>
-
-      <div class="ribbon-h"></div>
-
+      <div class="envelope-flap"></div>
 
       <div class="bow">
 
-        <div class="bow-loop left"></div>
+        <div class="bow-left"></div>
 
-        <div class="bow-loop right"></div>
+        <div class="bow-right"></div>
 
-        <div class="bow-tail left"></div>
-
-        <div class="bow-tail right"></div>
-
-        <div class="bow-knot"></div>
+        <div class="bow-center"></div>
 
       </div>
 
     </div>
 
 
-    <span class="spark s1"></span>
-    <span class="spark s2"></span>
-    <span class="spark s3"></span>
-    <span class="spark s4"></span>
+    <div class="invite-card" id="inviteCard">
+
+      <div class="card-border"></div>
+
+      <div class="flower tl"></div>
+      <div class="flower tr"></div>
+      <div class="flower bl"></div>
+      <div class="flower br"></div>
+
+      <div class="card-small">
+        You Are Invited
+      </div>
+
+      <h2 id="cardName">
+        Lëhanie
+      </h2>
+
+      <div class="turning">
+        is turning
+      </div>
+
+      <div class="age">
+        21
+      </div>
+
+      <div class="date">
+        14 October 2026<br>
+        An evening to celebrate
+      </div>
+
+    </div>
 
   </div>
 
-</section>
+</div>
 
 
 <!-- =========================
-     MAIN SITE
+     MAIN WEBSITE
 ========================= -->
 
 <div id="site">
 
-
   <!-- BALLOONS -->
 
-  <div
-    id="balloon-field"
-    aria-hidden="true"
-  >
+  <div id="balloon-field" aria-hidden="true">
 
     <div class="balloon pink b1">
       <span class="string"></span>
@@ -2005,98 +1342,91 @@ footer p{
   </div>
 
 
-  <!-- NAVIGATION -->
+  <div class="site-content">
 
-  <nav>
+    <!-- NAVIGATION -->
 
-    <div class="logo">
-      Lëhanie
-    </div>
+    <nav>
 
-    <button
-      class="menu-btn"
-      id="menuBtn"
-      type="button"
-    >
-      MENU
-    </button>
+      <div class="nav-inner">
 
-    <ul
-      class="nav-links"
-      id="navLinks"
-    >
+        <div class="logo">
+          Lëhanie
+        </div>
 
-      <li>
-        <a href="#invitation">
-          Invitation
-        </a>
-      </li>
+        <button class="menu-btn" id="menuBtn">
+          Menu
+        </button>
 
-      <li>
-        <a href="#verse">
-          Verse
-        </a>
-      </li>
+        <ul class="nav-links" id="navLinks">
 
-      <li>
-        <a href="#details">
-          Details
-        </a>
-      </li>
+          <li>
+            <a href="#invitation">
+              Invitation
+            </a>
+          </li>
 
-      <li>
-        <a href="#countdown">
-          Countdown
-        </a>
-      </li>
+          <li>
+            <a href="#verse">
+              Verse
+            </a>
+          </li>
 
-      <li>
-        <a href="#location">
-          Location
-        </a>
-      </li>
+          <li>
+            <a href="#details">
+              Details
+            </a>
+          </li>
 
-      <li>
-        <a href="#rsvp">
-          RSVP
-        </a>
-      </li>
+          <li>
+            <a href="#countdown">
+              Countdown
+            </a>
+          </li>
 
-    </ul>
+          <li>
+            <a href="#location">
+              Location
+            </a>
+          </li>
 
-  </nav>
+          <li>
+            <a href="#rsvp">
+              RSVP
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
 
 
-  <!-- HERO -->
+    <!-- HERO -->
 
-  <main id="invitation">
+    <section class="hero" id="invitation">
 
-    <section class="hero">
-
-      <div class="hero-content">
+      <div class="hero-copy">
 
         <div class="eyebrow">
-          You're invited
+          You're Invited
         </div>
 
         <h1>
-
-          <span>
-            Lëhanie
-          </span>
-
-          21st
-
+          Lëhanie's
+          <span>21st</span>
         </h1>
 
-        <p class="hero-text">
-          Come celebrate a very special milestone,
-          surrounded by good people, beautiful memories
-          and an unforgettable evening.
+        <p>
+          Join us for a beautiful evening celebrating
+          twenty-one years of Lëhanie.
+          A night filled with memories, laughter,
+          love and new beginnings.
         </p>
 
-        <div class="date-pill">
-          14 OCTOBER 2026
+        <div class="hero-date">
+          14 • 10 • 2026
         </div>
 
       </div>
@@ -2106,11 +1436,17 @@ footer p{
 
         <div class="photo-frame">
 
+          <!-- KEEP photo.jpeg IN THE SAME FOLDER AS index.html -->
+
           <img
             src="photo.jpeg"
             alt="Lëhanie"
             loading="lazy"
           >
+
+          <div class="photo-caption">
+            Celebrating Lëhanie
+          </div>
 
         </div>
 
@@ -2119,29 +1455,37 @@ footer p{
     </section>
 
 
-    <!-- =========================
-         PSALM 46:5
-    ========================= -->
+    <!-- PSALM -->
 
-    <section
-      class="section verse-section"
-      id="verse"
-    >
+    <section class="verse-section" id="verse">
 
-      <div class="section-inner">
+      <div class="section-title">
 
-        <div class="verse-mark">
+        <span>
+          A Special Verse
+        </span>
+
+        <h2>
+          Faith &amp; Grace
+        </h2>
+
+      </div>
+
+
+      <div class="verse-card">
+
+        <div class="cross">
           ✦
         </div>
 
-        <p class="verse-text">
+        <blockquote>
           “God is within her, she will not fall;
           God will help her at break of day.”
-        </p>
+        </blockquote>
 
-        <div class="verse-reference">
+        <cite>
           Psalm 46:5
-        </div>
+        </cite>
 
       </div>
 
@@ -2150,78 +1494,73 @@ footer p{
 
     <!-- DETAILS -->
 
-    <section
-      class="section details"
-      id="details"
-    >
+    <section id="details">
 
-      <div class="section-inner">
+      <div class="section-title">
 
-        <div class="section-label">
+        <span>
+          Save The Date
+        </span>
+
+        <h2>
           The Celebration
-        </div>
-
-        <h2 class="section-title">
-          Save the date.
         </h2>
 
+      </div>
 
-        <div class="details-grid">
 
+      <div class="details-grid">
 
-          <div class="detail-card">
+        <div class="detail-card">
 
-            <div class="detail-icon">
-              ♡
-            </div>
-
-            <h3>
-              Date
-            </h3>
-
-            <p>
-              Wednesday<br>
-              14 October 2026
-            </p>
-
+          <div class="detail-icon">
+            ♡
           </div>
 
+          <h3>
+            Date
+          </h3>
 
-          <div class="detail-card">
+          <p>
+            Wednesday<br>
+            14 October 2026
+          </p>
 
-            <div class="detail-icon">
-              ◷
-            </div>
+        </div>
 
-            <h3>
-              Time
-            </h3>
 
-            <p>
-              18:00<br>
-              Please arrive on time.
-            </p>
+        <div class="detail-card">
 
+          <div class="detail-icon">
+            ◷
           </div>
 
+          <h3>
+            Time
+          </h3>
 
-          <div class="detail-card">
+          <p>
+            18:00<br>
+            Please arrive on time
+          </p>
 
-            <div class="detail-icon">
-              ✦
-            </div>
+        </div>
 
-            <h3>
-              Dress Code
-            </h3>
 
-            <p>
-              Pink & Khaki<br>
-              Come dressed to celebrate.
-            </p>
+        <div class="detail-card">
 
+          <div class="detail-icon">
+            ♧
           </div>
 
+          <h3>
+            Venue
+          </h3>
+
+          <p>
+            Your Venue<br>
+            Your City
+          </p>
 
         </div>
 
@@ -2233,91 +1572,73 @@ footer p{
     <!-- COUNTDOWN -->
 
     <section
-      class="section countdown"
+      class="countdown-section"
       id="countdown"
     >
 
-      <div class="section-inner">
+      <div class="section-title">
 
-        <div class="section-label">
+        <span>
           Until The Celebration
-        </div>
+        </span>
 
-        <h2 class="section-title">
-          The countdown is on.
+        <h2>
+          Counting Down
         </h2>
 
-        <p class="countdown-sub">
-          I can't wait to celebrate this special night with you.
-        </p>
+      </div>
 
 
-        <div class="timer">
+      <div class="countdown">
+
+        <div class="count-box">
+
+          <strong id="days">
+            00
+          </strong>
+
+          <span>
+            Days
+          </span>
+
+        </div>
 
 
-          <div class="time-box">
+        <div class="count-box">
 
-            <span
-              class="time-number"
-              id="days"
-            >
-              00
-            </span>
+          <strong id="hours">
+            00
+          </strong>
 
-            <span class="time-label">
-              Days
-            </span>
+          <span>
+            Hours
+          </span>
 
-          </div>
+        </div>
 
 
-          <div class="time-box">
+        <div class="count-box">
 
-            <span
-              class="time-number"
-              id="hours"
-            >
-              00
-            </span>
+          <strong id="minutes">
+            00
+          </strong>
 
-            <span class="time-label">
-              Hours
-            </span>
+          <span>
+            Minutes
+          </span>
 
-          </div>
+        </div>
 
 
-          <div class="time-box">
+        <div class="count-box">
 
-            <span
-              class="time-number"
-              id="minutes"
-            >
-              00
-            </span>
+          <strong id="seconds">
+            00
+          </strong>
 
-            <span class="time-label">
-              Minutes
-            </span>
-
-          </div>
-
-
-          <div class="time-box">
-
-            <span
-              class="time-number"
-              id="seconds"
-            >
-              00
-            </span>
-
-            <span class="time-label">
-              Seconds
-            </span>
-
-          </div>
-
+          <span>
+            Seconds
+          </span>
 
         </div>
 
@@ -2328,70 +1649,68 @@ footer p{
 
     <!-- LOCATION -->
 
-    <section
-      class="section location"
-      id="location"
-    >
+    <section id="location">
 
-      <div class="section-inner">
+      <div class="section-title">
 
-        <div class="section-label">
-          Where
-        </div>
+        <span>
+          Find Us
+        </span>
 
-        <h2 class="section-title">
-          Let's celebrate.
+        <h2>
+          The Location
         </h2>
 
+      </div>
 
-        <div class="location-grid">
+
+      <div class="location-card">
+
+        <div class="location-info">
+
+          <h3>
+            Your Venue
+          </h3>
+
+          <p>
+            Your City
+          </p>
+
+          <p style="margin-top:15px;">
+            More details about the venue
+            can be added here.
+          </p>
+
+          <a
+            class="map-button"
+            id="mapButton"
+            href="https://www.google.com/maps"
+            target="_blank"
+            rel="noopener"
+          >
+            Open Map
+          </a>
+
+        </div>
 
 
-          <div class="location-card">
+        <div class="map-placeholder">
 
-            <h3 id="venueName">
-              Your Venue
-            </h3>
+          <div>
+
+            <div style="
+              font-size:2rem;
+              color:var(--pink-6);
+              margin-bottom:10px;
+            ">
+              ♡
+            </div>
 
             <p>
-              <strong>City:</strong>
-              <span id="cityName">
-                Your City
-              </span>
+              Location details
             </p>
-
-            <p>
-              <strong>Date:</strong>
-              14 October 2026
-            </p>
-
-            <p>
-              <strong>Time:</strong>
-              18:00
-            </p>
-
-            <a
-              class="map-btn"
-              id="mapLink"
-              href="#"
-              target="_blank"
-              rel="noopener"
-            >
-              OPEN GOOGLE MAPS
-            </a>
 
           </div>
-
-
-          <div class="map-placeholder">
-
-            <span>
-              Your celebration location<br>
-              will be waiting for you here.
-            </span>
-
-          </div>
-
 
         </div>
 
@@ -2402,69 +1721,74 @@ footer p{
 
     <!-- RSVP -->
 
-    <section
-      class="section rsvp"
-      id="rsvp"
-    >
+    <section id="rsvp">
 
-      <div class="section-inner">
+      <div class="section-title">
 
-        <div class="rsvp-box">
+        <span>
+          Let Us Know
+        </span>
 
-          <div class="section-label">
-            RSVP
-          </div>
+        <h2>
+          RSVP
+        </h2>
 
-          <h2 class="section-title">
-            Will you join me?
-          </h2>
+      </div>
 
-          <p>
-            Please confirm your attendance so I can
-            make sure everything is ready for you.
-          </p>
 
-          <a
-            class="whatsapp-btn"
-            id="whatsappLink"
-            href="#"
-            target="_blank"
-            rel="noopener"
-          >
-            RSVP ON WHATSAPP
-          </a>
+      <div class="rsvp-box">
 
-        </div>
+        <h2>
+          Will You Join Us?
+        </h2>
+
+        <p>
+          Please confirm your attendance
+          so we can celebrate this special
+          milestone together.
+        </p>
+
+        <a
+          class="rsvp-button"
+          id="rsvpButton"
+          href="#"
+        >
+          RSVP VIA WHATSAPP
+        </a>
 
       </div>
 
     </section>
 
-  </main>
 
+    <!-- FOOTER -->
 
-  <!-- FOOTER -->
+    <footer>
 
-  <footer>
+      <h3>
+        Lëhanie turns 21
+      </h3>
 
-    <p>
-      Can't wait to celebrate 21 with you.
-    </p>
+      <p>
+        14 October 2026
+      </p>
 
-    <p class="footer-small">
-      Lëhanie • 14 • 10 • 2026
-    </p>
+      <p>
+        With love ♡
+      </p>
 
-  </footer>
+    </footer>
+
+  </div>
 
 </div>
 
 
 <script>
 
-/* =========================================
+/* =========================
    CONFIGURATION
-========================================= */
+========================= */
 
 const CONFIG = {
 
@@ -2485,9 +1809,14 @@ const CONFIG = {
 };
 
 
-/* =========================================
-   BIRTHDAY SONG
-========================================= */
+/* =========================
+   AUDIO
+========================= */
+
+/*
+   Keep song.mp3 in the SAME FOLDER
+   as index.html.
+*/
 
 const birthdaySong =
   new Audio("song.mp3");
@@ -2496,9 +1825,9 @@ birthdaySong.loop = true;
 birthdaySong.volume = 0.7;
 
 
-/* =========================================
+/* =========================
    ELEMENTS
-========================================= */
+========================= */
 
 const gate =
   document.getElementById("gate");
@@ -2509,14 +1838,14 @@ const passwordInput =
 const enterBtn =
   document.getElementById("enterBtn");
 
-const passwordError =
-  document.getElementById("passwordError");
+const error =
+  document.getElementById("error");
 
 const reveal =
   document.getElementById("reveal");
 
-const site =
-  document.getElementById("site");
+const envelopeScene =
+  document.getElementById("envelopeScene");
 
 const envelope =
   document.getElementById("envelope");
@@ -2524,61 +1853,54 @@ const envelope =
 const inviteCard =
   document.getElementById("inviteCard");
 
+const site =
+  document.getElementById("site");
 
-/* =========================================
-   CONFIG DATA
-========================================= */
+const menuBtn =
+  document.getElementById("menuBtn");
 
-document.getElementById(
-  "cardName"
-).textContent =
+const navLinks =
+  document.getElementById("navLinks");
+
+
+/* =========================
+   APPLY CONFIG
+========================= */
+
+document.getElementById("cardName").textContent =
   CONFIG.name;
 
-document.getElementById(
-  "venueName"
-).textContent =
+document.querySelector(".logo").textContent =
+  CONFIG.name;
+
+document.querySelector(".hero-copy h1").innerHTML =
+  `${CONFIG.name}'s <span>21st</span>`;
+
+document.querySelector(".hero-date").textContent =
+  "14 • 10 • 2026";
+
+document.querySelector(".location-info h3").textContent =
   CONFIG.venue;
 
-document.getElementById(
-  "cityName"
-).textContent =
+document.querySelector(".location-info p").textContent =
   CONFIG.city;
 
-document.getElementById(
-  "mapLink"
-).href =
+document.getElementById("mapButton").href =
   CONFIG.mapUrl;
 
 
-/* =========================================
-   WHATSAPP RSVP
-========================================= */
-
-const whatsappMessage =
-  encodeURIComponent(
-    `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday on 14 October 2026.`
-  );
-
-document.getElementById(
-  "whatsappLink"
-).href =
-  `https://wa.me/${CONFIG.whatsapp}?text=${whatsappMessage}`;
-
-
-/* =========================================
-   PASSWORD
-========================================= */
+/* =========================
+   PASSWORD ENTER
+========================= */
 
 function openInvitation(){
 
   const entered =
     passwordInput.value.trim();
 
-
   if(entered !== CONFIG.password){
 
-    passwordError.textContent =
-      "Incorrect password. Please try again.";
+    error.style.display = "block";
 
     passwordInput.value = "";
 
@@ -2588,7 +1910,18 @@ function openInvitation(){
   }
 
 
-  /* START MUSIC IMMEDIATELY */
+  error.style.display = "none";
+
+  gate.style.transition =
+    "opacity .7s ease";
+
+  gate.style.opacity = "0";
+
+
+  /*
+     START SONG IMMEDIATELY
+     AFTER PASSWORD IS ENTERED.
+  */
 
   birthdaySong.currentTime = 0;
 
@@ -2602,12 +1935,9 @@ function openInvitation(){
   });
 
 
-  passwordError.textContent = "";
-
-  gate.classList.add("hide");
-
-
   setTimeout(() => {
+
+    gate.style.display = "none";
 
     reveal.classList.add("show");
 
@@ -2616,16 +1946,15 @@ function openInvitation(){
       "false"
     );
 
-    startInvitation();
+    document.body.style.overflow =
+      "hidden";
 
-  },500);
+    startEnvelopeAnimation();
+
+  },700);
 
 }
 
-
-/* =========================================
-   PASSWORD BUTTON
-========================================= */
 
 enterBtn.addEventListener(
   "click",
@@ -2633,13 +1962,9 @@ enterBtn.addEventListener(
 );
 
 
-/* =========================================
-   ENTER KEY
-========================================= */
-
 passwordInput.addEventListener(
   "keydown",
-  function(event){
+  event => {
 
     if(event.key === "Enter"){
 
@@ -2651,28 +1976,40 @@ passwordInput.addEventListener(
 );
 
 
-/* =========================================
-   ENVELOPE SEQUENCE
-========================================= */
+/* =========================
+   ENVELOPE ANIMATION
+========================= */
 
-function startInvitation(){
+function startEnvelopeAnimation(){
 
   /*
-    TIMELINE
-
-    0.0s   Reveal starts
-    1.8s   Bow drops
-    2.0s   Ribbon loosens
-    3.15s  Top flap opens
-    3.75s  Envelope doors open
-    4.10s  Bottom fold opens
-    4.65s  Invitation card rises
-    5.90s  Envelope completely disappears
-    6.35s  Card wording appears
-    8.10s  Reveal fades
-    8.90s  Main website appears
+     First:
+     closed envelope + bow
   */
 
+  setTimeout(() => {
+
+    envelopeScene.classList.add("open");
+
+  },2500);
+
+
+  /*
+     Invitation card rises.
+  */
+
+  setTimeout(() => {
+
+    inviteCard.classList.add("final");
+
+  },4700);
+
+
+  /*
+     Completely remove the envelope
+     BEFORE the invitation wording
+     becomes visible.
+  */
 
   setTimeout(() => {
 
@@ -2680,43 +2017,42 @@ function startInvitation(){
       "envelope-gone"
     );
 
-    inviteCard.classList.add(
-      "final"
-    );
-
   },5900);
 
+
+  /*
+     Fade the reveal away.
+  */
 
   setTimeout(() => {
 
     reveal.style.transition =
       "opacity .8s ease";
 
-    reveal.style.opacity =
-      "0";
+    reveal.style.opacity = "0";
 
   },8100);
 
 
+  /*
+     Remove reveal and show site.
+  */
+
   setTimeout(() => {
 
-    reveal.classList.remove(
-      "show"
-    );
+    reveal.classList.remove("show");
 
-    reveal.style.display =
-      "none";
+    reveal.style.display = "none";
 
-    site.classList.add(
-      "visible"
-    );
+    site.classList.add("visible");
 
     reveal.setAttribute(
       "aria-hidden",
       "true"
     );
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+      "";
 
     window.scrollTo({
       top:0,
@@ -2728,14 +2064,46 @@ function startInvitation(){
 }
 
 
-/* =========================================
+/* =========================
+   MOBILE MENU
+========================= */
+
+menuBtn.addEventListener(
+  "click",
+  () => {
+
+    navLinks.classList.toggle(
+      "open"
+    );
+
+  }
+);
+
+
+document.querySelectorAll(
+  ".nav-links a"
+).forEach(link => {
+
+  link.addEventListener(
+    "click",
+    () => {
+
+      navLinks.classList.remove(
+        "open"
+      );
+
+    }
+  );
+
+});
+
+
+/* =========================
    COUNTDOWN
-========================================= */
+========================= */
 
 const eventTime =
-  new Date(
-    CONFIG.eventDate
-  ).getTime();
+  new Date(CONFIG.eventDate).getTime();
 
 
 function updateCountdown(){
@@ -2743,29 +2111,14 @@ function updateCountdown(){
   const now =
     new Date().getTime();
 
-  const distance =
+  let distance =
     eventTime - now;
 
 
-  if(distance <= 0){
+  if(distance < 0){
 
-    document.getElementById(
-      "days"
-    ).textContent = "00";
+    distance = 0;
 
-    document.getElementById(
-      "hours"
-    ).textContent = "00";
-
-    document.getElementById(
-      "minutes"
-    ).textContent = "00";
-
-    document.getElementById(
-      "seconds"
-    ).textContent = "00";
-
-    return;
   }
 
 
@@ -2775,7 +2128,6 @@ function updateCountdown(){
       (1000 * 60 * 60 * 24)
     );
 
-
   const hours =
     Math.floor(
       (distance %
@@ -2783,14 +2135,12 @@ function updateCountdown(){
       (1000 * 60 * 60)
     );
 
-
   const minutes =
     Math.floor(
       (distance %
       (1000 * 60 * 60)) /
       (1000 * 60)
     );
-
 
   const seconds =
     Math.floor(
@@ -2834,79 +2184,42 @@ setInterval(
 );
 
 
-/* =========================================
-   MOBILE MENU
-========================================= */
+/* =========================
+   RSVP
+========================= */
 
-const menuBtn =
-  document.getElementById("menuBtn");
+const rsvpButton =
+  document.getElementById(
+    "rsvpButton"
+  );
 
-const navLinks =
-  document.getElementById("navLinks");
+
+const rsvpMessage =
+  encodeURIComponent(
+    `Hi! I would like to RSVP for Lëhanie's 21st birthday on 14 October 2026.`
+  );
 
 
-menuBtn.addEventListener(
+rsvpButton.href =
+  `https://wa.me/${CONFIG.whatsapp}?text=${rsvpMessage}`;
+
+
+/* =========================
+   PREVENT EMPTY MAP
+========================= */
+
+document.getElementById(
+  "mapButton"
+).addEventListener(
   "click",
   () => {
 
-    navLinks.classList.toggle(
-      "open"
-    );
+    if(!CONFIG.mapUrl){
 
-  }
-);
-
-
-navLinks
-  .querySelectorAll("a")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        navLinks.classList.remove(
-          "open"
-        );
-
-      }
-    );
-
-  });
-
-
-/* =========================================
-   INITIAL PAGE LOCK
-========================================= */
-
-document.body.style.overflow =
-  "hidden";
-
-
-const observer =
-  new MutationObserver(() => {
-
-    if(
-      site.classList.contains(
-        "visible"
-      )
-    ){
-
-      document.body.style.overflow =
-        "";
-
-      observer.disconnect();
+      return false;
 
     }
 
-  });
-
-
-observer.observe(
-  site,
-  {
-    attributes:true,
-    attributeFilter:["class"]
   }
 );
 
