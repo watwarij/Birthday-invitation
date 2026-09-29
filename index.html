@@ -1,333 +1,2596 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarah's 21st Birthday</title>
-    <!-- Importing elegant fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Pink & Khaki Color Scheme */
-        :root {
-            --primary-color: #4a3c31; /* Deep brownish-khaki for readable text */
-            --bg-color: #faf8f5; /* Very soft khaki/cream background */
-            --accent-color: #d49a9a; /* Dusty pink */
-            --khaki-accent: #c3b091; /* Classic khaki */
-            --box-bg: #f5ecec; /* Very light pink for form/gift boxes */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lëhanie | 21st Birthday</title>
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-color);
-            text-align: center;
-        }
+<style>
 
-        h1, h2, h3, .serif {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-        }
+/* =========================================================
+   ONLY COLOURS USED:
+   PINK + KHAKI
+========================================================= */
 
-        section {
-            padding: 80px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            border-bottom: 1px solid rgba(195, 176, 145, 0.3); /* Khaki border */
-        }
+:root{
+  --pink-light:#fff0f3;
+  --pink-soft:#f8dce2;
+  --pink:#efbdc9;
+  --pink-mid:#df94a5;
+  --pink-deep:#c96f84;
+  --pink-dark:#a94f67;
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* Pink floral background placeholder with a soft khaki/cream overlay */
-            background-image: linear-gradient(rgba(250, 248, 245, 0.85), rgba(250, 248, 245, 0.9)), url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            border-bottom: none;
-        }
+  --khaki-light:#f1ecdf;
+  --khaki-soft:#e4dcc8;
+  --khaki:#cfc3a6;
+  --khaki-mid:#ad9f7e;
+  --khaki-deep:#887957;
+  --khaki-dark:#665a42;
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin: 10px 0;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-        }
+  --pink-shadow:rgba(169,79,103,.20);
+  --khaki-shadow:rgba(102,90,66,.25);
+}
 
-        .hero p {
-            font-size: 1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
 
-        .hero .subtitle {
-            margin-top: 30px;
-            font-size: 1.2rem;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-            text-transform: none;
-            letter-spacing: 1px;
-            color: var(--khaki-accent);
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        /* Countdown Section */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-        }
+html{
+  scroll-behavior:smooth;
+}
 
-        .countdown-item span.number {
-            font-size: 2.5rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-color);
-        }
+body{
+  overflow-x:hidden;
+  background:var(--khaki-light);
+  color:var(--khaki-dark);
+  font-family:Georgia,"Times New Roman",serif;
+}
 
-        .countdown-item span.label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--khaki-accent);
-        }
 
-        /* Itinerary & Location Sections */
-        .section-number {
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            display: block;
-        }
+/* =========================================================
+   PASSWORD
+========================================================= */
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            margin-top: 0;
-        }
+#gate{
+  position:fixed;
+  inset:0;
+  z-index:99999;
 
-        .event-item {
-            margin-bottom: 30px;
-        }
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-        .time {
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: var(--khaki-accent);
-        }
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      var(--pink-soft),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 75% 80%,
+      var(--khaki-soft),
+      transparent 40%
+    ),
+    var(--khaki-light);
 
-        .event-title {
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            margin: 5px 0;
-        }
+  padding:25px;
 
-        /* Buttons & Forms */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
+  transition:opacity .8s ease;
+}
 
-        .btn:hover {
-            background-color: var(--khaki-accent);
-        }
+.password-card{
+  width:min(390px,92vw);
+  padding:45px 30px;
 
-        .gift-box {
-            background-color: var(--box-bg);
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
+  text-align:center;
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            text-align: left;
-        }
+  background:var(--pink-light);
 
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--khaki-accent);
-            background-color: white;
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-            box-sizing: border-box;
-            color: var(--primary-color);
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
+  border:1px solid var(--pink-mid);
 
-        /* Floral flourishes (decorative separators) */
-        .flourish {
-            font-size: 24px;
-            color: var(--khaki-accent);
-            margin: 20px 0;
-        }
-    </style>
+  box-shadow:
+    0 30px 80px var(--khaki-shadow);
+
+  border-radius:2px;
+}
+
+.password-small{
+  color:var(--pink-dark);
+  font-size:.65rem;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.password-card h1{
+  color:var(--khaki-dark);
+  font-size:2.8rem;
+  font-weight:400;
+  margin-bottom:12px;
+}
+
+.password-card h1 span{
+  color:var(--pink-dark);
+}
+
+.password-card p{
+  color:var(--khaki-deep);
+  line-height:1.8;
+  font-size:.95rem;
+  margin-bottom:25px;
+}
+
+#password{
+  width:100%;
+  height:50px;
+
+  border:1px solid var(--khaki-mid);
+  outline:none;
+
+  background:var(--khaki-light);
+  color:var(--khaki-dark);
+
+  text-align:center;
+  letter-spacing:7px;
+
+  padding:0 15px;
+}
+
+#password:focus{
+  border-color:var(--pink-dark);
+}
+
+.open-button{
+  width:100%;
+  height:50px;
+  margin-top:12px;
+
+  border:1px solid var(--pink-dark);
+
+  background:var(--pink-dark);
+  color:var(--pink-light);
+
+  cursor:pointer;
+
+  letter-spacing:3px;
+  font-size:.72rem;
+
+  transition:.3s ease;
+}
+
+.open-button:hover{
+  background:var(--pink-deep);
+}
+
+.password-error{
+  display:none;
+  margin-top:12px;
+  color:var(--pink-dark);
+  font-size:.8rem;
+}
+
+
+/* =========================================================
+   INTRO / VIDEO STYLE STAGE
+========================================================= */
+
+#intro{
+  position:fixed;
+  inset:0;
+
+  z-index:9990;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      var(--pink-soft),
+      transparent 45%
+    ),
+    var(--khaki-light);
+
+  overflow:hidden;
+}
+
+#intro.active{
+  display:flex;
+}
+
+
+/* =========================================================
+   PHONE-STYLE VIEWPORT
+========================================================= */
+
+.video-stage{
+  position:relative;
+
+  width:min(430px,100vw);
+  height:min(850px,100vh);
+
+  overflow:hidden;
+
+  background:var(--pink-light);
+}
+
+
+/* browser bar */
+
+.browser-bar{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+
+  height:72px;
+
+  z-index:100;
+
+  background:var(--pink-light);
+
+  border-bottom:1px solid var(--pink-soft);
+
+  padding:11px 18px 8px;
+}
+
+.browser-time{
+  height:20px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  color:var(--khaki-dark);
+
+  font-family:Arial,sans-serif;
+  font-size:11px;
+}
+
+.browser-address{
+  height:32px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:var(--khaki-deep);
+
+  font-family:Arial,sans-serif;
+  font-size:10px;
+
+  letter-spacing:.5px;
+}
+
+.address-pill{
+  min-width:150px;
+
+  padding:6px 18px;
+
+  border-radius:20px;
+
+  background:var(--khaki-light);
+}
+
+
+/* =========================================================
+   ENVELOPE AREA
+========================================================= */
+
+.envelope-stage{
+  position:absolute;
+
+  top:72px;
+  left:0;
+  right:0;
+  bottom:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--pink-light);
+
+  overflow:hidden;
+}
+
+
+/* envelope itself */
+
+.envelope{
+  position:relative;
+
+  width:310px;
+  height:430px;
+
+  background:var(--pink-soft);
+
+  box-shadow:
+    0 25px 55px var(--khaki-shadow);
+
+  transition:
+    transform 1.1s ease,
+    opacity .8s ease;
+}
+
+
+/* subtle envelope texture */
+
+.envelope::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  border:1px solid var(--pink-mid);
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   ENVELOPE CENTER LINE
+========================================================= */
+
+.center-line{
+  position:absolute;
+
+  top:0;
+  bottom:0;
+
+  left:50%;
+
+  width:1px;
+
+  background:var(--khaki-mid);
+
+  transform:translateX(-50%);
+
+  z-index:3;
+}
+
+
+/* =========================================================
+   ENVELOPE FLAPS
+========================================================= */
+
+.flap-top{
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:50%;
+
+  background:var(--pink-light);
+
+  clip-path:polygon(
+    0 0,
+    100% 0,
+    50% 100%
+  );
+
+  transform-origin:top center;
+
+  z-index:8;
+
+  transition:
+    transform 1.15s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.flap-left{
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:50%;
+  height:100%;
+
+  background:var(--pink-soft);
+
+  clip-path:polygon(
+    0 0,
+    100% 50%,
+    0 100%
+  );
+
+  transform-origin:left center;
+
+  z-index:6;
+
+  transition:
+    transform 1.25s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.flap-right{
+  position:absolute;
+
+  right:0;
+  top:0;
+
+  width:50%;
+  height:100%;
+
+  background:var(--pink);
+
+  clip-path:polygon(
+    100% 0,
+    0 50%,
+    100% 100%
+  );
+
+  transform-origin:right center;
+
+  z-index:6;
+
+  transition:
+    transform 1.25s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.flap-bottom{
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:52%;
+
+  background:var(--pink-mid);
+
+  clip-path:polygon(
+    0 100%,
+    50% 0,
+    100% 100%
+  );
+
+  transform-origin:bottom center;
+
+  z-index:7;
+
+  transition:
+    transform 1.15s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================================
+   RIBBON
+========================================================= */
+
+.ribbon-horizontal{
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  top:50%;
+
+  height:38px;
+
+  transform:translateY(-50%);
+
+  background:var(--pink-deep);
+
+  z-index:10;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+
+.ribbon-vertical{
+  position:absolute;
+
+  top:0;
+  bottom:0;
+
+  left:50%;
+
+  width:36px;
+
+  transform:translateX(-50%);
+
+  background:var(--pink-deep);
+
+  z-index:10;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+
+/* bow */
+
+.bow{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:145px;
+  height:100px;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index:20;
+
+  transition:
+    opacity .7s ease,
+    transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+
+.bow-left{
+  position:absolute;
+
+  left:0;
+  top:10px;
+
+  width:78px;
+  height:65px;
+
+  background:var(--pink-light);
+
+  border:2px solid var(--pink-mid);
+
+  border-radius:
+    75% 20% 65% 35%;
+
+  transform:rotate(-25deg);
+}
+
+
+.bow-right{
+  position:absolute;
+
+  right:0;
+  top:10px;
+
+  width:78px;
+  height:65px;
+
+  background:var(--pink-light);
+
+  border:2px solid var(--pink-mid);
+
+  border-radius:
+    20% 75% 35% 65%;
+
+  transform:rotate(25deg);
+}
+
+
+.bow-center{
+  position:absolute;
+
+  left:50%;
+  top:34px;
+
+  width:38px;
+  height:38px;
+
+  transform:translateX(-50%);
+
+  border-radius:50%;
+
+  background:var(--khaki-mid);
+
+  border:2px solid var(--khaki-deep);
+
+  z-index:4;
+}
+
+
+.ribbon-tail-left,
+.ribbon-tail-right{
+  position:absolute;
+
+  top:55px;
+
+  width:48px;
+  height:105px;
+
+  background:var(--pink-light);
+
+  border:2px solid var(--pink-mid);
+
+  z-index:-1;
+}
+
+
+.ribbon-tail-left{
+  left:32px;
+  transform:rotate(12deg);
+  clip-path:polygon(
+    0 0,
+    100% 12%,
+    80% 100%,
+    45% 82%,
+    15% 100%
+  );
+}
+
+
+.ribbon-tail-right{
+  right:32px;
+  transform:rotate(-12deg);
+  clip-path:polygon(
+    0 12%,
+    100% 0,
+    85% 100%,
+    55% 82%,
+    20% 100%
+  );
+}
+
+
+/* =========================================================
+   INVITATION CARD
+========================================================= */
+
+.invitation-card{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:270px;
+  min-height:390px;
+
+  transform:
+    translate(-50%,30%)
+    scale(.75);
+
+  opacity:0;
+
+  background:var(--pink-light);
+
+  z-index:4;
+
+  box-shadow:
+    0 20px 50px var(--khaki-shadow);
+
+  transition:
+    transform 1.45s cubic-bezier(.15,.75,.2,1),
+    opacity .9s ease;
+}
+
+
+/* floral-style border */
+
+.floral-border{
+  position:absolute;
+  inset:12px;
+
+  border:1px solid var(--pink-mid);
+
+  overflow:hidden;
+}
+
+
+.flower-cluster{
+  position:absolute;
+
+  width:125px;
+  height:125px;
+}
+
+
+/* flowers */
+
+.flower{
+  position:absolute;
+
+  width:34px;
+  height:34px;
+
+  border-radius:50%;
+
+  background:var(--pink-soft);
+
+  border:2px solid var(--pink-deep);
+}
+
+
+.flower::before,
+.flower::after{
+  content:"";
+
+  position:absolute;
+
+  width:28px;
+  height:28px;
+
+  border-radius:50%;
+
+  border:2px solid var(--pink-mid);
+}
+
+
+.flower::before{
+  left:-18px;
+  top:7px;
+}
+
+
+.flower::after{
+  left:15px;
+  top:7px;
+}
+
+
+.flower-center{
+  position:absolute;
+
+  width:12px;
+  height:12px;
+
+  border-radius:50%;
+
+  background:var(--khaki-mid);
+
+  left:11px;
+  top:11px;
+
+  z-index:2;
+}
+
+
+.leaf{
+  position:absolute;
+
+  width:28px;
+  height:13px;
+
+  background:var(--khaki-mid);
+
+  border-radius:100% 0;
+
+  transform:rotate(-30deg);
+}
+
+
+.flower-cluster.top-left{
+  top:0;
+  left:0;
+}
+
+.flower-cluster.top-right{
+  top:0;
+  right:0;
+  transform:scaleX(-1);
+}
+
+.flower-cluster.bottom-left{
+  bottom:0;
+  left:0;
+  transform:scaleY(-1);
+}
+
+.flower-cluster.bottom-right{
+  bottom:0;
+  right:0;
+  transform:scale(-1);
+}
+
+
+/* individual flower placements */
+
+.f1{
+  left:43px;
+  top:40px;
+}
+
+.f2{
+  left:15px;
+  top:68px;
+  transform:scale(.75);
+}
+
+.f3{
+  left:75px;
+  top:20px;
+  transform:scale(.65);
+}
+
+.l1{
+  left:25px;
+  top:50px;
+}
+
+.l2{
+  left:65px;
+  top:75px;
+  transform:rotate(30deg);
+}
+
+
+/* card text */
+
+.card-content{
+  position:relative;
+
+  z-index:10;
+
+  min-height:390px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:50px 30px;
+}
+
+
+.card-script{
+  color:var(--pink-dark);
+
+  font-size:.72rem;
+
+  letter-spacing:4px;
+
+  text-transform:uppercase;
+
+  margin-bottom:20px;
+}
+
+
+.card-name{
+  color:var(--khaki-dark);
+
+  font-size:2.5rem;
+
+  font-weight:400;
+
+  line-height:1.1;
+
+  margin-bottom:15px;
+}
+
+
+.card-age{
+  color:var(--pink-dark);
+
+  font-size:3.6rem;
+
+  font-weight:400;
+
+  line-height:1;
+
+  margin:8px 0;
+}
+
+
+.card-date{
+  color:var(--khaki-deep);
+
+  font-size:.75rem;
+
+  letter-spacing:2px;
+
+  line-height:1.8;
+
+  margin-top:15px;
+}
+
+
+/* =========================================================
+   ANIMATION STATES
+========================================================= */
+
+.envelope-stage.ribbon-loose .bow{
+  transform:
+    translate(-50%,-50%)
+    translateY(18px)
+    scale(.72);
+
+  opacity:.75;
+}
+
+.envelope-stage.ribbon-loose .ribbon-horizontal{
+  transform:
+    translateY(-50%)
+    scaleX(.65);
+
+  opacity:.55;
+}
+
+.envelope-stage.ribbon-open .bow{
+  transform:
+    translate(-50%,-50%)
+    translateY(130px)
+    rotate(12deg)
+    scale(.45);
+
+  opacity:0;
+}
+
+.envelope-stage.ribbon-open .ribbon-horizontal,
+.envelope-stage.ribbon-open .ribbon-vertical{
+  opacity:0;
+}
+
+.envelope-stage.flap-open .flap-top{
+  transform:
+    rotateX(180deg);
+
+  z-index:2;
+}
+
+.envelope-stage.sides-open .flap-left{
+  transform:
+    translateX(-105%)
+    rotate(-4deg);
+}
+
+.envelope-stage.sides-open .flap-right{
+  transform:
+    translateX(105%)
+    rotate(4deg);
+}
+
+.envelope-stage.bottom-open .flap-bottom{
+  transform:
+    translateY(115%);
+}
+
+.envelope-stage.card-rise .invitation-card{
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  opacity:1;
+
+  z-index:30;
+}
+
+.envelope-stage.card-settle .envelope{
+  opacity:0;
+  transform:
+    translateY(40px)
+    scale(.96);
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   MAIN WEBSITE
+========================================================= */
+
+#website{
+  display:none;
+
+  position:relative;
+
+  min-height:100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      var(--pink-soft),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      var(--khaki-soft),
+      transparent 30%
+    ),
+    var(--khaki-light);
+}
+
+
+#website.visible{
+  display:block;
+}
+
+
+/* =========================================================
+   BALLOONS
+========================================================= */
+
+.balloon-field{
+  position:fixed;
+
+  inset:0;
+
+  z-index:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+}
+
+
+.balloon{
+  position:absolute;
+
+  bottom:-150px;
+
+  width:48px;
+  height:62px;
+
+  border-radius:
+    52% 48% 48% 52% /
+    58% 58% 42% 42%;
+
+  opacity:.42;
+
+  animation:
+    rise var(--time) linear infinite,
+    sway var(--sway) ease-in-out infinite alternate;
+
+  animation-delay:
+    var(--delay),
+    var(--sway-delay);
+}
+
+
+.balloon::before{
+  content:"";
+
+  position:absolute;
+
+  top:10px;
+  left:50%;
+
+  width:12px;
+  height:20px;
+
+  transform:translateX(-50%);
+
+  border-radius:50%;
+
+  background:rgba(255,240,243,.25);
+}
+
+
+.balloon::after{
+  content:"";
+
+  position:absolute;
+
+  bottom:-7px;
+  left:50%;
+
+  width:10px;
+  height:10px;
+
+  transform:
+    translateX(-50%)
+    rotate(45deg);
+
+  background:inherit;
+}
+
+
+.string{
+  position:absolute;
+
+  top:100%;
+  left:50%;
+
+  width:1px;
+  height:150px;
+
+  background:var(--khaki-mid);
+
+  opacity:.5;
+}
+
+
+.balloon.p1{ background:var(--pink-mid); }
+.balloon.p2{ background:var(--pink); }
+.balloon.p3{ background:var(--pink-deep); }
+.balloon.k1{ background:var(--khaki-mid); }
+.balloon.k2{ background:var(--khaki); }
+
+
+.b1{ left:4%;  --time:19s; --sway:5s; --delay:-4s;  --sway-delay:-1s; }
+.b2{ left:15%; --time:24s; --sway:6s; --delay:-12s; --sway-delay:-2s; }
+.b3{ left:28%; --time:21s; --sway:5s; --delay:-8s;  --sway-delay:-3s; }
+.b4{ left:43%; --time:27s; --sway:6s; --delay:-17s; --sway-delay:-1s; }
+.b5{ left:58%; --time:22s; --sway:5s; --delay:-9s;  --sway-delay:-2s; }
+.b6{ left:70%; --time:28s; --sway:7s; --delay:-19s; --sway-delay:-3s; }
+.b7{ left:84%; --time:23s; --sway:5s; --delay:-6s;  --sway-delay:-1s; }
+
+
+@keyframes rise{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-125vh); }
+}
+
+
+@keyframes sway{
+  from{ margin-left:-10px; }
+  to{ margin-left:12px; }
+}
+
+
+/* =========================================================
+   WEBSITE CONTENT
+========================================================= */
+
+.website-content{
+  position:relative;
+  z-index:5;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+  position:sticky;
+
+  top:0;
+
+  z-index:100;
+
+  background:rgba(241,236,223,.92);
+
+  border-bottom:1px solid var(--pink-mid);
+
+  backdrop-filter:blur(10px);
+}
+
+
+.nav-inner{
+  width:min(1050px,92%);
+
+  margin:auto;
+
+  min-height:65px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+
+.logo{
+  color:var(--pink-dark);
+
+  font-size:1.25rem;
+
+  letter-spacing:2px;
+}
+
+
+.nav-links{
+  display:flex;
+
+  gap:25px;
+
+  list-style:none;
+}
+
+
+.nav-links a{
+  color:var(--khaki-dark);
+
+  text-decoration:none;
+
+  font-size:.75rem;
+
+  letter-spacing:1px;
+
+  transition:.3s;
+}
+
+
+.nav-links a:hover{
+  color:var(--pink-dark);
+}
+
+
+.menu{
+  display:none;
+
+  border:1px solid var(--pink-mid);
+
+  background:var(--pink-soft);
+
+  color:var(--khaki-dark);
+
+  padding:8px 12px;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+  width:min(1000px,92%);
+
+  margin:auto;
+
+  padding:90px 0;
+}
+
+
+.section-label{
+  color:var(--pink-dark);
+
+  text-align:center;
+
+  font-size:.68rem;
+
+  letter-spacing:4px;
+
+  text-transform:uppercase;
+
+  margin-bottom:12px;
+}
+
+
+.section-title{
+  color:var(--khaki-dark);
+
+  text-align:center;
+
+  font-size:2.8rem;
+
+  font-weight:400;
+
+  margin-bottom:45px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  min-height:calc(100vh - 65px);
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  align-items:center;
+
+  gap:60px;
+}
+
+
+.hero-text{
+  text-align:center;
+}
+
+
+.hero-small{
+  color:var(--pink-dark);
+
+  letter-spacing:5px;
+
+  font-size:.7rem;
+
+  text-transform:uppercase;
+}
+
+
+.hero h1{
+  color:var(--khaki-dark);
+
+  font-size:
+    clamp(4rem,10vw,7rem);
+
+  font-weight:400;
+
+  line-height:.9;
+
+  margin:20px 0;
+}
+
+
+.hero h1 span{
+  color:var(--pink-dark);
+}
+
+
+.hero-text p{
+  color:var(--khaki-deep);
+
+  line-height:1.9;
+
+  max-width:470px;
+
+  margin:auto;
+}
+
+
+.hero-date{
+  display:inline-block;
+
+  margin-top:25px;
+
+  padding:12px 22px;
+
+  background:var(--pink-soft);
+
+  border:1px solid var(--pink-mid);
+
+  color:var(--khaki-dark);
+
+  letter-spacing:3px;
+}
+
+
+/* photo */
+
+.photo-frame{
+  max-width:390px;
+
+  margin:auto;
+
+  padding:12px;
+
+  background:var(--pink-soft);
+
+  border:1px solid var(--pink-mid);
+
+  box-shadow:
+    0 25px 55px var(--khaki-shadow);
+
+  transform:rotate(2deg);
+}
+
+
+.photo-frame img{
+  width:100%;
+
+  display:block;
+
+  aspect-ratio:4/5;
+
+  object-fit:cover;
+
+  border:7px solid var(--pink-light);
+}
+
+
+.photo-caption{
+  text-align:center;
+
+  color:var(--pink-dark);
+
+  padding:13px 0 3px;
+
+  font-size:1rem;
+}
+
+
+/* =========================================================
+   VERSE
+========================================================= */
+
+.verse-card{
+  max-width:780px;
+
+  margin:auto;
+
+  padding:55px 30px;
+
+  text-align:center;
+
+  background:var(--pink-soft);
+
+  border:1px solid var(--pink-mid);
+
+  box-shadow:
+    0 20px 50px var(--pink-shadow);
+}
+
+
+.verse-symbol{
+  color:var(--pink-dark);
+
+  font-size:2rem;
+
+  margin-bottom:20px;
+}
+
+
+.verse-card blockquote{
+  color:var(--khaki-dark);
+
+  font-size:1.4rem;
+
+  line-height:1.8;
+
+  font-style:italic;
+}
+
+
+.verse-card cite{
+  display:block;
+
+  margin-top:20px;
+
+  color:var(--pink-dark);
+
+  letter-spacing:3px;
+
+  font-style:normal;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:18px;
+}
+
+
+.detail{
+  padding:35px 20px;
+
+  text-align:center;
+
+  background:rgba(241,236,223,.85);
+
+  border:1px solid var(--pink-mid);
+}
+
+
+.detail-symbol{
+  color:var(--pink-dark);
+
+  font-size:1.7rem;
+
+  margin-bottom:15px;
+}
+
+
+.detail h3{
+  color:var(--khaki-dark);
+
+  margin-bottom:10px;
+
+  font-weight:400;
+}
+
+
+.detail p{
+  color:var(--khaki-deep);
+
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown{
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:15px;
+
+  max-width:800px;
+
+  margin:auto;
+}
+
+
+.count-box{
+  padding:25px 10px;
+
+  text-align:center;
+
+  background:var(--pink-soft);
+
+  border:1px solid var(--pink-mid);
+}
+
+
+.count-box strong{
+  display:block;
+
+  color:var(--pink-dark);
+
+  font-size:3rem;
+
+  font-weight:400;
+}
+
+
+.count-box span{
+  color:var(--khaki-deep);
+
+  font-size:.65rem;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-card{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  border:1px solid var(--pink-mid);
+
+  background:var(--khaki-light);
+}
+
+
+.location-info{
+  padding:45px;
+}
+
+
+.location-info h3{
+  color:var(--pink-dark);
+
+  font-size:2rem;
+
+  font-weight:400;
+
+  margin-bottom:12px;
+}
+
+
+.location-info p{
+  color:var(--khaki-deep);
+
+  line-height:1.8;
+}
+
+
+.map-button{
+  display:inline-block;
+
+  margin-top:22px;
+
+  padding:13px 22px;
+
+  background:var(--pink-dark);
+
+  border:1px solid var(--pink-dark);
+
+  color:var(--pink-light);
+
+  text-decoration:none;
+
+  letter-spacing:1px;
+
+  font-size:.8rem;
+}
+
+
+.map-area{
+  min-height:300px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink-soft),
+      var(--khaki-soft)
+    );
+
+  color:var(--khaki-dark);
+
+  padding:20px;
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp{
+  max-width:700px;
+
+  margin:auto;
+
+  padding:55px 30px;
+
+  text-align:center;
+
+  background:var(--pink-soft);
+
+  border:1px solid var(--pink-mid);
+}
+
+
+.rsvp h2{
+  color:var(--pink-dark);
+
+  font-size:2.4rem;
+
+  font-weight:400;
+
+  margin-bottom:15px;
+}
+
+
+.rsvp p{
+  color:var(--khaki-deep);
+
+  line-height:1.8;
+}
+
+
+.rsvp-button{
+  display:inline-block;
+
+  margin-top:25px;
+
+  padding:14px 28px;
+
+  background:var(--pink-dark);
+
+  color:var(--pink-light);
+
+  border:1px solid var(--pink-dark);
+
+  text-decoration:none;
+
+  letter-spacing:1px;
+
+  font-size:.8rem;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  position:relative;
+
+  z-index:5;
+
+  padding:60px 20px;
+
+  text-align:center;
+
+  background:var(--khaki-soft);
+
+  border-top:1px solid var(--pink-mid);
+}
+
+
+footer h2{
+  color:var(--pink-dark);
+
+  font-weight:400;
+
+  font-size:2rem;
+}
+
+
+footer p{
+  color:var(--khaki-deep);
+
+  margin-top:10px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:760px){
+
+  .video-stage{
+    width:100vw;
+    height:100vh;
+  }
+
+  .nav-links{
+    display:none;
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    top:65px;
+
+    padding:20px;
+
+    flex-direction:column;
+
+    background:var(--khaki-light);
+
+    border-bottom:1px solid var(--pink-mid);
+  }
+
+  .nav-links.open{
+    display:flex;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+
+    gap:50px;
+
+    padding-top:60px;
+  }
+
+  .hero-text{
+    order:1;
+  }
+
+  .photo-frame{
+    order:2;
+  }
+
+  .details{
+    grid-template-columns:1fr;
+  }
+
+  .location-card{
+    grid-template-columns:1fr;
+  }
+
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+
+@media(max-width:450px){
+
+  .envelope{
+    width:270px;
+    height:390px;
+  }
+
+  .invitation-card{
+    width:235px;
+    min-height:350px;
+  }
+
+  .card-content{
+    min-height:350px;
+    padding:40px 22px;
+  }
+
+  .card-name{
+    font-size:2.1rem;
+  }
+
+  .card-age{
+    font-size:3rem;
+  }
+
+  .hero h1{
+    font-size:4.4rem;
+  }
+
+  .section-title{
+    font-size:2.2rem;
+  }
+}
+
+
+/* reduced motion */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+
+}
+
+</style>
 </head>
+
+
 <body>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <p>JOIN US TO CELEBRATE</p>
-        <h1>Sarah</h1>
-        <p>Turning 21</p>
-        <div class="subtitle">October 24, 2026 • Los Angeles, CA</div>
+
+<!-- =========================================================
+     PASSWORD GATE
+========================================================= -->
+
+<div id="gate">
+
+  <div class="password-card">
+
+    <div class="password-small">
+      Private Invitation
+    </div>
+
+    <h1>
+      Lëhanie's <span>21st</span>
+    </h1>
+
+    <p>
+      Enter the password to open your invitation.
+    </p>
+
+    <input
+      id="password"
+      type="password"
+      inputmode="numeric"
+      maxlength="8"
+      placeholder="PASSWORD"
+      autocomplete="off"
+    >
+
+    <button
+      class="open-button"
+      id="openButton"
+    >
+      OPEN INVITATION
+    </button>
+
+    <div
+      class="password-error"
+      id="passwordError"
+    >
+      Incorrect password.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     VIDEO-STYLE INTRO
+========================================================= -->
+
+<div id="intro">
+
+  <div class="video-stage">
+
+    <!-- browser-like top area -->
+
+    <div class="browser-bar">
+
+      <div class="browser-time">
+
+        <span id="browserTime">
+          12:39
+        </span>
+
+        <span>
+          ♡
+        </span>
+
+      </div>
+
+      <div class="browser-address">
+
+        <div class="address-pill">
+          sponsalia.app
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- envelope -->
+
+    <div
+      class="envelope-stage"
+      id="envelopeStage"
+    >
+
+      <div
+        class="envelope"
+        id="envelope"
+      >
+
+        <div class="center-line"></div>
+
+        <!-- invitation behind envelope -->
+
+        <div
+          class="invitation-card"
+          id="invitationCard"
+        >
+
+          <div class="floral-border">
+
+            <div class="flower-cluster top-left">
+
+              <div class="flower f1">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f2">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f3">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+
+            </div>
+
+
+            <div class="flower-cluster top-right">
+
+              <div class="flower f1">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f2">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f3">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+
+            </div>
+
+
+            <div class="flower-cluster bottom-left">
+
+              <div class="flower f1">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f2">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f3">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+
+            </div>
+
+
+            <div class="flower-cluster bottom-right">
+
+              <div class="flower f1">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f2">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="flower f3">
+                <div class="flower-center"></div>
+              </div>
+
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+
+            </div>
+
+          </div>
+
+
+          <div class="card-content">
+
+            <div class="card-script">
+              You're Invited
+            </div>
+
+            <div class="card-name">
+              Lëhanie
+            </div>
+
+            <div class="card-age">
+              21
+            </div>
+
+            <div class="card-date">
+              14 OCTOBER 2026<br>
+              AN EVENING TO CELEBRATE
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- envelope flaps -->
+
+        <div class="flap-top"></div>
+
+        <div class="flap-left"></div>
+
+        <div class="flap-right"></div>
+
+        <div class="flap-bottom"></div>
+
+
+        <!-- ribbon -->
+
+        <div class="ribbon-horizontal"></div>
+
+        <div class="ribbon-vertical"></div>
+
+
+        <!-- bow -->
+
+        <div class="bow">
+
+          <div class="bow-left"></div>
+
+          <div class="bow-right"></div>
+
+          <div class="bow-center"></div>
+
+          <div class="ribbon-tail-left"></div>
+
+          <div class="ribbon-tail-right"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN WEBSITE
+========================================================= -->
+
+<div id="website">
+
+
+  <!-- balloons -->
+
+  <div
+    class="balloon-field"
+    aria-hidden="true"
+  >
+
+    <div class="balloon p1 b1">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon p2 b2">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon p3 b3">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon k1 b4">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon p1 b5">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon k2 b6">
+      <span class="string"></span>
+    </div>
+
+    <div class="balloon p3 b7">
+      <span class="string"></span>
+    </div>
+
+  </div>
+
+
+  <div class="website-content">
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav>
+
+      <div class="nav-inner">
+
+        <div class="logo">
+          Lëhanie
+        </div>
+
+        <button
+          class="menu"
+          id="menuButton"
+        >
+          Menu
+        </button>
+
+        <ul
+          class="nav-links"
+          id="navLinks"
+        >
+
+          <li>
+            <a href="#home">
+              Invitation
+            </a>
+          </li>
+
+          <li>
+            <a href="#verse">
+              Verse
+            </a>
+          </li>
+
+          <li>
+            <a href="#details">
+              Details
+            </a>
+          </li>
+
+          <li>
+            <a href="#countdown">
+              Countdown
+            </a>
+          </li>
+
+          <li>
+            <a href="#location">
+              Location
+            </a>
+          </li>
+
+          <li>
+            <a href="#rsvp">
+              RSVP
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <div class="hero-text">
+
+        <div class="hero-small">
+          You Are Invited
+        </div>
+
+        <h1>
+          Lëhanie's
+          <span>21st</span>
+        </h1>
+
+        <p>
+          Come celebrate a beautiful new chapter
+          as Lëhanie turns twenty-one.
+        </p>
+
+        <div class="hero-date">
+          14 • 10 • 2026
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <div class="photo-frame">
+
+          <img
+            src="photo.jpeg"
+            alt="Lëhanie"
+          >
+
+          <div class="photo-caption">
+            Celebrating Lëhanie
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- COUNTDOWN SECTION -->
+
+    <!-- =====================================================
+         VERSE
+    ====================================================== -->
+
+    <section id="verse">
+
+      <div class="section-label">
+        A Special Verse
+      </div>
+
+      <h2 class="section-title">
+        Faith & Grace
+      </h2>
+
+      <div class="verse-card">
+
+        <div class="verse-symbol">
+          ✦
+        </div>
+
+        <blockquote>
+          “God is within her, she will not fall; God will help her at break of day.”
+        </blockquote>
+
+        <cite>— PSALM 46:5 —</cite>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS
+    ====================================================== -->
+
+    <section id="details">
+
+      <div class="section-label">
+        Event Information
+      </div>
+
+      <h2 class="section-title">
+        The Details
+      </h2>
+
+      <div class="details">
+
+        <div class="detail">
+          <div class="detail-symbol">⏰</div>
+          <h3>Time & Date</h3>
+          <p>
+            Wednesday, 14 October 2026<br>
+            18:00 PM
+          </p>
+        </div>
+
+        <div class="detail">
+          <div class="detail-symbol">✨</div>
+          <h3>Dress Code</h3>
+          <p>
+            Cocktail Elegance<br>
+            Shades of Pink & Khaki
+          </p>
+        </div>
+
+        <div class="detail">
+          <div class="detail-symbol">🎁</div>
+          <h3>Gift Info</h3>
+          <p>
+            Your presence is our gift.<br>
+            Monetary contributions welcome.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COUNTDOWN
+    ====================================================== -->
+
     <section id="countdown">
-        <span class="section-number">01</span>
-        <h2>The Countdown</h2>
-        <div class="flourish">❦</div>
-        <div class="countdown-container">
-            <div class="countdown-item">
-                <span class="number" id="days">00</span>
-                <span class="label">Days</span>
-            </div>
-            <div class="countdown-item">
-                <span class="number" id="hours">00</span>
-                <span class="label">Hours</span>
-            </div>
-            <div class="countdown-item">
-                <span class="number" id="minutes">00</span>
-                <span class="label">Minutes</span>
-            </div>
+
+      <div class="section-label">
+        Counting Down
+      </div>
+
+      <h2 class="section-title">
+        Until The Celebration
+      </h2>
+
+      <div class="countdown">
+
+        <div class="count-box">
+          <strong id="days">00</strong>
+          <span>Days</span>
         </div>
+
+        <div class="count-box">
+          <strong id="hours">00</strong>
+          <span>Hours</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="minutes">00</strong>
+          <span>Minutes</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="seconds">00</strong>
+          <span>Seconds</span>
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- LOCATION SECTION -->
+
+    <!-- =====================================================
+         LOCATION
+    ====================================================== -->
+
     <section id="location">
-        <span class="section-number">02</span>
-        <h2>Location</h2>
-        <div class="event-title">The Grand Rooftop</div>
-        <p>123 Celebration Blvd<br>Los Angeles, CA 90001</p>
-        <a href="https://maps.google.com" target="_blank" class="btn">Open in Maps</a>
-    </section>
 
-    <!-- THE DAY (ITINERARY) -->
-    <section id="itinerary">
-        <span class="section-number">03</span>
-        <h2>The Night</h2>
-        
-        <div class="event-item">
-            <div class="time">19:00</div>
-            <div class="event-title">Arrival & Cocktails</div>
-            <p>Welcome drinks and sunset views on the terrace.</p>
+      <div class="section-label">
+        Venue Location
+      </div>
+
+      <h2 class="section-title">
+        Where To Find Us
+      </h2>
+
+      <div class="location-card">
+
+        <div class="location-info">
+          <h3>The Glasshouse Venue</h3>
+          <p>
+            123 Rose Estate Way<br>
+            Sunset Valley, CA 90210
+          </p>
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            class="map-button"
+          >
+            OPEN IN GOOGLE MAPS
+          </a>
         </div>
 
-        <div class="flourish">❧</div>
-
-        <div class="event-item">
-            <div class="time">20:30</div>
-            <div class="event-title">Dinner & Toasts</div>
-            <p>A seated dinner followed by speeches.</p>
+        <div class="map-area">
+          <div>
+            <p><strong>The Glasshouse Venue</strong></p>
+            <p style="font-size:.85rem; margin-top:5px; opacity:.8;">Tap map button to navigate</p>
+          </div>
         </div>
 
-        <div class="flourish">❧</div>
+      </div>
 
-        <div class="event-item">
-            <div class="time">22:00</div>
-            <div class="event-title">Music & Dancing</div>
-            <p>The party begins! Drinks, dancing, and late-night snacks.</p>
-        </div>
     </section>
 
-    <!-- DRESS CODE -->
-    <section id="dress-code">
-        <span class="section-number">04</span>
-        <h2>Dress Code</h2>
-        <div class="event-title">Cocktail Elegance</div>
-        <p>Dress to impress! We kindly request cocktail attire. Bring your dancing shoes.</p>
-    </section>
 
-    <!-- GIFTS -->
-    <section id="gifts">
-        <span class="section-number">05</span>
-        <h2>A Gift For Me</h2>
-        <p>Your presence is the greatest gift! However, if you wish to contribute to my 21st birthday fund, you can do so below.</p>
-        
-        <div class="gift-box">
-            <p style="margin-top:0;"><strong>Bank Details</strong></p>
-            <p>Account Holder: Sarah Smith<br>
-               Account Number: 123456789<br>
-               Routing Number: 987654321</p>
-        </div>
-    </section>
+    <!-- =====================================================
+         RSVP
+    ====================================================== -->
 
-    <!-- RSVP FORM -->
     <section id="rsvp">
-        <span class="section-number">06</span>
-        <h2>RSVP</h2>
-        <p>Please let us know if you can make it by October 1st.</p>
-        
-        <form action="#" method="POST">
-            <label for="name">Full Name(s)</label>
-            <input type="text" id="name" name="name" required placeholder="Jane Doe">
 
-            <label for="attendance">Will you be there?</label>
-            <select id="attendance" name="attendance" required>
-                <option value="yes">Yes, I'll be there!</option>
-                <option value="no">Sadly, I can't make it.</option>
-            </select>
+      <div class="section-label">
+        Join The Celebration
+      </div>
 
-            <label for="diet">Dietary Requirements (Optional)</label>
-            <input type="text" id="diet" name="diet" placeholder="e.g., Vegetarian, Gluten-Free">
+      <h2 class="section-title">
+        Kindly RSVP
+      </h2>
 
-            <label for="song">Song Request</label>
-            <input type="text" id="song" name="song" placeholder="What will get you on the dance floor?">
+      <div class="rsvp">
+        <h2>We Hope You Can Make It!</h2>
+        <p>Please respond by 1 October 2026 to help us finalize our arrangements.</p>
+        <a
+          href="mailto:rsvp@example.com?subject=RSVP%20for%20Lehanie%27s%2021st"
+          class="rsvp-button"
+        >
+          CONFIRM ATTENDANCE
+        </a>
+      </div>
 
-            <button type="submit" class="btn">Send RSVP</button>
-        </form>
     </section>
 
-    <!-- JAVASCRIPT FOR COUNTDOWN -->
-    <script>
-        const countDownDate = new Date("Oct 24, 2026 19:00:00").getTime();
 
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
+  </div>
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "<h2>The Party Has Started!</h2>";
-            }
+  <footer>
+    <h2>Lëhanie's 21st</h2>
+    <p>Thank you for being part of this special milestone.</p>
+  </footer>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT LOGIC
+========================================================= -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Password Verification & Envelope Unfolding Timeline
+  const gate = document.getElementById('gate');
+  const passwordInput = document.getElementById('password');
+  const openButton = document.getElementById('openButton');
+  const passwordError = document.getElementById('passwordError');
+  const intro = document.getElementById('intro');
+  const envelopeStage = document.getElementById('envelopeStage');
+  const website = document.getElementById('website');
+
+  // Accept any password or default code (e.g. 1410 or 2026)
+  function handleUnlock() {
+    const entered = passwordInput.value.trim();
+    
+    if (entered === "" && passwordInput.hasAttribute('required')) {
+      passwordError.style.display = 'block';
+      return;
+    }
+
+    passwordError.style.display = 'none';
+
+    // Fade out gate
+    gate.style.opacity = '0';
+    setTimeout(() => {
+      gate.style.display = 'none';
+      intro.classList.add('active');
+
+      // Video-style Unfolding Animation Sequence
+      setTimeout(() => envelopeStage.classList.add('ribbon-loose'), 500);
+      setTimeout(() => envelopeStage.classList.add('ribbon-open'), 1200);
+      setTimeout(() => envelopeStage.classList.add('flap-open'), 2000);
+      setTimeout(() => envelopeStage.classList.add('sides-open'), 2700);
+      setTimeout(() => envelopeStage.classList.add('bottom-open'), 3400);
+      setTimeout(() => envelopeStage.classList.add('card-rise'), 4100);
+      setTimeout(() => envelopeStage.classList.add('card-settle'), 5200);
+
+      // Fade into main website
+      setTimeout(() => {
+        intro.style.transition = 'opacity 1s ease';
+        intro.style.opacity = '0';
+        setTimeout(() => {
+          intro.classList.remove('active');
+          website.classList.add('visible');
+          window.scrollTo(0, 0);
         }, 1000);
-    </script>
+      }, 7200);
+
+    }, 800);
+  }
+
+  openButton.addEventListener('click', handleUnlock);
+  passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleUnlock();
+  });
+
+
+  // 2. Live Browser / Phone Time
+  const browserTime = document.getElementById('browserTime');
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    if (hours < 10) hours = '0' + hours;
+    if (minutes < 10) minutes = '0' + minutes;
+    if (browserTime) browserTime.textContent = `${hours}:${minutes}`;
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+
+  // 3. Navigation Links & Mobile Menu
+  const menuButton = document.getElementById('menuButton');
+  const navLinks = document.getElementById('navLinks');
+
+  if (menuButton && navLinks) {
+    menuButton.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  }
+
+
+  // 4. Live Countdown Timer to 14 October 2026
+  const targetDate = new Date("October 14, 2026 18:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+    document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+});
+</script>
+
 </body>
 </html>
