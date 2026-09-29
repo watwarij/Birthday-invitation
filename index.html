@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f5d9df">
-<title>21st Birthday Invitation</title>
+<title>Lëhanie's 21st Birthday</title>
 
 <style>
 :root{
@@ -22,10 +22,6 @@
   --shadow:rgba(116,102,77,.22);
   --deep-shadow:rgba(116,102,77,.34);
 }
-
-/* =========================
-   RESET
-========================= */
 
 *{
   box-sizing:border-box;
@@ -66,10 +62,12 @@ a{
   align-items:center;
   justify-content:center;
   padding:25px;
+
   background:
     radial-gradient(circle at 20% 20%,var(--pink2),transparent 30%),
     radial-gradient(circle at 80% 80%,var(--khaki2),transparent 32%),
     var(--pink5);
+
   transition:opacity .8s ease,visibility .8s ease;
 }
 
@@ -83,6 +81,7 @@ a{
   width:min(440px,100%);
   padding:45px 30px;
   text-align:center;
+
   background:rgba(255,244,246,.94);
   border:1px solid var(--pink2);
   border-radius:28px;
@@ -113,11 +112,14 @@ a{
 #passwordInput{
   width:100%;
   padding:15px 18px;
+
   border:1px solid var(--khaki2);
   border-radius:14px;
   outline:none;
+
   background:var(--pink5);
   color:var(--khaki4);
+
   text-align:center;
   letter-spacing:4px;
   font-size:18px;
@@ -132,10 +134,13 @@ a{
   width:100%;
   margin-top:14px;
   padding:15px 20px;
+
   border:0;
   border-radius:14px;
+
   background:var(--pink4);
   color:var(--pink5);
+
   cursor:pointer;
   letter-spacing:2px;
   transition:.25s ease;
@@ -153,6 +158,7 @@ a{
   color:var(--pink4);
 }
 
+
 /* =========================
    ENVELOPE REVEAL
 ========================= */
@@ -161,10 +167,13 @@ a{
   position:fixed;
   inset:0;
   z-index:900;
+
   display:none;
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
+
   background:
     radial-gradient(circle at 50% 45%,var(--pink5),var(--pink));
 }
@@ -177,29 +186,37 @@ a{
   position:relative;
   width:min(700px,94vw);
   height:min(650px,88vh);
+
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* invitation card */
+
+/* INVITATION CARD */
 
 .card{
   position:absolute;
   left:50%;
   top:50%;
+
   width:min(360px,72vw);
   height:min(500px,70vh);
+
   transform:translate(-50%,15%);
+
   opacity:0;
   z-index:2;
 
   background:var(--pink5);
   border:2px solid var(--khaki2);
+
   box-shadow:0 25px 55px var(--deep-shadow);
+
   overflow:hidden;
 
-  animation:cardRise 2s cubic-bezier(.2,.8,.2,1) 4.65s forwards;
+  animation:
+    cardRise 2s cubic-bezier(.2,.8,.2,1) 4.65s forwards;
 }
 
 .card.final{
@@ -211,6 +228,7 @@ a{
     opacity:0;
     transform:translate(-50%,18%);
   }
+
   100%{
     opacity:1;
     transform:translate(-50%,-50%);
@@ -220,8 +238,10 @@ a{
 .floral{
   position:absolute;
   inset:0;
+
   width:100%;
   height:100%;
+
   pointer-events:none;
 }
 
@@ -229,17 +249,20 @@ a{
   position:absolute;
   inset:0;
   z-index:3;
+
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
+
   text-align:center;
   padding:35px;
 
   opacity:0;
   transform:translateY(15px);
 
-  animation:cardWords 1.2s ease 6.35s forwards;
+  animation:
+    cardWords 1.2s ease 6.35s forwards;
 }
 
 @keyframes cardWords{
@@ -277,15 +300,19 @@ a{
   color:var(--khaki3);
 }
 
-/* envelope */
+
+/* ENVELOPE */
 
 .envelope{
   position:absolute;
   left:50%;
   top:50%;
+
   width:min(410px,78vw);
   height:min(270px,52vw);
+
   transform:translate(-50%,-30%);
+
   z-index:10;
 
   transition:
@@ -301,54 +328,82 @@ a{
   pointer-events:none;
 }
 
-/* envelope back */
+
+/* ENVELOPE BACK */
 
 .env-back{
   position:absolute;
   inset:0;
+
   background:var(--khaki);
   border:2px solid var(--khaki3);
+
   overflow:hidden;
 }
 
 .env-back:after{
   content:"";
+
   position:absolute;
   left:0;
   right:0;
   bottom:0;
+
   height:50%;
+
   background:var(--khaki2);
-  clip-path:polygon(0 0,50% 100%,100% 0);
+
+  clip-path:polygon(
+    0 0,
+    50% 100%,
+    100% 0
+  );
 }
 
-/* envelope doors */
+
+/* ENVELOPE DOORS */
 
 .door{
   position:absolute;
   top:0;
   bottom:0;
+
   width:52%;
+
   z-index:4;
+
   background:var(--pink2);
   border:2px solid var(--pink3);
-  transition:none;
 }
 
 .door.left{
   left:0;
-  clip-path:polygon(0 0,100% 50%,0 100%);
+
+  clip-path:polygon(
+    0 0,
+    100% 50%,
+    0 100%
+  );
+
   transform-origin:left center;
 
-  animation:doorLeft 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
+  animation:
+    doorLeft 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
 }
 
 .door.right{
   right:0;
-  clip-path:polygon(100% 0,0 50%,100% 100%);
+
+  clip-path:polygon(
+    100% 0,
+    0 50%,
+    100% 100%
+  );
+
   transform-origin:right center;
 
-  animation:doorRight 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
+  animation:
+    doorRight 1.15s cubic-bezier(.7,0,.2,1) 3.75s forwards;
 }
 
 @keyframes doorLeft{
@@ -365,22 +420,32 @@ a{
   }
 }
 
-/* top flap */
+
+/* TOP FLAP */
 
 .fold-top{
   position:absolute;
   left:0;
   right:0;
   top:0;
+
   height:62%;
+
   z-index:7;
+
   background:var(--pink);
   border:2px solid var(--pink3);
-  clip-path:polygon(0 0,100% 0,50% 100%);
+
+  clip-path:polygon(
+    0 0,
+    100% 0,
+    50% 100%
+  );
 
   transform-origin:top center;
 
-  animation:topOpen 1.35s cubic-bezier(.7,0,.2,1) 3.15s forwards;
+  animation:
+    topOpen 1.35s cubic-bezier(.7,0,.2,1) 3.15s forwards;
 }
 
 @keyframes topOpen{
@@ -390,22 +455,32 @@ a{
   }
 }
 
-/* bottom fold */
+
+/* BOTTOM FOLD */
 
 .fold-bottom{
   position:absolute;
   left:0;
   right:0;
   bottom:0;
+
   height:62%;
+
   z-index:6;
+
   background:var(--khaki2);
   border:2px solid var(--khaki3);
-  clip-path:polygon(0 100%,100% 100%,50% 0);
+
+  clip-path:polygon(
+    0 100%,
+    100% 100%,
+    50% 0
+  );
 
   transform-origin:bottom center;
 
-  animation:bottomOpen 1.1s cubic-bezier(.7,0,.2,1) 4.1s forwards;
+  animation:
+    bottomOpen 1.1s cubic-bezier(.7,0,.2,1) 4.1s forwards;
 }
 
 @keyframes bottomOpen{
@@ -415,13 +490,16 @@ a{
   }
 }
 
-/* ribbon */
+
+/* RIBBON */
 
 .ribbon-v,
 .ribbon-h{
   position:absolute;
   z-index:15;
+
   background:var(--pink4);
+
   box-shadow:0 4px 8px var(--shadow);
 }
 
@@ -430,7 +508,11 @@ a{
   top:0;
   bottom:0;
   left:50%;
+
   transform:translateX(-50%);
+
+  animation:
+    ribbonVertical 1s ease 2s forwards;
 }
 
 .ribbon-h{
@@ -438,53 +520,62 @@ a{
   left:0;
   right:0;
   top:50%;
+
   transform:translateY(-50%);
-}
 
-/* ribbon disappears */
-
-.ribbon-v{
-  animation:ribbonVertical 1s ease 2s forwards;
-}
-
-.ribbon-h{
-  animation:ribbonHorizontal 1s ease 2s forwards;
+  animation:
+    ribbonHorizontal 1s ease 2s forwards;
 }
 
 @keyframes ribbonVertical{
   to{
-    transform:translate(-50%,100px) rotate(5deg);
+    transform:
+      translate(-50%,100px)
+      rotate(5deg);
+
     opacity:0;
   }
 }
 
 @keyframes ribbonHorizontal{
   to{
-    transform:translate(90px,-50%) rotate(5deg);
+    transform:
+      translate(90px,-50%)
+      rotate(5deg);
+
     opacity:0;
   }
 }
 
-/* bow */
+
+/* BOW */
 
 .bow{
   position:absolute;
   left:50%;
   top:50%;
+
   z-index:20;
+
   width:105px;
   height:65px;
+
   transform:translate(-50%,-50%);
-  animation:bowDrop 1.15s cubic-bezier(.6,-.2,.2,1) 1.8s forwards;
+
+  animation:
+    bowDrop 1.15s cubic-bezier(.6,-.2,.2,1) 1.8s forwards;
 }
 
 .bow-loop{
   position:absolute;
   top:5px;
+
   width:54px;
   height:42px;
+
   background:var(--pink4);
   border:2px solid var(--pink5);
+
   border-radius:70% 35% 70% 35%;
 }
 
@@ -500,23 +591,38 @@ a{
 
 .bow-knot{
   position:absolute;
+
   width:24px;
   height:24px;
+
   left:50%;
   top:20px;
+
   transform:translateX(-50%);
+
   border-radius:50%;
+
   background:var(--pink3);
   border:2px solid var(--pink5);
 }
 
 .bow-tail{
   position:absolute;
+
   top:38px;
+
   width:37px;
   height:55px;
+
   background:var(--pink4);
-  clip-path:polygon(0 0,100% 15%,75% 100%,50% 78%,20% 100%);
+
+  clip-path:polygon(
+    0 0,
+    100% 15%,
+    75% 100%,
+    50% 78%,
+    20% 100%
+  );
 }
 
 .bow-tail.left{
@@ -530,30 +636,48 @@ a{
 }
 
 @keyframes bowDrop{
+
   0%{
     transform:translate(-50%,-50%) scale(1);
     opacity:1;
   }
+
   45%{
-    transform:translate(-50%,45%) rotate(7deg) scale(.9);
+    transform:
+      translate(-50%,45%)
+      rotate(7deg)
+      scale(.9);
+
     opacity:1;
   }
+
   100%{
-    transform:translate(-50%,160%) rotate(18deg) scale(.65);
+    transform:
+      translate(-50%,160%)
+      rotate(18deg)
+      scale(.65);
+
     opacity:0;
   }
 }
 
-/* little decorative sparkles */
+
+/* SPARKLES */
 
 .spark{
   position:absolute;
+
   width:7px;
   height:7px;
+
   border-radius:50%;
+
   background:var(--pink3);
+
   opacity:0;
-  animation:spark .8s ease 5.5s forwards;
+
+  animation:
+    spark .8s ease 5.5s forwards;
 }
 
 .spark.s1{
@@ -580,19 +704,23 @@ a{
 }
 
 @keyframes spark{
+
   0%{
     opacity:0;
     transform:scale(.4);
   }
+
   50%{
     opacity:1;
     transform:scale(1.4);
   }
+
   100%{
     opacity:0;
     transform:scale(.6);
   }
 }
+
 
 /* =========================
    MAIN SITE
@@ -614,10 +742,12 @@ a{
   from{
     opacity:0;
   }
+
   to{
     opacity:1;
   }
 }
+
 
 /* =========================
    BALLOONS
@@ -626,7 +756,9 @@ a{
 #balloon-field{
   position:fixed;
   inset:0;
+
   z-index:2;
+
   overflow:hidden;
   pointer-events:none;
 }
@@ -634,63 +766,98 @@ a{
 .balloon{
   position:absolute;
   bottom:-180px;
+
   width:54px;
   height:68px;
-  border-radius:52% 48% 48% 52% / 58% 58% 42% 42%;
+
+  border-radius:
+    52% 48% 48% 52% /
+    58% 58% 42% 42%;
+
   opacity:.72;
 
-  filter:drop-shadow(0 10px 10px rgba(116,102,77,.12));
+  filter:
+    drop-shadow(
+      0 10px 10px
+      rgba(116,102,77,.12)
+    );
 
   animation:
     balloonRise var(--rise) linear infinite,
     balloonSway var(--sway) ease-in-out infinite alternate;
 
-  animation-delay:var(--delay),var(--sway-delay);
+  animation-delay:
+    var(--delay),
+    var(--sway-delay);
 }
 
 .balloon:before{
   content:"";
+
   position:absolute;
+
   left:50%;
   top:9px;
+
   width:16px;
   height:23px;
+
   border-radius:50%;
+
   transform:translateX(-50%);
+
   background:rgba(255,255,255,.22);
 }
 
 .balloon:after{
   content:"";
+
   position:absolute;
+
   left:50%;
   bottom:-8px;
+
   width:11px;
   height:11px;
-  transform:translateX(-50%) rotate(45deg);
+
+  transform:
+    translateX(-50%)
+    rotate(45deg);
+
   background:inherit;
 }
 
 .balloon .string{
   position:absolute;
+
   left:50%;
   top:100%;
+
   width:1px;
   height:150px;
+
   transform-origin:top;
+
   background:var(--khaki3);
+
   opacity:.58;
 }
 
 .balloon .string:after{
   content:"";
+
   position:absolute;
+
   top:65px;
   left:-3px;
+
   width:7px;
   height:24px;
+
   border-left:1px solid var(--khaki3);
+
   border-radius:50%;
+
   transform:rotate(18deg);
 }
 
@@ -805,28 +972,40 @@ a{
 }
 
 @keyframes balloonRise{
+
   0%{
-    transform:translate3d(0,0,0) rotate(-4deg);
+    transform:
+      translate3d(0,0,0)
+      rotate(-4deg);
   }
 
   25%{
-    transform:translate3d(12px,-25vh,0) rotate(4deg);
+    transform:
+      translate3d(12px,-25vh,0)
+      rotate(4deg);
   }
 
   50%{
-    transform:translate3d(-15px,-52vh,0) rotate(-3deg);
+    transform:
+      translate3d(-15px,-52vh,0)
+      rotate(-3deg);
   }
 
   75%{
-    transform:translate3d(10px,-77vh,0) rotate(5deg);
+    transform:
+      translate3d(10px,-77vh,0)
+      rotate(5deg);
   }
 
   100%{
-    transform:translate3d(-8px,-120vh,0) rotate(-4deg);
+    transform:
+      translate3d(-8px,-120vh,0)
+      rotate(-4deg);
   }
 }
 
 @keyframes balloonSway{
+
   from{
     margin-left:-8px;
   }
@@ -836,6 +1015,7 @@ a{
   }
 }
 
+
 /* =========================
    NAVIGATION
 ========================= */
@@ -843,16 +1023,21 @@ a{
 nav{
   position:sticky;
   top:0;
+
   z-index:20;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:20px;
 
   padding:17px 5%;
+
   background:rgba(255,244,246,.88);
+
   backdrop-filter:blur(12px);
+
   border-bottom:1px solid var(--pink2);
 }
 
@@ -864,8 +1049,11 @@ nav{
 .nav-links{
   display:flex;
   align-items:center;
+
   gap:25px;
+
   list-style:none;
+
   font-size:13px;
   letter-spacing:1px;
 }
@@ -880,13 +1068,19 @@ nav{
 
 .menu-btn{
   display:none;
+
   border:1px solid var(--khaki2);
+
   background:var(--pink5);
   color:var(--khaki4);
+
   padding:9px 12px;
+
   border-radius:10px;
+
   cursor:pointer;
 }
+
 
 /* =========================
    HERO
@@ -897,9 +1091,13 @@ nav{
   z-index:3;
 
   min-height:calc(100vh - 65px);
+
   display:grid;
+
   grid-template-columns:1.05fr .95fr;
+
   align-items:center;
+
   gap:50px;
 
   padding:70px 8%;
@@ -920,74 +1118,107 @@ nav{
 
 .eyebrow{
   font-size:13px;
+
   letter-spacing:5px;
+
   text-transform:uppercase;
+
   color:var(--pink4);
+
   margin-bottom:20px;
 }
 
 .hero h1{
   font-size:clamp(65px,10vw,130px);
+
   line-height:.8;
+
   font-weight:normal;
+
   color:var(--khaki4);
 }
 
 .hero h1 span{
   display:block;
+
   color:var(--pink4);
+
   font-style:italic;
 }
 
 .hero-text{
   max-width:520px;
+
   margin-top:28px;
+
   font-size:18px;
+
   line-height:1.8;
 }
 
 .date-pill{
   display:inline-block;
+
   margin-top:28px;
+
   padding:13px 20px;
+
   border:1px solid var(--pink3);
+
   border-radius:50px;
+
   background:rgba(255,244,246,.8);
+
   letter-spacing:2px;
+
   font-size:13px;
 }
 
 .hero-photo{
   position:relative;
+
   z-index:4;
+
   display:flex;
+
   justify-content:center;
 }
 
 .photo-frame{
   width:min(430px,90%);
+
   aspect-ratio:4/5;
+
   padding:12px;
+
   background:var(--pink5);
+
   border:1px solid var(--khaki2);
+
   box-shadow:0 25px 60px var(--deep-shadow);
+
   transform:rotate(2deg);
 }
 
 .photo-frame img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:block;
 }
 
+
 /* =========================
-   GENERAL SECTION
+   GENERAL SECTIONS
 ========================= */
 
 .section{
   position:relative;
+
   z-index:3;
+
   padding:100px 8%;
 }
 
@@ -998,19 +1229,28 @@ nav{
 
 .section-label{
   font-size:12px;
+
   text-transform:uppercase;
+
   letter-spacing:4px;
+
   color:var(--pink4);
+
   margin-bottom:14px;
 }
 
 .section-title{
   font-size:clamp(40px,6vw,75px);
+
   font-weight:normal;
+
   line-height:.95;
+
   color:var(--khaki4);
+
   margin-bottom:45px;
 }
+
 
 /* =========================
    DETAILS
@@ -1022,16 +1262,22 @@ nav{
 
 .details-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:20px;
 }
 
 .detail-card{
   padding:32px 25px;
+
   min-height:190px;
 
   background:rgba(255,244,246,.84);
+
   border:1px solid var(--pink2);
+
   box-shadow:0 12px 30px var(--shadow);
 
   transition:.25s ease;
@@ -1043,20 +1289,26 @@ nav{
 
 .detail-icon{
   font-size:30px;
+
   color:var(--pink4);
+
   margin-bottom:20px;
 }
 
 .detail-card h3{
   font-size:22px;
+
   font-weight:normal;
+
   margin-bottom:10px;
 }
 
 .detail-card p{
   line-height:1.7;
+
   font-size:15px;
 }
+
 
 /* =========================
    COUNTDOWN
@@ -1064,6 +1316,7 @@ nav{
 
 .countdown{
   background:rgba(255,244,246,.88);
+
   text-align:center;
 }
 
@@ -1073,37 +1326,53 @@ nav{
 
 .countdown-sub{
   margin-bottom:40px;
+
   line-height:1.7;
 }
 
 .timer{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   max-width:850px;
+
   margin:auto;
+
   gap:15px;
 }
 
 .time-box{
   padding:28px 15px;
+
   background:rgba(232,225,207,.78);
+
   border:1px solid var(--khaki2);
 }
 
 .time-number{
   display:block;
+
   font-size:clamp(38px,6vw,65px);
+
   color:var(--pink4);
+
   line-height:1;
 }
 
 .time-label{
   display:block;
+
   margin-top:10px;
+
   font-size:11px;
+
   text-transform:uppercase;
+
   letter-spacing:2px;
 }
+
 
 /* =========================
    LOCATION
@@ -1115,54 +1384,79 @@ nav{
 
 .location-grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:30px;
+
   align-items:stretch;
 }
 
 .location-card{
   padding:40px;
+
   background:rgba(232,225,207,.84);
+
   border:1px solid var(--khaki2);
 }
 
 .location-card h3{
   font-size:30px;
+
   font-weight:normal;
+
   margin-bottom:20px;
 }
 
 .location-card p{
   line-height:1.8;
+
   margin-bottom:8px;
 }
 
 .map-btn{
   display:inline-block;
+
   margin-top:25px;
+
   padding:14px 22px;
+
   border-radius:30px;
+
   background:var(--pink4);
+
   color:var(--pink5);
+
   letter-spacing:1px;
+
   transition:.2s ease;
 }
 
 .map-btn:hover{
   transform:translateY(-2px);
+
   box-shadow:0 10px 25px var(--shadow);
 }
 
 .map-placeholder{
   min-height:320px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   text-align:center;
+
   padding:30px;
 
   background:
-    radial-gradient(circle at center,var(--pink2),transparent 50%),
+    radial-gradient(
+      circle at center,
+      var(--pink2),
+      transparent 50%
+    ),
     var(--khaki2);
 
   border:1px solid var(--khaki3);
@@ -1172,43 +1466,59 @@ nav{
   font-size:18px;
 }
 
+
 /* =========================
    RSVP
 ========================= */
 
 .rsvp{
   background:rgba(232,225,207,.88);
+
   text-align:center;
 }
 
 .rsvp-box{
   max-width:700px;
+
   margin:auto;
+
   padding:55px 30px;
+
   background:rgba(255,244,246,.9);
+
   border:1px solid var(--pink2);
+
   box-shadow:0 15px 40px var(--shadow);
 }
 
 .rsvp-box p{
   line-height:1.8;
+
   margin-bottom:28px;
 }
 
 .whatsapp-btn{
   display:inline-block;
+
   padding:16px 30px;
+
   background:var(--pink4);
+
   color:var(--pink5);
+
   border-radius:40px;
+
   letter-spacing:1px;
+
   transition:.2s ease;
 }
 
 .whatsapp-btn:hover{
   transform:translateY(-3px);
+
   box-shadow:0 12px 30px var(--shadow);
 }
+
 
 /* =========================
    FOOTER
@@ -1216,10 +1526,15 @@ nav{
 
 footer{
   position:relative;
+
   z-index:3;
+
   padding:45px 20px;
+
   text-align:center;
+
   background:var(--pink4);
+
   color:var(--pink5);
 }
 
@@ -1229,9 +1544,12 @@ footer p{
 
 .footer-small{
   margin-top:8px;
+
   font-size:12px;
+
   opacity:.8;
 }
+
 
 /* =========================
    MOBILE
@@ -1249,14 +1567,22 @@ footer p{
 
   .nav-links{
     position:absolute;
+
     left:0;
     right:0;
+
     top:100%;
+
     display:none;
+
     flex-direction:column;
+
     align-items:flex-start;
+
     gap:0;
+
     background:rgba(255,244,246,.97);
+
     border-bottom:1px solid var(--pink2);
   }
 
@@ -1270,13 +1596,17 @@ footer p{
 
   .nav-links a{
     display:block;
+
     width:100%;
+
     padding:15px 5%;
   }
 
   .hero{
     grid-template-columns:1fr;
+
     min-height:auto;
+
     padding-top:75px;
     padding-bottom:75px;
   }
@@ -1294,7 +1624,8 @@ footer p{
   }
 
   .timer{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .location-grid{
@@ -1326,17 +1657,22 @@ footer p{
 
   .card{
     width:70vw;
+
     height:105vw;
+
     max-height:500px;
   }
 
   .envelope{
     width:80vw;
+
     height:52vw;
   }
 
   .bow{
-    transform:translate(-50%,-50%) scale(.82);
+    transform:
+      translate(-50%,-50%)
+      scale(.82);
   }
 
   .hero{
@@ -1361,6 +1697,7 @@ footer p{
   }
 }
 
+
 /* =========================
    REDUCED MOTION
 ========================= */
@@ -1371,24 +1708,31 @@ footer p{
   *::before,
   *::after{
     animation-duration:.01ms !important;
+
     animation-iteration-count:1 !important;
+
     scroll-behavior:auto !important;
+
     transition-duration:.01ms !important;
   }
 
   .balloon{
     animation:none;
+
     bottom:8%;
+
     opacity:.25;
   }
 }
+
 </style>
 </head>
 
 <body>
 
+
 <!-- =========================
-     PASSWORD SCREEN
+     PASSWORD
 ========================= -->
 
 <section id="gate">
@@ -1404,7 +1748,7 @@ footer p{
     </h1>
 
     <p class="gate-subtitle">
-      Enter the password to open your invitation.
+      Enter the password to open Lëhanie's invitation.
     </p>
 
     <input
@@ -1439,12 +1783,20 @@ footer p{
      ENVELOPE REVEAL
 ========================= -->
 
-<section id="reveal" aria-hidden="true">
+<section
+  id="reveal"
+  aria-hidden="true"
+>
 
   <div class="reveal-stage">
 
-    <!-- Invitation card -->
-    <div class="card" id="inviteCard">
+
+    <!-- INVITATION CARD -->
+
+    <div
+      class="card"
+      id="inviteCard"
+    >
 
       <svg
         class="floral"
@@ -1534,17 +1886,14 @@ footer p{
           class="card-name"
           id="cardName"
         >
-          Your Name
+          Lëhanie
         </div>
 
         <div class="card-age">
           21st Birthday
         </div>
 
-        <div
-          class="card-date"
-          id="cardDate"
-        >
+        <div class="card-date">
           14 OCTOBER 2026
         </div>
 
@@ -1553,8 +1902,12 @@ footer p{
     </div>
 
 
-    <!-- Envelope -->
-    <div class="envelope" id="envelope">
+    <!-- ENVELOPE -->
+
+    <div
+      class="envelope"
+      id="envelope"
+    >
 
       <div class="env-back"></div>
 
@@ -1567,15 +1920,18 @@ footer p{
       <div class="door right"></div>
 
       <div class="ribbon-v"></div>
+
       <div class="ribbon-h"></div>
 
 
       <div class="bow">
 
         <div class="bow-loop left"></div>
+
         <div class="bow-loop right"></div>
 
         <div class="bow-tail left"></div>
+
         <div class="bow-tail right"></div>
 
         <div class="bow-knot"></div>
@@ -1596,13 +1952,18 @@ footer p{
 
 
 <!-- =========================
-     MAIN WEBSITE
+     MAIN SITE
 ========================= -->
 
 <div id="site">
 
+
   <!-- BALLOONS -->
-  <div id="balloon-field" aria-hidden="true">
+
+  <div
+    id="balloon-field"
+    aria-hidden="true"
+  >
 
     <div class="balloon pink b1">
       <span class="string"></span>
@@ -1648,7 +2009,7 @@ footer p{
   <nav>
 
     <div class="logo">
-      21
+      Lëhanie
     </div>
 
     <button
@@ -1712,11 +2073,13 @@ footer p{
         </div>
 
         <h1>
-          <span id="heroName">
-            Your
+
+          <span>
+            Lëhanie
           </span>
 
           21st
+
         </h1>
 
         <p class="hero-text">
@@ -1738,7 +2101,7 @@ footer p{
 
           <img
             src="photo.jpeg"
-            alt="Birthday girl"
+            alt="Lëhanie"
             loading="lazy"
           >
 
@@ -1768,6 +2131,7 @@ footer p{
 
 
         <div class="details-grid">
+
 
           <div class="detail-card">
 
@@ -1822,6 +2186,7 @@ footer p{
 
           </div>
 
+
         </div>
 
       </div>
@@ -1852,6 +2217,7 @@ footer p{
 
 
         <div class="timer">
+
 
           <div class="time-box">
 
@@ -1916,6 +2282,7 @@ footer p{
 
           </div>
 
+
         </div>
 
       </div>
@@ -1942,6 +2309,7 @@ footer p{
 
 
         <div class="location-grid">
+
 
           <div class="location-card">
 
@@ -1987,6 +2355,7 @@ footer p{
             </span>
 
           </div>
+
 
         </div>
 
@@ -2047,7 +2416,7 @@ footer p{
     </p>
 
     <p class="footer-small">
-      14 • 10 • 2026
+      Lëhanie • 14 • 10 • 2026
     </p>
 
   </footer>
@@ -2069,7 +2438,7 @@ const CONFIG = {
 
   venue:"Your Venue",
 
-  city:"Rehoboth",
+  city:"Your City",
 
   whatsapp:"0000000000",
 
@@ -2078,6 +2447,23 @@ const CONFIG = {
   eventDate:"2026-10-14T18:00:00+02:00"
 
 };
+
+
+/* =========================================
+   BIRTHDAY SONG
+========================================= */
+
+const birthdaySong =
+  new Audio("song.mp3");
+
+birthdaySong.loop = true;
+
+/*
+  Volume can be changed here.
+  0.7 = 70% volume.
+*/
+
+birthdaySong.volume = 0.7;
 
 
 /* =========================================
@@ -2110,27 +2496,32 @@ const inviteCard =
 
 
 /* =========================================
-   INSERT CONFIG DATA
+   CONFIG DATA
 ========================================= */
 
-document.getElementById("cardName").textContent =
+document.getElementById(
+  "cardName"
+).textContent =
   CONFIG.name;
 
-document.getElementById("heroName").textContent =
-  CONFIG.name;
-
-document.getElementById("venueName").textContent =
+document.getElementById(
+  "venueName"
+).textContent =
   CONFIG.venue;
 
-document.getElementById("cityName").textContent =
+document.getElementById(
+  "cityName"
+).textContent =
   CONFIG.city;
 
-document.getElementById("mapLink").href =
+document.getElementById(
+  "mapLink"
+).href =
   CONFIG.mapUrl;
 
 
 /* =========================================
-   RSVP WHATSAPP
+   WHATSAPP RSVP
 ========================================= */
 
 const whatsappMessage =
@@ -2138,7 +2529,9 @@ const whatsappMessage =
     `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday on 14 October 2026.`
   );
 
-document.getElementById("whatsappLink").href =
+document.getElementById(
+  "whatsappLink"
+).href =
   `https://wa.me/${CONFIG.whatsapp}?text=${whatsappMessage}`;
 
 
@@ -2150,6 +2543,9 @@ function openInvitation(){
 
   const entered =
     passwordInput.value.trim();
+
+
+  /* WRONG PASSWORD */
 
   if(entered !== CONFIG.password){
 
@@ -2163,21 +2559,58 @@ function openInvitation(){
     return;
   }
 
+
+  /* CORRECT PASSWORD */
+
   passwordError.textContent = "";
 
+
+  /*
+    START MUSIC IMMEDIATELY.
+
+    Because this function is triggered directly
+    by the user's password submission, the browser
+    should allow the audio to play.
+  */
+
+  birthdaySong.currentTime = 0;
+
+  birthdaySong.play().catch(error => {
+
+    console.log(
+      "Audio could not autoplay:",
+      error
+    );
+
+  });
+
+
+  /* HIDE PASSWORD SCREEN */
+
   gate.classList.add("hide");
+
+
+  /* START ENVELOPE */
 
   setTimeout(() => {
 
     reveal.classList.add("show");
 
+    reveal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
     startInvitation();
 
   },500);
+
 }
 
 
-/* ENTER BUTTON */
+/* =========================================
+   PASSWORD BUTTON
+========================================= */
 
 enterBtn.addEventListener(
   "click",
@@ -2185,7 +2618,9 @@ enterBtn.addEventListener(
 );
 
 
-/* ENTER KEY */
+/* =========================================
+   ENTER KEY
+========================================= */
 
 passwordInput.addEventListener(
   "keydown",
@@ -2202,32 +2637,29 @@ passwordInput.addEventListener(
 
 
 /* =========================================
-   AUTOPLAY ENVELOPE SEQUENCE
+   ENVELOPE SEQUENCE
 ========================================= */
 
 function startInvitation(){
 
   /*
-    IMPORTANT TIMING:
+    TIMELINE
 
-    0s    = reveal begins
-    1.8s  = bow drops
-    2.0s  = ribbons loosen
-    3.15s = top flap opens
-    3.75s = envelope doors open
-    4.1s  = bottom fold opens
-    4.65s = invitation card rises
-    5.9s  = ENVELOPE IS COMPLETELY REMOVED
-    6.35s = invitation wording appears
-    8.1s  = reveal fades
-    8.8s  = main website appears
-
-    The envelope is deliberately removed
-    before the card's final text appears.
+    0.0s   Reveal starts
+    1.8s   Bow drops
+    2.0s   Ribbon loosens
+    3.15s  Top flap opens
+    3.75s  Envelope doors open
+    4.10s  Bottom fold opens
+    4.65s  Invitation card rises
+    5.90s  Envelope COMPLETELY disappears
+    6.35s  Card wording appears
+    8.10s  Reveal fades
+    8.90s  Main website appears
   */
 
 
-  /* Remove envelope completely */
+  /* REMOVE ENVELOPE */
 
   setTimeout(() => {
 
@@ -2242,7 +2674,7 @@ function startInvitation(){
   },5900);
 
 
-  /* Fade reveal away */
+  /* FADE REVEAL */
 
   setTimeout(() => {
 
@@ -2255,21 +2687,27 @@ function startInvitation(){
   },8100);
 
 
-  /* Show main site */
+  /* SHOW WEBSITE */
 
   setTimeout(() => {
 
-    reveal.classList.remove("show");
+    reveal.classList.remove(
+      "show"
+    );
 
     reveal.style.display =
       "none";
 
-    site.classList.add("visible");
+    site.classList.add(
+      "visible"
+    );
 
     reveal.setAttribute(
       "aria-hidden",
       "true"
     );
+
+    document.body.style.overflow = "";
 
     window.scrollTo({
       top:0,
@@ -2286,7 +2724,9 @@ function startInvitation(){
 ========================================= */
 
 const eventTime =
-  new Date(CONFIG.eventDate).getTime();
+  new Date(
+    CONFIG.eventDate
+  ).getTime();
 
 
 function updateCountdown(){
@@ -2300,17 +2740,21 @@ function updateCountdown(){
 
   if(distance <= 0){
 
-    document.getElementById("days").textContent =
-      "00";
+    document.getElementById(
+      "days"
+    ).textContent = "00";
 
-    document.getElementById("hours").textContent =
-      "00";
+    document.getElementById(
+      "hours"
+    ).textContent = "00";
 
-    document.getElementById("minutes").textContent =
-      "00";
+    document.getElementById(
+      "minutes"
+    ).textContent = "00";
 
-    document.getElementById("seconds").textContent =
-      "00";
+    document.getElementById(
+      "seconds"
+    ).textContent = "00";
 
     return;
   }
@@ -2322,6 +2766,7 @@ function updateCountdown(){
       (1000 * 60 * 60 * 24)
     );
 
+
   const hours =
     Math.floor(
       (distance %
@@ -2329,12 +2774,14 @@ function updateCountdown(){
       (1000 * 60 * 60)
     );
 
+
   const minutes =
     Math.floor(
       (distance %
       (1000 * 60 * 60)) /
       (1000 * 60)
     );
+
 
   const seconds =
     Math.floor(
@@ -2344,16 +2791,27 @@ function updateCountdown(){
     );
 
 
-  document.getElementById("days").textContent =
+  document.getElementById(
+    "days"
+  ).textContent =
     String(days).padStart(2,"0");
 
-  document.getElementById("hours").textContent =
+
+  document.getElementById(
+    "hours"
+  ).textContent =
     String(hours).padStart(2,"0");
 
-  document.getElementById("minutes").textContent =
+
+  document.getElementById(
+    "minutes"
+  ).textContent =
     String(minutes).padStart(2,"0");
 
-  document.getElementById("seconds").textContent =
+
+  document.getElementById(
+    "seconds"
+  ).textContent =
     String(seconds).padStart(2,"0");
 
 }
@@ -2390,27 +2848,26 @@ menuBtn.addEventListener(
 );
 
 
-/* Close mobile menu after clicking */
+navLinks
+  .querySelectorAll("a")
+  .forEach(link => {
 
-navLinks.querySelectorAll("a")
-.forEach(link => {
+    link.addEventListener(
+      "click",
+      () => {
 
-  link.addEventListener(
-    "click",
-    () => {
+        navLinks.classList.remove(
+          "open"
+        );
 
-      navLinks.classList.remove(
-        "open"
-      );
+      }
+    );
 
-    }
-  );
-
-});
+  });
 
 
 /* =========================================
-   PREVENT ACCIDENTAL REVEAL SCROLL
+   INITIAL PAGE LOCK
 ========================================= */
 
 document.body.style.overflow =
@@ -2420,7 +2877,11 @@ document.body.style.overflow =
 const observer =
   new MutationObserver(() => {
 
-    if(site.classList.contains("visible")){
+    if(
+      site.classList.contains(
+        "visible"
+      )
+    ){
 
       document.body.style.overflow =
         "";
