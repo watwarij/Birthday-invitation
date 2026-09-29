@@ -7,21 +7,26 @@
 <title>21st Birthday Invitation</title>
 
 <style>
+
 :root{
   --pink:#f5d9df;
   --pink2:#edb9c5;
   --pink3:#d98699;
   --pink4:#b65e73;
   --pink5:#fff4f6;
+
   --khaki:#e8e1cf;
   --khaki2:#d3c8ad;
   --khaki3:#a99a78;
   --khaki4:#74664d;
+
   --shadow:rgba(116,102,77,.22);
   --deep-shadow:rgba(116,102,77,.34);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 html{
   scroll-behavior:smooth;
@@ -34,7 +39,8 @@ body{
   font-family:Georgia,"Times New Roman",serif;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
 
@@ -42,17 +48,21 @@ a{
   color:inherit;
 }
 
-/* =========================
+
+/* =====================================================
    PASSWORD SCREEN
-========================= */
+===================================================== */
 
 #gate{
   position:fixed;
   inset:0;
   z-index:10000;
+
   display:grid;
   place-items:center;
+
   padding:24px;
+
   background:
     radial-gradient(
       circle at 50% 25%,
@@ -60,7 +70,10 @@ a{
       transparent 42%
     ),
     var(--pink5);
-  transition:opacity .8s,visibility .8s;
+
+  transition:
+    opacity .8s ease,
+    visibility .8s ease;
 }
 
 #gate.hide{
@@ -71,11 +84,17 @@ a{
 
 .gate-card{
   width:min(440px,100%);
+
   padding:42px 30px;
+
   text-align:center;
-  background:rgba(232,225,207,.93);
+
+  background:rgba(232,225,207,.94);
+
   border:1px solid var(--khaki2);
-  box-shadow:0 30px 80px var(--shadow);
+
+  box-shadow:
+    0 30px 80px var(--shadow);
 }
 
 .gate-card small{
@@ -85,8 +104,12 @@ a{
 
 .gate-card h1{
   margin:14px 0 8px;
-  font-size:clamp(42px,12vw,70px);
+
+  font-size:
+    clamp(42px,12vw,70px);
+
   color:var(--pink4);
+
   font-weight:400;
 }
 
@@ -102,40 +125,56 @@ a{
 .password-row input{
   min-width:0;
   flex:1;
+
   padding:14px;
+
   border:1px solid var(--khaki3);
+
   background:var(--pink5);
   color:var(--khaki4);
+
   text-align:center;
+
   letter-spacing:.16em;
+
   outline:none;
 }
 
 .password-row button{
   padding:14px 20px;
+
   border:1px solid var(--pink4);
+
   background:var(--pink4);
   color:var(--pink5);
+
   cursor:pointer;
 }
 
 .error{
   min-height:22px;
+
   margin-top:12px;
+
   color:var(--pink4);
 }
 
-/* =========================
+
+/* =====================================================
    ENVELOPE REVEAL
-========================= */
+===================================================== */
 
 #reveal{
   position:fixed;
   inset:0;
+
   z-index:9000;
+
   display:none;
   place-items:center;
+
   overflow:hidden;
+
   background:
     radial-gradient(
       circle at 50% 50%,
@@ -143,7 +182,10 @@ a{
       rgba(255,244,246,1) 62%
     ),
     var(--pink5);
+
   perspective:1400px;
+
+  opacity:1;
 }
 
 #reveal.show{
@@ -154,13 +196,18 @@ a{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .9s;
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
 }
 
 .reveal-bg{
   position:absolute;
   inset:-15%;
+
   opacity:.42;
+
   background:
     radial-gradient(
       circle at 15% 20%,
@@ -172,27 +219,42 @@ a{
       var(--pink3) 0 1px,
       transparent 2px
     );
-  background-size:34px 34px,48px 48px;
+
+  background-size:
+    34px 34px,
+    48px 48px;
+
   animation:bgDrift 10s linear infinite;
 }
 
 @keyframes bgDrift{
   to{
-    transform:translate3d(20px,-18px,0) rotate(.5deg);
+    transform:
+      translate3d(20px,-18px,0)
+      rotate(.5deg);
   }
 }
 
 .reveal-note{
   position:absolute;
+
   top:8%;
   left:50%;
+
   transform:translateX(-50%);
+
   z-index:30;
+
   color:var(--khaki3);
+
   font-size:12px;
+
   letter-spacing:.28em;
+
   text-transform:uppercase;
+
   opacity:0;
+
   animation:
     noteIn .8s ease 1s forwards,
     noteOut .7s ease 3.1s forwards;
@@ -207,46 +269,63 @@ a{
 @keyframes noteOut{
   to{
     opacity:0;
-    transform:translate(-50%,-12px);
+
+    transform:
+      translate(-50%,-12px);
   }
 }
 
 .stage{
   position:relative;
+
   width:min(430px,84vw);
   height:min(700px,76vh);
+
   transform-style:preserve-3d;
 }
 
-/* =========================
+
+/* =====================================================
    INVITATION CARD
-========================= */
+===================================================== */
 
 .card{
   position:absolute;
+
   z-index:2;
+
   left:5%;
   right:5%;
+
   top:4%;
   bottom:3%;
+
   padding:10px;
-  background:linear-gradient(
-    135deg,
-    var(--pink2),
-    var(--pink)
-  );
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink2),
+      var(--pink)
+    );
+
   border:1px solid var(--pink3);
+
   box-shadow:
     0 35px 90px rgba(116,102,77,.24),
-    inset 0 0 0 5px rgba(255,244,246,.55);
+    inset 0 0 0 5px
+    rgba(255,244,246,.55);
+
   opacity:0;
+
   transform:
     translateY(110px)
     scale(.78)
     rotateX(8deg);
+
   animation:
     cardReveal
-    2.25s
+    2.2s
     cubic-bezier(.15,.82,.15,1)
     4.85s
     forwards;
@@ -254,15 +333,20 @@ a{
 
 .card:before{
   content:"";
+
   position:absolute;
   inset:8px;
+
   border:1px solid var(--khaki2);
+
   pointer-events:none;
 }
 
 @keyframes cardReveal{
+
   0%{
     opacity:0;
+
     transform:
       translateY(110px)
       scale(.78)
@@ -282,6 +366,7 @@ a{
 
   100%{
     opacity:1;
+
     transform:
       translateY(0)
       scale(1)
@@ -289,10 +374,17 @@ a{
   }
 }
 
+
+/* =====================================================
+   FLORAL BORDER
+===================================================== */
+
 .floral{
   position:absolute;
   inset:0;
+
   color:var(--pink4);
+
   opacity:.78;
 }
 
@@ -301,32 +393,53 @@ a{
   height:100%;
 }
 
+
+/* =====================================================
+   CARD WORDING
+===================================================== */
+
 .card-copy{
   position:absolute;
+
   left:50%;
   top:50%;
+
   z-index:4;
+
   width:70%;
+
   transform:
     translate(-50%,-45%)
     translateY(22px);
+
   padding:28px 16px;
+
   text-align:center;
-  background:rgba(245,217,223,.9);
+
+  background:
+    rgba(245,217,223,.9);
+
   border:1px solid var(--khaki2);
-  box-shadow:0 16px 35px rgba(116,102,77,.14);
+
+  box-shadow:
+    0 16px 35px
+    rgba(116,102,77,.14);
+
   opacity:0;
+
   animation:
     copyReveal
     1s
     ease
-    7.05s
+    7s
     forwards;
 }
 
 @keyframes copyReveal{
+
   to{
     opacity:1;
+
     transform:
       translate(-50%,-45%)
       translateY(0);
@@ -335,82 +448,105 @@ a{
 
 .card-copy small{
   letter-spacing:.18em;
+
   text-transform:uppercase;
+
   font-size:9px;
 }
 
 .card-copy h2{
   margin:6px 0 0;
-  font-size:clamp(82px,20vw,118px);
+
+  font-size:
+    clamp(82px,20vw,118px);
+
   line-height:.82;
+
   color:var(--pink4);
+
   font-weight:400;
 }
 
 .card-copy h3{
   margin:10px 0;
+
   font-size:14px;
+
   letter-spacing:.3em;
+
   font-weight:400;
 }
 
 .card-copy p{
   margin:0;
+
   font-size:12px;
+
   letter-spacing:.18em;
 }
 
-/* =========================
+
+/* =====================================================
    ENVELOPE
-========================= */
+===================================================== */
 
 .envelope{
   position:absolute;
+
   left:0;
   right:0;
+
   bottom:5%;
+
   height:61%;
+
   z-index:10;
+
   transform-style:preserve-3d;
-  filter:drop-shadow(
-    0 32px 35px var(--shadow)
-  );
+
+  filter:
+    drop-shadow(
+      0 32px 35px var(--shadow)
+    );
+
+  /*
+    Envelope completely disappears
+    before the main website appears.
+  */
+
   animation:
-    envelopeSettle .9s 3.4s both,
-    envelopeFade .9s ease 6.8s forwards;
+    envelopeFadeOut
+    1s
+    ease
+    7.35s
+    forwards;
 }
 
-@keyframes envelopeSettle{
-  0%{
-    transform:translateY(0) rotateZ(0);
-  }
+@keyframes envelopeFadeOut{
 
-  40%{
-    transform:translateY(4px) rotateZ(-.5deg);
+  0%{
+    opacity:1;
   }
 
   70%{
-    transform:translateY(-3px) rotateZ(.35deg);
+    opacity:.4;
   }
 
   100%{
-    transform:translateY(0) rotateZ(0);
-  }
-}
-
-@keyframes envelopeFade{
-  to{
     opacity:0;
+
     visibility:hidden;
+
     transform:
-      translateY(12px)
-      scale(.985);
+      translateY(18px)
+      scale(.97);
   }
 }
 
 .env-back{
   position:absolute;
   inset:0;
+
   background:
     linear-gradient(
       135deg,
@@ -423,21 +559,31 @@ a{
       transparent 45%
     ),
     var(--khaki);
+
   border:1px solid var(--khaki3);
+
   box-shadow:
     inset 0 0 0 1px
     rgba(255,244,246,.55);
 }
 
-/* SIDE DOORS */
+
+/* =====================================================
+   SIDE DOORS
+===================================================== */
 
 .door{
   position:absolute;
+
   top:0;
   bottom:0;
+
   width:50%;
+
   z-index:12;
+
   overflow:hidden;
+
   background:
     linear-gradient(
       145deg,
@@ -445,47 +591,72 @@ a{
       transparent 50%
     ),
     var(--khaki);
+
   backface-visibility:hidden;
+
   animation-duration:1.65s;
-  animation-timing-function:cubic-bezier(.68,.02,.16,1);
+
+  animation-timing-function:
+    cubic-bezier(.68,.02,.16,1);
+
   animation-delay:4.05s;
+
   animation-fill-mode:forwards;
 }
 
 .door:after{
   content:"";
+
   position:absolute;
   inset:9px;
-  border:1px solid rgba(169,154,120,.55);
+
+  border:
+    1px solid
+    rgba(169,154,120,.55);
 }
 
 .door.left{
   left:0;
+
   transform-origin:left center;
-  border-right:1px solid var(--khaki2);
-  clip-path:polygon(
-    0 0,
-    100% 50%,
-    0 100%
-  );
+
+  border-right:
+    1px solid var(--khaki2);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 50%,
+      0 100%
+    );
+
   animation-name:leftDoorOpen;
 }
 
 .door.right{
   right:0;
+
   transform-origin:right center;
-  border-left:1px solid var(--khaki2);
-  clip-path:polygon(
-    100% 0,
-    0 50%,
-    100% 100%
-  );
+
+  border-left:
+    1px solid var(--khaki2);
+
+  clip-path:
+    polygon(
+      100% 0,
+      0 50%,
+      100% 100%
+    );
+
   animation-name:rightDoorOpen;
 }
 
 @keyframes leftDoorOpen{
+
   0%{
-    transform:rotateY(0) translateZ(0);
+    transform:
+      rotateY(0)
+      translateZ(0);
   }
 
   45%{
@@ -498,13 +669,17 @@ a{
     transform:
       rotateY(-118deg)
       translateZ(24px);
-    opacity:.15;
+
+    opacity:.08;
   }
 }
 
 @keyframes rightDoorOpen{
+
   0%{
-    transform:rotateY(0) translateZ(0);
+    transform:
+      rotateY(0)
+      translateZ(0);
   }
 
   45%{
@@ -517,18 +692,25 @@ a{
     transform:
       rotateY(118deg)
       translateZ(24px);
-    opacity:.15;
+
+    opacity:.08;
   }
 }
 
-/* TOP AND BOTTOM FOLDS */
+
+/* =====================================================
+   TOP AND BOTTOM FOLDS
+===================================================== */
 
 .fold-top,
 .fold-bottom{
   position:absolute;
+
   left:0;
   right:0;
+
   z-index:15;
+
   background:
     linear-gradient(
       180deg,
@@ -536,18 +718,25 @@ a{
       transparent 55%
     ),
     var(--khaki);
+
   transform-origin:center top;
 }
 
 .fold-top{
   top:0;
+
   height:46%;
-  clip-path:polygon(
-    0 0,
-    100% 0,
-    50% 78%
-  );
-  border-bottom:1px solid var(--khaki2);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 78%
+    );
+
+  border-bottom:
+    1px solid var(--khaki2);
+
   animation:
     topOpen
     1.35s
@@ -558,13 +747,19 @@ a{
 
 .fold-bottom{
   bottom:0;
+
   height:30%;
-  clip-path:polygon(
-    0 100%,
-    100% 100%,
-    50% 12%
-  );
-  border-top:1px solid var(--khaki2);
+
+  clip-path:
+    polygon(
+      0 100%,
+      100% 100%,
+      50% 12%
+    );
+
+  border-top:
+    1px solid var(--khaki2);
+
   animation:
     bottomOpen
     1.3s
@@ -574,10 +769,12 @@ a{
 }
 
 @keyframes topOpen{
+
   0%{
     transform:
       rotateX(0)
       translateY(0);
+
     opacity:1;
   }
 
@@ -585,15 +782,18 @@ a{
     transform:
       rotateX(-72deg)
       translateY(-55px);
+
     opacity:.08;
   }
 }
 
 @keyframes bottomOpen{
+
   0%{
     transform:
       rotateX(0)
       translateY(0);
+
     opacity:1;
   }
 
@@ -601,18 +801,22 @@ a{
     transform:
       rotateX(62deg)
       translateY(95px);
+
     opacity:.08;
   }
 }
 
-/* =========================
+
+/* =====================================================
    RIBBON
-========================= */
+===================================================== */
 
 .ribbon-v,
 .ribbon-h{
   position:absolute;
+
   z-index:22;
+
   background:
     linear-gradient(
       90deg,
@@ -622,6 +826,7 @@ a{
       transparent
     ),
     var(--pink3);
+
   box-shadow:
     inset 0 0 0 1px
     rgba(182,94,115,.22);
@@ -631,8 +836,12 @@ a{
   left:50%;
   top:0;
   bottom:0;
+
   width:15px;
-  transform:translateX(-50%);
+
+  transform:
+    translateX(-50%);
+
   animation:
     ribbonDrop
     1.2s
@@ -645,8 +854,12 @@ a{
   left:0;
   right:0;
   top:50%;
+
   height:16px;
-  transform:translateY(-50%);
+
+  transform:
+    translateY(-50%);
+
   animation:
     ribbonDropH
     1.05s
@@ -656,8 +869,10 @@ a{
 }
 
 @keyframes ribbonDrop{
+
   0%{
-    transform:translateX(-50%);
+    transform:
+      translateX(-50%);
   }
 
   30%{
@@ -670,13 +885,16 @@ a{
     transform:
       translate(-50%,125%)
       rotate(3deg);
+
     opacity:0;
   }
 }
 
 @keyframes ribbonDropH{
+
   0%{
-    transform:translateY(-50%);
+    transform:
+      translateY(-50%);
   }
 
   35%{
@@ -689,22 +907,30 @@ a{
     transform:
       translateY(105px)
       rotate(-8deg);
+
     opacity:0;
   }
 }
 
-/* =========================
+
+/* =====================================================
    BOW
-========================= */
+===================================================== */
 
 .bow{
   position:absolute;
+
   z-index:30;
+
   left:50%;
   top:50%;
+
   width:170px;
   height:108px;
-  transform:translate(-50%,-50%);
+
+  transform:
+    translate(-50%,-50%);
+
   animation:
     bowRelease
     1.35s
@@ -715,9 +941,12 @@ a{
 
 .bow .loop{
   position:absolute;
+
   top:8px;
+
   width:78px;
   height:72px;
+
   background:
     linear-gradient(
       145deg,
@@ -725,7 +954,10 @@ a{
       transparent 45%
     ),
     var(--pink3);
-  border:1px solid var(--pink4);
+
+  border:
+    1px solid var(--pink4);
+
   box-shadow:
     0 10px 18px
     rgba(116,102,77,.18);
@@ -733,23 +965,35 @@ a{
 
 .bow .loop.left{
   left:4px;
-  border-radius:75% 25% 70% 30%;
+
+  border-radius:
+    75% 25% 70% 30%;
+
   transform:rotate(20deg);
 }
 
 .bow .loop.right{
   right:4px;
-  border-radius:25% 75% 30% 70%;
+
+  border-radius:
+    25% 75% 30% 70%;
+
   transform:rotate(-20deg);
 }
 
 .bow .tail{
   position:absolute;
+
   top:58px;
+
   width:45px;
   height:68px;
+
   background:var(--pink3);
-  border:1px solid var(--pink4);
+
+  border:
+    1px solid var(--pink4);
+
   box-shadow:
     0 8px 16px
     rgba(116,102,77,.14);
@@ -757,48 +1001,66 @@ a{
 
 .bow .tail.left{
   left:39px;
-  clip-path:polygon(
-    0 0,
-    100% 8%,
-    72% 100%,
-    38% 78%
-  );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 8%,
+      72% 100%,
+      38% 78%
+    );
+
   transform:rotate(12deg);
 }
 
 .bow .tail.right{
   right:39px;
-  clip-path:polygon(
-    0 8%,
-    100% 0,
-    62% 78%,
-    28% 100%
-  );
+
+  clip-path:
+    polygon(
+      0 8%,
+      100% 0,
+      62% 78%,
+      28% 100%
+    );
+
   transform:rotate(-12deg);
 }
 
 .bow .knot{
   position:absolute;
+
   z-index:3;
+
   left:50%;
   top:31px;
+
   width:35px;
   height:35px;
-  transform:translateX(-50%);
+
+  transform:
+    translateX(-50%);
+
   border-radius:50%;
+
   background:var(--pink4);
-  border:1px solid var(--pink4);
+
+  border:
+    1px solid var(--pink4);
+
   box-shadow:
     0 6px 12px
     rgba(116,102,77,.22);
 }
 
 @keyframes bowRelease{
+
   0%{
     transform:
       translate(-50%,-50%)
       rotate(0)
       scale(1);
+
     opacity:1;
   }
 
@@ -814,6 +1076,7 @@ a{
       translate(-50%,15px)
       rotate(9deg)
       scale(.98);
+
     opacity:1;
   }
 
@@ -822,23 +1085,35 @@ a{
       translate(-50%,260px)
       rotate(24deg)
       scale(.7);
+
     opacity:0;
   }
 }
 
-/* =========================
+
+/* =====================================================
    SPARKS
-========================= */
+===================================================== */
 
 .spark{
   position:absolute;
+
   z-index:40;
+
   width:5px;
   height:5px;
+
   border-radius:50%;
+
   background:var(--pink3);
+
   opacity:0;
-  animation:spark 1.4s ease forwards;
+
+  animation:
+    spark
+    1.4s
+    ease
+    forwards;
 }
 
 .spark:nth-of-type(1){
@@ -866,6 +1141,7 @@ a{
 }
 
 @keyframes spark{
+
   0%{
     opacity:0;
     transform:scale(.2);
@@ -878,25 +1154,28 @@ a{
 
   100%{
     opacity:0;
+
     transform:
-      translate(
-        calc((var(--x,1) * 30px)),
-        -55px
-      )
+      translate(25px,-55px)
       scale(.2);
   }
 }
 
-/* =========================
+
+/* =====================================================
    MAIN SITE
-========================= */
+===================================================== */
 
 #site{
+  position:relative;
+
+  z-index:3;
+
   opacity:0;
   visibility:hidden;
-  transition:opacity 1.2s ease;
-  position:relative;
-  z-index:3;
+
+  transition:
+    opacity 1.2s ease;
 }
 
 #site.visible{
@@ -904,35 +1183,47 @@ a{
   visibility:visible;
 }
 
-/* =========================
+
+/* =====================================================
    BALLOONS
-========================= */
+===================================================== */
 
 #balloon-field{
   position:fixed;
+
   inset:0;
+
   z-index:2;
+
   overflow:hidden;
+
   pointer-events:none;
 }
 
 .balloon{
   position:absolute;
+
   bottom:-180px;
+
   width:54px;
   height:68px;
+
   border-radius:
     52% 48% 48% 52% /
     58% 58% 42% 42%;
+
   opacity:.72;
+
   filter:
     drop-shadow(
       0 10px 10px
       rgba(116,102,77,.12)
     );
+
   animation:
     balloonRise var(--rise) linear infinite,
     balloonSway var(--sway) ease-in-out infinite alternate;
+
   animation-delay:
     var(--delay),
     var(--sway-delay);
@@ -940,49 +1231,74 @@ a{
 
 .balloon:before{
   content:"";
+
   position:absolute;
+
   left:50%;
   top:9px;
+
   width:16px;
   height:23px;
+
   border-radius:50%;
-  transform:translateX(-50%);
-  background:rgba(255,255,255,.22);
+
+  transform:
+    translateX(-50%);
+
+  background:
+    rgba(255,255,255,.22);
 }
 
 .balloon:after{
   content:"";
+
   position:absolute;
+
   left:50%;
   bottom:-8px;
+
   width:11px;
   height:11px;
+
   transform:
     translateX(-50%)
     rotate(45deg);
+
   background:inherit;
 }
 
 .balloon .string{
   position:absolute;
+
   left:50%;
   top:100%;
+
   width:1px;
   height:150px;
+
   transform-origin:top;
+
   background:var(--khaki3);
+
   opacity:.58;
 }
 
 .balloon .string:after{
   content:"";
+
   position:absolute;
+
   top:65px;
   left:-3px;
+
   width:7px;
   height:24px;
-  border-left:1px solid var(--khaki3);
+
+  border-left:
+    1px solid var(--khaki3);
+
   border-radius:50%;
+
   transform:rotate(18deg);
 }
 
@@ -1006,10 +1322,14 @@ a{
   background:var(--khaki2);
 }
 
+
+/* BALLOON POSITIONS */
+
 .balloon.b1{
   left:4%;
   width:45px;
   height:58px;
+
   --rise:19s;
   --sway:4.2s;
   --delay:-4s;
@@ -1020,6 +1340,7 @@ a{
   left:13%;
   width:62px;
   height:76px;
+
   --rise:25s;
   --sway:5.5s;
   --delay:-14s;
@@ -1030,6 +1351,7 @@ a{
   left:25%;
   width:40px;
   height:51px;
+
   --rise:22s;
   --sway:4.8s;
   --delay:-9s;
@@ -1040,6 +1362,7 @@ a{
   left:37%;
   width:58px;
   height:73px;
+
   --rise:28s;
   --sway:6s;
   --delay:-20s;
@@ -1050,6 +1373,7 @@ a{
   left:49%;
   width:43px;
   height:55px;
+
   --rise:20s;
   --sway:4.5s;
   --delay:-7s;
@@ -1060,6 +1384,7 @@ a{
   left:61%;
   width:65px;
   height:80px;
+
   --rise:27s;
   --sway:5.8s;
   --delay:-17s;
@@ -1070,6 +1395,7 @@ a{
   left:73%;
   width:46px;
   height:59px;
+
   --rise:23s;
   --sway:4.7s;
   --delay:-11s;
@@ -1080,6 +1406,7 @@ a{
   left:84%;
   width:60px;
   height:75px;
+
   --rise:29s;
   --sway:6.2s;
   --delay:-23s;
@@ -1090,6 +1417,7 @@ a{
   left:91%;
   width:38px;
   height:49px;
+
   --rise:18s;
   --sway:4.1s;
   --delay:-6s;
@@ -1097,6 +1425,7 @@ a{
 }
 
 @keyframes balloonRise{
+
   0%{
     transform:
       translate3d(0,0,0)
@@ -1129,6 +1458,7 @@ a{
 }
 
 @keyframes balloonSway{
+
   from{
     margin-left:-8px;
   }
@@ -1138,52 +1468,74 @@ a{
   }
 }
 
-/* =========================
+
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 nav{
   position:sticky;
+
   top:0;
+
   z-index:100;
+
   display:flex;
+
   justify-content:space-between;
   align-items:center;
+
   padding:17px 6%;
-  background:rgba(255,244,246,.94);
-  border-bottom:1px solid var(--pink2);
+
+  background:
+    rgba(255,244,246,.94);
+
+  border-bottom:
+    1px solid var(--pink2);
+
   backdrop-filter:blur(10px);
 }
 
 .logo{
   color:var(--pink4);
+
   font-size:14px;
+
   letter-spacing:.12em;
 }
 
 .menu{
   display:flex;
+
   gap:25px;
 }
 
 .menu a{
   text-decoration:none;
+
   font-size:12px;
+
   letter-spacing:.08em;
 }
 
 .menu-btn{
   display:none;
+
   border:0;
+
   background:none;
+
   color:var(--pink4);
+
   font-size:24px;
+
   cursor:pointer;
 }
 
-/* =========================
+
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 section{
   position:relative;
@@ -1192,10 +1544,15 @@ section{
 
 .hero{
   min-height:100vh;
+
   display:grid;
+
   place-items:center;
+
   text-align:center;
+
   padding:100px 20px;
+
   background:
     radial-gradient(
       circle at 50% 20%,
@@ -1210,82 +1567,113 @@ section{
 
 .eyebrow{
   font-size:11px;
+
   letter-spacing:.35em;
+
   text-transform:uppercase;
+
   color:var(--khaki3);
 }
 
 .hero h1{
   margin:15px 0 0;
-  font-size:clamp(110px,24vw,230px);
+
+  font-size:
+    clamp(110px,24vw,230px);
+
   line-height:.75;
+
   font-weight:400;
+
   color:var(--pink4);
 }
 
 .hero h2{
   margin:20px 0;
-  font-size:clamp(20px,4vw,35px);
+
+  font-size:
+    clamp(20px,4vw,35px);
+
   letter-spacing:.35em;
+
   font-weight:400;
 }
 
 .ornament{
   width:90px;
   height:1px;
+
   margin:25px auto;
+
   background:var(--pink4);
 }
 
 .hero p{
   max-width:580px;
+
   margin:15px auto;
+
   line-height:1.8;
 }
 
 .photo-wrap{
   margin:55px auto 0;
+
   width:min(380px,90%);
 }
 
 .photo-frame{
   padding:12px;
+
   background:var(--khaki);
-  border:1px solid var(--khaki3);
+
+  border:
+    1px solid var(--khaki3);
+
   box-shadow:
     0 25px 55px var(--shadow);
 }
 
 .photo-frame img{
   display:block;
+
   width:100%;
+
   height:auto;
+
   max-height:520px;
+
   object-fit:cover;
 }
 
 .photo-caption{
   margin-top:12px;
+
   font-size:11px;
+
   letter-spacing:.2em;
+
   text-transform:uppercase;
+
   color:var(--khaki3);
 }
 
-/* =========================
+
+/* =====================================================
    GENERAL SECTIONS
-========================= */
+===================================================== */
+
+section.details,
+section.countdown,
+section.location,
+section.rsvp{
+  padding:110px 20px;
+}
 
 .center{
   width:min(1000px,92%);
-  margin:auto;
-}
 
-.details,
-.countdown,
-.location,
-.rsvp{
-  padding:110px 20px;
+  margin:auto;
 }
 
 .details{
@@ -1294,9 +1682,14 @@ section{
 
 .title{
   margin:12px 0 45px;
+
   color:var(--pink4);
-  font-size:clamp(40px,7vw,70px);
+
+  font-size:
+    clamp(40px,7vw,70px);
+
   font-weight:400;
+
   text-align:center;
 }
 
@@ -1309,134 +1702,191 @@ section{
 
 .detail-grid{
   display:grid;
+
   grid-template-columns:
     repeat(3,1fr);
+
   gap:20px;
 }
 
 .detail{
   padding:35px 20px;
+
   text-align:center;
-  background:rgba(255,244,246,.58);
-  border:1px solid var(--pink2);
+
+  background:
+    rgba(255,244,246,.58);
+
+  border:
+    1px solid var(--pink2);
 }
 
 .detail small{
   display:block;
+
   margin-bottom:12px;
+
   letter-spacing:.15em;
+
   text-transform:uppercase;
 }
 
 .detail strong{
   color:var(--pink4);
+
   font-size:18px;
+
   font-weight:400;
 }
 
-/* =========================
+
+/* =====================================================
    COUNTDOWN
-========================= */
+===================================================== */
 
 .countdown{
   background:var(--pink5);
+
   text-align:center;
 }
 
 .timer{
   display:grid;
+
   grid-template-columns:
     repeat(4,1fr);
+
   gap:15px;
+
   max-width:800px;
+
   margin:45px auto 0;
 }
 
 .time{
   padding:24px 10px;
-  background:rgba(255,244,246,.6);
-  border:1px solid var(--pink3);
+
+  background:
+    rgba(255,244,246,.6);
+
+  border:
+    1px solid var(--pink3);
 }
 
 .time strong{
   display:block;
-  font-size:clamp(32px,8vw,60px);
+
+  font-size:
+    clamp(32px,8vw,60px);
+
   font-weight:400;
+
   color:var(--pink4);
 }
 
 .time span{
   font-size:10px;
+
   letter-spacing:.16em;
+
   text-transform:uppercase;
 }
 
-/* =========================
+
+/* =====================================================
    LOCATION
-========================= */
+===================================================== */
 
 .location{
   text-align:center;
+
   background:var(--pink5);
 }
 
 .map-box{
   max-width:800px;
+
   margin:40px auto 0;
+
   padding:45px 25px;
+
   background:var(--khaki);
-  border:1px solid var(--khaki2);
+
+  border:
+    1px solid var(--khaki2);
 }
 
 .map-box h3{
   color:var(--pink4);
+
   font-size:30px;
+
   font-weight:400;
 }
 
 .btn{
   display:inline-block;
+
   margin-top:15px;
+
   padding:13px 22px;
+
   text-decoration:none;
+
   background:var(--pink4);
+
   color:var(--pink5);
-  border:1px solid var(--pink4);
+
+  border:
+    1px solid var(--pink4);
 }
 
-/* =========================
+
+/* =====================================================
    RSVP
-========================= */
+===================================================== */
 
 .rsvp{
   background:var(--khaki);
+
   text-align:center;
 }
 
 .rsvp p{
   max-width:550px;
+
   margin:20px auto;
+
   line-height:1.8;
 }
 
-/* =========================
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
   position:relative;
+
   z-index:3;
+
   padding:35px 20px;
+
   text-align:center;
+
   background:var(--pink4);
+
   color:var(--pink5);
+
   font-size:12px;
+
   letter-spacing:.08em;
 }
 
-/* =========================
+
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:700px){
 
@@ -1451,6 +1901,7 @@ footer{
 
   .stage{
     height:min(660px,74vh);
+
     width:min(410px,90vw);
   }
 
@@ -1464,14 +1915,22 @@ footer{
 
   .menu{
     position:absolute;
+
     top:100%;
     right:0;
+
     width:100%;
+
     display:none;
+
     flex-direction:column;
+
     gap:0;
+
     background:var(--pink5);
-    border-bottom:1px solid var(--pink2);
+
+    border-bottom:
+      1px solid var(--pink2);
   }
 
   .menu.show{
@@ -1480,7 +1939,9 @@ footer{
 
   .menu a{
     padding:16px 22px;
-    border-bottom:1px solid var(--pink2);
+
+    border-bottom:
+      1px solid var(--pink2);
   }
 
   .balloon{
@@ -1510,17 +1971,18 @@ footer{
     font-size:130px;
   }
 
-  .details,
-  .countdown,
-  .location,
-  .rsvp{
+  section.details,
+  section.countdown,
+  section.location,
+  section.rsvp{
     padding:80px 20px;
   }
 }
 
-/* =========================
+
+/* =====================================================
    REDUCED MOTION
-========================= */
+===================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1528,32 +1990,43 @@ footer{
   *:before,
   *:after{
     animation-duration:.01ms!important;
+
     animation-iteration-count:1!important;
+
     scroll-behavior:auto!important;
   }
 
   .balloon{
     animation:none;
+
     bottom:8%;
+
     opacity:.25;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- ===================================================
      PASSWORD
-========================= -->
+=================================================== -->
 
 <div id="gate">
 
   <div class="gate-card">
 
-    <small>Private invitation</small>
+    <small>
+      Private invitation
+    </small>
 
-    <h1>21</h1>
+    <h1>
+      21
+    </h1>
 
     <p>
       Enter the password to open your invitation.
@@ -1585,9 +2058,10 @@ footer{
 
 </div>
 
-<!-- =========================
+
+<!-- ===================================================
      ENVELOPE REVEAL
-========================= -->
+=================================================== -->
 
 <div
   id="reveal"
@@ -1600,6 +2074,7 @@ footer{
   </div>
 
   <div class="stage">
+
 
     <!-- INVITATION CARD -->
 
@@ -1715,13 +2190,16 @@ footer{
 
       </div>
 
+
       <div class="card-copy">
 
         <small>
           You're invited to
         </small>
 
-        <h2>21</h2>
+        <h2>
+          21
+        </h2>
 
         <h3>
           MY BIRTHDAY
@@ -1734,6 +2212,7 @@ footer{
       </div>
 
     </div>
+
 
     <!-- ENVELOPE -->
 
@@ -1753,6 +2232,7 @@ footer{
 
       <div class="ribbon-h"></div>
 
+
       <!-- BOW -->
 
       <div class="bow">
@@ -1769,6 +2249,7 @@ footer{
 
       </div>
 
+
       <!-- SPARKS -->
 
       <i class="spark"></i>
@@ -1782,49 +2263,62 @@ footer{
 
 </div>
 
-<!-- =========================
+
+<!-- ===================================================
      MAIN WEBSITE
-========================= -->
+=================================================== -->
 
 <main id="site">
 
-  <!-- BALLOONS -->
+
+  <!-- =================================================
+       FLOATING BALLOONS
+  ================================================= -->
 
   <div
     id="balloon-field"
     aria-hidden="true">
 
+
     <div class="balloon pink b1">
       <span class="string"></span>
     </div>
+
 
     <div class="balloon light b2">
       <span class="string"></span>
     </div>
 
+
     <div class="balloon deep b3">
       <span class="string"></span>
     </div>
+
 
     <div class="balloon khaki b4">
       <span class="string"></span>
     </div>
 
+
     <div class="balloon pink b5">
       <span class="string"></span>
     </div>
+
 
     <div class="balloon soft b6">
       <span class="string"></span>
     </div>
 
+
     <div class="balloon deep b7">
       <span class="string"></span>
     </div>
 
+
     <div class="balloon light b8">
       <span class="string"></span>
     </div>
+
 
     <div class="balloon khaki b9">
       <span class="string"></span>
@@ -1832,7 +2326,10 @@ footer{
 
   </div>
 
-  <!-- NAVIGATION -->
+
+  <!-- =================================================
+       NAVIGATION
+  ================================================= -->
 
   <nav>
 
@@ -1844,8 +2341,11 @@ footer{
       class="menu-btn"
       id="menuBtn"
       aria-label="Open menu">
+
       ☰
+
     </button>
+
 
     <div
       class="menu"
@@ -1875,9 +2375,10 @@ footer{
 
   </nav>
 
-  <!-- =========================
+
+  <!-- =================================================
        HERO
-  ========================= -->
+  ================================================= -->
 
   <section
     class="hero"
@@ -1911,10 +2412,8 @@ footer{
         </strong>
       </p>
 
-      <!-- PHOTO
-           Put photo.jpeg in the same folder
-           as this index.html
-      -->
+
+      <!-- PHOTO -->
 
       <div class="photo-wrap">
 
@@ -1938,9 +2437,10 @@ footer{
 
   </section>
 
-  <!-- =========================
+
+  <!-- =================================================
        DETAILS
-  ========================= -->
+  ================================================= -->
 
   <section
     class="details"
@@ -1958,6 +2458,7 @@ footer{
 
       <div class="detail-grid">
 
+
         <div class="detail">
 
           <small>
@@ -1970,6 +2471,7 @@ footer{
 
         </div>
 
+
         <div class="detail">
 
           <small>
@@ -1981,6 +2483,7 @@ footer{
           </strong>
 
         </div>
+
 
         <div class="detail">
 
@@ -2000,9 +2503,10 @@ footer{
 
   </section>
 
-  <!-- =========================
+
+  <!-- =================================================
        COUNTDOWN
-  ========================= -->
+  ================================================= -->
 
   <section
     class="countdown"
@@ -2020,6 +2524,7 @@ footer{
 
       <div class="timer">
 
+
         <div class="time">
 
           <strong id="days">
@@ -2031,6 +2536,7 @@ footer{
           </span>
 
         </div>
+
 
         <div class="time">
 
@@ -2044,6 +2550,7 @@ footer{
 
         </div>
 
+
         <div class="time">
 
           <strong id="minutes">
@@ -2055,6 +2562,7 @@ footer{
           </span>
 
         </div>
+
 
         <div class="time">
 
@@ -2074,9 +2582,10 @@ footer{
 
   </section>
 
-  <!-- =========================
+
+  <!-- =================================================
        LOCATION
-  ========================= -->
+  ================================================= -->
 
   <section
     class="location"
@@ -2119,9 +2628,10 @@ footer{
 
   </section>
 
-  <!-- =========================
+
+  <!-- =================================================
        RSVP
-  ========================= -->
+  ================================================= -->
 
   <section
     class="rsvp"
@@ -2158,19 +2668,26 @@ footer{
 
   </section>
 
-  <!-- FOOTER -->
+
+  <!-- =================================================
+       FOOTER
+  ================================================= -->
 
   <footer>
+
     21 • 14 OCTOBER 2026 • SEE YOU THERE
+
   </footer>
 
 </main>
 
+
 <script>
 
-/* =========================
-   WEBSITE CONFIGURATION
-========================= */
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
 
 const CONFIG = {
 
@@ -2191,9 +2708,9 @@ const CONFIG = {
 };
 
 
-/* =========================
-   PASSWORD ELEMENTS
-========================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const gate =
   document.getElementById("gate");
@@ -2214,9 +2731,9 @@ const site =
   document.getElementById("site");
 
 
-/* =========================
+/* =====================================================
    START INVITATION
-========================= */
+===================================================== */
 
 function startInvitation(){
 
@@ -2231,14 +2748,31 @@ function startInvitation(){
 
   reveal.classList.add("show");
 
+
   /*
-    Envelope animation plays automatically.
-    After 9 seconds the main website appears.
+    The envelope animation finishes first.
+
+    7.35s:
+    Envelope/card begin their final fade.
+
+    8.25s:
+    Reveal screen disappears.
+
+    8.35s:
+    Main website appears.
+
+    This prevents the envelope and
+    website from overlapping.
   */
 
   setTimeout(()=>{
 
     reveal.classList.add("done");
+
+  },7350);
+
+
+  setTimeout(()=>{
 
     site.classList.add("visible");
 
@@ -2246,13 +2780,14 @@ function startInvitation(){
 
     window.scrollTo(0,0);
 
-  },9000);
+  },8350);
+
 }
 
 
-/* =========================
-   PASSWORD CHECK
-========================= */
+/* =====================================================
+   PASSWORD
+===================================================== */
 
 function checkPassword(){
 
@@ -2277,6 +2812,7 @@ function checkPassword(){
     password.select();
 
   }
+
 }
 
 
@@ -2291,16 +2827,18 @@ password.addEventListener(
   event=>{
 
     if(event.key==="Enter"){
+
       checkPassword();
+
     }
 
   }
 );
 
 
-/* =========================
+/* =====================================================
    MOBILE MENU
-========================= */
+===================================================== */
 
 const menuBtn =
   document.getElementById("menuBtn");
@@ -2319,26 +2857,27 @@ menuBtn.addEventListener(
 );
 
 
-menu.querySelectorAll("a")
-.forEach(a=>{
+menu
+  .querySelectorAll("a")
+  .forEach(a=>{
 
-  a.addEventListener(
-    "click",
-    ()=>{
+    a.addEventListener(
+      "click",
+      ()=>{
 
-      menu.classList.remove(
-        "show"
-      );
+        menu.classList.remove(
+          "show"
+        );
 
-    }
-  );
+      }
+    );
 
-});
+  });
 
 
-/* =========================
+/* =====================================================
    COUNTDOWN
-========================= */
+===================================================== */
 
 const target =
   new Date(
@@ -2355,7 +2894,7 @@ function countdown(){
     );
 
 
-  const d =
+  const days =
     Math.floor(
       diff / 86400000
     );
@@ -2363,7 +2902,7 @@ function countdown(){
   diff %= 86400000;
 
 
-  const h =
+  const hours =
     Math.floor(
       diff / 3600000
     );
@@ -2371,7 +2910,7 @@ function countdown(){
   diff %= 3600000;
 
 
-  const m =
+  const minutes =
     Math.floor(
       diff / 60000
     );
@@ -2379,7 +2918,7 @@ function countdown(){
   diff %= 60000;
 
 
-  const s =
+  const seconds =
     Math.floor(
       diff / 1000
     );
@@ -2388,25 +2927,25 @@ function countdown(){
   document.getElementById(
     "days"
   ).textContent =
-    String(d).padStart(2,"0");
+    String(days).padStart(2,"0");
 
 
   document.getElementById(
     "hours"
   ).textContent =
-    String(h).padStart(2,"0");
+    String(hours).padStart(2,"0");
 
 
   document.getElementById(
     "minutes"
   ).textContent =
-    String(m).padStart(2,"0");
+    String(minutes).padStart(2,"0");
 
 
   document.getElementById(
     "seconds"
   ).textContent =
-    String(s).padStart(2,"0");
+    String(seconds).padStart(2,"0");
 
 }
 
@@ -2419,9 +2958,9 @@ setInterval(
 );
 
 
-/* =========================
-   GOOGLE MAPS
-========================= */
+/* =====================================================
+   MAP
+===================================================== */
 
 document.getElementById(
   "mapBtn"
@@ -2429,9 +2968,9 @@ document.getElementById(
   CONFIG.mapUrl;
 
 
-/* =========================
+/* =====================================================
    WHATSAPP RSVP
-========================= */
+===================================================== */
 
 const msg =
   `Hi! I'd like to RSVP for ${CONFIG.name}'s 21st birthday celebration on 14 October 2026.`;
@@ -2441,6 +2980,7 @@ document.getElementById(
   "rsvpBtn"
 ).href =
   `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+
 
 </script>
 
