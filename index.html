@@ -158,7 +158,6 @@ a{
   color:var(--pink4);
 }
 
-
 /* =========================
    ENVELOPE REVEAL
 ========================= */
@@ -191,7 +190,6 @@ a{
   align-items:center;
   justify-content:center;
 }
-
 
 /* INVITATION CARD */
 
@@ -300,7 +298,6 @@ a{
   color:var(--khaki3);
 }
 
-
 /* ENVELOPE */
 
 .envelope{
@@ -327,9 +324,6 @@ a{
   visibility:hidden;
   pointer-events:none;
 }
-
-
-/* ENVELOPE BACK */
 
 .env-back{
   position:absolute;
@@ -359,9 +353,6 @@ a{
     100% 0
   );
 }
-
-
-/* ENVELOPE DOORS */
 
 .door{
   position:absolute;
@@ -420,9 +411,6 @@ a{
   }
 }
 
-
-/* TOP FLAP */
-
 .fold-top{
   position:absolute;
   left:0;
@@ -455,9 +443,6 @@ a{
   }
 }
 
-
-/* BOTTOM FOLD */
-
 .fold-bottom{
   position:absolute;
   left:0;
@@ -489,9 +474,6 @@ a{
     opacity:0;
   }
 }
-
-
-/* RIBBON */
 
 .ribbon-v,
 .ribbon-h{
@@ -546,9 +528,6 @@ a{
     opacity:0;
   }
 }
-
-
-/* BOW */
 
 .bow{
   position:absolute;
@@ -636,7 +615,6 @@ a{
 }
 
 @keyframes bowDrop{
-
   0%{
     transform:translate(-50%,-50%) scale(1);
     opacity:1;
@@ -647,7 +625,6 @@ a{
       translate(-50%,45%)
       rotate(7deg)
       scale(.9);
-
     opacity:1;
   }
 
@@ -656,13 +633,9 @@ a{
       translate(-50%,160%)
       rotate(18deg)
       scale(.65);
-
     opacity:0;
   }
 }
-
-
-/* SPARKLES */
 
 .spark{
   position:absolute;
@@ -704,7 +677,6 @@ a{
 }
 
 @keyframes spark{
-
   0%{
     opacity:0;
     transform:scale(.4);
@@ -972,7 +944,6 @@ a{
 }
 
 @keyframes balloonRise{
-
   0%{
     transform:
       translate3d(0,0,0)
@@ -1005,7 +976,6 @@ a{
 }
 
 @keyframes balloonSway{
-
   from{
     margin-left:-8px;
   }
@@ -1249,6 +1219,43 @@ nav{
   color:var(--khaki4);
 
   margin-bottom:45px;
+}
+
+
+/* =========================
+   PSALM 46:5
+========================= */
+
+.verse-section{
+  background:rgba(255,244,246,.92);
+  text-align:center;
+  padding-top:85px;
+  padding-bottom:85px;
+}
+
+.verse-section .section-inner{
+  max-width:800px;
+}
+
+.verse-mark{
+  font-size:38px;
+  color:var(--pink3);
+  margin-bottom:18px;
+}
+
+.verse-text{
+  font-size:clamp(22px,4vw,34px);
+  line-height:1.65;
+  color:var(--khaki4);
+  font-style:italic;
+}
+
+.verse-reference{
+  margin-top:22px;
+  font-size:13px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--pink4);
 }
 
 
@@ -1695,6 +1702,10 @@ footer p{
   .location-card{
     padding:30px 25px;
   }
+
+  .verse-text{
+    font-size:22px;
+  }
 }
 
 
@@ -1708,19 +1719,14 @@ footer p{
   *::before,
   *::after{
     animation-duration:.01ms !important;
-
     animation-iteration-count:1 !important;
-
     scroll-behavior:auto !important;
-
     transition-duration:.01ms !important;
   }
 
   .balloon{
     animation:none;
-
     bottom:8%;
-
     opacity:.25;
   }
 }
@@ -1789,9 +1795,6 @@ footer p{
 >
 
   <div class="reveal-stage">
-
-
-    <!-- INVITATION CARD -->
 
     <div
       class="card"
@@ -1901,8 +1904,6 @@ footer p{
 
     </div>
 
-
-    <!-- ENVELOPE -->
 
     <div
       class="envelope"
@@ -2032,6 +2033,12 @@ footer p{
       </li>
 
       <li>
+        <a href="#verse">
+          Verse
+        </a>
+      </li>
+
+      <li>
         <a href="#details">
           Details
         </a>
@@ -2105,6 +2112,35 @@ footer p{
             loading="lazy"
           >
 
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PSALM 46:5
+    ========================= -->
+
+    <section
+      class="section verse-section"
+      id="verse"
+    >
+
+      <div class="section-inner">
+
+        <div class="verse-mark">
+          ✦
+        </div>
+
+        <p class="verse-text">
+          “God is within her, she will not fall;
+          God will help her at break of day.”
+        </p>
+
+        <div class="verse-reference">
+          Psalm 46:5
         </div>
 
       </div>
@@ -2457,12 +2493,6 @@ const birthdaySong =
   new Audio("song.mp3");
 
 birthdaySong.loop = true;
-
-/*
-  Volume can be changed here.
-  0.7 = 70% volume.
-*/
-
 birthdaySong.volume = 0.7;
 
 
@@ -2545,8 +2575,6 @@ function openInvitation(){
     passwordInput.value.trim();
 
 
-  /* WRONG PASSWORD */
-
   if(entered !== CONFIG.password){
 
     passwordError.textContent =
@@ -2560,18 +2588,7 @@ function openInvitation(){
   }
 
 
-  /* CORRECT PASSWORD */
-
-  passwordError.textContent = "";
-
-
-  /*
-    START MUSIC IMMEDIATELY.
-
-    Because this function is triggered directly
-    by the user's password submission, the browser
-    should allow the audio to play.
-  */
+  /* START MUSIC IMMEDIATELY */
 
   birthdaySong.currentTime = 0;
 
@@ -2585,12 +2602,10 @@ function openInvitation(){
   });
 
 
-  /* HIDE PASSWORD SCREEN */
+  passwordError.textContent = "";
 
   gate.classList.add("hide");
 
-
-  /* START ENVELOPE */
 
   setTimeout(() => {
 
@@ -2652,14 +2667,12 @@ function startInvitation(){
     3.75s  Envelope doors open
     4.10s  Bottom fold opens
     4.65s  Invitation card rises
-    5.90s  Envelope COMPLETELY disappears
+    5.90s  Envelope completely disappears
     6.35s  Card wording appears
     8.10s  Reveal fades
     8.90s  Main website appears
   */
 
-
-  /* REMOVE ENVELOPE */
 
   setTimeout(() => {
 
@@ -2674,8 +2687,6 @@ function startInvitation(){
   },5900);
 
 
-  /* FADE REVEAL */
-
   setTimeout(() => {
 
     reveal.style.transition =
@@ -2686,8 +2697,6 @@ function startInvitation(){
 
   },8100);
 
-
-  /* SHOW WEBSITE */
 
   setTimeout(() => {
 
